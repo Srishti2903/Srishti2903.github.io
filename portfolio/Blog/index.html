@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Blog Section</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+        box-sizing: border-box;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      body {
+        margin: 0px;
+        padding: 0px;
+        font-family: poppins;
+        font-size: 16px;
+        line-height: 1.6;
+        background-color: #f4f4f4;
+        color: #333;
+      }
+
+      #blog {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 40px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+      }
+
+      .blog-heading {
+        display: flex;
+        text-align: center;
+        align-items: center;
+        flex-direction: column;
+        margin-bottom: 20px;
+      }
+
+      .blog-heading span {
+        display: block;
+        font-size: 1.2em;
+        color: #f33c3c;
+      }
+
+      .blog-heading h3 {
+        font-size: 2.4rem;
+        margin-top: 10px;
+        color: #2b2b2b;
+        font-weight: 600px;
+      }
+
+      .blog-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0px;
+        flex-wrap: wrap;
+      }
+
+      .blog-box {
+        width: 350px;
+        background-color: #fff;
+        border: 1px solid #ececec;
+        margin: 20px;
+      }
+
+      .blog-img img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+    </style>
+  </head>
+
+  <body>
+    <section id="blog">
+      <header class="blog-heading">
+        <span>My Recent Posts</span>
+        <h3>My Blog</h3>
+      </header>
+      <div class="blog-container">
+        <div class="blog-box">
+          <div class="blog-img">
+            <img src="images/work-1.png" alt="Blog Image" />
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

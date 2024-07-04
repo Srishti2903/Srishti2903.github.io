@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personal Portfolio Website</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://kit.fontawesome.com/2b51dcc15f.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div id="header">
+      <div class="container">
+        <nav>
+          <img src="images/logo.png" class="logo" />
+          <ul id="sidemenu">
+            <li>
+              <button><a href="#header">Home</a></button>
+            </li>
+            <li>
+              <button><a href="#about">About</a></button>
+            </li>
+            <li>
+              <button><a href="#blog">Blog</a></button>
+            </li>
+            <li>
+              <button><a href="#contact">Contact</a></button>
+            </li>
+            <i class="fas fa-times" onclick="closemenu()"></i>
+          </ul>
+          <i class="fas fa-bars" onclick="openmenu()"></i>
+        </nav>
+        <div class="header-text">
+          <p>Math and CS Student @ University of Toronto, Mississauga</p>
+          <h1>
+            Hi, I'm <span> ✨ Srishti ✨</span><br />Welcome to my website
+          </h1>
+        </div>
+      </div>
+    </div>
+
+    <!----------------about----------->
+    <div id="about">
+      <div class="about-container">
+        <div class="row">
+          <div class="about-col-1">
+            <img src="images/User-1.png" />
+            <a href="images/Srishti_Resume.pdf" download class="download">Download Resume</a>
+          </div>
+          <div class="about-col-2">
+            <h1 class="sub-title">print ("Hey there!"); </h1>
+            <p>
+              I'm currently a student at University of Toronto pursuing my undergrad in <b>Math</b> with a minor in <b>CS</b> and <b>Communications</b>, 
+              also serving as the Director of External Affairs in the UTM Math and CS Society. 🎓
+            </br>
+            <br> 
+            Some of my interests lie in <b>Brand Strategy and Marketing, Product Management, and UX design</b>. 
+            I enjoy participating in case competitions, hackathons and I'm an active participant in Toastmasters International. 💼
+              <br /> 
+              <br> 
+              Outside of academics and extracurriculars, I find joy in <b>reading</b>, particularly romances and murder-mysteries, and <b>writing blogs</b>! I dabble with <b>graphic design</b> and <b>sketching</b>. 
+              You can always find me refreshing my Spotify playlists, curating Pinterest boards and <b>brainstorming new projects</b>📚✏️
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+   <!----------------Blog----------->
+    <section id="blog">
+      <header class="blog-heading">
+        <h1>My Blog</h1>
+      </header>
+      <div class="blog-container">
+        <a href="https://medium.com/@srishti.gangolly/who-are-you-building-your-brand-10452c028e85" class="blog-box-link">
+          <div class="blog-box">
+              <div class="blog-img">
+                  <img src="images/genz.png" alt="Blog Image" />
+              </div>
+              <div class="blog-text">
+                <span class="blog-category"> Personal Branding </span>
+                <a class="blog-title"> Who are you? → Building your brand </a>
+                <p> In the rapidly changing, always growing world of technology, social media has grown into an important tool for people who want to develop and strengthen brands. </p>
+                <a href="https://medium.com/@srishti.gangolly/who-are-you-building-your-brand-10452c028e85" class="read-more"> Read More</a>
+              </div>
+          </div>
+        </a>
+
+
+        <a href="https://medium.com/@srishti.gangolly/social-media-edition-wrapped-around-the-finger-42ef303effd" class="blog-box-link">
+          <div class="blog-box">
+              <div class="blog-img">
+                  <img src="images/vlog.jpg" alt="Blog Image" />
+              </div>
+              <div class="blog-text">
+                <span class="blog-category"> Social Media </span>
+                  <a class="blog-title"> Social Media Edition: Wrapped around the finger </a>
+                  <p>Social media has completely transformed the way we communicate and interact with the world around us. Whether we are scrolling through Instagram, tweeting on Twitter, or posting on Facebook, these platforms provide us with new ways to connect with others. </p>
+                  <a href="https://medium.com/@srishti.gangolly/social-media-edition-wrapped-around-the-finger-42ef303effd" class="read-more"> Read More</a>
+              </div>
+          </div>
+        </a>
+        
+        <a href="https://medium.com/@srishti.gangolly/are-we-still-playing-boys-vs-girls-3917c3c356b6" class="blog-box-link">
+          <div class="blog-box">
+            <div class="blog-img">
+                <img src="images/vlog.png" alt="Blog Image" />
+            </div>
+            <div class="blog-text">
+              <span class="blog-category"> Diversity and Inclusion </span>
+                <a class="blog-title"> Are we still playing boys vs girls? </a>
+                <p>TYPICALLY…marketers usually use pink as the target color for girls and blue for boys in their marketing campaigns, have you ever wondered why?</p>
+                <a href="https://medium.com/@srishti.gangolly/are-we-still-playing-boys-vs-girls-3917c3c356b6" class="read-more">Read More</a>
+            </div>
+        </div>
+        <a href="https://medium.com/@srishti.gangolly" class="btn">Read More</a> 
+      </a>
+      </div>
+    </section>
+
+   <!----------------Contact----------->
+    <section id="contact">
+      <header>
+        <h1>Contact Me</h1>
+      </header>
+      <main>
+        <form action="https://api.web3forms.com/submit" method="post">
+          <input type="hidden" name="access_key" value="efc7f023-f355-4626-a33c-4410e36cd15a">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required><br><br>
+          
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required><br><br>
+          
+          <label for="message">Message:</label><br>
+          <textarea id="message" name="message" rows="4" required></textarea><br><br>
+          
+          <input type="submit" value="Submit">
+        </form>
+      </main>
+    </section>
+
+    <!-- Floating Scroll Arrow -->
+    <div class="scroll-arrow" onclick="scrollToSection('about')">
+      <i class="fa-solid fa-angle-down"></i>
+    </div>
+
+    <script>
+      function scrollToSection(sectionId) {
+        document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+      }
+
+      var sidemenu = document.getElementById("sidemenu");
+
+      function openmenu() {
+        sidemenu.style.right = "0";
+      }
+
+      function closemenu() {
+        sidemenu.style.right = "-200px";
+      }
+
+      window.onscroll = function() {
+        var scrollArrow = document.querySelector('.scroll-arrow i');
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+          scrollArrow.classList.remove('fa-angle-down');
+          scrollArrow.classList.add('fa-angle-up');
+          document.querySelector('.scroll-arrow').setAttribute('onclick', "scrollToSection('header')");
+        } else {
+          scrollArrow.classList.remove('fa-angle-up');
+          scrollArrow.classList.add('fa-angle-down');
+          document.querySelector('.scroll-arrow').setAttribute('onclick', "scrollToSection('about')");
+        }
+      };
+
+      function scrollToSection(sectionId) {
+  document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+}
+
+var sidemenu = document.getElementById("sidemenu");
+
+function openmenu() {
+  sidemenu.style.right = "0";
+}
+
+function closemenu() {
+  sidemenu.style.right = "-200px";
+}
+
+window.onscroll = function() {
+  var scrollArrow = document.querySelector('.scroll-arrow i');
+  var aboutSection = document.getElementById('about');
+  var blogSection = document.getElementById('blog');
+  var contactSection = document.getElementById('contact');
+  var windowHeight = window.innerHeight;
+  var documentHeight = document.body.clientHeight;
+
+  if (window.scrollY < aboutSection.offsetTop - windowHeight / 2) {
+    // Scroll is in the header section or above
+    scrollArrow.classList.remove('fa-angle-up');
+    scrollArrow.classList.add('fa-angle-down');
+    scrollArrow.parentElement.setAttribute('onclick', "scrollToSection('about')");
+  } else if (
+    window.scrollY >= aboutSection.offsetTop - windowHeight / 2 &&
+    window.scrollY < blogSection.offsetTop - windowHeight / 2
+  ) {
+    // Scroll is between about and blog sections
+    scrollArrow.classList.remove('fa-angle-up', 'fa-angle-down');
+    scrollArrow.classList.add('fa-angle-down');
+    scrollArrow.parentElement.setAttribute('onclick', "scrollToSection('blog')");
+  } else if (
+    window.scrollY >= blogSection.offsetTop - windowHeight / 2 &&
+    window.scrollY < contactSection.offsetTop - windowHeight / 2
+  ) {
+    // Scroll is between blog and contact sections
+    scrollArrow.classList.remove('fa-angle-up', 'fa-angle-down');
+    scrollArrow.classList.add('fa-angle-down');
+    scrollArrow.parentElement.setAttribute('onclick', "scrollToSection('contact')");
+  } else if (window.scrollY + windowHeight === documentHeight) {
+    // Scroll is at the bottom of the page
+    scrollArrow.classList.remove('fa-angle-down');
+    scrollArrow.classList.add('fa-angle-up');
+    scrollArrow.parentElement.setAttribute('onclick', "scrollToSection('header')");
+  } else {
+    // Scroll is in or below the contact section
+    scrollArrow.classList.remove('fa-angle-down');
+    scrollArrow.classList.add('fa-angle-up');
+    scrollArrow.parentElement.setAttribute('onclick', "scrollToSection('header')");
+  }
+};
+
+
+    </script>
+  </body>
+</html>
