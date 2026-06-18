@@ -27,6 +27,15 @@
   const nl = document.getElementById('nav-links');
   hb.addEventListener('click', () => { hb.classList.toggle('open'); nl.classList.toggle('open'); });
   nl.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { hb.classList.remove('open'); nl.classList.remove('open'); }));
+
+  // Tap to expand/collapse experience rows on mobile
+  document.querySelectorAll('.exp-row--has-tooltip').forEach(row => {
+    row.addEventListener('click', () => {
+      const isOpen = row.classList.contains('tapped');
+      document.querySelectorAll('.exp-row--has-tooltip').forEach(r => r.classList.remove('tapped'));
+      if (!isOpen) row.classList.add('tapped');
+    });
+  });
 </script>
 
 <!-- SVG filters (shared with polaroids) -->
