@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Srishti Gangolly</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300&family=DM+Sans:wght@300;400;500&family=Kalam:wght@300;400;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="logo.png" alt="Srishti Gangolly" style="height:80px;width:auto;display:block;"></a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#home" style="color:var(--ink);">Home</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="https://srishtigangolly.substack.com/" target="_blank">Writing</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+</nav>
+<script>
+  const hb = document.getElementById('hamburger');
+  const nl = document.getElementById('nav-links');
+  hb.addEventListener('click', () => { hb.classList.toggle('open'); nl.classList.toggle('open'); });
+  nl.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { hb.classList.remove('open'); nl.classList.remove('open'); }));
+</script>
+
+<!-- SVG filters (shared with polaroids) -->
+<svg width="0" height="0" style="position:absolute;">
+  <filter id="doodle">
+    <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="3" result="noise" seed="2"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="tape-wobble">
+    <feTurbulence type="turbulence" baseFrequency="0.04" numOctaves="2" seed="5"/>
+    <feDisplacementMap in="SourceGraphic" scale="2" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<!-- ===================== HERO ===================== -->
+<header id="home" class="home-hero">
+  <div class="home-hero-text">
+    <p class="home-eyebrow flow">Srishti Gangolly</p>
+    <h1 class="home-title word-fade">A numbers girl<br>with a <em>creative edge.</em></h1>
+    <p class="home-sub flow">Living at the intersection of data, technology, and marketing. Where insights don't just inform — they build.</p>
+    <div class="slide-unlock flow" id="slide-unlock">
+      <div class="su-track" aria-label="Slide all the way to get to know me">
+        <span class="su-text">get to know me!</span>
+        <button class="su-knob" type="button" aria-label="Slide to open About">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2026 die-cut sticker (real cutout → tilts on hover) -->
+  <div class="home-hero-photo pol-float-r flow" style="position:relative;display:inline-block;width:340px;transform:rotate(3deg);">
+    <img class="hero-sticker" data-tilt-only="1" src="sticker-cut6.png" alt="Srishti" style="width:100%;display:block;filter:drop-shadow(4px 7px 0 rgba(200,192,180,0.9)) drop-shadow(0 14px 26px rgba(26,22,20,0.22));">
+    <svg width="60" height="60" viewBox="0 0 60 60" style="position:absolute;top:-22px;right:-14px;color:#420001;pointer-events:none;">
+      <path d="M30 6 L34 26 L54 30 L34 34 L30 54 L26 34 L6 30 L26 26 Z" fill="currentColor" opacity="0.92"/>
+    </svg>
+    <svg width="30" height="30" viewBox="0 0 60 60" style="position:absolute;bottom:34px;left:-20px;color:#1A3A2A;pointer-events:none;">
+      <path d="M30 6 L34 26 L54 30 L34 34 L30 54 L26 34 L6 30 L26 26 Z" fill="currentColor" opacity="0.9"/>
+    </svg>
+  </div>
+
+</header>
+
+<!-- ===================== WRITING ===================== -->
+<section id="writing" class="home-section writing-band">
+  <div class="home-section-inner">
+    <p class="eyebrow-tag flow">Writing</p>
+    <h2 class="home-h2 word-fade">words, on <em>Substack.</em></h2>
+    <div class="teaser">
+      <div class="teaser-copy flow">
+        <p>join my little nook on the internet: love letters to my intrusive thoughts, curated lists of hyperfixations &amp; a mirror into my relationships.</p>
+      </div>
+      <a href="https://srishtigangolly.substack.com/" target="_blank" class="contact-link primary flow">Subscribe to train of thoughts &#8594;</a>
+    </div>
+  </div>
+  <div class="train-track" aria-hidden="true"><img class="train-doodle" src="train-doodle.png" alt=""></div>
+</section>
+
+<!-- ===================== EXPERIENCE ===================== -->
+<section id="experience" class="home-section">
+  <div style="display:flex; align-items:flex-start; justify-content:space-between;">
+    <p class="eyebrow-tag flow">Experience</p>
+    <a href="https://drive.google.com/file/d/1VO8sRzveUCqf3H1eBF_kj9z9wQum5QK_/view?usp=sharing" target="_blank" rel="noopener" class="resume-btn">Resume ↗</a>
+  </div>
+  <h2 class="home-h2 word-fade">Where I've <em>been</em><br>&amp; what I built.</h2>
+
+  <div class="exp-list">
+    <div class="exp-row exp-row--has-tooltip flow">
+      <div class="exp-row-top">
+        <span class="exp-org">Google Developer Student Club (GDSC)</span>
+        <span class="exp-role">Marketing Associate | Freshmen Representative<span class="exp-dates">2021 — 2022 · 1 yr</span></span>
+        <span class="exp-tag exp-tag--lead">Leadership</span>
+      </div>
+      <div class="exp-details">
+        <div class="exp-details-inner">
+          <ul>
+            <li>Managed <b>marketing and communications</b> across first-year Discord servers, lectures, tutorials, and FSG channels, maintaining <b>consistent engagement</b> across student touchpoints.</li>
+            <li>Coordinated and facilitated <b>online community events</b> including discussion panels, study hubs, and game nights, strengthening <b>member retention and participation</b>.</li>
+            <li>Represented GDSC at <b>DeerHacks</b>, increasing <b>club visibility</b> and driving <b>new member engagement</b> through cross-org presence.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="exp-row exp-row--has-tooltip flow">
+      <div class="exp-row-top">
+        <span class="exp-org">Mathematical and Computational Sciences Society (MCSS)</span>
+        <span class="exp-role">VP of Marketing → VP of External Affairs<span class="exp-dates">2022 — 2024 · 2 yrs</span></span>
+        <span class="exp-tag exp-tag--lead">Leadership</span>
+      </div>
+      <div class="exp-details">
+        <div class="exp-details-inner">
+          <ul>
+            <li>Led <b>marketing efforts</b> that boosted <b>social media engagement</b> (450 on Instagram &amp; 870 on LinkedIn) using <b>data-driven strategies</b> and creating content that clicked with our audience.</li>
+            <li>Strengthened <b>community engagement</b> by bringing in diverse <b>industry professionals</b> and reconnecting with alumni to host <b>workshops, panels, and networking events</b>.</li>
+            <li><b>DeerHacks II and III</b> organizer 🦌</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="exp-row exp-row--has-tooltip flow">
+      <div class="exp-row-top">
+        <span class="exp-org">Milton Learna</span>
+        <span class="exp-role">Math &amp; Statistics Tutor | Grades 9–12<span class="exp-dates">2023 — 2024 | 2025 — 2026 · 2 yrs</span></span>
+        <span class="exp-tag exp-tag--teach">Teaching</span>
+      </div>
+      <div class="exp-details">
+        <div class="exp-details-inner">
+          <ul>
+            <li>Identified where each student was struggling and created <b>customized study plans</b> for <b>3+ students per term</b>, helping them achieve an <b>average AP exam score of 4 or higher</b>.</li>
+            <li>Provided <b>ongoing mentorship and feedback</b> beyond just the lessons, helping students to think <b>analytically</b>, manage their workload independently, and approach challenging material with <b>confidence</b>.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="exp-row exp-row--has-tooltip flow">
+      <div class="exp-row-top">
+        <span class="exp-org">Vosyn AI</span>
+        <span class="exp-role">Data Analytics &amp; Strategy Intern | Digital Marketing<span class="exp-dates">Summer 2024 · 4 mos</span></span>
+        <span class="exp-tag exp-tag--coop">Co-op</span>
+      </div>
+      <div class="exp-details">
+        <div class="exp-details-inner">
+          <p class="exp-details-intro">Embedded within the Digital Marketing team to drive analytics and strategy initiatives across LinkedIn, web, and product channels.</p>
+          <ul>
+            <li><b>Increased investor engagement by 5%</b> by leading business analytics initiatives that optimized <b>LinkedIn and website performance</b> through data-driven insights.</li>
+            <li>Identified <b>key usability gaps</b> by leveraging <b>Google Analytics</b> for user behavior analysis, translating findings into actionable <b>product and marketing recommendations</b>.</li>
+            <li>Accelerated <b>executive decision-making</b> by designing and maintaining <b>Tableau dashboards</b> with real-time visibility into <b>marketing and product KPIs</b>.</li>
+            <li>Drove <b>KPI alignment across 3 business units</b> by translating complex analytics into clear recommendations for <b>Business Development, Capital Markets, and Strategy</b> stakeholders.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="exp-row exp-row--has-tooltip flow">
+      <div class="exp-row-top">
+        <span class="exp-org">Intuit Canada · TurboTax</span>
+        <span class="exp-role">Digital &amp; Data Activation Intern | Digital Marketing<span class="exp-dates">Sept 2024 — Apr 2025 · 8 mos</span></span>
+        <span class="exp-tag exp-tag--coop">Co-op</span>
+      </div>
+      <div class="exp-details">
+        <div class="exp-details-inner">
+          <p class="exp-details-intro">Worked on the Digital Marketing team supporting data activation across TurboTax's 5M+ user base. My work spanned Customer Data Platforms, mobile attribution, and campaign analytics.</p>
+          <ul>
+            <li>Optimized <b>data integration and user tracking</b> for <b>5M+ users</b> by providing cross-platform support for <b>CDP and Kochava</b> mobile attribution systems, improving <b>attribution accuracy</b> across large-scale campaigns.</li>
+            <li>Increased <b>campaign targeting precision</b> by building and activating <b>segmented audiences</b> using <b>Segment CDP and Braze</b>, enabling data-informed marketing decisions at scale.</li>
+            <li>Improved <b>performance insight delivery</b> by deploying and optimizing <b>Kochava SmartLinks</b>, supporting faster <b>attribution reporting</b> for cross-functional stakeholders.</li>
+            <li>Strengthened <b>data integrity</b> across Marketing teams by leading <b>MarTech documentation</b> and standardizing <b>Claravine CID taxonomy</b>, streamlining workflows across teams.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="exp-row flow">
+      <span class="exp-org">Innovative Business Association (IBA)</span>
+      <span class="exp-role">Marketing Project Manager | Professional Development<span class="exp-dates">2025 — 2026 · 1 yr</span></span>
+      <span class="exp-tag exp-tag--lead">Leadership</span>
+    </div>
+  </div>
+
+  <h2 class="home-h2 word-fade" style="margin-top:4.5rem;margin-bottom:0;">Always <em>learning.</em></h2>
+  <div class="cert-grid">
+    <div class="cert-card flow">
+      <p class="cert-eyebrow">Google</p>
+      <h3 class="cert-title">Data Analytics Professional<br>Certificate</h3>
+      <div class="cert-tags">
+        <span class="cert-chip">Data Cleaning</span>
+        <span class="cert-chip">SQL Querying</span>
+        <span class="cert-chip">Exploratory Data Analysis</span>
+        <span class="cert-chip">Tableau</span>
+        <span class="cert-chip">Statistical Analysis (R)</span>
+        <span class="cert-chip">Data Storytelling</span>
+      </div>
+      <a href="https://coursera.org/share/9d9e1e655838ba468bf9b7b5470ab7bb" target="_blank" rel="noopener" class="cert-credential-btn">Show credential ↗</a>
+    </div>
+    <div class="cert-card flow">
+      <p class="cert-eyebrow">Aha!</p>
+      <h3 class="cert-title">Product Management Professional Certificate</h3>
+      <div class="cert-tags">
+        <span class="cert-chip">Product Roadmapping</span>
+        <span class="cert-chip">Feature Prioritization</span>
+        <span class="cert-chip">User Stories</span>
+        <span class="cert-chip">Product Metrics &amp; KPIs</span>
+        <span class="cert-chip">Stakeholder Alignment</span>
+        <span class="cert-chip">Agile Lifecycle</span>
+      </div>
+      <a href="https://www.linkedin.com/learning/certificates/69bdaf3c865cb7ef0c7bc39a142da9111da5304e577a6bb2269b3b4013a04b70" target="_blank" rel="noopener" class="cert-credential-btn">Show credential ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROJECTS ===================== -->
+<section id="projects" class="home-section alt">
+  <div class="home-section-inner">
+    <p class="eyebrow-tag flow">Projects</p>
+    <h2 class="home-h2 word-fade">Work that<br>made an <em>impact.</em></h2>
+    <div class="proj-grid">
+      <a href="rsm.html" class="proj-card neutral flow" style="text-decoration:none;cursor:pointer;">
+        <p class="proj-eyebrow">UTM IBA · Ready, Set, Market — Fall 2025</p>
+        <h3 class="proj-title">"A Formula For You"</h3>
+        <p class="proj-desc">Estée Lauder Repositioning</p>
+        <div class="proj-tags">
+          <span class="proj-chip">Technical Expert</span>
+          <span class="proj-chip">Case Competition</span>
+        </div>
+        <p class="proj-foot">Team: Paris Phan, Kim Nguyen, Sandeepa Das</p>
+      </a>
+      <a href="deerhacks.html" class="proj-card maroon flow" style="text-decoration:none;">
+        <p class="proj-eyebrow">MCSS · 2022 — 2024</p>
+        <h3 class="proj-title">DeerHacks II &amp; III</h3>
+        <p class="proj-desc">From building a brand to building a community.</p>
+        <div class="proj-tags">
+          <span class="proj-chip">Organizer</span>
+          <span class="proj-chip">Hackathon</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section id="contact">
+  <h2 class="section-heading word-fade">Let's work <em>together.</em></h2>
+  <p class="contact-sub">If you think we'd make a good team,<br>you're probably right. Let's talk! :)</p>
+  <div class="contact-links">
+    <a href="https://www.instagram.com/srishti_gangolly_" target="_blank" class="contact-link primary">Instagram</a>
+    <a href="https://www.linkedin.com/in/srishtigangolly" target="_blank" class="contact-link outline">LinkedIn</a>
+    <a href="https://srishtigangolly.substack.com/" target="_blank" class="contact-link outline">Substack</a>
+  </div>
+  <p class="footer-note">Srishti Gangolly · <em>Your potential future employee.</em> &#10022; Toronto, Ontario</p>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>

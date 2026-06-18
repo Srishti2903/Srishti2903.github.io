@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About – Srishti Gangolly</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300&family=DM+Sans:wght@300;400;500&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .about-hero {
+    min-height: 38vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 8rem 5rem 3rem;
+    background: var(--cream);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .about-eyebrow {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--muted);
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .about-eyebrow::before { content:''; width:1.5rem; height:1px; background:#420001; display:block; }
+
+  .about-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+  .about-title em { font-style: italic; font-weight: 300; color: #420001; }
+
+  /* ARTICLE */
+  .about-body {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 2rem 6rem;
+  }
+
+  .about-body p {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.08rem;
+    line-height: 2;
+    color: #2E2E2E;
+    margin-bottom: 2rem;
+    font-weight: 300;
+  }
+  .about-body p strong { font-weight: 700; font-style: normal; }
+  .about-body p em { font-style: italic; font-weight: 300; }
+  .about-body p strong em, .about-body p em strong { font-weight: 700; font-style: italic; }
+
+  /* Drop cap on first paragraph */
+  .about-body p:first-of-type::first-letter {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 4.5rem;
+    font-weight: 700;
+    line-height: 0.75;
+    float: left;
+    margin-right: 0.12em;
+    margin-top: 0.08em;
+    color: #420001;
+  }
+
+  /* Pull quote */
+  .pull-quote {
+    border-left: 3px solid #420001;
+    margin: 2.5rem 0;
+    padding: 0.5rem 0 0.5rem 2rem;
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+
+  /* Section divider */
+  .about-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 3rem 0;
+  }
+  .about-divider::before,
+  .about-divider::after { content:''; flex:1; height:1px; background: var(--border); }
+  .about-divider span {
+    font-size: 0.68rem; font-weight: 500; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--muted); white-space: nowrap;
+  }
+
+  /* Logo watermark in hero */
+  .about-hero-logo {
+    position: absolute;
+    right: 5rem;
+    bottom: 2rem;
+    height: 110px;
+    width: auto;
+    opacity: 0.7;
+  }
+  .about-hero { position: relative; }
+
+  @media (max-width: 768px) {
+    /* Hero */
+    .about-hero { padding: 5.5rem 1.25rem 2rem; min-height: 28vh; }
+
+    /* Intro photo + diary section */
+    .intro-flex-section {
+      flex-direction: column !important;
+      padding: 2rem 1.25rem 0 !important;
+      align-items: center !important;
+      gap: 1.5rem !important;
+    }
+    .intro-flex-section p {
+      padding-top: 0 !important;
+      font-size: 1rem !important;
+      line-height: 1.85 !important;
+    }
+
+    /* Hey typewriter */
+    .hey-title-wrap { padding: 2rem 1.25rem 0 !important; }
+    .hey-title-wrap h2 { font-size: 1.6rem !important; }
+
+    /* Article body */
+    .about-body { padding: 1.25rem 1.25rem 4rem; }
+    .about-body p { font-size: 1rem; line-height: 1.85; margin-bottom: 1.4rem; }
+
+    /* Disable drop cap */
+    .about-body p:first-of-type::first-letter {
+      font-size: 1rem;
+      float: none;
+      margin: 0;
+      line-height: inherit;
+    }
+
+    /* Section banners ("for the resume." etc) */
+    .section-banner { text-align: center !important; margin: 2rem 0 1.5rem !important; }
+
+    /* Floated polaroids — stay floated, just smaller and with safe margins */
+    .pol-float-l {
+      width: clamp(90px, 28vw, 130px) !important;
+      float: left !important;
+      margin: 0.25rem 1rem 0.75rem 0 !important;
+      transform: rotate(-1.5deg) !important;
+    }
+    .pol-float-r {
+      width: clamp(100px, 32vw, 150px) !important;
+      float: right !important;
+      margin: 0.25rem 0 0.75rem 1rem !important;
+      transform: rotate(1deg) !important;
+    }
+
+    /* Photobooth strip */
+    .photobooth-strip { margin: 0 auto 2rem !important; }
+    .photobooth-strip > div:last-child { width: clamp(140px, 50vw, 200px) !important; }
+
+    /* Teaching flex */
+    .teaching-flex {
+      flex-direction: column !important;
+      align-items: center !important;
+    }
+    .teaching-flex > div { margin-top: 0 !important; width: 130px !important; }
+    .teaching-flex > p { margin-top: 1rem !important; }
+
+    /* Intern polaroids side by side */
+    .intern-polaroid-pair {
+      display: flex !important;
+      justify-content: center !important;
+      gap: 1rem !important;
+      margin-bottom: 1.5rem !important;
+      overflow: visible !important;
+    }
+    .intern-polaroid-pair .pol-float-l,
+    .intern-polaroid-pair .pol-float-r {
+      float: none !important;
+      margin: 0 !important;
+      width: clamp(100px, 38vw, 140px) !important;
+    }
+    .intern-polaroid-pair .pol-float-l > div,
+    .intern-polaroid-pair .pol-float-r > div { width: 100% !important; }
+
+    /* Clearfix so floats don't bleed into next section */
+    .about-body p { clear: none; }
+    .about-body p:last-of-type { clear: both; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="logo.png" alt="Srishti Gangolly" style="height:80px;width:auto;display:block;"></a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html#home">Home</a></li>
+    <li><a href="index.html#experience">Experience</a></li>
+    <li><a href="index.html#projects">Projects</a></li>
+    <li><a href="https://srishtigangolly.substack.com/" target="_blank">Writing</a></li>
+    <li><a href="about.html" style="color:var(--ink);">About</a></li>
+  </ul>
+</nav>
+<script>
+  const hb = document.getElementById('hamburger');
+  const nl = document.getElementById('nav-links');
+  hb.addEventListener('click', () => { hb.classList.toggle('open'); nl.classList.toggle('open'); });
+  nl.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { hb.classList.remove('open'); nl.classList.remove('open'); }));
+</script>
+
+<!-- HERO -->
+<div class="about-hero">
+  <p class="about-eyebrow">About</p>
+  <h1 class="about-title word-fade">The person<br>behind the <em>work.</em></h1>
+</div>
+
+<!-- SVG filters -->
+<svg width="0" height="0" style="position:absolute;">
+  <filter id="doodle">
+    <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="3" result="noise" seed="2"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="tape-wobble">
+    <feTurbulence type="turbulence" baseFrequency="0.04" numOctaves="2" seed="5"/>
+    <feDisplacementMap in="SourceGraphic" scale="2" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<!-- PHOTO + FIRST PARAGRAPH SIDE BY SIDE -->
+<div class="intro-flex-section" style="background:var(--cream);padding:0 5rem 0;max-width:780px;margin:0 auto;display:flex;align-items:center;gap:3rem;">
+
+  <!-- Photobooth strip -- 2009 + 2026 -->
+  <div style="position:relative;flex-shrink:0;transform:rotate(-1.5deg);margin-top:2rem;">
+    <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(1deg);z-index:10;">
+      <svg width="72" height="28" viewBox="0 0 72 28">
+        <rect x="2" y="2" width="68" height="24" rx="2" fill="rgba(226,229,223,0.75)" stroke="#b0b8a8" stroke-width="1" filter="url(#tape-wobble)"/>
+        <line x1="10" y1="9" x2="62" y2="9" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
+        <line x1="10" y1="16" x2="62" y2="16" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
+      </svg>
+    </div>
+    <div style="background:#0e0e0e;padding:8px 8px 24px;box-shadow:3px 5px 0px #c8c0b4,0 10px 28px rgba(26,22,20,0.18);width:160px;">
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="position:relative;">
+          <img src="young-srishti.jpg" style="width:100%;display:block;object-fit:cover;aspect-ratio:1/1;object-position:center top;filter:sepia(0.12);">
+          <span style="display:block;font-family:'Times New Roman',Times,serif;font-size:0.65rem;color:rgba(255,255,255,0.5);text-align:center;margin-top:5px;">2009</span>
+        </div>
+        <div style="position:relative;">
+          <img src="19C72FF4-41E2-4C8E-B378-958AEA0C1706.JPG" style="width:100%;display:block;object-fit:cover;aspect-ratio:1/1;object-position:center top;filter:sepia(0.06);">
+          <span style="display:block;font-family:'Times New Roman',Times,serif;font-size:0.65rem;color:rgba(255,255,255,0.5);text-align:center;margin-top:5px;">2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- First paragraph (right) -->
+  <p style="font-family:'Kalam',cursive;font-size:1.08rem;line-height:2;color:#2E2E2E;font-weight:300;margin:0;padding-top:1rem;"><em>Dear diary,</em><br>Ever since I was little, I've loved the story behind my name, but there's a small irony about it I've come to love even more. My name, <strong style="font-weight:700;font-style:normal;"><em style="font-style:italic;">Srishti,</em></strong> means <strong style="font-weight:700;"><em style="font-style:italic;">Creation</em></strong> in Sanskrit. My dad chose it because he thought it sounded beautiful, perhaps not realizing how perfectly it would fit. Because whether I'm <em style="font-style:italic;">writing</em>, <em style="font-style:italic;">designing a graphic</em>, <em style="font-style:italic;">building a deck</em>, <em style="font-style:italic;">presenting a speech</em> or <em style="font-style:italic;">making sense of trends</em>, that same <strong style="font-weight:700;"><em style="font-style:italic;">creative pull</em></strong> has always been at the center of who I am. Maybe the name was always meant to be mine.</p>
+
+</div>
+
+<!-- HEY TYPEWRITER -->
+<div class="hey-title-wrap" style="max-width:780px;margin:0 auto;padding:3rem 5rem 0;">
+  <h2 id="hey-title" style="font-family:'Times New Roman',Times,serif;font-size:2rem;font-weight:700;font-style:italic;color:#420001;text-align:center;"></h2>
+</div>
+<script>
+  (function() {
+    const el = document.getElementById('hey-title');
+    const text = "Hey! I'm Srishti :)";
+    const cursor = document.createElement('span');
+    cursor.style.cssText = 'display:inline-block;width:3px;height:0.85em;background:#420001;margin-left:3px;vertical-align:middle;';
+    el.appendChild(cursor);
+    let i = 0;
+    function type() {
+      if (i < text.length) {
+        el.insertBefore(document.createTextNode(text[i]), cursor);
+        i++;
+        setTimeout(type, 75);
+      } else {
+        cursor.style.animation = 'blink 0.85s step-start infinite';
+      }
+    }
+    setTimeout(type, 1000);
+  })();
+</script>
+
+<!-- BODY (remaining paragraphs) -->
+<article class="about-body">
+
+  <!-- Float left -- team portrait, text wraps around -->
+  <div class="pol-float-l" style="float:left;margin:4.5rem 2rem 1rem 0;position:relative;display:inline-block;width:190px;transform:rotate(-2deg);">
+    <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(1deg);z-index:10;">
+      <svg width="60" height="24" viewBox="0 0 60 24">
+        <rect x="2" y="2" width="56" height="20" rx="2" fill="rgba(226,229,223,0.75)" stroke="#b0b8a8" stroke-width="1" filter="url(#tape-wobble)"/>
+        <line x1="8" y1="8" x2="52" y2="8" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
+        <line x1="8" y1="14" x2="52" y2="14" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
+      </svg>
+    </div>
+    <svg style="position:absolute;top:-4px;left:-4px;width:calc(100% + 8px);height:calc(100% + 8px);overflow:visible;pointer-events:none;z-index:2;" viewBox="0 0 158 226" preserveAspectRatio="none">
+      <rect x="2" y="2" width="154" height="222" rx="3" fill="none" stroke="#1A3A2A" stroke-width="2.5" filter="url(#doodle)"/>
+    </svg>
+    <div style="background:white;padding:5px 5px 22px 5px;box-shadow:3px 5px 0px #c8c0b4,0 10px 28px rgba(26,22,20,0.12);">
+      <img src="1778266214084.jpg" style="width:100%;display:block;object-fit:cover;aspect-ratio:2/3;">
+    </div>
+  </div>
+
+  <p>I'm currently completing a Bachelor of Science in <strong><em>Applied Mathematics with Geospatial Data Science and Statistics</em></strong> at the <strong>University of Toronto.</strong> Beyond lectures and problem sets, I've consistently gravitated toward roles where I could build and connect: <strong><em>Marketing Associate</em></strong> at the <strong>Google Developer Student Club</strong> → <strong><em>Director of Marketing and Partnerships</em></strong> at the <strong>Mathematical and Computational Sciences Society</strong> → <strong><em>Marketing Project Manager</em></strong> at the <strong>Innovative Business Association.</strong> The roles evolved, but the core never changed: <strong><em>build visibility, create impact, and foster the right relationships.</em></strong></p>
+
+  <!-- Float right -- DeerHacks team -->
+  <div class="pol-float-r" style="float:right;margin:0.5rem 0 1rem 2rem;position:relative;display:inline-block;width:260px;transform:rotate(1.5deg);">
+    <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(-1deg);z-index:10;">
+      <svg width="60" height="24" viewBox="0 0 60 24">
+        <rect x="2" y="2" width="56" height="20" rx="2" fill="rgba(226,229,223,0.75)" stroke="#b0b8a8" stroke-width="1" filter="url(#tape-wobble)"/>
+        <line x1="8" y1="8" x2="52" y2="8" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
+        <line x1="8" y1="14" x2="52" y2="14" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
+      </svg>
+    </div>
+    <svg style="position:absolute;top:-4px;left:-4px;width:calc(100% + 8px);height:calc(100% + 8px);overflow:visible;pointer-events:none;z-index:2;" viewBox="0 0 228 160" preserveAspectRatio="none">
+      <rect x="2" y="2" width="224" height="156" rx="3" fill="none" stroke="#1A3A2A" stroke-width="2.5" filter="url(#doodle)"/>
+    </svg>
+    <div style="background:white;padding:5px 5px 22px 5px;box-shadow:3px 5px 0px #c8c0b4,0 10px 28px rgba(26,22,20,0.12);">
+      <img src="Deerhacks .jpeg" style="width:100%;display:block;object-fit:cover;aspect-ratio:5/3;">
+    </div>
+  </div>
+
+  <p>A highlight of that journey was being part of the organizing team behind <strong>DeerHacks</strong>, a 36-hour hackathon run through the Mathematical and Computational Sciences Society. I contributed across two iterations, but DeerHacks III was where it all came together – <strong><em>1,500+ applicants, 35+ events, a $15,000+ budget,</em></strong> and a social media community of <strong><em>3,000+ followers</em></strong> built from the ground up. To top it off, DeerHacks III was named <strong><em>best event of the year</em></strong> (big kudos to the whole team!)</p>
+
+  <div class="section-banner" style="text-align:right;margin:3rem 0 2rem;">
+    <h2 style="font-family:'Fraunces',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:700;line-height:0.95;letter-spacing:-0.03em;color:var(--ink);">for the <em style="font-style:italic;font-weight:300;color:#420001;">resume.</em></h2>
+  </div>
+
+  <p>That same instinct to connect data with people carried into my internships. At <strong>Vosyn AI</strong>, I came in as a <strong><em>Data Analytics and Strategy Intern</em></strong> with a heavy focus on <strong><em>product marketing</em></strong> – digging into <strong>Google Analytics</strong> to understand user and investor behavior, building <strong>Tableau</strong> dashboards so leadership could stay on top of <strong><em>marketing and product KPIs</em></strong> in real time, and collaborating with Business Development and UI/UX teams to turn findings into <strong><em>actionable, growth-focused recommendations.</em></strong> It was fast-paced, cross-functional, and exactly the kind of environment where you learn to move quickly with imperfect data.</p>
+
+  <div class="intern-polaroid-pair">
+    <!-- Polaroid left -- Vosyn -->
+    <div class="pol-float-l" style="float:left;margin:0.5rem 2rem 1rem 0;position:relative;transform:rotate(2deg);">
+      <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(-1deg);z-index:10;">
+        <svg width="72" height="28" viewBox="0 0 72 28">
+          <rect x="2" y="2" width="68" height="24" rx="2" fill="rgba(226,229,223,0.75)" stroke="#b0b8a8" stroke-width="1" filter="url(#tape-wobble)"/>
+          <line x1="10" y1="9" x2="62" y2="9" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
+          <line x1="10" y1="16" x2="62" y2="16" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
+        </svg>
+      </div>
+      <div style="position:relative;display:inline-block;width:180px;">
+        <svg style="position:absolute;top:-4px;left:-4px;width:calc(100% + 8px);height:calc(100% + 8px);overflow:visible;pointer-events:none;z-index:2;" viewBox="0 0 188 260" preserveAspectRatio="none">
+          <rect x="2" y="2" width="184" height="256" rx="3" fill="none" stroke="#1A3A2A" stroke-width="2.5" filter="url(#doodle)"/>
+        </svg>
+        <div style="background:white;padding:6px;display:block;box-shadow:3px 5px 0px #c8c0b4,0 10px 28px rgba(26,22,20,0.12);">
+          <img src="intern-left.jpg" alt="Office" style="width:100%;display:block;aspect-ratio:3/4;object-fit:cover;object-position:center top;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Polaroid right -- Intuit -->
+    <div class="pol-float-r" style="float:right;margin:0.5rem 0 1rem 2rem;position:relative;transform:rotate(-2.5deg);">
+      <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(1deg);z-index:10;">
+        <svg width="72" height="28" viewBox="0 0 72 28">
+          <rect x="2" y="2" width="68" height="24" rx="2" fill="rgba(226,229,223,0.75)" stroke="#b0b8a8" stroke-width="1" filter="url(#tape-wobble)"/>
+          <line x1="10" y1="9" x2="62" y2="9" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
+          <line x1="10" y1="16" x2="62" y2="16" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
+        </svg>
+      </div>
+      <div style="position:relative;display:inline-block;width:180px;">
+        <svg style="position:absolute;top:-4px;left:-4px;width:calc(100% + 8px);height:calc(100% + 8px);overflow:visible;pointer-events:none;z-index:2;" viewBox="0 0 188 260" preserveAspectRatio="none">
+          <rect x="2" y="2" width="184" height="256" rx="3" fill="none" stroke="#1A3A2A" stroke-width="2.5" filter="url(#doodle)"/>
+        </svg>
+        <div style="background:white;padding:6px;display:block;box-shadow:3px 5px 0px #c8c0b4,0 10px 28px rgba(26,22,20,0.12);">
+          <img src="intern-right.jpg" alt="Intuit" style="width:100%;display:block;aspect-ratio:3/4;object-fit:cover;object-position:center top;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p>From there, I joined <strong>Intuit Canada</strong> as a <strong><em>Digital and Data Activation Intern,</em></strong> embedded in the team behind <strong>TurboTax</strong>, where the scale got a lot bigger. My work centered on making sure campaigns reached <strong><em>the right people at the right time</em></strong> – optimizing data integration across <strong><em>Customer Data Platforms</em></strong> and <strong><em>mobile attribution tools</em></strong> for a <strong><em>5M+ user base,</em></strong> building and activating <strong><em>complex-custom audiences</em></strong> in <strong>Segment</strong> and <strong>Braze,</strong> and deploying <strong>Kochava SmartLinks</strong> to surface <strong><em>performance insights</em></strong> to stakeholders faster. Along the way, I also led the <strong><em>standardization</em></strong> of how data was organized across marketing teams, laying the groundwork for more consistent, <strong><em>data-driven decision making at scale.</em></strong></p>
+
+  <div style="clear:both;"></div>
+
+  <div class="section-banner" style="text-align:left;margin:3rem 0 2rem;">
+    <h2 style="font-family:'Fraunces',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:700;line-height:0.95;letter-spacing:-0.03em;color:var(--ink);">beyond the <em style="font-style:italic;font-weight:300;color:#420001;">resume.</em></h2>
+  </div>
+
+  <!-- Teaching: flex row -- photo left, para right -->
+  <div class="teaching-flex" style="display:flex;gap:2rem;align-items:flex-start;margin-bottom:2rem;">
+
+    <!-- Polaroid left -- teaching -->
+    <div style="flex-shrink:0;position:relative;display:inline-block;width:180px;transform:rotate(-1.5deg);margin-top:0.5rem;">
+      <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(1deg);z-index:10;">
+        <svg width="72" height="28" viewBox="0 0 72 28">
+          <rect x="2" y="2" width="68" height="24" rx="2" fill="rgba(226,229,223,0.75)" stroke="#b0b8a8" stroke-width="1" filter="url(#tape-wobble)"/>
+          <line x1="10" y1="9" x2="62" y2="9" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
+          <line x1="10" y1="16" x2="62" y2="16" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
+        </svg>
+      </div>
+      <svg style="position:absolute;top:-4px;left:-4px;width:calc(100% + 8px);height:calc(100% + 8px);overflow:visible;pointer-events:none;z-index:2;" viewBox="0 0 188 266" preserveAspectRatio="none">
+        <rect x="2" y="2" width="184" height="262" rx="3" fill="none" stroke="#1A3A2A" stroke-width="2.5" filter="url(#doodle)"/>
+      </svg>
+      <div style="background:white;padding:6px 6px 28px 6px;box-shadow:3px 5px 0px #c8c0b4,0 10px 28px rgba(26,22,20,0.12);">
+        <img src="IMG_3052.jpg" style="width:100%;display:block;filter:sepia(0.08);">
+      </div>
+    </div>
+
+    <p style="margin-bottom:0;">Outside of the professional scope, I take pride in <strong><em>teaching.</em></strong> I worked with <strong><em>high school students one-on-one</em></strong> across <strong>Advanced Placement (AP) and university-level Math and Statistics</strong> – identifying gaps, <em>building targeted lesson plans,</em> and staying invested long enough to see <strong><em>real progress.</em></strong> The grades mattered, but the real win was watching students start to <strong><em>think independently.</em></strong></p>
+
+  </div>
+
+  <!-- PHOTOBOOTH STRIP -->
+  <div class="pol-float-r photobooth-strip" style="float:right;margin:0 0 1.5rem 2rem;position:relative;">
+    <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(1deg);z-index:10;">
+      <svg width="72" height="28" viewBox="0 0 72 28">
+        <rect x="2" y="2" width="68" height="24" rx="2" fill="rgba(226,229,223,0.75)" stroke="#b0b8a8" stroke-width="1" filter="url(#tape-wobble)"/>
+        <line x1="10" y1="9" x2="62" y2="9" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
+        <line x1="10" y1="16" x2="62" y2="16" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
+      </svg>
+    </div>
+    <div style="background:#0e0e0e;padding:8px;box-shadow:4px 6px 0px #c8c0b4,0 12px 36px rgba(26,22,20,0.18);transform:rotate(-1deg);width:260px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;">
+        <img src="IMG_9490.jpg" style="width:100%;display:block;object-fit:cover;aspect-ratio:3/4;">
+        <img src="IMG_7664.PNG" style="width:100%;display:block;object-fit:cover;aspect-ratio:3/4;">
+        <img src="IMG_0348.jpg" style="width:100%;display:block;object-fit:cover;aspect-ratio:3/4;">
+        <img src="IMG_5123.jpg" style="width:100%;display:block;object-fit:cover;aspect-ratio:3/4;object-position:center top;">
+      </div>
+    </div>
+  </div>
+
+  <p>And when I'm not doing any of the above, you'll find me as an active <strong><em>Toastmaster</em></strong> under the <strong><em>Presentation Mastery pathway,</em></strong> a writer, and a self-proclaimed <strong><em>professional sidequester</em></strong> -- somewhere in between all of it, buried in a good book, typically <em>romance</em>, <em>murder mystery</em>, or the self-help read I told myself I'd finally finish.</p>
+
+  <p>That curiosity has never really been separate from the way I work. At the end of the day, I care about <strong><em>leading with intention,</em></strong> showing up with <strong><em>structure, creativity, and a genuine desire to learn</em></strong> in every team I'm part of, regardless of the problem on the table.</p>
+
+  <div style="clear:both;"></div>
+
+</article>
+
+<!-- CONTACT FOOTER -->
+<section id="contact" style="padding-top:4rem;">
+  <h2 class="section-heading word-fade">Let's work <em>together.</em></h2>
+  <p class="contact-sub">If you think we'd make a good team,<br>you're probably right. Let's talk! :)</p>
+  <div class="contact-links">
+    <a href="https://www.instagram.com/srishti_gangolly_" target="_blank" class="contact-link primary">Instagram</a>
+    <a href="https://www.linkedin.com/in/srishtigangolly" target="_blank" class="contact-link outline">LinkedIn</a>
+    <a href="https://srishtigangolly.substack.com/" target="_blank" class="contact-link outline">Substack</a>
+  </div>
+  <p class="footer-note">Srishti Gangolly · <em>Your potential future employee.</em> ✦ Toronto, Ontario</p>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>

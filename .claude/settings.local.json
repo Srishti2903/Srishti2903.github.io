@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Read(//Users/srishti/Desktop/**)",
+      "Bash(python3 -c ' *)",
+      "Bash(pip3 install *)",
+      "Bash(cp \"/Users/srishti/Desktop/RSM 2025 Estée Lauder \\(1\\).pdf\" \"/Users/srishti/Desktop/Portfolio 2/rsm-deck.pdf\")",
+      "mcp__visualize__read_me",
+      "mcp__visualize__show_widget",
+      "Bash(find /Users/srishti -name \"*.html\" 2>/dev/null | xargs grep -l \"skin consultation\\\\|RETURNING CUSTOMER\\\\|Begin Your Skin\" 2>/dev/null)",
+      "Bash(cp \"/Users/srishti/Desktop/Volunteer /1.png\" \"/Users/srishti/Desktop/Portfolio 2/assets/deerhacks/dh3-vol-1.png\")",
+      "Bash(cp \"/Users/srishti/Desktop/Volunteer /2.png\" \"/Users/srishti/Desktop/Portfolio 2/assets/deerhacks/dh3-vol-2.png\")",
+      "Bash(cp \"/Users/srishti/Desktop/Volunteer /3.png\" \"/Users/srishti/Desktop/Portfolio 2/assets/deerhacks/dh3-vol-3.png\")",
+      "Bash(cp \"/Users/srishti/Desktop/Volunteer /4.png\" \"/Users/srishti/Desktop/Portfolio 2/assets/deerhacks/dh3-vol-4.png\")",
+      "Bash(cp \"/Users/srishti/Desktop/625263281_18104835661756412_1272442145812802622_n.jpg\" \"/Users/srishti/Desktop/Portfolio 2/assets/deerhacks/dh2-7.jpg\")",
+      "Bash(cp \"/Users/srishti/Desktop/627768510_18311753632252306_5860466181991849701_n.jpg\" \"/Users/srishti/Desktop/Portfolio 2/assets/deerhacks/dh2-8.jpg\")",
+      "Bash(cp \"/Users/srishti/Desktop/625263281_18104835661756412_1272442145812802622_n.jpg\" \"/Users/srishti/Desktop/Portfolio 2/assets/deerhacks/dh2-logo-final.jpg\")",
+      "Bash(python3 -c \"import shutil; shutil.copy\\('/Users/srishti/Desktop/Screenshot 2026-06-18 at 5.21.35 PM.png', '/Users/srishti/Desktop/Portfolio 2/assets/deerhacks/dh2-sketch.jpg'\\)\")",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
+    ]
+  }
+}

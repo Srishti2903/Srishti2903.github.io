@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeerHacks – Srishti Gangolly</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300&family=DM+Sans:wght@300;400;500&family=Kalam:wght@300;400;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .case-hero {
+    min-height: 28vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 9rem 5rem 4rem;
+    background: #1c1a17;
+    border-bottom: 1px solid var(--border);
+  }
+  .case-hero .case-eyebrow { color: rgba(255,255,255,0.45); }
+  .case-hero .case-eyebrow::before { background: rgba(255,255,255,0.3); }
+  .case-hero .case-title { color: #f5ede0; }
+  .case-hero .case-subtitle { color: rgba(255,255,255,0.6); }
+  .case-hero .back-link { color: rgba(255,255,255,0.4); }
+  .case-hero .back-link:hover { color: #f5ede0; }
+  .case-eyebrow {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--muted);
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .case-eyebrow::before { content:''; width:1.5rem; height:1px; background:#420001; display:block; }
+  .case-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700;
+    line-height: 1.08;
+    color: var(--oxblood);
+    margin-bottom: 0.75rem;
+  }
+  .case-subtitle {
+    font-size: 1rem;
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    margin-bottom: 1.5rem;
+    transition: color 0.2s ease;
+  }
+  .back-link:hover { color: var(--oxblood); }
+  .back-link::before { content: '←'; }
+
+  .case-body {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+
+  /* Toggle tabs */
+  .dh-tabs {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 2.5rem;
+    width: fit-content;
+  }
+  .dh-tab {
+    padding: 0.65rem 1.8rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    transition: all 0.2s ease;
+  }
+  .dh-tab.active {
+    background: var(--oxblood);
+    color: #fff;
+  }
+  .dh-tab:not(.active):hover {
+    background: var(--border);
+    color: var(--ink);
+  }
+
+  /* Panel */
+  .dh-panel { display: none; }
+  .dh-panel.active { display: block; }
+
+  /* Bullets */
+  .dh-bullets {
+    margin-bottom: 2rem;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .dh-bullets li {
+    font-size: 1.02rem;
+    line-height: 1.75;
+    color: var(--ink);
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .dh-bullets li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--oxblood);
+    font-size: 1.4rem;
+    line-height: 1.5;
+    font-weight: 700;
+  }
+
+  /* Instagram-style scroll */
+  .ig-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .ig-scroll-wrap {
+    position: relative;
+  }
+  .ig-scroll {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+  }
+  .ig-scroll::-webkit-scrollbar { display: none; }
+  .ig-slide {
+    flex: 0 0 300px;
+    height: 300px;
+    scroll-snap-align: start;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--paper);
+  }
+  .ig-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* dot indicators */
+  .ig-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .ig-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--border);
+    transition: background 0.2s;
+    cursor: pointer;
+  }
+  .ig-dot.active { background: var(--oxblood); }
+
+  /* Coming soon panel */
+  .coming-soon {
+    text-align: center;
+    padding: 4rem 2rem;
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .coming-soon strong {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--oxblood);
+    margin-bottom: 0.5rem;
+  }
+
+  /* Brand identity section */
+  .dh-section-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--oxblood);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 2.5rem 0 0.75rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .dh-section-title:first-of-type { margin-top: 0; }
+  .dh-section-body {
+    font-size: 0.95rem;
+    color: var(--ink);
+    line-height: 1.75;
+    margin: 0 0 1.25rem;
+  }
+  .dh-section-body ul {
+    margin: 0.5rem 0 0 1.2rem;
+    padding: 0;
+  }
+  .dh-section-body li { margin-bottom: 0.5rem; }
+  .dh-sketch-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.25rem 0 2rem;
+    align-items: start;
+  }
+  .dh-sketch-row .dh-sketch-img-wrap {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  .dh-sketch-row .dh-sketch-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .dh-sketch-caption {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    color: var(--ink);
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+
+  /* Carousel section block */
+  .dh-carousel-section {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem 1.5rem 1.25rem;
+    margin-top: 2.5rem;
+    width: calc(100vw - 4rem);
+    max-width: 1100px;
+    margin-left: calc(50% - min(50vw - 2rem, 550px));
+  }
+  .dh-carousel-section-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--oxblood);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 1.5rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* LinkedIn post thumbnails */
+  .li-posts {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.25rem;
+  }
+  .li-post {
+    flex: 1;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid var(--ink);
+    text-decoration: none;
+    display: block;
+    transition: box-shadow 0.2s;
+  }
+  .li-post:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+  .li-post img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: top;
+    height: 320px;
+  }
+
+  @media (max-width: 768px) {
+    .case-hero { padding: 6rem 1.5rem 2.5rem; }
+    .case-body { padding: 2.5rem 1.25rem 4rem; }
+    .ig-slide { flex: 0 0 260px; height: 260px; }
+    .dh-sketch-row { grid-template-columns: 1fr; }
+    .li-posts { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="logo.png" alt="Srishti Gangolly" style="height:80px;width:auto;display:block;"></a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html#home">Home</a></li>
+    <li><a href="index.html#experience">Experience</a></li>
+    <li><a href="index.html#projects">Projects</a></li>
+    <li><a href="https://srishtigangolly.substack.com/" target="_blank">Writing</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+</nav>
+
+<header class="case-hero">
+  <a href="index.html#projects" class="back-link">Back to projects</a>
+  <p class="case-eyebrow">MLH-Partnered Hackathon · MCSS</p>
+  <h1 class="case-title">DeerHacks</h1>
+  <p class="case-subtitle">Organizer | 2022 – 2024</p>
+</header>
+
+<main class="case-body">
+
+  <!-- Toggle tabs -->
+  <div class="dh-tabs">
+    <button class="dh-tab active" onclick="switchTab('dh2')">DeerHacks II</button>
+    <button class="dh-tab" onclick="switchTab('dh3')">DeerHacks III</button>
+  </div>
+
+  <!-- DeerHacks II -->
+  <div class="dh-panel active" id="panel-dh2">
+
+    <img src="assets/deerhacks/dh2-team.jpg" alt="DeerHacks II team photo" style="float:right; width:260px; border-radius:10px; object-fit:cover; border:2px solid var(--ink); margin:3.5rem 0 1rem 1.75rem;">
+
+    <p class="dh-section-title">Overview</p>
+    <div class="dh-section-body">
+      The <strong><em>2nd iteration of the largest MLH-partnered hackathon</em></strong> hosted by the <strong><em>Mathematical and Computational Sciences Society</em></strong> at the <strong><em>University of Toronto, Mississauga</em></strong>, bringing together <strong><em>hundreds of students</em></strong> to build, learn, and compete.
+    </div>
+
+    <p class="dh-section-title">Team</p>
+    <div class="dh-section-body">
+      <a href="https://www.linkedin.com/in/anthonytedja/" target="_blank" style="color:var(--oxblood);">Anthony Tedja</a> ·
+      <a href="https://www.linkedin.com/in/crastars/" target="_blank" style="color:var(--oxblood);">Carina Rastorgueva</a> ·
+      <a href="https://www.linkedin.com/in/harneet-channi/" target="_blank" style="color:var(--oxblood);">Harneet Singh</a> ·
+      <a href="https://www.linkedin.com/in/hillarytang/" target="_blank" style="color:var(--oxblood);">Hillary Tang</a> ·
+      <a href="https://www.linkedin.com/in/ivanvarquez/" target="_blank" style="color:var(--oxblood);">Ivan Varquez</a> ·
+      <a href="https://www.linkedin.com/in/niralpatel02/" target="_blank" style="color:var(--oxblood);">Niral Patel</a> ·
+      <a href="https://www.linkedin.com/in/ninaricci29/" target="_blank" style="color:var(--oxblood);">Nina Ricci Lu</a> ·
+      <a href="https://www.linkedin.com/in/shrey-vakil/" target="_blank" style="color:var(--oxblood);">Shrey Vakil</a>
+    </div>
+
+    <p class="dh-section-title">Marketing &amp; Brand Strategy</p>
+    <div class="dh-section-body"><ul>
+      <li>Coordinated <strong><em>marketing workflows</em></strong> across UI/UX, Tech, and external teams to maintain <strong><em>consistent branding</em></strong> throughout the event.</li>
+      <li>Collaborated with <a href="https://www.linkedin.com/in/crastars/" target="_blank" style="color:var(--oxblood);"><strong>Carina Rastorgueva</strong></a> and <a href="https://www.linkedin.com/in/ivanvarquez/" target="_blank" style="color:var(--oxblood);"><strong>Ivan Varquez</strong></a> on <strong><em>brand strategy</em></strong>, <strong><em>content creation</em></strong>, and overall <strong><em>brand voice</em></strong>.</li>
+    </ul></div>
+    <div style="clear:both;"></div>
+
+    <p class="dh-section-title">Social Media &amp; Outreach</p>
+    <div class="dh-section-body"><ul>
+      <li>Built the <strong><em><u>Instagram presence from zero to 450+ followers</u></em></strong>, producing content that drove outreach and participant sign-ups.</li>
+      <li>Created and promoted <strong><em>engaging content</em></strong> leading up to the event, boosting <strong><em>visibility</em></strong> and <strong><em>participant involvement</em></strong>.</li>
+    </ul></div>
+
+    <p class="dh-section-title">Brand Identity — From Sketch to Starry Night</p>
+    <div class="dh-section-body">
+      <p>What began as <strong><em>hand-drawn logo sketches</em></strong> exploring possible themes evolved into the final <strong><em>'Starry Night'</em></strong> concept.</p>
+      <p style="margin-top:0.75rem;">Early concepts explored a <strong><em>deer motif</em></strong>, a <strong><em>gaming controller</em></strong>, and a <strong><em>circular scenic badge</em></strong> — the final polished brand was brought to life digitally by <strong><em>Ivan</em></strong>, translating rough paper concepts into a cohesive theme.</p>
+    </div>
+
+    <div class="dh-sketch-row">
+      <div>
+        <div class="dh-sketch-img-wrap">
+          <img src="assets/deerhacks/dh2-sketch.jpg" alt="Early logo sketches — deer, controller, and circular badge concepts">
+        </div>
+        <p class="dh-sketch-caption">early sketches · theme exploration</p>
+      </div>
+      <div>
+        <div class="dh-sketch-img-wrap">
+          <img src="assets/deerhacks/dh2-logo-final.jpg" alt="Final DeerHacks starry night logo">
+        </div>
+        <p class="dh-sketch-caption">final logo · starry night</p>
+      </div>
+    </div>
+
+    <!-- Carousel section -->
+    <div class="dh-carousel-section">
+      <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; border-bottom:1px solid var(--border); padding-bottom:0.4rem;">
+        <p class="dh-carousel-section-title" style="margin:0; border:none; padding:0; flex:1;">Content &amp; Campaigns · Instagram</p>
+        <a href="https://www.instagram.com/deerhacks/" target="_blank" style="display:inline-flex; align-items:center; gap:0.4rem; font-family:'DM Sans',sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#fff; background:var(--oxblood); padding:0.35rem 0.85rem; border-radius:20px; text-decoration:none; white-space:nowrap; transition:opacity 0.2s;" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">↗ Instagram</a>
+      </div>
+
+      <p class="ig-label">2022 Wrapped</p>
+      <div class="ig-scroll-wrap" style="margin-bottom:2rem;">
+        <div class="ig-scroll" id="ig-scroll-dh2">
+          <div class="ig-slide"><img src="assets/deerhacks/dh2-1.png" alt="DeerHacks 2022 Wrapped"></div>
+          <div class="ig-slide"><img src="assets/deerhacks/dh2-2.png" alt="150+ participants, 2 sponsors"></div>
+          <div class="ig-slide"><img src="assets/deerhacks/dh2-3.png" alt="$5000+ in prizes, 13+ workshops"></div>
+          <div class="ig-slide"><img src="assets/deerhacks/dh2-4.png" alt="6+ club collaborations"></div>
+        </div>
+        <div class="ig-dots" id="ig-dots-dh2">
+          <div class="ig-dot active" onclick="scrollToSlide('dh2',0)"></div>
+          <div class="ig-dot" onclick="scrollToSlide('dh2',1)"></div>
+          <div class="ig-dot" onclick="scrollToSlide('dh2',2)"></div>
+          <div class="ig-dot" onclick="scrollToSlide('dh2',3)"></div>
+        </div>
+      </div>
+
+      <p class="ig-label">Registration &amp; FAQ</p>
+      <div class="ig-scroll-wrap" style="margin-bottom:2rem;">
+        <div class="ig-scroll" id="ig-scroll-reg">
+          <div class="ig-slide"><img src="assets/deerhacks/dh2-5.png" alt="Registration is now open"></div>
+          <div class="ig-slide"><img src="assets/deerhacks/dh2-6.png" alt="FAQ: eligibility criteria"></div>
+          <div class="ig-slide"><img src="assets/deerhacks/dh2-8.jpg" alt="What's in my bag? DeerHacks edition"></div>
+        </div>
+        <div class="ig-dots" id="ig-dots-reg">
+          <div class="ig-dot active" onclick="scrollToSlide('reg',0)"></div>
+          <div class="ig-dot" onclick="scrollToSlide('reg',1)"></div>
+          <div class="ig-dot" onclick="scrollToSlide('reg',2)"></div>
+        </div>
+      </div>
+
+      <p class="ig-label">Mentor Recruitment</p>
+      <div class="ig-scroll-wrap" style="margin-bottom:2rem;">
+        <div class="ig-scroll" id="ig-scroll-mentor">
+          <div class="ig-slide"><img src="assets/deerhacks/dh3-mentor-1.png" alt="DeerHacks is looking for mentors"></div>
+          <div class="ig-slide"><img src="assets/deerhacks/dh3-mentor-2.png" alt="What do mentors do?"></div>
+          <div class="ig-slide"><img src="assets/deerhacks/dh3-mentor-3.png" alt="Who can be a mentor?"></div>
+          <div class="ig-slide"><img src="assets/deerhacks/dh3-mentor-4.png" alt="Interested?"></div>
+        </div>
+        <div class="ig-dots" id="ig-dots-mentor">
+          <div class="ig-dot active" onclick="scrollToSlide('mentor',0)"></div>
+          <div class="ig-dot" onclick="scrollToSlide('mentor',1)"></div>
+          <div class="ig-dot" onclick="scrollToSlide('mentor',2)"></div>
+          <div class="ig-dot" onclick="scrollToSlide('mentor',3)"></div>
+        </div>
+      </div>
+
+      <p class="ig-label">Volunteer Recruitment</p>
+      <div class="ig-scroll-wrap">
+        <div class="ig-scroll" id="ig-scroll-vol">
+          <div class="ig-slide"><img src="assets/deerhacks/dh3-vol-1.png" alt="DeerHacks is looking for volunteers"></div>
+          <div class="ig-slide"><img src="assets/deerhacks/dh3-vol-2.png" alt="What can volunteers do?"></div>
+          <div class="ig-slide"><img src="assets/deerhacks/dh3-vol-3.png" alt="Who can be a volunteer?"></div>
+          <div class="ig-slide"><img src="assets/deerhacks/dh3-vol-4.png" alt="Interested?"></div>
+        </div>
+        <div class="ig-dots" id="ig-dots-vol">
+          <div class="ig-dot active" onclick="scrollToSlide('vol',0)"></div>
+          <div class="ig-dot" onclick="scrollToSlide('vol',1)"></div>
+          <div class="ig-dot" onclick="scrollToSlide('vol',2)"></div>
+          <div class="ig-dot" onclick="scrollToSlide('vol',3)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DeerHacks III -->
+  <div class="dh-panel" id="panel-dh3">
+
+    <div style="float:right; display:flex; flex-direction:column; gap:0.75rem; margin:3.5rem 0 1rem 1.75rem;">
+      <img src="assets/deerhacks/dh3-team.jpg" alt="DeerHacks III team photo" style="width:340px; border-radius:10px; object-fit:cover; border:2px solid var(--ink);">
+      <img src="assets/deerhacks/dh3-team-2.jpg" alt="DeerHacks III full team photo" style="width:340px; border-radius:10px; object-fit:cover; border:2px solid var(--ink);">
+    </div>
+
+    <p class="dh-section-title">Overview</p>
+    <div class="dh-section-body">
+      <p>The <strong><em>3rd iteration of the largest MLH-partnered hackathon</em></strong> hosted by the <strong><em>Mathematical and Computational Sciences Society</em></strong> at the <strong><em>University of Toronto, Mississauga</em></strong>.</p>
+      <p style="margin-top:0.75rem;">This iteration saw <strong><em>1,500+ applicants</em></strong>, <strong><em>35+ events</em></strong>, a <strong><em>$15,000+ budget</em></strong>, and a <strong><em>social media community of 3,000+ followers</em></strong> built from the ground up.</p>
+      <p style="margin-top:0.75rem;">To top it off, <strong><em>DeerHacks III was named Best Event of the Year.</em></strong> 🏆</p>
+    </div>
+
+    <p class="dh-section-title">Team</p>
+    <div class="dh-section-body">
+      <a href="https://www.linkedin.com/in/a1t/" target="_blank" style="color:var(--oxblood);">Akira Takaki</a> ·
+      <a href="https://www.linkedin.com/in/anthonytedja/" target="_blank" style="color:var(--oxblood);">Anthony Tedja</a> ·
+      <a href="https://www.linkedin.com/in/crastars/" target="_blank" style="color:var(--oxblood);">Carina Rastorgueva</a> ·
+      <a href="https://www.linkedin.com/in/ivanvarquez/" target="_blank" style="color:var(--oxblood);">Ivan Varquez</a> ·
+      <a href="https://www.linkedin.com/in/jasmineguru/" target="_blank" style="color:var(--oxblood);">Jasmine Guruparan</a> ·
+      <a href="https://www.linkedin.com/in/ninaricci29/" target="_blank" style="color:var(--oxblood);">Nina Ricci Lu</a> ·
+      <a href="https://www.linkedin.com/in/shiva-mulwani/" target="_blank" style="color:var(--oxblood);">Shiva Mulwani</a> ·
+      <a href="https://www.linkedin.com/in/manojvis2001/" target="_blank" style="color:var(--oxblood);">Vishnu Manoj</a>
+    </div>
+
+    <p class="dh-section-title">Partnerships &amp; Outreach</p>
+    <div class="dh-section-body"><ul>
+      <li>Acted as a <strong><em>main point of contact and spokesperson</em></strong> for the club, building strong connections with <strong><em>external partners and sponsors</em></strong>.</li>
+      <li>Collaborated with <a href="https://www.linkedin.com/in/manojvis2001/" target="_blank" style="color:var(--oxblood);"><strong>Vishnu Manoj</strong></a>, <a href="https://www.linkedin.com/in/jasmineguru/" target="_blank" style="color:var(--oxblood);"><strong>Jasmine Guruparan</strong></a>, and <a href="https://www.linkedin.com/in/ninaricci29/" target="_blank" style="color:var(--oxblood);"><strong>Nina Ricci</strong></a> on <strong><em>logistics and project management</em></strong> across all channels.</li>
+    </ul></div>
+
+    <p class="dh-section-title">Marketing &amp; Social Media</p>
+    <div class="dh-section-body"><ul>
+      <li>Created engaging <strong><em>LinkedIn content</em></strong> that grew the community to <strong><em>800+ followers</em></strong>, boosting visibility and online engagement leading up to the event.</li>
+      <li>Supported development of <strong><em>onboarding packages</em></strong> for hackers, mentors, volunteers, and judges to streamline orientation and ensure a smooth event-day experience alongside <a href="https://www.linkedin.com/in/ivanvarquez/" target="_blank" style="color:var(--oxblood);"><strong>Ivan</strong></a> and <a href="https://www.linkedin.com/in/ninaricci29/" target="_blank" style="color:var(--oxblood);"><strong>Nina</strong></a>.</li>
+    </ul>
+    <div class="li-posts">
+      <div class="li-post">
+        <img src="assets/deerhacks/dh3-li-1.png" alt="DeerHacks III LinkedIn post — registrations open">
+      </div>
+      <div class="li-post">
+        <img src="assets/deerhacks/dh3-li-2.png" alt="DeerHacks III LinkedIn post — mentor recruitment">
+      </div>
+      <div class="li-post">
+        <img src="assets/deerhacks/dh3-li-3.png" alt="DeerHacks III LinkedIn post — volunteer recruitment">
+      </div>
+    </div>
+    <p style="font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--muted); margin-top:0.5rem;">named &amp; updated by current team</p>
+
+    <p class="dh-section-title">Events &amp; Programming</p>
+    <div class="dh-section-body"><ul>
+      <li>Took the lead in <strong><em>expanding and diversifying the workshop lineup</em></strong>, making the event more valuable and inclusive for participants across all experience levels.</li>
+      <li>Supported <strong><em>recruitment efforts</em></strong> for judges, mentors, and volunteers, ensuring a high-quality experience throughout the event.</li>
+    </ul></div>
+
+    <p class="ig-label">DeerHacks III · Event Photos</p>
+    <div class="ig-scroll-wrap">
+      <div class="ig-scroll" id="ig-scroll-dh3event">
+        <div class="ig-slide"><img src="assets/deerhacks/dh3-event-1.png" alt="DeerHacks III event photo 1"></div>
+        <div class="ig-slide"><img src="assets/deerhacks/dh3-event-2.png" alt="DeerHacks III event photo 2"></div>
+        <div class="ig-slide"><img src="assets/deerhacks/dh3-event-3.png" alt="DeerHacks III event photo 3"></div>
+        <div class="ig-slide"><img src="assets/deerhacks/dh3-event-4.png" alt="DeerHacks III event photo 4"></div>
+        <div class="ig-slide"><img src="assets/deerhacks/dh3-event-5.png" alt="DeerHacks III event photo 5"></div>
+        <div class="ig-slide"><img src="assets/deerhacks/dh3-event-6.png" alt="DeerHacks III event photo 6"></div>
+        <div class="ig-slide"><img src="assets/deerhacks/dh3-event-7.png" alt="DeerHacks III event photo 7"></div>
+        <div class="ig-slide"><img src="assets/deerhacks/dh3-event-8.png" alt="DeerHacks III event photo 8"></div>
+        <div class="ig-slide"><img src="assets/deerhacks/dh3-event-9.png" alt="DeerHacks III event photo 9"></div>
+        <div class="ig-slide"><img src="assets/deerhacks/dh3-event-10.png" alt="DeerHacks III event photo 10"></div>
+      </div>
+      <div class="ig-dots" id="ig-dots-dh3event">
+        <div class="ig-dot active" onclick="scrollToSlide('dh3event',0)"></div>
+        <div class="ig-dot" onclick="scrollToSlide('dh3event',1)"></div>
+        <div class="ig-dot" onclick="scrollToSlide('dh3event',2)"></div>
+        <div class="ig-dot" onclick="scrollToSlide('dh3event',3)"></div>
+        <div class="ig-dot" onclick="scrollToSlide('dh3event',4)"></div>
+        <div class="ig-dot" onclick="scrollToSlide('dh3event',5)"></div>
+        <div class="ig-dot" onclick="scrollToSlide('dh3event',6)"></div>
+        <div class="ig-dot" onclick="scrollToSlide('dh3event',7)"></div>
+        <div class="ig-dot" onclick="scrollToSlide('dh3event',8)"></div>
+        <div class="ig-dot" onclick="scrollToSlide('dh3event',9)"></div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<script src="script.js"></script>
+<script>
+  function switchTab(id) {
+    document.querySelectorAll('.dh-tab').forEach(function(t){ t.classList.remove('active'); });
+    document.querySelectorAll('.dh-panel').forEach(function(p){ p.classList.remove('active'); });
+    document.getElementById('panel-' + id).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+
+  function scrollToSlide(id, idx) {
+    var scroll = document.getElementById('ig-scroll-' + id);
+    var slideW = scroll.querySelector('.ig-slide').offsetWidth + 12;
+    scroll.scrollTo({ left: slideW * idx, behavior: 'smooth' });
+  }
+
+  // Update dots on scroll
+  document.querySelectorAll('.ig-scroll').forEach(function(el) {
+    var id = el.id.replace('ig-scroll-', '');
+    el.addEventListener('scroll', function() {
+      var slideW = el.querySelector('.ig-slide').offsetWidth + 12;
+      var idx = Math.round(el.scrollLeft / slideW);
+      var dots = document.querySelectorAll('#ig-dots-' + id + ' .ig-dot');
+      dots.forEach(function(d, i){ d.classList.toggle('active', i === idx); });
+    });
+  });
+</script>
+</body>
+</html>
