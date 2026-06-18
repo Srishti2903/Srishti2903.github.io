@@ -14,8 +14,7 @@
 
   /* -------- motion flavor (persisted) -------- */
   const STYLES = ['subtle', 'playful', 'cinematic'];
-  let motion = localStorage.getItem('sg-motion');
-  if (!STYLES.includes(motion)) motion = 'playful';
+  let motion = 'playful';
   document.body.setAttribute('data-motion', motion);
 
   /* =========================================================
@@ -407,7 +406,6 @@
     initReveal();
     bindHover();
     collectParallax();
-    buildSwitcher();
     initSlideToUnlock();
     setTimeout(checkReveals, 0);
   }
