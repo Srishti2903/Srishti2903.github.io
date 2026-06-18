@@ -314,9 +314,8 @@
     .dh-panel div[style*="float:right"] img {
       width: 100% !important;
     }
-    .dh-panel { display: flex; flex-direction: column; }
-    .dh-panel img[style*="float:right"],
-    .dh-panel div[style*="float:right"] { order: 99; }
+    .dh-panel { display: none !important; }
+    .dh-panel.active { display: block !important; }
     /* carousel section full width */
     .dh-carousel-section {
       width: 100% !important;
@@ -364,8 +363,6 @@
   <!-- DeerHacks II -->
   <div class="dh-panel active" id="panel-dh2">
 
-    <img src="assets/deerhacks/dh2-team.jpg" alt="DeerHacks II team photo" style="float:right; width:260px; border-radius:10px; object-fit:cover; border:2px solid var(--ink); margin:3.5rem 0 1rem 1.75rem;">
-
     <p class="dh-section-title">Overview</p>
     <div class="dh-section-body">
       The <strong><em>2nd iteration of the largest MLH-partnered hackathon</em></strong> hosted by the <strong><em>Mathematical and Computational Sciences Society</em></strong> at the <strong><em>University of Toronto, Mississauga</em></strong>, bringing together <strong><em>hundreds of students</em></strong> to build, learn, and compete.
@@ -382,6 +379,8 @@
       <a href="https://www.linkedin.com/in/ninaricci29/" target="_blank" style="color:var(--oxblood);">Nina Ricci Lu</a> ·
       <a href="https://www.linkedin.com/in/shrey-vakil/" target="_blank" style="color:var(--oxblood);">Shrey Vakil</a>
     </div>
+
+    <img src="assets/deerhacks/dh2-team.jpg" alt="DeerHacks II team photo" style="float:right; width:260px; border-radius:10px; object-fit:cover; border:2px solid var(--ink); margin:0 0 1rem 1.75rem;">
 
     <p class="dh-section-title">Marketing &amp; Brand Strategy</p>
     <div class="dh-section-body"><ul>
@@ -491,11 +490,6 @@
   <!-- DeerHacks III -->
   <div class="dh-panel" id="panel-dh3">
 
-    <div style="float:right; display:flex; flex-direction:column; gap:0.75rem; margin:3.5rem 0 1rem 1.75rem;">
-      <img src="assets/deerhacks/dh3-team.jpg" alt="DeerHacks III team photo" style="width:340px; border-radius:10px; object-fit:cover; border:2px solid var(--ink);">
-      <img src="assets/deerhacks/dh3-team-2.jpg" alt="DeerHacks III full team photo" style="width:340px; border-radius:10px; object-fit:cover; border:2px solid var(--ink);">
-    </div>
-
     <p class="dh-section-title">Overview</p>
     <div class="dh-section-body">
       <p>The <strong><em>3rd iteration of the largest MLH-partnered hackathon</em></strong> hosted by the <strong><em>Mathematical and Computational Sciences Society</em></strong> at the <strong><em>University of Toronto, Mississauga</em></strong>.</p>
@@ -513,6 +507,11 @@
       <a href="https://www.linkedin.com/in/ninaricci29/" target="_blank" style="color:var(--oxblood);">Nina Ricci Lu</a> ·
       <a href="https://www.linkedin.com/in/shiva-mulwani/" target="_blank" style="color:var(--oxblood);">Shiva Mulwani</a> ·
       <a href="https://www.linkedin.com/in/manojvis2001/" target="_blank" style="color:var(--oxblood);">Vishnu Manoj</a>
+    </div>
+
+    <div style="float:right; display:flex; flex-direction:column; gap:0.75rem; margin:0 0 1rem 1.75rem;">
+      <img src="assets/deerhacks/dh3-team.jpg" alt="DeerHacks III team photo" style="width:340px; border-radius:10px; object-fit:cover; border:2px solid var(--ink);">
+      <img src="assets/deerhacks/dh3-team-2.jpg" alt="DeerHacks III full team photo" style="width:340px; border-radius:10px; object-fit:cover; border:2px solid var(--ink);">
     </div>
 
     <p class="dh-section-title">Partnerships &amp; Outreach</p>
