@@ -276,67 +276,6 @@
     if (!ticking) { ticking = true; requestAnimationFrame(parallaxTick); }
   }, { passive: true });
 
-  /* =========================================================
-     7. MOTION SWITCHER UI
-     ========================================================= */
-  function buildSwitcher() {
-    const wrap = document.createElement('div');
-    wrap.id = 'motion-switch';
-    wrap.innerHTML = `
-      <span class="ms-label">Motion</span>
-      <div class="ms-track" role="tablist">
-        <button data-m="subtle">Subtle</button>
-        <button data-m="playful">Playful</button>
-        <button data-m="cinematic">Cinematic</button>
-      </div>`;
-    document.body.appendChild(wrap);
-    const buttons = wrap.querySelectorAll('button');
-    const sync = () => buttons.forEach((b) => b.classList.toggle('active', b.dataset.m === motion));
-    sync();
-    buttons.forEach((b) => b.addEventListener('click', () => {
-      reflavor(b.dataset.m);
-      sync();
-      collectParallax();
-      // nudge: scroll up a hair then back so in-view items replay cleanly
-      window.scrollBy({ top: -1, behavior: 'instant' in window ? 'instant' : 'auto' });
-    }));
-
-    const style = document.createElement('style');
-    style.textContent = `
-      #motion-switch{
-        position:fixed; right:1.4rem; bottom:1.4rem; z-index:500;
-        display:flex; align-items:center; gap:.7rem;
-        padding:.5rem .6rem .5rem .9rem; border-radius:999px;
-        background:rgba(251,248,241,.82); backdrop-filter:blur(12px) saturate(1.1);
-        -webkit-backdrop-filter:blur(12px) saturate(1.1);
-        border:1px solid var(--border); box-shadow:0 10px 30px rgba(26,22,20,.14);
-        font-family:'DM Sans',sans-serif;
-        animation:msIn .7s cubic-bezier(.2,.7,.2,1) .9s both;
-      }
-      @keyframes msIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-      #motion-switch .ms-label{
-        font-size:.62rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
-        color:var(--muted);
-      }
-      #motion-switch .ms-track{ display:flex; gap:2px; background:rgba(66,0,1,.06); border-radius:999px; padding:3px; }
-      #motion-switch button{
-        font-family:inherit; font-size:.74rem; font-weight:500; cursor:pointer;
-        border:none; background:none; color:var(--muted);
-        padding:.34rem .8rem; border-radius:999px;
-        transition:color .25s ease, background .25s ease, transform .25s ease;
-      }
-      #motion-switch button:hover{ color:var(--ink); }
-      #motion-switch button.active{ background:var(--oxblood); color:#FBF8F1; box-shadow:0 3px 10px rgba(66,0,1,.22); }
-      @media (max-width:768px){
-        #motion-switch{ right:.7rem; bottom:.7rem; padding:.4rem .45rem .4rem .7rem; gap:.5rem; }
-        #motion-switch .ms-label{ display:none; }
-        #motion-switch button{ font-size:.68rem; padding:.32rem .62rem; }
-      }
-.wf-word{ display:inline-block; opacity:0; transform:translateY(.5em); transition:opacity .95s ease, transform 1.1s cubic-bezier(.22,.61,.36,1); }
-      .wf-word.in{ opacity:1; transform:none; }
-    `;
-    document.head.appendChild(style);
-  }
 
   /* =========================================================
      BOOT
