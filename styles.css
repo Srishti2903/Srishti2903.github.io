@@ -532,12 +532,23 @@ nav.scrolled .nav-logo:hover img {
 @media (max-width: 880px) {
   .home-section { padding: 4rem 1.5rem; }
   .home-section.alt { padding: 4rem 1.5rem; }
-  .exp-row { grid-template-columns: 1fr; gap: 0.4rem; padding: 1.2rem 0.5rem; }
-  .exp-row--has-tooltip .exp-row-top { grid-template-columns: 1fr; gap: 0.4rem; }
-  .exp-tag { justify-self: start; order: -1; }
-  .exp-org { font-size: 1.1rem; }
+
+  /* stack exp rows vertically */
+  .exp-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 1.1rem 0.5rem;
+  }
+  .exp-row--has-tooltip .exp-row-top {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .exp-tag { align-self: flex-start; margin-bottom: 0.25rem; }
+  .exp-org { font-size: 1.05rem; }
   .exp-role { font-size: 0.85rem; }
-  .exp-dates { font-size: 0.75rem; }
+  .exp-dates { font-size: 0.75rem; margin-top: 0.15rem; }
   .exp-details-intro { max-width: 100%; }
   .exp-details ul { max-width: 100%; }
   .proj-grid, .cert-grid { grid-template-columns: 1fr; }
