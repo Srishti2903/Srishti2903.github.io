@@ -303,6 +303,26 @@
     .ig-slide { flex: 0 0 260px; height: 260px; }
     .dh-sketch-row { grid-template-columns: 1fr; }
     .li-posts { flex-direction: column; }
+    /* unfloat team photos */
+    .dh-panel img[style*="float:right"],
+    .dh-panel div[style*="float:right"] {
+      float: none !important;
+      width: 100% !important;
+      margin: 0 0 1.5rem 0 !important;
+    }
+    .dh-panel div[style*="float:right"] img {
+      width: 100% !important;
+    }
+    /* carousel section full width */
+    .dh-carousel-section {
+      width: 100% !important;
+      margin-left: 0 !important;
+    }
+    /* tabs */
+    .dh-tabs { width: 100%; }
+    .dh-tab { flex: 1; text-align: center; padding: 0.65rem 0.5rem; }
+    /* hero */
+    .case-hero { padding: 6rem 1.5rem 2rem; }
   }
 </style>
 </head>

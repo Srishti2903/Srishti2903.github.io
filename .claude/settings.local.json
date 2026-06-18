@@ -19,7 +19,14 @@
       "Bash(python3 -c \"import shutil; shutil.copy\\('/Users/srishti/Desktop/Screenshot 2026-06-18 at 5.21.35 PM.png', '/Users/srishti/Desktop/Portfolio 2/assets/deerhacks/dh2-sketch.jpg'\\)\")",
       "Bash(git init *)",
       "Bash(git add *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(git branch *)",
+      "Bash(git remote *)",
+      "Bash(git push *)",
+      "Bash(brew --version)",
+      "Bash(gh auth *)",
+      "Bash(git pull *)",
+      "Bash(git stash *)"
     ]
   }
 }

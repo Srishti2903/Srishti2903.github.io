@@ -220,6 +220,25 @@
     .case-body { padding: 2.5rem 1.25rem 4rem; }
     .case-deck-section { flex-direction: column; padding: 0 1.25rem 3rem; }
     .case-deck-frame { flex: none; width: 100%; }
+    /* contribution grids → single column */
+    .case-body [style*="grid-template-columns:1fr 1fr"],
+    .case-body [style*="grid-template-columns: 1fr 1fr"] {
+      display: block !important;
+    }
+    .case-body [style*="grid-template-columns:1fr 260px"],
+    .case-body [style*="grid-template-columns: 1fr 260px"] {
+      display: block !important;
+    }
+    /* phone prototype — center on mobile */
+    .case-body [style*="width:240px"],
+    .case-body [style*="width: 240px"] {
+      width: 200px !important;
+      margin: 1.5rem auto 0 !important;
+    }
+    /* nav mockup image */
+    .case-body img[style*="border-radius"] { width: 100% !important; }
+    /* team grid */
+    .team-grid { grid-template-columns: repeat(2, 1fr) !important; }
   }
 </style>
 </head>
