@@ -9,7 +9,7 @@
 (function () {
   'use strict';
 
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.innerWidth <= 768;
   const root = document.documentElement;
 
   /* -------- motion flavor (persisted) -------- */
