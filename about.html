@@ -113,30 +113,34 @@
 
   @media (max-width: 768px) {
     /* Hero */
-    .about-hero { padding: 5.5rem 1.25rem 2rem; min-height: 28vh; }
+    .about-hero { padding: 6rem 1.25rem 2rem; min-height: 28vh; }
+    .about-hero-logo { display: none; }
 
-    /* Intro photo + diary section */
+    /* Intro photo + diary section — stack vertically */
     .intro-flex-section {
       flex-direction: column !important;
       padding: 2rem 1.25rem 0 !important;
       align-items: center !important;
       gap: 1.5rem !important;
+      max-width: 100% !important;
     }
+    .intro-flex-section > div { margin-top: 0 !important; }
     .intro-flex-section p {
       padding-top: 0 !important;
       font-size: 1rem !important;
       line-height: 1.85 !important;
+      margin: 0 !important;
     }
 
     /* Hey typewriter */
-    .hey-title-wrap { padding: 2rem 1.25rem 0 !important; }
-    .hey-title-wrap h2 { font-size: 1.6rem !important; }
+    .hey-title-wrap { padding: 2rem 1.25rem 0 !important; max-width: 100% !important; }
+    .hey-title-wrap h2 { font-size: 1.5rem !important; }
 
     /* Article body */
-    .about-body { padding: 1.25rem 1.25rem 4rem; }
+    .about-body { padding: 1.5rem 1.25rem 4rem; max-width: 100%; }
     .about-body p { font-size: 1rem; line-height: 1.85; margin-bottom: 1.4rem; }
 
-    /* Disable drop cap */
+    /* Disable drop cap on mobile */
     .about-body p:first-of-type::first-letter {
       font-size: 1rem;
       float: none;
@@ -144,55 +148,58 @@
       line-height: inherit;
     }
 
-    /* Section banners ("for the resume." etc) */
+    /* Section banners */
     .section-banner { text-align: center !important; margin: 2rem 0 1.5rem !important; }
+    .section-banner h2 { font-size: clamp(2rem, 10vw, 3rem) !important; }
 
-    /* Floated polaroids — stay floated, just smaller and with safe margins */
-    .pol-float-l {
-      width: clamp(90px, 28vw, 130px) !important;
-      float: left !important;
-      margin: 0.25rem 1rem 0.75rem 0 !important;
-      transform: rotate(-1.5deg) !important;
-    }
+    /* Floated polaroids — unfloat and center */
+    .pol-float-l,
     .pol-float-r {
-      width: clamp(100px, 32vw, 150px) !important;
-      float: right !important;
-      margin: 0.25rem 0 0.75rem 1rem !important;
-      transform: rotate(1deg) !important;
+      float: none !important;
+      display: block !important;
+      margin: 1rem auto 1.5rem !important;
+      width: clamp(140px, 55vw, 200px) !important;
     }
 
-    /* Photobooth strip */
-    .photobooth-strip { margin: 0 auto 2rem !important; }
-    .photobooth-strip > div:last-child { width: clamp(140px, 50vw, 200px) !important; }
+    /* Photobooth strip — unfloat, center */
+    .photobooth-strip {
+      float: none !important;
+      margin: 1rem auto 2rem !important;
+      display: block !important;
+    }
+    .photobooth-strip > div:last-child { width: clamp(160px, 65vw, 220px) !important; }
 
-    /* Teaching flex */
+    /* Teaching flex — stack */
     .teaching-flex {
       flex-direction: column !important;
       align-items: center !important;
     }
-    .teaching-flex > div { margin-top: 0 !important; width: 130px !important; }
-    .teaching-flex > p { margin-top: 1rem !important; }
+    .teaching-flex > div {
+      float: none !important;
+      margin: 0 auto 1rem !important;
+      width: clamp(130px, 50vw, 180px) !important;
+    }
+    .teaching-flex > p { margin-top: 0 !important; }
 
-    /* Intern polaroids side by side */
+    /* Intern polaroids — side by side centered */
     .intern-polaroid-pair {
       display: flex !important;
       justify-content: center !important;
       gap: 1rem !important;
-      margin-bottom: 1.5rem !important;
+      margin-bottom: 2rem !important;
       overflow: visible !important;
     }
     .intern-polaroid-pair .pol-float-l,
     .intern-polaroid-pair .pol-float-r {
       float: none !important;
       margin: 0 !important;
-      width: clamp(100px, 38vw, 140px) !important;
+      width: clamp(110px, 40vw, 160px) !important;
     }
     .intern-polaroid-pair .pol-float-l > div,
     .intern-polaroid-pair .pol-float-r > div { width: 100% !important; }
 
-    /* Clearfix so floats don't bleed into next section */
-    .about-body p { clear: none; }
-    .about-body p:last-of-type { clear: both; }
+    /* Pull quote */
+    .pull-quote { padding-left: 1.25rem; font-size: 1.1rem; }
   }
 </style>
 </head>
