@@ -143,7 +143,10 @@
     .section-banner h2 { font-size: clamp(2rem, 10vw, 3rem) !important; }
 
     /* Floated polaroids — unfloat and center */
-    .pol-float-l, .pol-float-r {
+    .pol-float-l {
+      display: none !important;
+    }
+    .pol-float-r {
       float: none !important;
       display: block !important;
       margin: 1rem auto 1.5rem !important;
