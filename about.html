@@ -463,31 +463,65 @@
 
 
   <!-- Currently widget -->
-  <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.5rem 1.75rem;margin:2rem 0;font-family:'DM Sans',sans-serif;">
-    <p style="font-size:0.68rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin:0 0 1.1rem 0;font-family:'DM Sans',sans-serif;">Currently</p>
-    <div style="display:flex;flex-direction:column;gap:0.85rem;">
-      <div style="display:flex;gap:0.75rem;align-items:baseline;">
+  <style>
+    @keyframes currently-fade-up {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .currently-row {
+      display: flex; gap: 0.75rem; align-items: baseline;
+      opacity: 0;
+      border-radius: 6px;
+      padding: 0.45rem 0.6rem;
+      margin: 0 -0.6rem;
+      transition: background 0.2s ease;
+      cursor: default;
+    }
+    .currently-row.visible {
+      animation: currently-fade-up 0.5s ease forwards;
+    }
+    .currently-row:hover { background: var(--cream); }
+  </style>
+  <div id="currently-widget" style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.5rem 1.75rem;margin:2rem 0;font-family:'DM Sans',sans-serif;">
+    <p style="font-size:0.68rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin:0 0 1.1rem 0;">Currently</p>
+    <div style="display:flex;flex-direction:column;gap:0.5rem;">
+      <div class="currently-row" style="animation-delay:0.05s;">
         <span style="font-size:1rem;flex-shrink:0;">📚</span>
         <p style="margin:0;font-size:0.92rem;color:#2E2E2E;line-height:1.5;"><span style="font-weight:500;color:var(--ink);">reading</span> — <em>Tuesdays with Morrie</em> by Mitch Albom</p>
       </div>
-      <div style="display:flex;gap:0.75rem;align-items:baseline;">
+      <div class="currently-row" style="animation-delay:0.15s;">
         <span style="font-size:1rem;flex-shrink:0;">🎤</span>
         <p style="margin:0;font-size:0.92rem;color:#2E2E2E;line-height:1.5;"><span style="font-weight:500;color:var(--ink);">working on</span> — Presentation Mastery Pathway, Level 4, Speech #1 at Milton Escarpment Toastmasters</p>
       </div>
-      <div style="display:flex;gap:0.75rem;align-items:baseline;">
+      <div class="currently-row" style="animation-delay:0.25s;">
         <span style="font-size:1rem;flex-shrink:0;">🌀</span>
         <p style="margin:0;font-size:0.92rem;color:#2E2E2E;line-height:1.5;"><span style="font-weight:500;color:var(--ink);">sidequesting</span> — getting more flexible, balanced &amp; stronger through Hot Yoga &amp; Mat Pilates</p>
       </div>
-      <div style="display:flex;gap:0.75rem;align-items:baseline;">
+      <div class="currently-row" style="animation-delay:0.35s;">
         <span style="font-size:1rem;flex-shrink:0;">☕</span>
         <p style="margin:0;font-size:0.92rem;color:#2E2E2E;line-height:1.5;"><span style="font-weight:500;color:var(--ink);">obsessed with</span> — coconut matcha, Olivia Dean, moya mawhinney &amp; lindsiann, and summer sunsets from my room window</p>
       </div>
-      <div style="display:flex;gap:0.75rem;align-items:baseline;">
+      <div class="currently-row" style="animation-delay:0.45s;">
         <span style="font-size:1rem;flex-shrink:0;">🎯</span>
         <p style="margin:0;font-size:0.92rem;color:#2E2E2E;line-height:1.5;"><span style="font-weight:500;color:var(--ink);">chasing</span> — one last summer of funemployment before the real world hits; case studies &amp; job applications, a fitness routine I'm still negotiating with, and daycations to Toronto</p>
       </div>
     </div>
   </div>
+  <script>
+    (function() {
+      const widget = document.getElementById('currently-widget');
+      const rows = widget.querySelectorAll('.currently-row');
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            rows.forEach(function(row) { row.classList.add('visible'); });
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.2 });
+      observer.observe(widget);
+    })();
+  </script>
 
   <p>That curiosity has never really been separate from the way I work. At the end of the day, I care about <strong><em>leading with intention,</em></strong> showing up with <strong><em>structure, creativity, and a genuine desire to learn</em></strong> in every team I'm part of, regardless of the problem on the table.</p>
 
