@@ -418,11 +418,11 @@
     <h2 style="font-family:'Fraunces',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:700;line-height:0.95;letter-spacing:-0.03em;color:var(--ink);">beyond the <em style="font-style:italic;font-weight:300;color:#420001;">resume.</em></h2>
   </div>
 
-  <!-- Teaching: flex row -- photo left, para right -->
+  <!-- Teaching: flex row -- photobooth left, para right -->
   <div class="teaching-flex" style="display:flex;gap:2rem;align-items:flex-start;margin-bottom:2rem;">
 
-    <!-- Polaroid left -- teaching -->
-    <div style="flex-shrink:0;position:relative;display:inline-block;width:180px;transform:rotate(-1.5deg);margin-top:0.5rem;">
+    <!-- Photobooth strip left -->
+    <div style="flex-shrink:0;position:relative;transform:rotate(-1deg);margin-top:0.5rem;">
       <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(1deg);z-index:10;">
         <svg width="72" height="28" viewBox="0 0 72 28">
           <rect x="2" y="2" width="68" height="24" rx="2" fill="rgba(226,229,223,0.75)" stroke="#b0b8a8" stroke-width="1" filter="url(#tape-wobble)"/>
@@ -430,35 +430,18 @@
           <line x1="10" y1="16" x2="62" y2="16" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
         </svg>
       </div>
-      <svg style="position:absolute;top:-4px;left:-4px;width:calc(100% + 8px);height:calc(100% + 8px);overflow:visible;pointer-events:none;z-index:2;" viewBox="0 0 188 266" preserveAspectRatio="none">
-        <rect x="2" y="2" width="184" height="262" rx="3" fill="none" stroke="#1A3A2A" stroke-width="2.5" filter="url(#doodle)"/>
-      </svg>
-      <div style="background:white;padding:6px 6px 28px 6px;box-shadow:3px 5px 0px #c8c0b4,0 10px 28px rgba(26,22,20,0.12);">
-        <img loading="eager" src="IMG_3052.jpg" style="width:100%;display:block;filter:sepia(0.08);">
+      <div style="background:#0e0e0e;padding:8px;box-shadow:4px 6px 0px #c8c0b4,0 12px 36px rgba(26,22,20,0.18);width:200px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;">
+          <img loading="eager" src="IMG_9490.jpg" style="width:100%;display:block;object-fit:cover;aspect-ratio:3/4;">
+          <img loading="eager" src="IMG_7664.PNG" style="width:100%;display:block;object-fit:cover;aspect-ratio:3/4;">
+          <img loading="eager" src="IMG_0348.jpg" style="width:100%;display:block;object-fit:cover;aspect-ratio:3/4;">
+          <img loading="eager" src="IMG_5123.jpg" style="width:100%;display:block;object-fit:cover;aspect-ratio:3/4;object-position:center top;">
+        </div>
       </div>
     </div>
 
     <p style="margin-bottom:0;">Outside of the professional scope, I take pride in <strong><em>teaching.</em></strong> I worked with <strong><em>high school students one-on-one</em></strong> across <strong>Advanced Placement (AP) and university-level Math and Statistics</strong> – identifying gaps, <em>building targeted lesson plans,</em> and staying invested long enough to see <strong><em>real progress.</em></strong> The grades mattered, but the real win was watching students start to <strong><em>think independently.</em></strong></p>
 
-  </div>
-
-  <!-- PHOTOBOOTH STRIP -->
-  <div class="pol-float-r photobooth-strip" style="float:right;margin:0 0 1.5rem 2rem;position:relative;">
-    <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(1deg);z-index:10;">
-      <svg width="72" height="28" viewBox="0 0 72 28">
-        <rect x="2" y="2" width="68" height="24" rx="2" fill="rgba(226,229,223,0.75)" stroke="#b0b8a8" stroke-width="1" filter="url(#tape-wobble)"/>
-        <line x1="10" y1="9" x2="62" y2="9" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
-        <line x1="10" y1="16" x2="62" y2="16" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
-      </svg>
-    </div>
-    <div style="background:#0e0e0e;padding:8px;box-shadow:4px 6px 0px #c8c0b4,0 12px 36px rgba(26,22,20,0.18);transform:rotate(-1deg);width:260px;">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;">
-        <img loading="eager" src="IMG_9490.jpg" style="width:100%;display:block;object-fit:cover;aspect-ratio:3/4;">
-        <img loading="eager" src="IMG_7664.PNG" style="width:100%;display:block;object-fit:cover;aspect-ratio:3/4;">
-        <img loading="eager" src="IMG_0348.jpg" style="width:100%;display:block;object-fit:cover;aspect-ratio:3/4;">
-        <img loading="eager" src="IMG_5123.jpg" style="width:100%;display:block;object-fit:cover;aspect-ratio:3/4;object-position:center top;">
-      </div>
-    </div>
   </div>
 
 
@@ -488,7 +471,7 @@
   </style>
   <div id="currently-widget" style="margin:2rem 0;">
     <p style="font-size:0.68rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin:0 0 0.9rem 0;font-family:'DM Sans',sans-serif;">Currently</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;width:100%;">
       <div class="currently-card" style="animation-delay:0.05s;">
         <p class="c-label">📚 reading</p>
         <p class="c-text"><em>Tuesdays with Morrie</em> by Mitch Albom</p>
