@@ -452,7 +452,8 @@
       to   { opacity: 1; transform: translateY(0); }
     }
     .currently-card {
-      background: #1c1a17;
+      background: #fff;
+      border: 1px solid var(--border);
       border-radius: 8px;
       padding: 1.05rem 1.3rem;
       opacity: 0;
@@ -462,10 +463,10 @@
     .currently-card.visible {
       animation: currently-fade-up 0.5s ease forwards;
     }
-    .currently-card:hover { background: #2a2724; }
-    .currently-card .c-label { font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.9);font-family:'DM Sans',sans-serif;margin:0 0 0.4rem 0;text-align:center; }
-    .currently-card .c-text { margin:0;font-size:0.82rem;color:rgba(255,255,255,0.65);line-height:1.55;font-family:'Fraunces',serif;font-weight:300;font-style:italic;text-align:center; }
-    .currently-card .c-text em { font-style:italic;color:rgba(255,255,255,0.85); }
+    .currently-card:hover { background: #fdf9f6; }
+    .currently-card .c-label { font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#420001;font-family:'DM Sans',sans-serif;margin:0 0 0.4rem 0;text-align:center; }
+    .currently-card .c-text { margin:0;font-size:0.82rem;color:#2E2E2E;line-height:1.55;font-family:'Fraunces',serif;font-weight:300;font-style:italic;text-align:center; }
+    .currently-card .c-text em { font-style:italic;color:#420001; }
     /* prevent drop cap bleed */
     #currently-widget p::first-letter { font-size:inherit !important; float:none !important; margin:0 !important; line-height:inherit !important; color:inherit !important; }
   </style>
