@@ -186,15 +186,15 @@
     }
     .photobooth-strip > div:last-child { width: clamp(150px, 60vw, 200px) !important; }
 
-    /* Teaching flex — text first, photo below centered */
+    /* Teaching flex — stack fully, text full width first, photo centered below */
     .teaching-flex {
       flex-direction: column !important;
-      align-items: flex-start !important;
+      align-items: center !important;
     }
-    .teaching-flex > div { order: 2 !important; margin: 1rem auto 0 !important; width: clamp(130px, 50vw, 170px) !important; }
+    .teaching-flex > div { order: 2 !important; margin: 1rem auto 0 !important; width: clamp(130px, 55vw, 180px) !important; float: none !important; }
     .teaching-flex > div img { width: 100% !important; }
-    .teaching-flex > div[style] { order: 2 !important; }
-    .teaching-flex > p { order: 1 !important; margin: 0 !important; }
+    .teaching-flex > div > div { width: 100% !important; }
+    .teaching-flex > p { order: 1 !important; margin: 0 0 0.5rem 0 !important; width: 100% !important; }
 
     /* Intern polaroids — side by side */
     .intern-polaroid-pair {
