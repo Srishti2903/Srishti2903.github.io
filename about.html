@@ -112,13 +112,15 @@
   .about-hero { position: relative; }
 
   @media (max-width: 768px) {
-    /* Kill all transitions and animations */
-    * { transition: none !important; animation: none !important; }
-    /* Make everything visible */
-    * { opacity: 1 !important; transform: none !important; filter: none !important; }
-    /* Exception: keep polaroid rotations */
+    /* Kill scroll-reveal transitions but preserve nav and polaroids */
+    .pol-float-l, .pol-float-r, .photobooth-strip,
+    .about-body > p, .intro-flex-section > p,
+    .section-banner, .teaching-flex > p,
+    .hey-title-wrap, .about-eyebrow, .about-title,
+    .wf-word { transition: none !important; animation: none !important; opacity: 1 !important; filter: none !important; }
     .pol-float-l { transform: rotate(-2deg) !important; }
     .pol-float-r { transform: rotate(1.5deg) !important; }
+    .wf-word { transform: none !important; }
 
     /* Currently cards always visible */
     .currently-card { opacity: 1 !important; }
