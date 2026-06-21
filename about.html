@@ -224,51 +224,37 @@
   </filter>
 </svg>
 
-<!-- SPLIT SCREEN INTRO -->
-<div class="intro-split" style="display:flex;min-height:70vh;border-bottom:1px solid var(--border);">
+<!-- PHOTO + FIRST PARAGRAPH SIDE BY SIDE -->
+<div class="intro-flex-section" style="background:var(--cream);padding:0 5rem 0;max-width:780px;margin:0 auto;display:flex;align-items:center;gap:3rem;">
 
-  <!-- LEFT — diary text + 2009/2026 strip -->
-  <div class="intro-split-left" style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:2.5rem;padding:4rem 3.5rem;background:var(--cream);border-right:1px solid var(--border);">
-    <p style="font-family:'Kalam',cursive;font-size:1.05rem;line-height:2;color:#2E2E2E;font-weight:300;margin:0;"><em>Dear diary,</em><br>Ever since I was little, I've loved the story behind my name, but there's a small irony about it I've come to love even more. My name, <strong style="font-weight:700;font-style:normal;"><em style="font-style:italic;">Srishti,</em></strong> means <strong style="font-weight:700;"><em style="font-style:italic;">Creation</em></strong> in Sanskrit. My dad chose it because he thought it sounded beautiful, perhaps not realizing how perfectly it would fit. Because whether I'm <em style="font-style:italic;">writing</em>, <em style="font-style:italic;">designing a graphic</em>, <em style="font-style:italic;">building a deck</em>, <em style="font-style:italic;">presenting a speech</em> or <em style="font-style:italic;">making sense of trends</em>, that same <strong style="font-weight:700;"><em style="font-style:italic;">creative pull</em></strong> has always been at the center of who I am. Maybe the name was always meant to be mine.</p>
-
-    <!-- 2009 / 2026 strip -->
-    <div style="position:relative;align-self:flex-start;transform:rotate(-1.5deg);">
-      <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(1deg);z-index:10;">
-        <svg width="72" height="28" viewBox="0 0 72 28">
-          <rect x="2" y="2" width="68" height="24" rx="2" fill="rgba(226,229,223,0.75)" stroke="#b0b8a8" stroke-width="1" filter="url(#tape-wobble)"/>
-          <line x1="10" y1="9" x2="62" y2="9" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
-          <line x1="10" y1="16" x2="62" y2="16" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
-        </svg>
-      </div>
-      <div style="background:#0e0e0e;padding:8px 8px 24px;box-shadow:3px 5px 0px #c8c0b4,0 10px 28px rgba(26,22,20,0.18);width:130px;">
-        <div style="display:flex;flex-direction:column;gap:6px;">
-          <div style="position:relative;">
-            <img loading="eager" src="young-srishti.jpg" style="width:100%;display:block;object-fit:cover;aspect-ratio:1/1;object-position:center top;filter:sepia(0.12);">
-            <span style="display:block;font-family:'Times New Roman',Times,serif;font-size:0.6rem;color:rgba(255,255,255,0.5);text-align:center;margin-top:4px;">2009</span>
-          </div>
-          <div style="position:relative;">
-            <img loading="eager" src="srishti-2026.jpg" style="width:100%;display:block;object-fit:cover;aspect-ratio:1/1;object-position:center top;filter:sepia(0.06);">
-            <span style="display:block;font-family:'Times New Roman',Times,serif;font-size:0.6rem;color:rgba(255,255,255,0.5);text-align:center;margin-top:4px;">2026</span>
-          </div>
+  <!-- Photobooth strip -- 2009 + 2026 -->
+  <div style="position:relative;flex-shrink:0;transform:rotate(-1.5deg);margin-top:2rem;">
+    <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(1deg);z-index:10;">
+      <svg width="72" height="28" viewBox="0 0 72 28">
+        <rect x="2" y="2" width="68" height="24" rx="2" fill="rgba(226,229,223,0.75)" stroke="#b0b8a8" stroke-width="1" filter="url(#tape-wobble)"/>
+        <line x1="10" y1="9" x2="62" y2="9" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
+        <line x1="10" y1="16" x2="62" y2="16" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
+      </svg>
+    </div>
+    <div style="background:#0e0e0e;padding:8px 8px 24px;box-shadow:3px 5px 0px #c8c0b4,0 10px 28px rgba(26,22,20,0.18);width:160px;">
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="position:relative;">
+          <img loading="eager" src="young-srishti.jpg" style="width:100%;display:block;object-fit:cover;aspect-ratio:1/1;object-position:center top;filter:sepia(0.12);">
+          <span style="display:block;font-family:'Times New Roman',Times,serif;font-size:0.65rem;color:rgba(255,255,255,0.5);text-align:center;margin-top:5px;">2009</span>
+        </div>
+        <div style="position:relative;">
+          <img loading="eager" src="srishti-2026.jpg" style="width:100%;display:block;object-fit:cover;aspect-ratio:1/1;object-position:center top;filter:sepia(0.06);">
+          <span style="display:block;font-family:'Times New Roman',Times,serif;font-size:0.65rem;color:rgba(255,255,255,0.5);text-align:center;margin-top:5px;">2026</span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- RIGHT — group photo -->
-  <div class="intro-split-right" style="flex:1;position:relative;overflow:hidden;min-height:500px;">
-    <img loading="eager" src="1778266214084.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
-  </div>
+
+  <!-- First paragraph (right) -->
+  <p style="font-family:'Kalam',cursive;font-size:1.08rem;line-height:2;color:#2E2E2E;font-weight:300;margin:0;padding-top:1rem;"><em>Dear diary,</em><br>Ever since I was little, I've loved the story behind my name, but there's a small irony about it I've come to love even more. My name, <strong style="font-weight:700;font-style:normal;"><em style="font-style:italic;">Srishti,</em></strong> means <strong style="font-weight:700;"><em style="font-style:italic;">Creation</em></strong> in Sanskrit. My dad chose it because he thought it sounded beautiful, perhaps not realizing how perfectly it would fit. Because whether I'm <em style="font-style:italic;">writing</em>, <em style="font-style:italic;">designing a graphic</em>, <em style="font-style:italic;">building a deck</em>, <em style="font-style:italic;">presenting a speech</em> or <em style="font-style:italic;">making sense of trends</em>, that same <strong style="font-weight:700;"><em style="font-style:italic;">creative pull</em></strong> has always been at the center of who I am. Maybe the name was always meant to be mine.</p>
 
 </div>
-
-<style>
-  @media (max-width: 768px) {
-    .intro-split { flex-direction: column !important; min-height: auto !important; }
-    .intro-split-left { padding: 2rem 1.25rem !important; border-right: none !important; border-bottom: 1px solid var(--border); }
-    .intro-split-right { min-height: 260px !important; }
-  }
-</style>
 
 <!-- HEY TYPEWRITER -->
 <div class="hey-title-wrap" style="max-width:780px;margin:0 auto;padding:3rem 5rem 0;">
@@ -297,6 +283,23 @@
 
 <!-- BODY (remaining paragraphs) -->
 <article class="about-body">
+
+  <!-- Float left -- team portrait, text wraps around -->
+  <div class="pol-float-l" style="float:left;margin:4.5rem 2rem 1rem 0;position:relative;display:inline-block;width:190px;transform:rotate(-2deg);">
+    <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(1deg);z-index:10;">
+      <svg width="60" height="24" viewBox="0 0 60 24">
+        <rect x="2" y="2" width="56" height="20" rx="2" fill="rgba(226,229,223,0.75)" stroke="#b0b8a8" stroke-width="1" filter="url(#tape-wobble)"/>
+        <line x1="8" y1="8" x2="52" y2="8" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
+        <line x1="8" y1="14" x2="52" y2="14" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
+      </svg>
+    </div>
+    <svg style="position:absolute;top:-4px;left:-4px;width:calc(100% + 8px);height:calc(100% + 8px);overflow:visible;pointer-events:none;z-index:2;" viewBox="0 0 158 226" preserveAspectRatio="none">
+      <rect x="2" y="2" width="154" height="222" rx="3" fill="none" stroke="#1A3A2A" stroke-width="2.5" filter="url(#doodle)"/>
+    </svg>
+    <div style="background:white;padding:5px 5px 22px 5px;box-shadow:3px 5px 0px #c8c0b4,0 10px 28px rgba(26,22,20,0.12);">
+      <img loading="eager" src="1778266214084.jpg" style="width:100%;display:block;object-fit:cover;aspect-ratio:2/3;">
+    </div>
+  </div>
 
   <p>I'm currently completing a Bachelor of Science in <strong><em>Applied Mathematics with Geospatial Data Science and Statistics</em></strong> at the <strong>University of Toronto.</strong> Beyond lectures and problem sets, I've consistently gravitated toward roles where I could build and connect:</p>
   <div class="role-cards" style="display:flex;flex-direction:column;gap:0.6rem;margin:0 0 1.5rem 220px;">
