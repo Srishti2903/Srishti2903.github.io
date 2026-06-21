@@ -468,57 +468,61 @@
       from { opacity: 0; transform: translateY(14px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    .currently-row {
-      display: flex; gap: 0.75rem; align-items: baseline;
+    .currently-card {
+      background: #1c1a17;
+      border-radius: 8px;
+      padding: 0.9rem 1.1rem;
       opacity: 0;
-      border-radius: 6px;
-      padding: 0.45rem 0.6rem;
-      margin: 0 -0.6rem;
       transition: background 0.2s ease;
       cursor: default;
     }
-    .currently-row.visible {
+    .currently-card.visible {
       animation: currently-fade-up 0.5s ease forwards;
     }
-    .currently-row:hover { background: var(--cream); }
+    .currently-card:hover { background: #2a2724; }
+    .currently-card .c-label { font-size:0.68rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);font-family:'DM Sans',sans-serif;margin:0 0 0.3rem 0; }
+    .currently-card .c-text { margin:0;font-size:0.9rem;color:rgba(255,255,255,0.85);line-height:1.55;font-family:'DM Sans',sans-serif;font-weight:300; }
+    .currently-card .c-text em { font-style:italic;color:#fff; }
+    /* prevent drop cap bleed */
+    .currently-card p::first-letter { font-size:inherit !important; float:none !important; margin:0 !important; line-height:inherit !important; color:inherit !important; }
   </style>
-  <div id="currently-widget" style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.5rem 1.75rem;margin:2rem 0;font-family:'DM Sans',sans-serif;">
-    <p style="font-size:0.68rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin:0 0 1.1rem 0;">Currently</p>
-    <div style="display:flex;flex-direction:column;gap:0.5rem;">
-      <div class="currently-row" style="animation-delay:0.05s;">
-        <span style="font-size:1rem;flex-shrink:0;">📚</span>
-        <p style="margin:0;font-size:0.92rem;color:#2E2E2E;line-height:1.5;"><span style="font-weight:500;color:var(--ink);">reading</span> — <em>Tuesdays with Morrie</em> by Mitch Albom</p>
+  <div id="currently-widget" style="margin:2rem 0;">
+    <p style="font-size:0.68rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin:0 0 0.9rem 0;font-family:'DM Sans',sans-serif;">Currently</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;">
+      <div class="currently-card" style="animation-delay:0.05s;">
+        <p class="c-label">📚 reading</p>
+        <p class="c-text"><em>Tuesdays with Morrie</em> by Mitch Albom</p>
       </div>
-      <div class="currently-row" style="animation-delay:0.15s;">
-        <span style="font-size:1rem;flex-shrink:0;">🎤</span>
-        <p style="margin:0;font-size:0.92rem;color:#2E2E2E;line-height:1.5;"><span style="font-weight:500;color:var(--ink);">working on</span> — Presentation Mastery Pathway, Level 4, Speech #1 at Milton Escarpment Toastmasters</p>
+      <div class="currently-card" style="animation-delay:0.15s;">
+        <p class="c-label">🎤 working on</p>
+        <p class="c-text">Presentation Mastery Pathway, Level 4, Speech #1 @ Milton Escarpment Toastmasters</p>
       </div>
-      <div class="currently-row" style="animation-delay:0.25s;">
-        <span style="font-size:1rem;flex-shrink:0;">🌀</span>
-        <p style="margin:0;font-size:0.92rem;color:#2E2E2E;line-height:1.5;"><span style="font-weight:500;color:var(--ink);">sidequesting</span> — getting more flexible, balanced &amp; stronger through Hot Yoga &amp; Mat Pilates</p>
+      <div class="currently-card" style="animation-delay:0.25s;">
+        <p class="c-label">🌀 sidequesting</p>
+        <p class="c-text">Getting more flexible, balanced &amp; stronger through Hot Yoga &amp; Mat Pilates</p>
       </div>
-      <div class="currently-row" style="animation-delay:0.35s;">
-        <span style="font-size:1rem;flex-shrink:0;">☕</span>
-        <p style="margin:0;font-size:0.92rem;color:#2E2E2E;line-height:1.5;"><span style="font-weight:500;color:var(--ink);">obsessed with</span> — coconut matcha, Olivia Dean, moya mawhinney &amp; lindsiann, and summer sunsets from my room window</p>
+      <div class="currently-card" style="animation-delay:0.35s;">
+        <p class="c-label">☕ obsessed with</p>
+        <p class="c-text">Coconut matcha, Olivia Dean, moya mawhinney &amp; lindsiann, and summer sunsets from my room window</p>
       </div>
-      <div class="currently-row" style="animation-delay:0.45s;">
-        <span style="font-size:1rem;flex-shrink:0;">🎯</span>
-        <p style="margin:0;font-size:0.92rem;color:#2E2E2E;line-height:1.5;"><span style="font-weight:500;color:var(--ink);">chasing</span> — one last summer of funemployment before the real world hits; case studies &amp; job applications, a fitness routine I'm still negotiating with, and daycations to Toronto</p>
+      <div class="currently-card" style="grid-column:1/-1;animation-delay:0.45s;">
+        <p class="c-label">🎯 chasing</p>
+        <p class="c-text">One last summer of funemployment before the real world hits; case studies &amp; job applications, a fitness routine I'm still negotiating with, and daycations to Toronto</p>
       </div>
     </div>
   </div>
   <script>
     (function() {
       const widget = document.getElementById('currently-widget');
-      const rows = widget.querySelectorAll('.currently-row');
+      const cards = widget.querySelectorAll('.currently-card');
       const observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
-            rows.forEach(function(row) { row.classList.add('visible'); });
+            cards.forEach(function(card) { card.classList.add('visible'); });
             observer.disconnect();
           }
         });
-      }, { threshold: 0.2 });
+      }, { threshold: 0.15 });
       observer.observe(widget);
     })();
   </script>
