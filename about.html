@@ -112,111 +112,75 @@
   .about-hero { position: relative; }
 
   @media (max-width: 768px) {
-    /* Kill scroll-reveal transitions but preserve nav and polaroids */
-    .pol-float-l, .pol-float-r, .photobooth-strip,
-    .about-body > p, .intro-flex-section > p,
-    .section-banner, .teaching-flex > p,
-    .hey-title-wrap, .about-eyebrow, .about-title,
-    .wf-word { transition: none !important; animation: none !important; opacity: 1 !important; filter: none !important; }
-    .pol-float-l { transform: rotate(-2deg) !important; }
-    .pol-float-r { transform: rotate(1.5deg) !important; }
-    .wf-word { transform: none !important; }
-
-    /* Currently cards always visible */
-    .currently-card { opacity: 1 !important; }
-
     /* Hero */
     .about-hero { padding: 6rem 1.25rem 2rem; min-height: 28vh; }
     .about-hero-logo { display: none; }
 
-    /* Intro section — text left, small photo right */
+    /* Intro photo + diary section — stack vertically */
     .intro-flex-section {
-      flex-direction: row !important;
-      align-items: flex-start !important;
-      gap: 0.75rem !important;
-      padding: 1.5rem 1.25rem 0 !important;
+      flex-direction: column !important;
+      padding: 2rem 1.25rem 0 !important;
+      align-items: center !important;
+      gap: 1.5rem !important;
       max-width: 100% !important;
     }
-    .intro-flex-section > p {
-      order: 1 !important;
-      font-size: 0.85rem !important;
-      line-height: 1.7 !important;
-      margin: 0 !important;
-      padding-top: 0 !important;
-      flex: 1 !important;
-    }
-    .intro-flex-section > div {
-      order: 2 !important;
-      flex-shrink: 0 !important;
-      width: 60px !important;
-      margin-top: 0 !important;
-    }
+    .intro-flex-section > div { margin-top: 0 !important; order: 2 !important; }
+    .intro-flex-section > p { order: 1 !important; padding-top: 0 !important; font-size: 1rem !important; line-height: 1.85 !important; margin: 0 !important; }
 
     /* Hey typewriter */
-    .hey-title-wrap { padding: 1.5rem 1.25rem 0 !important; max-width: 100% !important; }
-    .hey-title-wrap h2 { font-size: 1.4rem !important; }
+    .hey-title-wrap { padding: 2rem 1.25rem 0 !important; max-width: 100% !important; }
+    .hey-title-wrap h2 { font-size: 1.5rem !important; }
 
     /* Article body */
-    .about-body { padding: 1.5rem 1.25rem 4rem; max-width: 100%; overflow-x: hidden; }
-    .about-body p,
-    .about-body p[style],
-    .teaching-flex p[style],
-    .about-body div p { font-size: 0.97rem !important; line-height: 1.65 !important; margin-bottom: 1rem !important; }
+    .about-body { padding: 1.5rem 1.25rem 4rem; max-width: 100%; }
+    .about-body p { font-size: 1rem; line-height: 1.85; margin-bottom: 1.4rem; }
 
-    /* Disable drop cap */
+    /* Disable drop cap on mobile */
     .about-body p:first-of-type::first-letter { font-size: 1rem; float: none; margin: 0; line-height: inherit; }
 
     /* Section banners */
-    .section-banner { text-align: center !important; margin: 1.5rem 0 1rem !important; }
-    .section-banner h2 { font-size: clamp(1.8rem, 9vw, 2.8rem) !important; }
+    .section-banner { text-align: center !important; margin: 2rem 0 1.5rem !important; }
+    .section-banner h2 { font-size: clamp(2rem, 10vw, 3rem) !important; }
 
-    /* All polaroids — unfloat, constrain, center */
+    /* Floated polaroids — unfloat and center */
     .pol-float-l, .pol-float-r {
       float: none !important;
       display: block !important;
-      width: clamp(130px, 50vw, 180px) !important;
       margin: 1rem auto 1.5rem !important;
+      width: clamp(140px, 55vw, 200px) !important;
     }
 
-    /* Photobooth strip */
-    .photobooth-strip {
-      float: none !important;
-      display: block !important;
-      margin: 1rem auto 1.5rem !important;
-    }
-    .photobooth-strip > div:last-child { width: clamp(150px, 60vw, 200px) !important; }
+    /* Photobooth strip — unfloat, center */
+    .photobooth-strip { float: none !important; margin: 1rem auto 2rem !important; display: block !important; }
+    .photobooth-strip > div:last-child { width: clamp(160px, 65vw, 220px) !important; }
 
-    /* Teaching flex — stack fully, text full width first, photo centered below */
-    .teaching-flex {
-      flex-direction: column !important;
-      align-items: center !important;
-    }
-    .teaching-flex > div { order: 2 !important; margin: 1rem auto 0 !important; width: clamp(130px, 55vw, 180px) !important; float: none !important; }
-    .teaching-flex > div img { width: 100% !important; }
-    .teaching-flex > div > div { width: 100% !important; }
-    .teaching-flex > p { order: 1 !important; margin: 0 0 0.5rem 0 !important; width: 100% !important; }
+    /* Teaching flex — text first, photo below */
+    .teaching-flex { flex-direction: column !important; align-items: center !important; }
+    .teaching-flex > div { float: none !important; margin: 0 auto 1rem !important; width: clamp(130px, 60vw, 200px) !important; max-width: 200px !important; order: 2 !important; }
+    .teaching-flex > div img { width: 100% !important; height: auto !important; }
+    .teaching-flex > p { order: 1 !important; margin: 0 !important; width: 100% !important; }
 
-    /* Intern polaroids — side by side */
-    .intern-polaroid-pair {
-      display: flex !important;
-      justify-content: center !important;
-      gap: 0.75rem !important;
-      margin-bottom: 1.5rem !important;
-    }
-    .intern-polaroid-pair .pol-float-l,
-    .intern-polaroid-pair .pol-float-r {
-      float: none !important;
-      margin: 0 !important;
-      width: clamp(100px, 38vw, 150px) !important;
-    }
-    .intern-polaroid-pair .pol-float-l > div,
-    .intern-polaroid-pair .pol-float-r > div { width: 100% !important; }
+    /* Intern polaroids — side by side centered */
+    .intern-polaroid-pair { display: flex !important; justify-content: center !important; gap: 1rem !important; margin-bottom: 2rem !important; overflow: visible !important; }
+    .intern-polaroid-pair .pol-float-l, .intern-polaroid-pair .pol-float-r { float: none !important; margin: 0 !important; width: clamp(110px, 40vw, 160px) !important; }
+    .intern-polaroid-pair .pol-float-l > div, .intern-polaroid-pair .pol-float-r > div { width: 100% !important; }
+
+    /* Pull quote */
+    .pull-quote { padding-left: 1.25rem; font-size: 1.1rem; }
 
     /* Role cards */
     .role-cards { margin-left: 0 !important; margin-right: 0 !important; }
 
-    /* Currently cards — single column */
-    #currently-widget > div { grid-template-columns: 1fr !important; }
+    /* Currently cards always visible */
+    .currently-card { opacity: 1 !important; animation: none !important; }
+
+    /* Disable scroll-reveal */
+    .pol-float-l, .pol-float-r, .photobooth-strip,
+    .about-body > p, .intro-flex-section > p,
+    .section-banner, .teaching-flex > p, .pull-quote,
+    .hey-title-wrap, .about-eyebrow, .about-title,
+    .wf-word { opacity: 1 !important; filter: none !important; }
+    .wf-word { transform: none !important; }
   }
 </style>
 </head>
