@@ -169,7 +169,7 @@
     }
     .photobooth-strip > div:last-child { width: clamp(160px, 65vw, 220px) !important; }
 
-    /* Teaching flex — stack */
+    /* Teaching flex — stack, text first */
     .teaching-flex {
       flex-direction: column !important;
       align-items: center !important;
@@ -179,9 +179,15 @@
       margin: 0 auto 1rem !important;
       width: clamp(130px, 60vw, 200px) !important;
       max-width: 200px !important;
+      order: 2 !important;
     }
     .teaching-flex > div img { width: 100% !important; height: auto !important; }
-    .teaching-flex > p { margin-top: 0 !important; }
+    .teaching-flex > p, .teaching-flex > div:last-child { margin-top: 0 !important; }
+    .teaching-flex > p { order: 1 !important; }
+
+    /* Intro flex — text before photo on mobile */
+    .intro-flex-section > div { order: 2 !important; }
+    .intro-flex-section > p { order: 1 !important; }
 
     /* Intern polaroids — side by side centered */
     .intern-polaroid-pair {
