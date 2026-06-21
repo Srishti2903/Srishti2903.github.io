@@ -215,7 +215,7 @@
       margin-right: 0 !important;
     }
 
-    /* Disable all scroll-reveal transitions */
+    /* Disable scroll-reveal transitions but keep currently cards visible */
     * { transition: none !important; animation: none !important; }
     .pol-float-l, .pol-float-r, .photobooth-strip,
     .about-body > p, .intro-flex-section > p,
@@ -223,6 +223,25 @@
     .hey-title-wrap, .about-eyebrow, .about-title,
     .wf-word { opacity: 1 !important; transform: none !important; filter: none !important; }
     .wf-word { transform: none !important; }
+    .currently-card { opacity: 1 !important; animation: none !important; }
+
+    /* Intro section — keep side by side on mobile, smaller photo */
+    .intro-flex-section {
+      flex-direction: row !important;
+      align-items: center !important;
+      gap: 1rem !important;
+      padding: 1.5rem 1.25rem 0 !important;
+    }
+    .intro-flex-section > div {
+      order: 2 !important;
+      flex-shrink: 0 !important;
+      width: 90px !important;
+    }
+    .intro-flex-section > p {
+      order: 1 !important;
+      font-size: 0.88rem !important;
+      line-height: 1.7 !important;
+    }
   }
 </style>
 </head>
