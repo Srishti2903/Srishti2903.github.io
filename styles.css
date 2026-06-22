@@ -529,7 +529,9 @@ nav.scrolled .nav-logo:hover img {
   .slide-unlock { margin-left: auto; margin-right: auto; }
   .home-hero-photo { align-self: center; width: 220px !important; }
   .tagline-highlight { font-weight: 700 !important; color: #420001 !important; }
+  .mobile-only { display: inline !important; }
 }
+.mobile-only { display: none; }
 
 @media (max-width: 880px) {
   .home-section { padding: 4rem 1.5rem; }
