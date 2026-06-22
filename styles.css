@@ -234,12 +234,12 @@ nav.scrolled .nav-logo:hover img {
    ============================================================ */
 .home-hero {
   position: relative;
-  min-height: 92vh;
+  min-height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: clamp(1.5rem, 3vw, 4rem);
-  padding: 9rem clamp(1.5rem, 5vw, 5rem) 4rem;
+  padding: 6rem clamp(1.5rem, 5vw, 5rem) 3rem;
   background: var(--cream);
   border-bottom: 1px solid var(--border);
 }
