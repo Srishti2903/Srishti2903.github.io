@@ -525,7 +525,7 @@ nav.scrolled .nav-logo:hover img {
   .home-hero { flex-direction: column; align-items: center; text-align: center; gap: 2.5rem; padding: 7rem 1.5rem 3rem; min-height: auto; }
   .home-hero-text { flex: 0 1 auto; }
   .home-eyebrow { justify-content: center; }
-  .home-sub { margin-left: auto; margin-right: auto; }
+  .home-sub { margin-left: auto; margin-right: auto; font-size: 0.95rem !important; line-height: 1.55 !important; }
   .slide-unlock { margin-left: auto; margin-right: auto; }
   .home-hero-photo { align-self: center; width: 220px !important; }
 }
