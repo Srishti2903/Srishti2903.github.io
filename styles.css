@@ -528,6 +528,7 @@ nav.scrolled .nav-logo:hover img {
   .home-sub { margin-left: auto; margin-right: auto; font-size: 0.95rem !important; line-height: 1.55 !important; }
   .slide-unlock { margin-left: auto; margin-right: auto; }
   .home-hero-photo { align-self: center; width: 220px !important; }
+  .tagline-highlight { font-weight: 700 !important; color: #420001 !important; }
 }
 
 @media (max-width: 880px) {
