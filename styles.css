@@ -360,6 +360,10 @@ nav.scrolled .nav-logo:hover img {
 .section-head { display: flex; align-items: flex-start; justify-content: space-between; }
 .home-h2.spaced { margin-top: 4.5rem; margin-bottom: 0; }
 #certifications .home-h2.spaced { margin-top: 0; }
+/* short subpages: stretch the main section so the footer sits at the bottom */
+body.subpage { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
+body.subpage > section { width: 100%; }
+body.subpage > .page-top { flex: 1 0 auto; }
 .home-section.alt { background: var(--paper); max-width: none; }
 .home-section.alt > .home-section-inner { max-width: 1180px; margin: 0 auto; }
 
