@@ -189,24 +189,19 @@
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo"><img src="logo.png" alt="Srishti Gangolly" style="height:80px;width:auto;display:block;"></a>
+  <a href="index.html" class="nav-logo"><img src="logo.png" alt="Srishti Gangolly"></a>
   <button class="nav-hamburger" id="hamburger" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
   <ul class="nav-links" id="nav-links">
-    <li><a href="index.html#home">Home</a></li>
-    <li><a href="index.html#experience">Experience</a></li>
-    <li><a href="index.html#projects">Projects</a></li>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="certifications.html">Certifications</a></li>
+    <li><a href="projects.html">Projects</a></li>
     <li><a href="https://srishtigangolly.substack.com/" target="_blank">Writing</a></li>
-    <li><a href="about.html" style="color:var(--ink);">About</a></li>
+    <li><a href="about.html" class="active" aria-current="page">About</a></li>
   </ul>
 </nav>
-<script>
-  const hb = document.getElementById('hamburger');
-  const nl = document.getElementById('nav-links');
-  hb.addEventListener('click', () => { hb.classList.toggle('open'); nl.classList.toggle('open'); });
-  nl.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { hb.classList.remove('open'); nl.classList.remove('open'); }));
-</script>
 
 <!-- HERO -->
 <div class="about-hero">
@@ -488,7 +483,7 @@
 </article>
 
 <!-- CONTACT FOOTER -->
-<section id="contact" style="padding-top:4rem;">
+<section id="contact">
   <h2 class="section-heading word-fade">Let's work <em>together.</em></h2>
   <p class="contact-sub">If you think we'd make a good team,<br>you're probably right. Let's talk! :)</p>
   <div class="contact-links">

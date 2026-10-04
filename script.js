@@ -28,6 +28,25 @@
   window.addEventListener('scroll', onScrollNav, { passive: true });
   onScrollNav();
 
+  /* =========================================================
+     2. NAV — mobile hamburger
+     ========================================================= */
+  const hb = document.getElementById('hamburger');
+  const nl = document.getElementById('nav-links');
+  if (hb && nl) {
+    hb.addEventListener('click', () => { hb.classList.toggle('open'); nl.classList.toggle('open'); });
+    nl.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => { hb.classList.remove('open'); nl.classList.remove('open'); }));
+  }
+
+  // Tap to expand/collapse experience rows on mobile
+  document.querySelectorAll('.exp-row--has-tooltip').forEach((row) => {
+    row.addEventListener('click', () => {
+      const isOpen = row.classList.contains('tapped');
+      document.querySelectorAll('.exp-row--has-tooltip').forEach((r) => r.classList.remove('tapped'));
+      if (!isOpen) row.classList.add('tapped');
+    });
+  });
+
 
   /* =========================================================
      3. WORD-BY-WORD reveal for .word-fade headings
