@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+  /* theme: saved choice, else device setting. Runs before CSS paints to avoid a flash. */
+  (function () {
+    var t;
+    try { t = localStorage.getItem('sg-theme'); } catch (e) {}
+    if (t !== 'light' && t !== 'dark') t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8WV189JDM0"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -19,7 +28,7 @@
 
 <nav>
   <a href="index.html" class="nav-logo"><img src="logo.png" alt="Srishti Gangolly"></a>
-  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+  <button class="nav-hamburger" id="hamburger" type="button" aria-label="Menu" aria-controls="nav-links" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
   <ul class="nav-links" id="nav-links">

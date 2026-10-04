@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+  /* theme: saved choice, else device setting. Runs before CSS paints to avoid a flash. */
+  (function () {
+    var t;
+    try { t = localStorage.getItem('sg-theme'); } catch (e) {}
+    if (t !== 'light' && t !== 'dark') t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8WV189JDM0"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -30,7 +39,7 @@
     display: flex; align-items: center; gap: 0.75rem;
     margin-bottom: 1rem;
   }
-  .about-eyebrow::before { content:''; width:1.5rem; height:1px; background:#420001; display:block; }
+  .about-eyebrow::before { content:''; width:1.5rem; height:1px; background:var(--accent); display:block; }
 
   .about-title {
     font-family: 'Fraunces', serif;
@@ -40,7 +49,7 @@
     letter-spacing: -0.03em;
     color: var(--ink);
   }
-  .about-title em { font-style: italic; font-weight: 300; color: #420001; }
+  .about-title em { font-style: italic; font-weight: 300; color: var(--accent); }
 
   /* ARTICLE */
   .about-body {
@@ -53,7 +62,7 @@
     font-family: 'Times New Roman', Times, serif;
     font-size: 1.08rem;
     line-height: 2;
-    color: #2E2E2E;
+    color: var(--text);
     margin-bottom: 2rem;
     font-weight: 300;
   }
@@ -70,12 +79,12 @@
     float: left;
     margin-right: 0.12em;
     margin-top: 0.08em;
-    color: #420001;
+    color: var(--accent);
   }
 
   /* Pull quote */
   .pull-quote {
-    border-left: 3px solid #420001;
+    border-left: 3px solid var(--accent);
     margin: 2.5rem 0;
     padding: 0.5rem 0 0.5rem 2rem;
     font-family: 'Fraunces', serif;
@@ -190,7 +199,7 @@
 
 <nav>
   <a href="index.html" class="nav-logo"><img src="logo.png" alt="Srishti Gangolly"></a>
-  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+  <button class="nav-hamburger" id="hamburger" type="button" aria-label="Menu" aria-controls="nav-links" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
   <ul class="nav-links" id="nav-links">
@@ -233,7 +242,7 @@
         <line x1="10" y1="16" x2="62" y2="16" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
       </svg>
     </div>
-    <div style="background:#0e0e0e;padding:8px 8px 24px;box-shadow:3px 5px 0px #c8c0b4,0 10px 28px rgba(26,22,20,0.18);width:160px;">
+    <div style="background:#0e0e0e;padding:8px 8px 24px;box-shadow:3px 5px 0px var(--pol-shadow),0 10px 28px rgba(26,22,20,0.18);width:160px;">
       <div style="display:flex;flex-direction:column;gap:6px;">
         <div style="position:relative;">
           <img loading="eager" src="young-srishti.jpg" style="width:100%;display:block;object-fit:cover;aspect-ratio:1/1;object-position:center top;filter:sepia(0.12);">
@@ -249,20 +258,20 @@
 
 
   <!-- First paragraph (right) -->
-  <p style="font-family:'Kalam',cursive;font-size:1.08rem;line-height:2;color:#2E2E2E;font-weight:300;margin:0;padding-top:1rem;"><em>Dear diary,</em><br>Ever since I was little, I've loved the story behind my name, but there's a small irony about it I've come to love even more. My name, <strong style="font-weight:700;font-style:normal;"><em style="font-style:italic;">Srishti,</em></strong> means <strong style="font-weight:700;"><em style="font-style:italic;">Creation</em></strong> in Sanskrit. My dad chose it because he thought it sounded beautiful, perhaps not realizing how perfectly it would fit. Because whether I'm <em style="font-style:italic;">writing</em>, <em style="font-style:italic;">designing a graphic</em>, <em style="font-style:italic;">building a deck</em>, <em style="font-style:italic;">presenting a speech</em> or <em style="font-style:italic;">making sense of trends</em>, that same <strong style="font-weight:700;"><em style="font-style:italic;">creative pull</em></strong> has always been at the center of who I am. Maybe the name was always meant to be mine.</p>
+  <p style="font-family:'Kalam',cursive;font-size:1.08rem;line-height:2;color:var(--text);font-weight:300;margin:0;padding-top:1rem;"><em>Dear diary,</em><br>Ever since I was little, I've loved the story behind my name, but there's a small irony about it I've come to love even more. My name, <strong style="font-weight:700;font-style:normal;"><em style="font-style:italic;">Srishti,</em></strong> means <strong style="font-weight:700;"><em style="font-style:italic;">Creation</em></strong> in Sanskrit. My dad chose it because he thought it sounded beautiful, perhaps not realizing how perfectly it would fit. Because whether I'm <em style="font-style:italic;">writing</em>, <em style="font-style:italic;">designing a graphic</em>, <em style="font-style:italic;">building a deck</em>, <em style="font-style:italic;">presenting a speech</em> or <em style="font-style:italic;">making sense of trends</em>, that same <strong style="font-weight:700;"><em style="font-style:italic;">creative pull</em></strong> has always been at the center of who I am. Maybe the name was always meant to be mine.</p>
 
 </div>
 
 <!-- HEY TYPEWRITER -->
 <div class="hey-title-wrap" style="max-width:780px;margin:0 auto;padding:3rem 5rem 0;">
-  <h2 id="hey-title" style="font-family:'Times New Roman',Times,serif;font-size:2rem;font-weight:700;font-style:italic;color:#420001;text-align:center;"></h2>
+  <h2 id="hey-title" style="font-family:'Times New Roman',Times,serif;font-size:2rem;font-weight:700;font-style:italic;color:var(--accent);text-align:center;"></h2>
 </div>
 <script>
   (function() {
     const el = document.getElementById('hey-title');
     const text = "Hey! I'm Srishti :)";
     const cursor = document.createElement('span');
-    cursor.style.cssText = 'display:inline-block;width:3px;height:0.85em;background:#420001;margin-left:3px;vertical-align:middle;';
+    cursor.style.cssText = 'display:inline-block;width:3px;height:0.85em;background:var(--accent);margin-left:3px;vertical-align:middle;';
     el.appendChild(cursor);
     let i = 0;
     function type() {
@@ -293,16 +302,16 @@
     <svg style="position:absolute;top:-4px;left:-4px;width:calc(100% + 8px);height:calc(100% + 8px);overflow:visible;pointer-events:none;z-index:2;" viewBox="0 0 158 226" preserveAspectRatio="none">
       <rect x="2" y="2" width="154" height="222" rx="3" fill="none" stroke="#1A3A2A" stroke-width="2.5" filter="url(#doodle)"/>
     </svg>
-    <div style="background:white;padding:5px 5px 22px 5px;box-shadow:3px 5px 0px #c8c0b4,0 10px 28px rgba(26,22,20,0.12);">
+    <div style="background:white;padding:5px 5px 22px 5px;box-shadow:3px 5px 0px var(--pol-shadow),0 10px 28px rgba(26,22,20,0.12);">
       <img loading="eager" src="1778266214084.jpg" style="width:100%;display:block;object-fit:cover;aspect-ratio:2/3;">
     </div>
   </div>
 
   <p>I'm currently completing a Bachelor of Science in <strong><em>Applied Mathematics with Geospatial Data Science and Statistics</em></strong> at the <strong>University of Toronto.</strong> Beyond lectures and problem sets, I've consistently gravitated toward roles where I could build and connect:</p>
   <div class="role-cards" style="display:flex;flex-direction:column;gap:0.6rem;margin:0 0 1.5rem 220px;">
-    <div style="background:#fff;border:1px solid var(--border);border-radius:6px;padding:0.65rem 1rem;font-family:'Fraunces',serif;font-style:italic;color:#420001;font-size:1rem;line-height:1.5;"><strong>Marketing Associate</strong> at <strong>Google Developer Student Club (GDSC)</strong></div>
-    <div style="background:#fff;border:1px solid var(--border);border-radius:6px;padding:0.65rem 1rem;font-family:'Fraunces',serif;font-style:italic;color:#420001;font-size:1rem;line-height:1.5;"><strong>Director of Marketing &amp; Partnerships</strong> at <strong>Mathematical and Computational Sciences Society (MCSS)</strong></div>
-    <div style="background:#fff;border:1px solid var(--border);border-radius:6px;padding:0.65rem 1rem;font-family:'Fraunces',serif;font-style:italic;color:#420001;font-size:1rem;line-height:1.5;"><strong>Marketing Project Manager</strong> at <strong>Innovative Business Association (IBA)</strong></div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:0.65rem 1rem;font-family:'Fraunces',serif;font-style:italic;color:var(--accent);font-size:1rem;line-height:1.5;"><strong>Marketing Associate</strong> at <strong>Google Developer Student Club (GDSC)</strong></div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:0.65rem 1rem;font-family:'Fraunces',serif;font-style:italic;color:var(--accent);font-size:1rem;line-height:1.5;"><strong>Director of Marketing &amp; Partnerships</strong> at <strong>Mathematical and Computational Sciences Society (MCSS)</strong></div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:0.65rem 1rem;font-family:'Fraunces',serif;font-style:italic;color:var(--accent);font-size:1rem;line-height:1.5;"><strong>Marketing Project Manager</strong> at <strong>Innovative Business Association (IBA)</strong></div>
   </div>
   <p>The roles evolved, but the core never changed: <strong><em>build visibility, create impact, and foster the right relationships.</em></strong></p>
 
@@ -318,7 +327,7 @@
     <svg style="position:absolute;top:-4px;left:-4px;width:calc(100% + 8px);height:calc(100% + 8px);overflow:visible;pointer-events:none;z-index:2;" viewBox="0 0 228 160" preserveAspectRatio="none">
       <rect x="2" y="2" width="224" height="156" rx="3" fill="none" stroke="#1A3A2A" stroke-width="2.5" filter="url(#doodle)"/>
     </svg>
-    <div style="background:white;padding:5px 5px 22px 5px;box-shadow:3px 5px 0px #c8c0b4,0 10px 28px rgba(26,22,20,0.12);">
+    <div style="background:white;padding:5px 5px 22px 5px;box-shadow:3px 5px 0px var(--pol-shadow),0 10px 28px rgba(26,22,20,0.12);">
       <img loading="eager" src="deerhacks-team.jpeg" style="width:100%;display:block;object-fit:cover;aspect-ratio:5/3;">
     </div>
   </div>
@@ -326,7 +335,7 @@
   <p>A highlight was helping organize <strong>DeerHacks</strong>, a 36-hour hackathon run through <strong>MCSS.</strong> I contributed to two iterations, but <strong>DeerHacks III</strong> stood out most — <strong><em>1,500+ applicants, 35+ events, a $15,000+ budget,</em></strong> and a <strong><em>3,000+ follower community</em></strong> built from scratch. It was later named <strong><em>best event of the year</em></strong> 🏆 (kudos to the whole team!)</p>
 
   <div class="section-banner" style="text-align:right;margin:3rem 0 2rem;">
-    <h2 style="font-family:'Fraunces',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:700;line-height:0.95;letter-spacing:-0.03em;color:var(--ink);">for the <em style="font-style:italic;font-weight:300;color:#420001;">resume.</em></h2>
+    <h2 style="font-family:'Fraunces',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:700;line-height:0.95;letter-spacing:-0.03em;color:var(--ink);">for the <em style="font-style:italic;font-weight:300;color:var(--accent);">resume.</em></h2>
   </div>
 
   <p>That same instinct to connect data with people carried into my internships. At <strong>Vosyn AI</strong>, as a <strong><em>Data Analytics and Strategy Intern,</em></strong> I dug into <strong>Google Analytics</strong> to understand user and investor behavior, built <strong>Tableau</strong> dashboards for <strong><em>real-time KPI tracking,</em></strong> and worked with Business Development and UI/UX teams to turn findings into <strong><em>growth-focused recommendations.</em></strong></p>
@@ -345,7 +354,7 @@
         <svg style="position:absolute;top:-4px;left:-4px;width:calc(100% + 8px);height:calc(100% + 8px);overflow:visible;pointer-events:none;z-index:2;" viewBox="0 0 188 260" preserveAspectRatio="none">
           <rect x="2" y="2" width="184" height="256" rx="3" fill="none" stroke="#1A3A2A" stroke-width="2.5" filter="url(#doodle)"/>
         </svg>
-        <div style="background:white;padding:6px;display:block;box-shadow:3px 5px 0px #c8c0b4,0 10px 28px rgba(26,22,20,0.12);">
+        <div style="background:white;padding:6px;display:block;box-shadow:3px 5px 0px var(--pol-shadow),0 10px 28px rgba(26,22,20,0.12);">
           <img loading="eager" src="intern-left.jpg" alt="Office" style="width:100%;display:block;aspect-ratio:3/4;object-fit:cover;object-position:center top;">
         </div>
       </div>
@@ -364,7 +373,7 @@
         <svg style="position:absolute;top:-4px;left:-4px;width:calc(100% + 8px);height:calc(100% + 8px);overflow:visible;pointer-events:none;z-index:2;" viewBox="0 0 188 260" preserveAspectRatio="none">
           <rect x="2" y="2" width="184" height="256" rx="3" fill="none" stroke="#1A3A2A" stroke-width="2.5" filter="url(#doodle)"/>
         </svg>
-        <div style="background:white;padding:6px;display:block;box-shadow:3px 5px 0px #c8c0b4,0 10px 28px rgba(26,22,20,0.12);">
+        <div style="background:white;padding:6px;display:block;box-shadow:3px 5px 0px var(--pol-shadow),0 10px 28px rgba(26,22,20,0.12);">
           <img loading="eager" src="intern-right.jpg" alt="Intuit" style="width:100%;display:block;aspect-ratio:3/4;object-fit:cover;object-position:center top;">
         </div>
       </div>
@@ -376,7 +385,7 @@
   <div style="clear:both;"></div>
 
   <div class="section-banner" style="text-align:left;margin:3rem 0 2rem;">
-    <h2 style="font-family:'Fraunces',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:700;line-height:0.95;letter-spacing:-0.03em;color:var(--ink);">beyond the <em style="font-style:italic;font-weight:300;color:#420001;">resume.</em></h2>
+    <h2 style="font-family:'Fraunces',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:700;line-height:0.95;letter-spacing:-0.03em;color:var(--ink);">beyond the <em style="font-style:italic;font-weight:300;color:var(--accent);">resume.</em></h2>
   </div>
 
   <!-- Teaching: flex row -- photobooth left, para right -->
@@ -391,7 +400,7 @@
           <line x1="10" y1="16" x2="62" y2="16" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
         </svg>
       </div>
-      <div style="background:#0e0e0e;padding:8px;box-shadow:4px 6px 0px #c8c0b4,0 12px 36px rgba(26,22,20,0.18);width:250px;">
+      <div style="background:#0e0e0e;padding:8px;box-shadow:4px 6px 0px var(--pol-shadow),0 12px 36px rgba(26,22,20,0.18);width:250px;">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;">
           <img loading="eager" src="IMG_9490.jpg" style="width:100%;display:block;object-fit:cover;aspect-ratio:3/4;">
           <img loading="eager" src="IMG_7664.PNG" style="width:100%;display:block;object-fit:cover;aspect-ratio:3/4;">
@@ -416,7 +425,7 @@
       to   { opacity: 1; transform: translateY(0); }
     }
     .currently-card {
-      background: #fff;
+      background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 1.05rem 1.3rem;
@@ -427,11 +436,11 @@
     .currently-card.visible {
       animation: currently-fade-up 0.5s ease forwards;
     }
-    .currently-card:hover { background: #fdf9f6; }
-    .currently-card .c-label { font-size:0.72rem;font-weight:700;letter-spacing:0.05em;text-transform:none;color:#420001;font-family:'DM Sans',sans-serif;margin:0 0 0.4rem 0;text-align:center; }
-    .currently-card .c-text { margin:0;font-size:0.88rem;color:#2E2E2E;line-height:1.6;font-family:'Fraunces',serif;font-weight:400;font-style:italic;text-align:center; }
-    .currently-card .c-text strong { font-weight:700;font-style:italic;color:#420001; }
-    .currently-card .c-text em { font-style:italic;color:#420001; }
+    .currently-card:hover { background: var(--surface-hover); }
+    .currently-card .c-label { font-size:0.72rem;font-weight:700;letter-spacing:0.05em;text-transform:none;color:var(--accent);font-family:'DM Sans',sans-serif;margin:0 0 0.4rem 0;text-align:center; }
+    .currently-card .c-text { margin:0;font-size:0.88rem;color:var(--text);line-height:1.6;font-family:'Fraunces',serif;font-weight:400;font-style:italic;text-align:center; }
+    .currently-card .c-text strong { font-weight:700;font-style:italic;color:var(--accent); }
+    .currently-card .c-text em { font-style:italic;color:var(--accent); }
     /* prevent drop cap bleed */
     #currently-widget p::first-letter { font-size:inherit !important; float:none !important; margin:0 !important; line-height:inherit !important; color:inherit !important; }
   </style>
@@ -476,7 +485,7 @@
     })();
   </script>
 
-  <p style="font-family:'Fraunces',serif;font-size:1.25rem;font-weight:300;font-style:italic;line-height:1.75;color:var(--ink);border-top:1px solid var(--border);padding-top:2rem;margin-top:2rem;">Curiosity has never really been separate from the way I work. At the end of the day, I care about <strong style="font-weight:700;color:#420001;">leading with intention</strong> and showing up with <strong style="font-weight:700;color:#420001;">structure, creativity, and a genuine desire to learn,</strong> regardless of the problem on the table.</p>
+  <p style="font-family:'Fraunces',serif;font-size:1.25rem;font-weight:300;font-style:italic;line-height:1.75;color:var(--ink);border-top:1px solid var(--border);padding-top:2rem;margin-top:2rem;">Curiosity has never really been separate from the way I work. At the end of the day, I care about <strong style="font-weight:700;color:var(--accent);">leading with intention</strong> and showing up with <strong style="font-weight:700;color:var(--accent);">structure, creativity, and a genuine desire to learn,</strong> regardless of the problem on the table.</p>
 
   <div style="clear:both;"></div>
 

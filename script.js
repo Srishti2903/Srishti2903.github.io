@@ -34,9 +34,74 @@
   const hb = document.getElementById('hamburger');
   const nl = document.getElementById('nav-links');
   if (hb && nl) {
-    hb.addEventListener('click', () => { hb.classList.toggle('open'); nl.classList.toggle('open'); });
-    nl.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => { hb.classList.remove('open'); nl.classList.remove('open'); }));
+    const scrim = document.createElement('div');
+    scrim.className = 'nav-scrim';
+    scrim.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(scrim);
+
+    hb.setAttribute('aria-label', 'Menu');
+    hb.setAttribute('aria-controls', 'nav-links');
+    hb.setAttribute('aria-expanded', 'false');
+
+    const isOpen = () => nl.classList.contains('open');
+    function setMenu(open, returnFocus) {
+      hb.classList.toggle('open', open);
+      nl.classList.toggle('open', open);
+      scrim.classList.toggle('open', open);
+      root.classList.toggle('menu-open', open);
+      hb.setAttribute('aria-expanded', String(open));
+      if (!open && returnFocus) hb.focus();
+    }
+
+    hb.addEventListener('click', () => setMenu(!isOpen()));
+    // close on: tapping a link, tapping outside, Escape
+    nl.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+    scrim.addEventListener('click', () => setMenu(false));
+    document.addEventListener('click', (e) => {
+      if (isOpen() && !nl.contains(e.target) && !hb.contains(e.target)) setMenu(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen()) setMenu(false, true);
+    });
+    // growing past the mobile breakpoint with the menu open: reset it
+    const desktopMQ = window.matchMedia('(min-width: 769px)');
+    const onDesktop = (e) => { if (e.matches) setMenu(false); };
+    if (desktopMQ.addEventListener) desktopMQ.addEventListener('change', onDesktop);
+    else if (desktopMQ.addListener) desktopMQ.addListener(onDesktop);
   }
+
+  /* =========================================================
+     THEME — light / dark
+     The <head> of every page sets data-theme before paint; the toggle
+     (home page only) saves the choice so every page picks it up.
+     ========================================================= */
+  const THEME_KEY = 'sg-theme';
+  const savedTheme = () => { try { return localStorage.getItem(THEME_KEY); } catch (e) { return null; } };
+  function applyTheme(t, animate) {
+    if (animate) {
+      root.classList.add('theme-anim');
+      clearTimeout(applyTheme.timer);
+      applyTheme.timer = setTimeout(() => root.classList.remove('theme-anim'), 500);
+    }
+    root.setAttribute('data-theme', t);
+    document.querySelectorAll('.theme-toggle').forEach((b) => {
+      b.setAttribute('aria-label', t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      b.setAttribute('aria-pressed', String(t === 'dark'));
+    });
+  }
+  applyTheme(root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light', false);
+  document.querySelectorAll('.theme-toggle').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
+      applyTheme(next, true);
+    });
+  });
+  // until a visitor picks a theme, follow their device setting live
+  const darkMQ = window.matchMedia('(prefers-color-scheme: dark)');
+  const onSystemTheme = (e) => { if (!savedTheme()) applyTheme(e.matches ? 'dark' : 'light', true); };
+  if (darkMQ.addEventListener) darkMQ.addEventListener('change', onSystemTheme);
+  else if (darkMQ.addListener) darkMQ.addListener(onSystemTheme);
 
   // Tap to expand/collapse experience rows on mobile
   document.querySelectorAll('.exp-row--has-tooltip').forEach((row) => {
@@ -90,7 +155,7 @@
      4. SCROLL REVEAL (flavored)
      ========================================================= */
   // gather targets
-  const photoSel = '[style*="#c8c0b4"], [data-tilt-only]'; // polaroid/booth frames + die-cut sticker
+  const photoSel = '[style*="--pol-shadow"], [data-tilt-only]'; // polaroid/booth frames + die-cut sticker
   const targets = [];
 
   function collect() {
@@ -254,7 +319,7 @@
           frame.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)`;
         } else {
           frame.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-7px) scale(1.035)`;
-          frame.style.boxShadow = '8px 16px 0px #c8c0b4, 0 26px 50px rgba(26,22,20,0.30)';
+          frame.style.boxShadow = '8px 16px 0px var(--pol-shadow), 0 26px 50px rgba(26,22,20,0.30)';
           frame.style.zIndex = '40';
         }
       });

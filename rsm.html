@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+  /* theme: saved choice, else device setting. Runs before CSS paints to avoid a flash. */
+  (function () {
+    var t;
+    try { t = localStorage.getItem('sg-theme'); } catch (e) {}
+    if (t !== 'light' && t !== 'dark') t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8WV189JDM0"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -35,13 +44,13 @@
     display: flex; align-items: center; gap: 0.75rem;
     margin-bottom: 1rem;
   }
-  .case-eyebrow::before { content:''; width:1.5rem; height:1px; background:#420001; display:block; }
+  .case-eyebrow::before { content:''; width:1.5rem; height:1px; background:var(--accent); display:block; }
   .case-title {
     font-family: 'Fraunces', serif;
     font-size: clamp(2.5rem, 6vw, 5rem);
     font-weight: 700;
     line-height: 1.08;
-    color: var(--oxblood);
+    color: var(--accent);
     margin-bottom: 0.75rem;
   }
   .case-subtitle {
@@ -66,7 +75,7 @@
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--oxblood);
+    color: var(--accent);
     margin-bottom: 1rem;
     padding-bottom: 0.6rem;
     border-bottom: 1px solid var(--border);
@@ -105,13 +114,13 @@
     padding: 1.2rem 1.4rem;
     border: 1px solid var(--border);
     border-radius: 10px;
-    background: #fff;
+    background: var(--surface);
   }
   .case-pillar-num {
     font-family: 'Fraunces', serif;
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--oxblood);
+    color: var(--accent);
     line-height: 1;
     min-width: 1.8rem;
   }
@@ -152,7 +161,7 @@
     margin-bottom: 1.5rem;
     transition: color 0.2s ease;
   }
-  .back-link:hover { color: var(--oxblood); }
+  .back-link:hover { color: var(--accent); }
   .back-link::before { content: '←'; }
 
   .case-team {
@@ -253,7 +262,7 @@
 
 <nav>
   <a href="index.html" class="nav-logo"><img src="logo.png" alt="Srishti Gangolly"></a>
-  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+  <button class="nav-hamburger" id="hamburger" type="button" aria-label="Menu" aria-controls="nav-links" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
   <ul class="nav-links" id="nav-links">
@@ -342,7 +351,7 @@
     </div>
     <div style="display:flex; justify-content:space-between; align-items:baseline; margin-top:2rem; margin-bottom:1rem;">
       <p class="case-section-label" style="margin-bottom:0; border-bottom:none; padding-bottom:0;">The Outcome</p>
-      <a href="rsm-deck.pdf" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:0.4rem; font-size:0.82rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--oxblood); border:1px solid var(--oxblood); border-radius:999px; padding:0.45rem 1.1rem; text-decoration:none;">View full deck ↗</a>
+      <a href="rsm-deck.pdf" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:0.4rem; font-size:0.82rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--accent); border:1px solid var(--accent); border-radius:999px; padding:0.45rem 1.1rem; text-decoration:none;">View full deck ↗</a>
     </div>
     <div class="case-outcome">
       A campaign that reimagines Estée Lauder's heritage through <strong><em>emotional storytelling</em></strong>, <strong><em>scientific transparency</em></strong>, and a <strong><em>more personal digital experience</em></strong> — without losing what made the brand <strong>iconic</strong>.
@@ -388,15 +397,15 @@
         <p style="font-size:0.68rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:0.7rem;">The redesign rationale</p>
         <div style="display:flex; flex-direction:column; gap:0.9rem;">
           <div style="display:flex; gap:0.8rem; align-items:flex-start;">
-            <span style="font-family:'Fraunces',serif; font-size:1.1rem; font-weight:700; color:var(--oxblood); min-width:1.4rem; line-height:1.2;">01</span>
+            <span style="font-family:'Fraunces',serif; font-size:1.1rem; font-weight:700; color:var(--accent); min-width:1.4rem; line-height:1.2;">01</span>
             <div><strong style="font-size:0.88rem;">Better visibility</strong><p style="font-size:0.83rem; color:var(--muted); margin:0.2rem 0 0; line-height:1.6;">Moved from a <strong><em><u>buried nav dropdown</u></em></strong> to a <strong><em><u>featured homepage experience</u></em></strong>.</p></div>
           </div>
           <div style="display:flex; gap:0.8rem; align-items:flex-start;">
-            <span style="font-family:'Fraunces',serif; font-size:1.1rem; font-weight:700; color:var(--oxblood); min-width:1.4rem; line-height:1.2;">02</span>
+            <span style="font-family:'Fraunces',serif; font-size:1.1rem; font-weight:700; color:var(--accent); min-width:1.4rem; line-height:1.2;">02</span>
             <div><strong style="font-size:0.88rem;">Accessibility</strong><p style="font-size:0.83rem; color:var(--muted); margin:0.2rem 0 0; line-height:1.6;">Clear entry points for both <strong><em><u>new</u></em></strong> and <strong><em><u>returning customers</u></em></strong>.</p></div>
           </div>
           <div style="display:flex; gap:0.8rem; align-items:flex-start;">
-            <span style="font-family:'Fraunces',serif; font-size:1.1rem; font-weight:700; color:var(--oxblood); min-width:1.4rem; line-height:1.2;">03</span>
+            <span style="font-family:'Fraunces',serif; font-size:1.1rem; font-weight:700; color:var(--accent); min-width:1.4rem; line-height:1.2;">03</span>
             <div><strong style="font-size:0.88rem;">Better engagement</strong><p style="font-size:0.83rem; color:var(--muted); margin:0.2rem 0 0; line-height:1.6;">Personalized journeys drive <strong><em><u>higher retention time</u></em></strong> on the site and converts more <strong><em><u>browsers into buyers</u></em></strong>.</p></div>
           </div>
         </div>
