@@ -152,6 +152,7 @@ nav.scrolled .nav-logo:hover img {
   display: flex;
   align-items: center;
   gap: 2.2rem;
+  margin-left: auto;
 }
 .nav-links a {
   position: relative;
@@ -199,8 +200,11 @@ nav.scrolled .nav-logo:hover img {
 .nav-hamburger.open span:nth-child(2) { opacity: 0; }
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* theme toggle (home page nav + mobile menu) */
+/* theme toggle (home page): always in the top bar, after the links */
+.nav-links + .theme-toggle { margin-left: 1.8rem; }
 .theme-toggle {
+  position: relative; z-index: 2;   /* stays tappable above the open mobile menu */
+  flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
   width: 34px; height: 34px; padding: 0;
   background: none; border: 1px solid var(--border); border-radius: 50%;
@@ -367,8 +371,9 @@ html.menu-open { overflow: hidden; }
   .nav-links.open li:nth-child(6) { transition-delay: .28s; }
   .nav-links.open li:nth-child(7) { transition-delay: .32s; }
   .nav-links a { font-size: 1.3rem; font-family: 'Fraunces', serif; }
-  .theme-toggle { width: 42px; height: 42px; }
-  .theme-toggle svg { width: 20px; height: 20px; }
+  /* top bar on mobile: logo ... toggle  hamburger */
+  .nav-links + .theme-toggle { order: 1; margin-left: auto; margin-right: 0.9rem; }
+  .nav-hamburger { order: 2; }
 }
 
 /* ------------------------------------------------------------

@@ -58,7 +58,7 @@
     nl.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
     scrim.addEventListener('click', () => setMenu(false));
     document.addEventListener('click', (e) => {
-      if (isOpen() && !nl.contains(e.target) && !hb.contains(e.target)) setMenu(false);
+      if (isOpen() && !nl.contains(e.target) && !hb.contains(e.target) && !e.target.closest('.theme-toggle')) setMenu(false);
     });
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && isOpen()) setMenu(false, true);
