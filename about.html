@@ -119,22 +119,27 @@
     opacity: 0.7;
   }
   .about-hero { position: relative; }
+  .pol-group-photo--mobile { display: none !important; }
 
   @media (max-width: 768px) {
     /* Hero */
     .about-hero { padding: 6rem 1.25rem 2rem; min-height: 28vh; }
     .about-hero-logo { display: none; }
 
-    /* Intro photo + diary section — stack vertically */
+    /* Intro photo + diary section — strip floats left, diary text wraps around it */
     .intro-flex-section {
-      flex-direction: column !important;
+      display: block !important;
       padding: 2rem 1.25rem 0 !important;
-      align-items: center !important;
-      gap: 1.5rem !important;
       max-width: 100% !important;
     }
-    .intro-flex-section > div { margin-top: 1rem !important; order: 2 !important; width: clamp(140px, 55vw, 200px) !important; }
-    .intro-flex-section > p { order: 1 !important; padding-top: 0 !important; font-size: 1rem !important; line-height: 1.85 !important; margin: 0 !important; }
+    .intro-flex-section::after { content: ''; display: block; clear: both; }
+    .intro-flex-section > div {
+      float: left;
+      width: clamp(110px, 34vw, 140px) !important;
+      margin: 0.6rem 1.1rem 0.5rem 0 !important;
+    }
+    .intro-flex-section > div > div:last-child { width: 100% !important; padding: 6px 6px 18px !important; }
+    .intro-flex-section > p { padding-top: 0 !important; font-size: 1rem !important; line-height: 1.85 !important; margin: 0 !important; }
 
     /* Hey typewriter */
     .hey-title-wrap { padding: 2rem 1.25rem 0 !important; max-width: 100% !important; }
@@ -152,8 +157,14 @@
     .section-banner h2 { font-size: clamp(2rem, 10vw, 3rem) !important; }
 
     /* Floated polaroids — unfloat and center */
-    .pol-group-photo {
-      display: none !important;
+    /* group polaroid: on phones the floated desktop copy is hidden and the
+       copy placed after the first paragraph is shown, centred */
+    .pol-group-photo:not(.pol-group-photo--mobile) { display: none !important; }
+    .pol-group-photo--mobile {
+      float: none !important;
+      display: block !important;
+      margin: 0.5rem auto 2.5rem !important;
+      width: clamp(110px, 40vw, 160px) !important;   /* same size as the intern polaroids */
     }
     .pol-float-r {
       float: none !important;
@@ -167,7 +178,9 @@
     .photobooth-strip > div:last-child { width: clamp(160px, 65vw, 220px) !important; }
 
     /* Teaching flex — hide photo, text full width */
-    .teaching-photo { display: none !important; }
+    /* teaching photobooth strip: stacked above the text, centred */
+    .teaching-photo { display: block !important; width: fit-content; margin: 1.5rem auto 2rem !important; }
+    .teaching-photo > div:last-child { width: clamp(200px, 70vw, 250px) !important; }
     .teaching-flex { display: block !important; }
     .teaching-flex > div:not(.teaching-photo) { width: 100% !important; }
 
@@ -312,6 +325,22 @@
   </div>
 
   <p>I'm currently completing a Bachelor of Science in <strong><em>Applied Mathematics with Geospatial Data Science and Statistics</em></strong> at the <strong>University of Toronto.</strong> Beyond lectures and problem sets, I've consistently gravitated toward roles where I could build and connect:</p>
+  <!-- Same team portrait, phone layout only: sits below the first paragraph -->
+  <div class="pol-float-l pol-group-photo pol-group-photo--mobile" aria-hidden="true" style="float:left;margin:4.5rem 2rem 1rem 0;position:relative;display:inline-block;width:240px;transform:rotate(-2deg);">
+    <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(1deg);z-index:10;">
+      <svg width="60" height="24" viewBox="0 0 60 24">
+        <rect x="2" y="2" width="56" height="20" rx="2" fill="rgba(226,229,223,0.75)" stroke="#b0b8a8" stroke-width="1" filter="url(#tape-wobble)"/>
+        <line x1="8" y1="8" x2="52" y2="8" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
+        <line x1="8" y1="14" x2="52" y2="14" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
+      </svg>
+    </div>
+    <svg style="position:absolute;top:-4px;left:-4px;width:calc(100% + 8px);height:calc(100% + 8px);overflow:visible;pointer-events:none;z-index:2;" viewBox="0 0 158 226" preserveAspectRatio="none">
+      <rect x="2" y="2" width="154" height="222" rx="3" fill="none" stroke="#1A3A2A" stroke-width="2.5" filter="url(#doodle)"/>
+    </svg>
+    <div style="background:white;padding:5px 5px 22px 5px;box-shadow:3px 5px 0px var(--pol-shadow),0 10px 28px rgba(26,22,20,0.12);">
+      <img loading="eager" src="1778266214084.jpg" style="width:100%;display:block;object-fit:cover;aspect-ratio:2/3;">
+    </div>
+  </div>
   <div class="role-cards" style="display:flex;flex-direction:column;gap:0.6rem;margin:0 0 1.5rem 220px;">
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:0.65rem 1rem;font-family:'Fraunces',serif;font-style:italic;color:var(--accent);font-size:1rem;line-height:1.5;"><strong>Marketing Associate</strong> at <strong>Google Developer Student Club (GDSC)</strong></div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:0.65rem 1rem;font-family:'Fraunces',serif;font-style:italic;color:var(--accent);font-size:1rem;line-height:1.5;"><strong>Director of Marketing &amp; Partnerships</strong> at <strong>Mathematical and Computational Sciences Society (MCSS)</strong></div>
