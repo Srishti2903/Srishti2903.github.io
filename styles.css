@@ -533,23 +533,23 @@ body.subpage > .page-top { flex: 1 0 auto; }
 [data-theme="dark"] body.home #projects { background: var(--forest); }
 /* ...and the title banner on the RSM / DeerHacks project pages */
 [data-theme="dark"] .case-hero { background: var(--forest); }
-/* home page: both project cards use the maroon card's colours (light + dark) */
-body.home #projects .proj-card.neutral { background: var(--oxblood-fill); color: #F4EFE4; }
-body.home #projects .proj-card.neutral .proj-title { color: #F4EFE4; }
-body.home #projects .proj-card.neutral .proj-eyebrow,
-body.home #projects .proj-card.neutral .proj-foot { color: rgba(244,239,228,0.6); }
-body.home #projects .proj-card.neutral .proj-chip { background: rgba(244,239,228,0.15); color: #F4EFE4; }
-[data-theme="dark"] body.home #projects .proj-card.neutral {
+/* home + Projects page: both project cards use the maroon card's colours (light + dark) */
+#projects .proj-card.neutral { background: var(--oxblood-fill); color: #F4EFE4; }
+#projects .proj-card.neutral .proj-title { color: #F4EFE4; }
+#projects .proj-card.neutral .proj-eyebrow,
+#projects .proj-card.neutral .proj-foot { color: rgba(244,239,228,0.6); }
+#projects .proj-card.neutral .proj-chip { background: rgba(244,239,228,0.15); color: #F4EFE4; }
+[data-theme="dark"] #projects .proj-card.neutral {
   box-shadow: inset 0 0 0 1px rgba(244,239,228,0.10);
 }
-[data-theme="dark"] body.home #projects .proj-card.neutral:hover {
+[data-theme="dark"] #projects .proj-card.neutral:hover {
   box-shadow: inset 0 0 0 1px rgba(244,239,228,0.10), 0 20px 44px rgba(0,0,0,0.3);
 }
 /* maroon card: same frosted edge (its red comes from --oxblood-fill) */
-[data-theme="dark"] body.home #projects .proj-card.maroon {
+[data-theme="dark"] #projects .proj-card.maroon {
   box-shadow: inset 0 0 0 1px rgba(244,239,228,0.10);
 }
-[data-theme="dark"] body.home #projects .proj-card.maroon:hover {
+[data-theme="dark"] #projects .proj-card.maroon:hover {
   box-shadow: inset 0 0 0 1px rgba(244,239,228,0.10), 0 20px 44px rgba(0,0,0,0.3);
 }
 .home-section.alt > .home-section-inner { max-width: 1180px; margin: 0 auto; }
