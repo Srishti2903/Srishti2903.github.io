@@ -132,6 +132,19 @@
           <a href="https://coursera.org/share/9d9e1e655838ba468bf9b7b5470ab7bb" target="_blank" rel="noopener" class="cert-credential-btn">Show credential ↗</a>
         </div>
         <div class="cert-card flow">
+          <p class="cert-eyebrow">Google</p>
+          <h3 class="cert-title">Advanced Data Analytics Professional Certificate</h3>
+          <div class="cert-tags">
+            <span class="cert-chip">Statistical Modeling</span>
+            <span class="cert-chip">Applied Machine Learning</span>
+            <span class="cert-chip">Logistic Regression</span>
+            <span class="cert-chip">NumPy</span>
+            <span class="cert-chip">Interactive Data Visualization</span>
+            <span class="cert-chip">Data-Driven Decision-Making</span>
+          </div>
+          <a href="https://www.credly.com/badges/7b83b715-b708-48a5-b93d-1f8a5a06c5dd" target="_blank" rel="noopener" class="cert-credential-btn">Show credential ↗</a>
+        </div>
+        <div class="cert-card flow">
           <p class="cert-eyebrow">Aha!</p>
           <h3 class="cert-title">Product Management Professional Certificate</h3>
           <div class="cert-tags">
