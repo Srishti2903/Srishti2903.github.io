@@ -540,17 +540,17 @@ body.subpage > .page-top { flex: 1 0 auto; }
 #projects .proj-card.neutral .proj-foot { color: rgba(244,239,228,0.6); }
 #projects .proj-card.neutral .proj-chip { background: rgba(244,239,228,0.15); color: #F4EFE4; }
 [data-theme="dark"] #projects .proj-card.neutral {
-  box-shadow: inset 0 0 0 1px rgba(244,239,228,0.10);
+  box-shadow: inset 0 0 0 1.5px #000;
 }
 [data-theme="dark"] #projects .proj-card.neutral:hover {
-  box-shadow: inset 0 0 0 1px rgba(244,239,228,0.10), 0 20px 44px rgba(0,0,0,0.3);
+  box-shadow: inset 0 0 0 1.5px #000, 0 20px 44px rgba(0,0,0,0.3);
 }
-/* maroon card: same frosted edge (its red comes from --oxblood-fill) */
+/* maroon card: same black outline (its red comes from --oxblood-fill) */
 [data-theme="dark"] #projects .proj-card.maroon {
-  box-shadow: inset 0 0 0 1px rgba(244,239,228,0.10);
+  box-shadow: inset 0 0 0 1.5px #000;
 }
 [data-theme="dark"] #projects .proj-card.maroon:hover {
-  box-shadow: inset 0 0 0 1px rgba(244,239,228,0.10), 0 20px 44px rgba(0,0,0,0.3);
+  box-shadow: inset 0 0 0 1.5px #000, 0 20px 44px rgba(0,0,0,0.3);
 }
 .home-section.alt > .home-section-inner { max-width: 1180px; margin: 0 auto; }
 
