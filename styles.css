@@ -54,34 +54,34 @@
 [data-theme="dark"] {
   color-scheme: dark;
   --cream:   #000000;   /* page background: pure black */
-  --paper:   #1E1915;
+  --paper:   #1F1214;
   --ink:     #EFE8DC;
-  --muted:   #A2978A;
-  --border:  #3A312A;
+  --muted:   #AA9597;
+  --border:  #3D2629;
   --oxblood: #4F1114;
 
   --accent:        #E8A598;
-  --on-accent:     #16120F;
-  --on-ink:        #16120F;
+  --on-accent:     #140A0C;
+  --on-ink:        #140A0C;
   --text:          #D9D1C4;
-  --surface:       #241E1A;
-  --surface-hover: #2C2520;
-  --card-neutral:  #2A2C27;
-  --card-foot:     #A89E8F;
+  --surface:       #26171A;
+  --surface-hover: #301D20;
+  --card-neutral:  #2B1B1E;
+  --card-foot:     #AD9799;
   --chip-neutral:  rgba(244,239,228,0.09);
   --hero-tags:     #93A3B3;
   --forest-accent: #8DBF9C;
-  --pol-shadow:    #423830;
-  --pol-shadow-soft: rgba(66,56,48,0.95);
-  --footer-bg:     #110E0B;
+  --pol-shadow:    #45292D;
+  --pol-shadow-soft: rgba(69,41,45,0.95);
+  --footer-bg:     #14090B;
   --footer-line:   var(--border);
-  --su-track-top:  #29221D;
-  --su-track-bot:  #211B17;
+  --su-track-top:  #2B1A1D;
+  --su-track-bot:  #221416;
   --su-track-hi:   rgba(255,255,255,0.05);
   --su-done-top:   #1F2E23;
   --su-done-bot:   #26372B;
   --tag-lead-bg:   #22352A;  --tag-lead-fg:  #A9D1AE;
-  --tag-teach-bg:  #2F2A24;  --tag-teach-fg: #C2B8A9;
+  --tag-teach-bg:  #33211F;  --tag-teach-fg: #C9B3B0;
   --tag-coop-bg:   #3B2323;  --tag-coop-fg:  #EBB0A4;
   --scrim:         rgba(0,0,0,0.55);
   --toggle-edge:         #F4EFE4;   /* near-white ring + sun */
