@@ -518,7 +518,8 @@ html.menu-open { overflow: hidden; }
 #experience.home-section { padding-top: 3rem; }
 /* standalone experience / projects pages: clear the fixed nav */
 .home-section.page-top, #experience.page-top { padding-top: 9rem; }
-.section-head { display: flex; align-items: flex-start; justify-content: space-between; }
+.section-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.2rem; }
+.section-head .eyebrow-tag { margin-bottom: 0; }
 .home-h2.spaced { margin-top: 4.5rem; margin-bottom: 0; }
 #certifications .home-h2.spaced { margin-top: 0; }
 /* short subpages: stretch the main section so the footer sits at the bottom */
@@ -602,9 +603,9 @@ body.subpage > .page-top { flex: 1 0 auto; }
 .exp-tag--coop  { background: var(--tag-coop-bg);  color: var(--tag-coop-fg); }
 
 .resume-btn {
-  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--accent); border: 1px solid var(--accent); border-radius: 999px;
-  padding: 0.35rem 0.9rem; text-decoration: none; white-space: nowrap;
+  font-size: 0.88rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent); border: 1.5px solid var(--accent); border-radius: 999px;
+  padding: 0.65rem 1.5rem; text-decoration: none; white-space: nowrap;
   transition: background .2s ease, color .2s ease;
 }
 .resume-btn:hover { background: var(--accent); color: var(--on-accent); }
