@@ -650,6 +650,11 @@ body.subpage > .page-top { flex: 1 0 auto; }
   display: flex; flex-direction: column;
 }
 .cert-card .cert-tags { flex: 1; align-content: flex-start; }
+/* a lone card on the last row sits centred under the pair above */
+.cert-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1; justify-self: center;
+  width: calc((100% - 1.6rem) / 2);
+}
 .cert-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 14px 32px rgba(26,22,20,0.08); }
 .cert-eyebrow { font-size: 0.64rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
 .cert-title { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 700; color: var(--ink); margin-bottom: 1.1rem; }
@@ -755,6 +760,7 @@ body.subpage > .page-top { flex: 1 0 auto; }
   .exp-details-intro { max-width: 100%; }
   .exp-details ul { max-width: 100%; }
   .proj-grid, .cert-grid { grid-template-columns: 1fr; }
+  .cert-card:last-child:nth-child(odd) { width: auto; justify-self: stretch; }
   .exp-group-label { font-size: 0.65rem; }
 }
 
