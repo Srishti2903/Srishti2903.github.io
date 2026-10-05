@@ -42,7 +42,6 @@
   --toggle-fill:         #000000;
   --toggle-icon-on-fill: #FFFFFF;
   --menu-shadow:   rgba(26,22,20,0.14);
-  --projects-page-bg: var(--paper);   /* projects.html section */
 
   /* fixed: text on surfaces that stay dark in both themes */
   --light: #FBF8F1;
@@ -54,7 +53,7 @@
    ------------------------------------------------------------ */
 [data-theme="dark"] {
   color-scheme: dark;
-  --cream:   #16120F;
+  --cream:   #000000;   /* page background: pure black */
   --paper:   #1E1915;
   --ink:     #EFE8DC;
   --muted:   #A2978A;
@@ -84,7 +83,6 @@
   --tag-lead-bg:   #22352A;  --tag-lead-fg:  #A9D1AE;
   --tag-teach-bg:  #2F2A24;  --tag-teach-fg: #C2B8A9;
   --tag-coop-bg:   #3B2323;  --tag-coop-fg:  #EBB0A4;
-  --projects-page-bg: #000000;
   --scrim:         rgba(0,0,0,0.55);
   --toggle-edge:         #F4EFE4;   /* near-white ring + sun */
   --toggle-fill:         #FFFFFF;
@@ -526,7 +524,7 @@ html.menu-open { overflow: hidden; }
 body.subpage { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
 body.subpage > section { width: 100%; }
 body.subpage > .page-top { flex: 1 0 auto; }
-#projects.page-top { background: var(--projects-page-bg); }
+#projects.page-top { background: var(--cream); }   /* match the other subpages */
 .home-section.alt { background: var(--paper); max-width: none; }
 .home-section.alt > .home-section-inner { max-width: 1180px; margin: 0 auto; }
 
