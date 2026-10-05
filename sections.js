@@ -170,7 +170,7 @@
           <h3 class="proj-title">"A Formula For You"</h3>
           <p class="proj-desc">Estée Lauder Repositioning</p>
           <div class="proj-tags">
-            <span class="proj-chip">Technical Expert</span>
+            <span class="proj-chip">Technology Consultant</span>
             <span class="proj-chip">Case Competition</span>
           </div>
           <p class="proj-foot">Team: Paris Phan, Kim Nguyen, Sandeepa Das</p>
