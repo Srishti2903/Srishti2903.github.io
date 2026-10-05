@@ -91,7 +91,7 @@
         <div class="exp-row exp-row--has-tooltip flow">
           <div class="exp-row-top">
             <span class="exp-org">Intuit Canada · TurboTax</span>
-            <span class="exp-role">Digital &amp; Data Activation Intern | Digital Marketing<span class="exp-dates">Sept 2024 — Apr 2025 · 8 mos</span></span>
+            <span class="exp-role">Digital Enablement &amp; Data Activation Intern | Digital Marketing<span class="exp-dates">Sept 2024 — Apr 2025 · 8 mos</span></span>
             <span class="exp-tag exp-tag--coop">Co-op</span>
           </div>
           <div class="exp-details">
