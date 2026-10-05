@@ -529,8 +529,8 @@ body.subpage > section { width: 100%; }
 body.subpage > .page-top { flex: 1 0 auto; }
 #projects.page-top { background: var(--cream); }   /* match the other subpages */
 .home-section.alt { background: var(--paper); max-width: none; }
-/* dark mode: the home page's Projects band uses the Writing band's forest green */
-[data-theme="dark"] body.home #projects { background: var(--forest); }
+/* dark mode: the home page's Projects band uses the same red as the Writing band */
+[data-theme="dark"] body.home #projects { background: var(--oxblood-fill); }
 /* ...and the title banner on the RSM / DeerHacks project pages */
 [data-theme="dark"] .case-hero { background: var(--forest); }
 /* home + Projects page: both project cards use the maroon card's colours (light + dark) */
@@ -552,6 +552,14 @@ body.subpage > .page-top { flex: 1 0 auto; }
 [data-theme="dark"] #projects .proj-card.maroon:hover {
   box-shadow: inset 0 0 0 1.5px #000, 0 20px 44px rgba(0,0,0,0.3);
 }
+/* ...on the home page's red band, both cards turn cream (like the Subscribe pill) */
+[data-theme="dark"] body.home #projects .proj-card.neutral,
+[data-theme="dark"] body.home #projects .proj-card.maroon { background: #F4EFE4; color: #211C18; }
+[data-theme="dark"] body.home #projects .proj-card .proj-title { color: #420001; }
+[data-theme="dark"] body.home #projects .proj-card .proj-eyebrow { color: #8C8275; }
+[data-theme="dark"] body.home #projects .proj-card .proj-desc { color: #211C18; }
+[data-theme="dark"] body.home #projects .proj-card .proj-foot { color: #6E665A; }
+[data-theme="dark"] body.home #projects .proj-card .proj-chip { background: rgba(66,0,1,0.08); color: #420001; }
 .home-section.alt > .home-section-inner { max-width: 1180px; margin: 0 auto; }
 
 .eyebrow-tag {
