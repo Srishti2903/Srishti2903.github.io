@@ -531,6 +531,8 @@ body.subpage > .page-top { flex: 1 0 auto; }
 .home-section.alt { background: var(--paper); max-width: none; }
 /* dark mode: the home page's Projects band uses the Writing band's forest green */
 [data-theme="dark"] body.home #projects { background: var(--forest); }
+/* ...and the title banner on the RSM / DeerHacks project pages */
+[data-theme="dark"] .case-hero { background: var(--forest); }
 /* ...and its neutral card becomes a frosted cream panel that sits in the green */
 [data-theme="dark"] body.home #projects .proj-card.neutral {
   background: rgba(244,239,228,0.07);
