@@ -18,7 +18,7 @@
     experience: `
       <div class="section-head">
         <p class="eyebrow-tag flow">Experience</p>
-        <a href="https://drive.google.com/file/d/1XB8RAKRf0FMAH_T9nQvAGkErnU69HGB7/view?usp=sharing" target="_blank" rel="noopener" class="resume-btn">Resume ↗</a>
+        <a href="https://drive.google.com/file/d/1gkRO0WyfjWjeQ3IMbG2SMonINdwqb7nt/view?usp=sharing" target="_blank" rel="noopener" class="resume-btn">Resume ↗</a>
       </div>
       <h2 class="home-h2 word-fade">Where I've <em>been</em><br>&amp; what I built.</h2>
 
