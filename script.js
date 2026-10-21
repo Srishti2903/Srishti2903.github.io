@@ -77,16 +77,23 @@
      ========================================================= */
   const THEME_KEY = 'sg-theme';
   const savedTheme = () => { try { return localStorage.getItem(THEME_KEY); } catch (e) { return null; } };
-  function applyTheme(t, animate) {
-    if (animate) {
-      root.classList.add('theme-anim');
-      clearTimeout(applyTheme.timer);
-      applyTheme.timer = setTimeout(() => root.classList.remove('theme-anim'), 500);
-    }
+  function setTheme(t) {
     root.setAttribute('data-theme', t);
     document.querySelectorAll('.theme-toggle').forEach((b) => {
       b.setAttribute('aria-checked', String(t === 'dark'));
     });
+  }
+  // Animated switches cross-fade a snapshot of the whole page (View Transitions),
+  // so every element changes together in one smooth, GPU-composited fade.
+  // Browsers without it, or visitors who prefer reduced motion, switch instantly.
+  function applyTheme(t, animate) {
+    const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (animate && document.startViewTransition && !noMotion) {
+      const vt = document.startViewTransition(() => setTheme(t));
+      vt.ready.catch(() => {});   // a quick double-click skips the first fade; that's fine
+    } else {
+      setTheme(t);
+    }
   }
   applyTheme(root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light', false);
   document.querySelectorAll('.theme-toggle').forEach((btn) => {

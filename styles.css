@@ -98,14 +98,13 @@
 /* subpages: footer matches the header in dark mode (home page keeps the deeper footer) */
 [data-theme="dark"] body:not(.home) { --footer-bg: var(--paper); }
 
-/* smooth cross-fade while switching themes (class added briefly by script.js) */
-html.theme-anim,
-html.theme-anim *,
-html.theme-anim *::before,
-html.theme-anim *::after {
-  transition: background-color .45s ease, color .45s ease, border-color .45s ease,
-              fill .45s ease, stroke .45s ease, box-shadow .45s ease !important;
-}
+/* theme switch: script.js cross-fades a snapshot of the whole page (View Transitions).
+   The switch gets its own layer so its knob slides live on top of the fade. */
+::view-transition-old(root),
+::view-transition-new(root) { animation-duration: .45s; animation-timing-function: ease; }
+.theme-toggle { view-transition-name: theme-toggle; }
+::view-transition-old(theme-toggle) { display: none; }
+::view-transition-new(theme-toggle) { animation: none; }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -225,9 +224,6 @@ nav.scrolled .nav-logo:hover img {
   transition: transform .35s cubic-bezier(.34,1.56,.34,1), background-color .3s ease, box-shadow .3s ease;
 }
 [data-theme="dark"] .theme-toggle::before { transform: translateX(26px); }
-html.theme-anim .theme-toggle::before {
-  transition: transform .35s cubic-bezier(.34,1.56,.34,1), background-color .45s ease !important;
-}
 .theme-toggle svg {
   position: absolute; top: 50%; z-index: 1;
   width: 13px; height: 13px; margin-top: -6.5px;
