@@ -212,29 +212,38 @@ nav.scrolled .nav-logo:hover img {
 .theme-toggle {
   position: relative; z-index: 2;   /* stays tappable above the open mobile menu */
   flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  width: 34px; height: 34px; padding: 0;
-  background: transparent; border: 1.5px solid var(--toggle-edge); border-radius: 50%;
-  color: var(--toggle-edge); cursor: pointer;
-  transition: background-color .3s ease, color .3s ease, border-color .3s ease,
-              transform .5s cubic-bezier(.34,1.56,.34,1);
+  width: 56px; height: 30px; padding: 0;
+  background: transparent; border: 1.5px solid var(--toggle-edge); border-radius: 999px;
+  cursor: pointer;
+  transition: border-color .3s ease;
 }
-/* fill on hover (mouse) and keyboard focus; touch taps don't leave it stuck filled */
+/* the sliding knob: sits on the sun in light mode, slides onto the moon in dark mode */
+.theme-toggle::before {
+  content: ''; position: absolute; top: 2.5px; left: 2.5px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--toggle-edge);
+  transition: transform .35s cubic-bezier(.34,1.56,.34,1), background-color .3s ease, box-shadow .3s ease;
+}
+[data-theme="dark"] .theme-toggle::before { transform: translateX(26px); }
+html.theme-anim .theme-toggle::before {
+  transition: transform .35s cubic-bezier(.34,1.56,.34,1), background-color .45s ease !important;
+}
+.theme-toggle svg {
+  position: absolute; top: 50%; z-index: 1;
+  width: 13px; height: 13px; margin-top: -6.5px;
+  pointer-events: none; transition: color .3s ease;
+}
+.theme-toggle .icon-sun  { left: 7px; }
+.theme-toggle .icon-moon { right: 7px; }
+/* the icon under the knob takes the knob's contrast colour; the other one is muted */
+.theme-toggle .icon-sun,
+[data-theme="dark"] .theme-toggle .icon-moon { color: var(--toggle-icon-on-fill); }
+.theme-toggle .icon-moon,
+[data-theme="dark"] .theme-toggle .icon-sun { color: var(--muted); }
 @media (hover: hover) {
-  .theme-toggle:hover {
-    background: var(--toggle-fill); border-color: var(--toggle-fill);
-    color: var(--toggle-icon-on-fill); transform: rotate(-18deg);
-  }
+  .theme-toggle:hover::before { box-shadow: 0 0 0 4px color-mix(in srgb, var(--toggle-edge) 14%, transparent); }
 }
-.theme-toggle:focus-visible {
-  outline: none;
-  background: var(--toggle-fill); border-color: var(--toggle-fill);
-  color: var(--toggle-icon-on-fill);
-}
-.theme-toggle svg { width: 17px; height: 17px; }
-.theme-toggle .icon-sun { display: none; }
-[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
-[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 /* six nav links: tighten spacing before the hamburger takes over */
 @media (max-width: 1100px) {

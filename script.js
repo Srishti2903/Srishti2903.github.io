@@ -85,8 +85,7 @@
     }
     root.setAttribute('data-theme', t);
     document.querySelectorAll('.theme-toggle').forEach((b) => {
-      b.setAttribute('aria-label', t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
-      b.setAttribute('aria-pressed', String(t === 'dark'));
+      b.setAttribute('aria-checked', String(t === 'dark'));
     });
   }
   applyTheme(root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light', false);
