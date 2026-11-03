@@ -89,13 +89,11 @@ a{color:#97051D}a:hover{color:#04361D}
 }
 .home-btn{display:none}
 .head-row{display:contents}
-/* phones: a little wine home button beside the page heading instead of the "back to desktop" link */
+/* phones: a little "homepage" link beside the page heading instead of the "back to desktop" link */
 @media (max-width:560px){
   .head-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
   .card > .head-row{justify-content:center;align-items:center}
-  .home-btn{flex:none;display:inline-flex;align-items:center;justify-content:center;width:36px;height:30px;margin-top:4px;border:2px solid #04361D;background:#97051D;box-shadow:2px 2px 0 #04361D}
-  .home-btn path{fill:#F0F2D5}
-  .home-btn:active{transform:translate(1px,1px);box-shadow:1px 1px 0 #04361D}
+  .home-btn{flex:none;display:inline-block;margin-top:6px;font-family:'Pixelify Sans',monospace;font-size:14px;color:#97051D;text-decoration:underline;white-space:nowrap}
   .navrow a[href="desktop.html"],.navrow a[href="Home.dc.html"]{display:none}
 }
 </style>
@@ -131,7 +129,7 @@ a{color:#97051D}a:hover{color:#04361D}
     <header class="hero">
       <a href="projects.html">← back to projects</a>
       <span class="eyebrow">mlh-partnered hackathon · mcss</span>
-      <div class="head-row"><h1>deerhacks</h1><a class="home-btn" href="desktop.html" aria-label="home: back to the desktop" title="desktop"><svg class="px" viewBox="0 0 10 9" width="15" height="14" aria-hidden="true"><path fill="#04361D" d="M4 0h2v1H4zM3 1h4v1H3zM2 2h6v1H2zM1 3h8v1H1zM0 4h10v1H0zM1 5h3v4H1zM6 5h3v4H6zM4 5h2v1H4z"/></svg></a></div>
+      <div class="head-row"><h1>deerhacks</h1><a class="home-btn" href="desktop.html" aria-label="home: back to the desktop" title="desktop">homepage</a></div>
       <span class="sub">organizer · 2022 — 2024</span>
     </header>
 
