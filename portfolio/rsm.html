@@ -99,6 +99,15 @@ a{color:#97051D}a:hover{color:#04361D}
 .crt{position:fixed;inset:0;pointer-events:none;z-index:5;background:repeating-linear-gradient(rgba(4,54,29,.05) 0 1px,transparent 1px 3px);box-shadow:inset 0 0 140px rgba(4,54,29,.28)}
 @media (max-width:700px){.menubar .menus .opt{display:none}}
 @media (max-width:480px){.menubar{padding:0 10px;font-size:13px}.menubar .tray{gap:10px}.menubar .tray svg{width:14px;height:auto}}
+
+/* phones: everything a little smaller and tighter; full-height blocks are scaled back up to fill the screen */
+@media (max-width:560px){
+  body{zoom:.88}
+  footer [style*="gap: 12px; margin-top: 6px"]{justify-content:center}
+  /* same footer on every page: no fixed heights */
+  footer,footer > div{height:auto!important}
+  [style*="min-height: 100vh"],.desk-root{min-height:calc(100dvh / .88)!important}
+}
 </style>
 <script src="js/srishti-os.js"></script>
 </head>
@@ -339,7 +348,7 @@ a{color:#97051D}a:hover{color:#04361D}
         </div>
       </div>
     </div>
-    <div style="width: 100%; border-top: 2px solid #2E5A43; padding: 12px 16px; box-sizing: border-box; text-align: center; font-family: 'Pixelify Sans', monospace; font-size: 15px">srishti gangolly · your potential future employee. ✦ toronto, ontario · <a href="v1/" style="color: #F0F2D5">see my old portfolio ↗</a></div>
+    <div style="width: 100%; border-top: 2px solid #2E5A43; padding: 12px 16px; box-sizing: border-box; text-align: center; font-family: 'Pixelify Sans', monospace; font-size: 15px">srishti gangolly · your potential future employee. ✦ toronto, ontario <span style="white-space: nowrap">· <a href="v1/" style="color: #F0F2D5">see my old portfolio ↗</a></span></div>
   </footer>
   <div class="crt" aria-hidden="true"></div>
 </div>

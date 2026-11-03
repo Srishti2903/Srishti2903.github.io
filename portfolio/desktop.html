@@ -39,6 +39,16 @@ a{color:#97051D}a:hover{color:#04361D}
   .win h2{font-size:34px!important}
 }
 @media (max-width:900px){.icon{touch-action:auto;cursor:pointer}}
+.icon{-webkit-touch-callout:none}
+/* a held icon wiggles, like rearranging apps on a phone */
+.icon.lifted{z-index:6!important}
+.icon.lifted svg{animation:wiggle 260ms ease-in-out infinite;filter:drop-shadow(3px 4px 0 rgba(4,54,29,.35))}
+.icon.lifted span{background:#04361D;color:#F0F2D5}
+@keyframes wiggle{0%,100%{transform:rotate(-4deg) scale(1.12)}50%{transform:rotate(4deg) scale(1.12)}}
+.icons .hint{display:none;grid-column:1/-1;margin:2px 0 0;justify-self:center;font-family:'Pixelify Sans',monospace;font-size:13px;color:#04361D;background:rgba(240,242,213,.88);padding:2px 8px}
+.icons .hint a{color:#97051D}
+@media (hover:none),(max-width:900px){.icons .hint{display:block}}
+@media (prefers-reduced-motion:reduce){.icon.lifted svg{animation:none;transform:scale(1.12)}}
 .px{image-rendering:pixelated;shape-rendering:crispEdges}
 .menubar{height:32px;flex:none;width:100%;box-sizing:border-box;background:#F0F2D5;border-bottom:3px solid #04361D;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-family:'Pixelify Sans',monospace;font-size:15px;position:relative;z-index:2}
 .menubar .menus{display:flex;align-items:center;gap:18px}
@@ -58,6 +68,12 @@ a{color:#97051D}a:hover{color:#04361D}
   .menubar .menus::-webkit-scrollbar{display:none}
 }
 @media (max-width:480px){.menubar{padding:4px 10px 0;font-size:13px}.menubar .menus{margin:4px -10px 0}.menubar .tray{gap:10px}.menubar .tray svg{width:14px;height:auto}}
+
+/* phones: everything a little smaller and tighter; full-height blocks are scaled back up to fill the screen */
+@media (max-width:560px){
+  body{zoom:.88}
+  [style*="min-height: 100vh"],.desk-root{min-height:calc(100dvh / .88)!important}
+}
 </style>
 <script src="js/srishti-os.js"></script>
 </head>
@@ -121,6 +137,7 @@ a{color:#97051D}a:hover{color:#04361D}
         <svg class="px" viewBox="0 0 16 16" width="52" height="52" aria-hidden="true"><path fill="#04361D" d="M1 1h14v14H1z"/><path fill="#F0F2D5" d="M4 1h7v5H4zM3 8h10v6H3z"/><path fill="#04361D" d="M8 2h2v3H8z"/><path fill="#EF233C" d="M4 10h8v1H4zM4 12h6v1H4z"/></svg>
         <span>resume.pdf ↗</span>
       </a>
+      <p class="hint">✿ hold an icon to move it<sc-if value="{{moved}}" hint-placeholder-val="{{ false }}"> · <a href="#" onClick="{{tidy}}">tidy up</a></sc-if></p>
     </nav>
 
     <section class="win" aria-label="welcome" style="position: relative; max-width: 700px; width: 100%; justify-self: center">
@@ -154,15 +171,20 @@ class Component extends DCLogic {
     setInterval(() => this.setState({ now: new Date() }), 30000);
   }
   // drag an icon to a new spot; a press without movement still opens it
-  grab(i, e) {
-    if (e.button !== 0 || e.pointerType === 'touch') return;
-    const el = e.currentTarget;
+  // how far an icon may travel: inside the desktop, below the menu bar
+  limits(el) {
     const scale = el.getBoundingClientRect().width / el.offsetWidth || 1;
+    const r = el.getBoundingClientRect(), d = el.closest('.desk-root').getBoundingClientRect();
+    const top = el.closest('.desk-root').querySelector('.menubar').getBoundingClientRect().bottom;
+    return { scale, x0: (d.left + 4 - r.left) / scale, x1: (d.right - 4 - r.right) / scale, y0: (top + 8 - r.top) / scale, y1: (d.bottom - 4 - r.bottom) / scale };
+  }
+  grab(i, e) {
+    if (e.pointerType === 'touch') return this.hold(i, e);
+    if (e.button !== 0) return;
+    const el = e.currentTarget;
+    const lim = this.limits(el), scale = lim.scale;
     const from = this.state.spots[i] || { x: 0, y: 0 };
     const x0 = e.clientX, y0 = e.clientY;
-    // keep the icon inside the desktop, below the menu bar
-    const r = el.getBoundingClientRect(), d = el.closest('.desk-root').getBoundingClientRect();
-    const lim = { x0: (d.left + 4 - r.left) / scale, x1: (d.right - 4 - r.right) / scale, y0: (d.top + 44 - r.top) / scale, y1: (d.bottom - 4 - r.bottom) / scale };
     const clamp = (v, a, b) => Math.min(Math.max(v, a), b);
     this.dragged = false;
     const move = (ev) => {
@@ -182,6 +204,51 @@ class Component extends DCLogic {
     window.addEventListener('pointermove', move);
     window.addEventListener('pointerup', drop);
   }
+  // touch: a quick tap opens the icon, a swipe scrolls the page, and holding still picks the icon up.
+  // While held it is moved straight on the element (no re-render), so the touch keeps its target.
+  hold(i, e) {
+    const el = e.currentTarget;
+    const from = this.state.spots[i] || { x: 0, y: 0 };
+    const x0 = e.clientX, y0 = e.clientY;
+    const clamp = (v, a, b) => Math.min(Math.max(v, a), b);
+    let lim = null, at = from;
+    this.dragged = false;
+    const timer = setTimeout(() => {
+      lim = this.limits(el);
+      this.dragged = true;
+      el.classList.add('lifted');
+      if (navigator.vibrate) navigator.vibrate(12);
+    }, 320);
+    const move = (ev) => {
+      const t = ev.touches[0];
+      if (!lim) { if (Math.hypot(t.clientX - x0, t.clientY - y0) > 8) end(); return; }
+      ev.preventDefault();
+      at = { x: from.x + clamp((t.clientX - x0) / lim.scale, lim.x0, lim.x1), y: from.y + clamp((t.clientY - y0) / lim.scale, lim.y0, lim.y1) };
+      el.style.transform = 'translate(' + Math.round(at.x) + 'px, ' + Math.round(at.y) + 'px)';
+    };
+    const noMenu = (ev) => ev.preventDefault();
+    const end = () => {
+      clearTimeout(timer);
+      el.removeEventListener('touchmove', move);
+      el.removeEventListener('touchend', end);
+      el.removeEventListener('touchcancel', end);
+      setTimeout(() => el.removeEventListener('contextmenu', noMenu), 0);
+      if (!lim) return;
+      el.classList.remove('lifted');
+      const spots = Object.assign({}, this.state.spots, { [i]: at });
+      try { localStorage.setItem('srishti-os-icons-v2', JSON.stringify(spots)); } catch (err) {}
+      this.setState({ spots });
+    };
+    el.addEventListener('touchmove', move, { passive: false });
+    el.addEventListener('touchend', end);
+    el.addEventListener('touchcancel', end);
+    el.addEventListener('contextmenu', noMenu);
+  }
+  tidy(e) {
+    e.preventDefault();
+    try { localStorage.removeItem('srishti-os-icons-v2'); } catch (err) {}
+    this.setState({ spots: {} });
+  }
   tap(e) {
     if (this.dragged) { e.preventDefault(); this.dragged = false; }
   }
@@ -189,7 +256,7 @@ class Component extends DCLogic {
     const d = this.state.now;
     const day = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }).replace(',', '');
     const time = d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-    const vals = { clock: (day + '  ' + time).toLowerCase() };
+    const vals = { clock: (day + '  ' + time).toLowerCase(), tidy: (e) => this.tidy(e), moved: Object.keys(this.state.spots).length > 0 };
     for (let i = 0; i < 7; i++) {
       const p = this.state.spots[i];
       vals['t' + i] = p ? 'translate(' + Math.round(p.x) + 'px, ' + Math.round(p.y) + 'px)' : 'none';
