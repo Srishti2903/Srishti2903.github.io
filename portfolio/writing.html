@@ -36,6 +36,18 @@ a{color:#97051D}a:hover{color:#04361D}
 .tg-tag{align-self:flex-start;font-family:'Pixelify Sans',monospace;font-size:12px;padding:1px 8px;background:#76BA9D;border:2px solid #04361D}
 .tg-card p{margin:0;font-family:'Fraunces',serif;font-style:italic;font-weight:800;font-size:19px;line-height:1.45;color:#04361D}
 .tg-fmt{font-family:'Pixelify Sans',monospace;font-size:13px;color:#97051D}
+/* phones: the prompt generator folds into a dropdown bar, like the bouquet on the mailbox */
+.tg-toggle{display:none}
+@media (max-width:560px){
+  .tg{flex-basis:auto;width:100%;transform:none}
+  .tg:not(.open){background:none;border:0;box-shadow:none}
+  .tg > .bar,.tg:not(.open) > .tg-body{display:none}
+  .tg-toggle{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;min-height:44px;padding:8px 12px;box-sizing:border-box;font-family:'Pixelify Sans',monospace;font-size:15px;color:#F0F2D5;background:#97051D;border:3px solid #04361D;box-shadow:3px 3px 0 #04361D;cursor:pointer}
+  .tg.open .tg-toggle{border-width:0 0 3px;box-shadow:none}
+  .tg-more{display:inline-flex;align-items:center;gap:6px;font-weight:700}
+  .tg-toggle .caret{display:inline-block;transition:transform 150ms}
+  .tg-toggle[aria-expanded="true"] .caret{transform:rotate(180deg)}
+}
 .desk-row{width:100%;max-width:1020px;display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:28px}
 .menubar{height:32px;flex:none;width:100%;box-sizing:border-box;background:#F0F2D5;border-bottom:3px solid #04361D;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-family:'Pixelify Sans',monospace;font-size:15px;position:sticky;top:0;z-index:6}
 .menubar .menus{display:flex;align-items:center;gap:18px}
@@ -97,7 +109,8 @@ a{color:#97051D}a:hover{color:#04361D}
 
   </main>
     <!-- topic generator: pick an age + interest, get a writing prompt -->
-    <section class="tg win" aria-labelledby="tg-title">
+    <section class="{{tgCls}}" aria-labelledby="tg-title">
+      <button class="tg-toggle" type="button" onClick="{{toggleTg}}" aria-expanded="{{tgOpen}}"><span>writer's block?</span><span class="tg-more">get a prompt ✎ <span class="caret" aria-hidden="true">▾</span></span></button>
       <div class="bar" style="align-self: stretch"><span>prompt_generator.exe</span><span aria-hidden="true">✎</span></div>
       <div class="tg-body">
         <h2 id="tg-title">writer's block?</h2>
@@ -233,7 +246,7 @@ const ageGroup = (a) => (a === '13–15' || a === '16–17') ? 'teen' : (a === '
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { age: '', topic: '', format: 'journal entry', prompt: '', note: '' };
+    this.state = { age: '', topic: '', format: 'journal entry', prompt: '', note: '', tgOpen: false };
   }
   renderVals() {
     const d = new Date();
@@ -243,6 +256,9 @@ class Component extends DCLogic {
   pageVals() {
     const s = this.state, ready = s.age && s.topic;
     return {
+      tgCls: s.tgOpen ? 'tg win open' : 'tg win',
+      tgOpen: s.tgOpen ? 'true' : 'false',
+      toggleTg: () => this.setState({ tgOpen: !this.state.tgOpen }),
       ages: AGES.map((v) => ({ v })), topics: TOPICS.map((v) => ({ v, label: EMOJI[v] + ' ' + v })), formats: Object.keys(FORMATS).map((v) => ({ v })),
       onAge: (e) => this.setState({ age: e.target.value, note: '' }),
       onTopic: (e) => this.setState({ topic: e.target.value, note: '' }),
