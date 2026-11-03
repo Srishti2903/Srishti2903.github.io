@@ -1,67 +1,215 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<script>
-  /* theme: saved choice, else device setting. Runs before CSS paints to avoid a flash. */
-  (function () {
-    var t;
-    try { t = localStorage.getItem('sg-theme'); } catch (e) {}
-    if (t !== 'light' && t !== 'dark') t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', t);
-  })();
-</script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8WV189JDM0"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-8WV189JDM0');
-</script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Experience | Srishti Gangolly</title>
-<meta name="description" content="Where I&#39;ve been &amp; what I built: Srishti Gangolly&#39;s roles across MarTech, data analytics, marketing and leadership, plus certifications.">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300&family=DM+Sans:wght@300;400;500&family=Kalam:wght@300;400;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Srishti Gangolly — experience</title>
+<meta name="theme-color" content="#76BA9D">
+<link rel="icon" href="img/doodle.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Fraunces:ital,wght@1,800;1,900&amp;family=Pixelify+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#97051D}a:hover{color:#04361D}
+.btn{font-family:'Pixelify Sans',monospace;font-weight:700;font-size:19px;letter-spacing:.05em;text-transform:lowercase;text-decoration:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 18px;border:3px solid #04361D;box-sizing:border-box;box-shadow:inset -3px -3px 0 rgba(4,54,29,.28),inset 3px 3px 0 rgba(255,255,255,.35),0 4px 0 #04361D}
+.win{background:#F0F2D5;border:3px solid #04361D;box-shadow:6px 6px 0 #04361D;display:flex;flex-direction:column;min-width:0}
+.bar{height:36px;flex:none;background:#04361D;color:#F0F2D5;display:flex;align-items:center;justify-content:space-between;padding:0 6px 0 12px;font-family:'Pixelify Sans',monospace;font-size:16px;font-weight:600}
+.close{width:28px;height:28px;box-sizing:border-box;border:2px solid #F0F2D5;background:#F0F2D5;display:inline-flex;align-items:center;justify-content:center}
+.close:hover{background:#EF233C}
+.h2{margin:0;font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:clamp(36px,4.4vw,52px);line-height:1.05;color:#6B0314}
+.chip{font-family:'Pixelify Sans',monospace;font-size:13px;padding:3px 10px;border:2px solid #04361D;background:#76BA9D;min-width:96px;box-sizing:border-box;text-align:center;margin-left:auto}
+.card{border:3px solid #04361D;background:#FFFFF4;box-shadow:4px 4px 0 #97051D;display:flex;flex-direction:column}
+.drop{width:100%;font:inherit;color:inherit;text-align:left;background:none;border:0;cursor:pointer;display:flex;align-items:center;gap:16px;padding:18px 20px}
+.drop:hover{background:#F0F2D5}
+.drop:focus-visible{outline:3px solid #97051D;outline-offset:-3px}
+.drop-head{flex:1;min-width:0;display:flex;flex-direction:column;gap:10px}
+.caret{flex:none;transition:transform 150ms}
+.drop-body{padding:16px 20px 20px;border-top:2px dashed #04361D;display:flex;flex-direction:column;gap:10px;animation:dropIn 180ms ease-out}
+@keyframes dropIn{from{opacity:0;transform:translateY(-6px)}}
+@media (prefers-reduced-motion:reduce){.caret,.drop-body{transition:none;animation:none}}
+.p{margin:0;font-size:14px;line-height:1.7;color:#2E5A43}
+.ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:14px;line-height:1.6}
+.navrow{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-family:'Pixelify Sans',monospace;font-size:16px}
+.navrow a{color:#04361D}
+.px{image-rendering:pixelated;shape-rendering:crispEdges}
+.menubar{height:32px;flex:none;width:100%;box-sizing:border-box;background:#F0F2D5;border-bottom:3px solid #04361D;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-family:'Pixelify Sans',monospace;font-size:15px;position:sticky;top:0;z-index:6}
+.menubar .menus{display:flex;align-items:center;gap:18px}
+.menubar .menus a{color:#04361D;text-decoration:none;padding:2px 6px}
+.menubar .menus a:hover{background:#04361D;color:#F0F2D5}
+.menubar .tray{display:flex;align-items:center;gap:22px}
+.crt{position:fixed;inset:0;pointer-events:none;z-index:5;background:repeating-linear-gradient(rgba(4,54,29,.05) 0 1px,transparent 1px 3px);box-shadow:inset 0 0 140px rgba(4,54,29,.28)}
+@media (max-width:700px){.menubar .menus .opt{display:none}}
+@media (max-width:480px){.menubar{padding:0 10px;font-size:13px}.menubar .tray{gap:10px}.menubar .tray svg{width:14px;height:auto}}
+</style>
+<script src="js/srishti-os.js"></script>
 </head>
-<body class="subpage">
+<body>
+<div id="app"></div>
+<template id="page">
+<div style="width: 100%; min-height: 100vh; box-sizing: border-box; background-color: #76BA9D; background-image: radial-gradient(#6AAE91 1px, transparent 1.2px); background-size: 8px 8px; font-family: 'DM Mono', monospace; color: #04361D; display: flex; flex-direction: column; align-items: center; gap: 22px; padding: 24px 16px 0; position: relative">
+  <header class="menubar" style="margin: -24px -16px 0; width: calc(100% + 32px)">
+    <nav class="menus" aria-label="menu">
+      <span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700; padding: 2px 6px">
+        <svg class="px" viewBox="0 0 11 16" width="11" height="16" aria-hidden="true"><path fill="#EF233C" d="M2 0h1v1H2zM5 0h1v1H5zM8 0h1v1H8zM2 1h7v1H2zM2 2h7v3H2zM3 5h5v1H3zM4 6h3v1H4z"/><path fill="#97051D" d="M5 2h1v4H5zM8 2h1v3H8z"/><path fill="#04361D" d="M5 7h1v9H5zM1 9h1v2H1zM2 11h1v1H2zM3 12h2v1H3zM9 8h1v2H9zM8 10h1v1H8zM6 11h2v1H6z"/><path fill="#76BA9D" d="M2 9h1v2H2zM3 11h2v1H3zM8 8h1v2H8zM6 10h2v1H6z"/></svg>
+        srishti os
+      </span>
+    </nav>
+    <div class="tray">
+      <svg class="px" viewBox="0 0 9 7" width="18" height="14" aria-label="wifi" role="img"><path fill="#04361D" d="M2 0h5v1H2zM1 1h1v1H1zM7 1h1v1H7zM0 2h1v1H0zM8 2h1v1H8zM3 2h3v1H3zM2 3h1v1H2zM6 3h1v1H6zM4 5h1v2H4z"/></svg>
+      <svg class="px" viewBox="0 0 12 7" width="24" height="14" aria-label="battery full" role="img"><path fill="#04361D" d="M0 0h10v1H0zM0 6h10v1H0zM0 1h1v5H0zM9 1h1v5H9zM10 2h2v3h-2z"/><path fill="#EF233C" d="M2 2h6v3H2z"/></svg>
+      <time style="white-space: pre; word-spacing: 2px">{{clock}}</time>
+    </div>
+  </header>
 
-<nav>
-  <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="Srishti Gangolly"></a>
-  <button class="nav-hamburger" id="hamburger" type="button" aria-label="Menu" aria-controls="nav-links" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-  <ul class="nav-links" id="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="experience.html" class="active" aria-current="page">Experience</a></li>
-    <li><a href="certifications.html">Certifications</a></li>
-    <li><a href="projects.html">Projects</a></li>
-    <li><a href="https://srishtigangolly.substack.com/" target="_blank">Writing</a></li>
-    <li><a href="about.html">About</a></li>
-  </ul>
-  <button class="theme-toggle" type="button" role="switch" aria-label="Dark mode" aria-checked="false">
-    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>
-    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
-  </button>
-</nav>
+  <a href="desktop.html" aria-label="back to desktop" style="line-height: 0"><img src="img/doodle.png" alt="Srishti Gangolly" style="width: 92px; height: auto; transform: rotate(6deg)"></a>
 
-<!-- ===================== EXPERIENCE ===================== -->
-<section id="experience" class="home-section page-top">
-  <div data-section="experience"></div>
-</section>
+  <main class="win" style="width: 100%; max-width: 1080px">
+    <div class="bar">
+      <span>experience.exe</span>
+      <a class="close" href="desktop.html" aria-label="close, back to desktop"><svg class="px" viewBox="0 0 8 8" width="12" height="12" aria-hidden="true"><path fill="#04361D" d="M0 0h2v1H0zM6 0h2v1H6zM1 1h2v1H1zM5 1h2v1H5zM2 2h4v1H2zM3 3h2v2H3zM2 5h4v1H2zM1 6h2v1H1zM5 6h2v1H5zM0 7h2v1H0zM6 7h2v1H6z"/></svg></a>
+    </div>
+    <div style="padding: 32px 32px 36px; display: flex; flex-direction: column; gap: 24px">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+        <h1 class="h2">where i've been<br>&amp; what i built.</h1>
+        <a class="btn" href="https://drive.google.com/file/d/1dasPUW3PCfL3X46S7Zs5TBzfl2K2QQfY/view?usp=sharing" style="background: #F0F2D5; color: #04361D">resume ↗</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 20px">
+        <sc-for list="{{jobs}}" as="j" hint-placeholder-count="6">
+          <article class="card">
+            <sc-if value="{{j.hasDetail}}" hint-placeholder-val="{{ true }}">
+              <button class="drop" type="button" onClick="{{j.toggle}}" aria-expanded="{{j.expanded}}">
+                <span class="drop-head">
+                  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; align-items: baseline">
+                        <h2 style="margin: 0; font-family: 'Pixelify Sans', monospace; font-size: 20px; font-weight: 700">{{j.org}}</h2>
+                        <span class="chip">{{j.tag}}</span>
+                      </div>
+                      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; font-size: 14px">
+                        <span style="font-weight: 500">{{j.role}}</span>
+                        <span style="color: #2E5A43">{{j.when}}</span>
+                      </div>
+                </span>
+                <svg class="px caret" viewBox="0 0 7 4" width="14" height="8" aria-hidden="true" style="transform: rotate({{j.caret}})"><path fill="#04361D" d="M0 0h7v1H0zM1 1h5v1H1zM2 2h3v1H2zM3 3h1v1H3z"/></svg>
+              </button>
+              <sc-if value="{{j.isOpen}}" hint-placeholder-val="{{ true }}">
+                <div class="drop-body">
+                  <sc-if value="{{j.hasIntro}}" hint-placeholder-val="{{ false }}">
+                    <p class="p">{{j.intro}}</p>
+                  </sc-if>
+                  <sc-if value="{{j.hasPoints}}" hint-placeholder-val="{{ true }}">
+                    <ul class="ul">
+                      <sc-for list="{{j.points}}" as="pt" hint-placeholder-count="2">
+                        <li>{{pt.t}}</li>
+                      </sc-for>
+                    </ul>
+                  </sc-if>
+                </div>
+              </sc-if>
+            </sc-if>
+            <sc-if value="{{j.noDetail}}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; align-items: center; gap: 16px; padding: 18px 20px">
+              <div class="drop-head">
+                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; align-items: baseline">
+                    <h2 style="margin: 0; font-family: 'Pixelify Sans', monospace; font-size: 20px; font-weight: 700">{{j.org}}</h2>
+                    <span class="chip">{{j.tag}}</span>
+                  </div>
+                  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; font-size: 14px">
+                    <span style="font-weight: 500">{{j.role}}</span>
+                    <span style="color: #2E5A43">{{j.when}}</span>
+                  </div>
+              </div>
+              <span aria-hidden="true" style="flex: none; width: 14px"></span>
+              </div>
+            </sc-if>
+          </article>
+        </sc-for>
+      </div>
+    </div>
+  </main>
 
-<!-- ===================== CONTACT ===================== -->
-<section id="contact">
-  <h2 class="section-heading word-fade">Let's work <em>together.</em></h2>
-  <p class="contact-sub">If you think we'd make a good team, you're probably right. Let's talk! :)</p>
-  <div class="contact-links">
-<a href="https://www.linkedin.com/in/srishti-gangolly/" target="_blank" class="contact-link outline">LinkedIn</a>
-    <a href="https://srishtigangolly.substack.com/" target="_blank" class="contact-link outline">Substack</a>
-  </div>
-  <p class="footer-note">Srishti Gangolly · <em>Your potential future employee.</em> &#10022; Toronto, Ontario</p>
-</section>
+  <nav class="navrow" aria-label="pages" style="width: 100%; max-width: 1080px">
+    <a href="about.html">← about_me.txt</a>
+    <a href="desktop.html">back to desktop</a>
+    <a href="certifications.html">next: certifications →</a>
+  </nav>
 
-<script src="js/sections.js"></script>
-<script src="js/script.js"></script>
+  <!-- let's work together (footer on every page) -->
+  <footer aria-labelledby="lwt" style="width: calc(100% + 32px); margin: 30px -16px 0; box-sizing: border-box; background: #04361D; color: #F0F2D5; border-top: 3px solid #04361D; display: flex; flex-direction: column; align-items: center">
+    <div style="width: 100%; max-width: 1080px; box-sizing: border-box; padding: 44px 24px 36px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px">
+      <div style="display: flex; flex-direction: column; gap: 14px; flex: 1 1 360px">
+        <h2 id="lwt" style="margin: 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 900; font-size: clamp(34px, 4vw, 46px); line-height: 1.05; color: #F0F2D5">let's work together.</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.7">if you think we'd make a good team, you're probably right. let's talk! :)</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px">
+          <a href="https://www.linkedin.com/in/srishti-gangolly/" style="font-family: 'Pixelify Sans', monospace; font-weight: 700; font-size: 18px; letter-spacing: .05em; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; box-sizing: border-box; border: 3px solid #F0F2D5; background: #EF233C; color: #F0F2D5; box-shadow: 0 4px 0 #97051D"><span aria-hidden="true" style="font-size: 16px; line-height: 1; padding: 1px 3px; border: 2px solid #F0F2D5">in</span> linkedin</a>
+          <a href="https://srishtigangolly.substack.com/" style="font-family: 'Pixelify Sans', monospace; font-weight: 700; font-size: 18px; letter-spacing: .05em; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; box-sizing: border-box; border: 3px solid #F0F2D5; background: #EF233C; color: #F0F2D5; box-shadow: 0 4px 0 #97051D"><svg class="px" viewBox="0 0 10 12" width="15" height="18" aria-hidden="true"><path fill="#F0F2D5" d="M0 0h10v2H0zM0 3h10v2H0zM0 6h10v6l-5-3-5 3z"/></svg> substack</a>
+        </div>
+      </div>
+      <a href="index.html" style="display: flex; flex-direction: column; align-items: center; gap: 12px; text-decoration: none; color: #F0F2D5">
+        <div aria-hidden="true" style="position: relative; width: 170px; aspect-ratio: 46 / 29">
+          <div style="position: absolute; inset: 0; background: #F0F2D5; border: 3px solid #F0F2D5; box-shadow: 6px 6px 0 #97051D"></div>
+          <div style="position: absolute; left: 3px; right: 3px; top: 3px; height: 58.6%; background: #04361D; clip-path: polygon(0 0, 100% 0, 50% 100%)"></div>
+          <div style="position: absolute; left: 3px; right: 3px; top: 3px; height: 55%; background: #E4E7C3; clip-path: polygon(1% 0, 99% 0, 50% 100%)"></div>
+          <svg class="px" viewBox="0 0 13 12" width="40" height="37" style="position: absolute; left: 50%; top: 58%; transform: translate(-50%, -50%)"><path fill="#04361D" d="M2 0h3v1H2zM8 0h3v1H8zM1 1h1v1H1zM5 1h1v1H5zM7 1h1v1H7zM11 1h1v1h-1zM0 2h1v4H0zM6 2h1v1H6zM12 2h1v4h-1zM1 6h1v1H1zM11 6h1v1h-1zM2 7h1v1H2zM10 7h1v1h-1zM3 8h1v1H3zM9 8h1v1H9zM4 9h1v1H4zM8 9h1v1H8zM5 10h1v1H5zM7 10h1v1H7zM6 11h1v1H6z"/><path fill="#EF233C" d="M2 1h3v1H2zM8 1h3v1H8zM1 2h5v1H1zM7 2h5v1H7zM1 3h11v3H1zM2 6h9v1H2zM3 7h7v1H3zM4 8h5v1H4zM5 9h3v1H5zM6 10h1v1H6z"/><path fill="#F0F2D5" d="M2 2h2v1H2zM2 3h1v1H2z"/></svg>
+        </div>
+        <span style="font-family: 'Pixelify Sans', monospace; font-size: 16px; text-decoration: underline">or leave me a note →</span>
+      </a>
+    </div>
+    <div style="width: 100%; border-top: 2px solid #2E5A43; padding: 12px 16px; box-sizing: border-box; text-align: center; font-family: 'Pixelify Sans', monospace; font-size: 15px">srishti gangolly · your potential future employee. ✦ toronto, ontario · <a href="v1/" style="color: #F0F2D5">see my old portfolio ↗</a></div>
+  </footer>
+  <div class="crt" aria-hidden="true"></div>
+</div>
+</template>
+<script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { open: { 0: true } };
+  }
+  renderVals() {
+    const d = new Date();
+    const clock = (d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }).replace(',', '') + '  ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })).toLowerCase();
+    return Object.assign({ clock }, this.pageVals());
+  }
+  pageVals() {
+    const job = (org, role, when, tag, intro, points) => ({ org, role, when, tag, intro, hasIntro: !!intro, hasPoints: points.length > 0, points: points.map((t) => ({ t })) });
+    return {
+      jobs: this.list(job).map((j, i) => {
+        const isOpen = !!this.state.open[i], hasDetail = j.hasIntro || j.hasPoints;
+        return Object.assign(j, {
+          hasDetail, noDetail: !hasDetail, isOpen, expanded: String(isOpen), caret: isOpen ? '180deg' : '0deg',
+          toggle: () => this.setState({ open: Object.assign({}, this.state.open, { [i]: !isOpen }) })
+        });
+      })
+    };
+  }
+  list(job) {
+    return [
+        job('intuit canada · turbotax', 'digital enablement & data activation intern | digital marketing', 'sept 2024 — apr 2025 · 8 mos', 'co-op',
+          "worked on the digital marketing team supporting data activation across turbotax's 5m+ user base. my work spanned customer data platforms, mobile attribution, and campaign analytics.",
+          ['optimized data integration and user tracking for 5m+ users by providing cross-platform support for cdp and kochava mobile attribution systems, improving attribution accuracy across large-scale campaigns.',
+           'increased campaign targeting precision by building and activating segmented audiences using segment cdp and braze, enabling data-informed marketing decisions at scale.',
+           'improved performance insight delivery by deploying and optimizing kochava smartlinks, supporting faster attribution reporting for cross-functional stakeholders.',
+           'strengthened data integrity across marketing teams by leading martech documentation and standardizing claravine cid taxonomy, streamlining workflows across teams.']),
+        job('vosyn ai', 'data analytics & strategy intern | digital marketing', 'summer 2024 · 4 mos', 'co-op',
+          'embedded within the digital marketing team to drive analytics and strategy initiatives across linkedin, web, and product channels.',
+          ['increased investor engagement by 5% by leading business analytics initiatives that optimized linkedin and website performance through data-driven insights.',
+           'identified key usability gaps by leveraging google analytics for user behavior analysis, translating findings into actionable product and marketing recommendations.',
+           'accelerated executive decision-making by designing and maintaining tableau dashboards with real-time visibility into marketing and product kpis.',
+           'drove kpi alignment across 3 business units by translating complex analytics into clear recommendations for business development, capital markets, and strategy stakeholders.']),
+        job('innovative business association (iba)', 'marketing project manager | professional development', '2025 — 2026 · 1 yr', 'leadership', '', []),
+        job('milton learna', 'math & statistics tutor | grades 9–12', '2023 — 2024 | 2025 — 2026 · 2 yrs', 'teaching', '',
+          ['identified where each student was struggling and created customized study plans for 3+ students per term, helping them achieve an average ap exam score of 4 or higher.',
+           'provided ongoing mentorship and feedback beyond just the lessons, helping students to think analytically, manage their workload independently, and approach challenging material with confidence.']),
+        job('mathematical and computational sciences society (mcss)', 'vp of marketing → vp of external affairs', '2022 — 2024 · 2 yrs', 'leadership', '',
+          ['led marketing efforts that boosted social media engagement (450 on instagram & 870 on linkedin) using data-driven strategies and creating content that clicked with our audience.',
+           'strengthened community engagement by bringing in diverse industry professionals and reconnecting with alumni to host workshops, panels, and networking events.',
+           'deerhacks ii and iii organizer']),
+        job('google developer student club (gdsc)', 'marketing associate | freshmen representative', '2021 — 2022 · 1 yr', 'leadership', '',
+          ['managed marketing and communications across first-year discord servers, lectures, tutorials, and fsg channels, maintaining consistent engagement across student touchpoints.',
+           'coordinated and facilitated online community events including discussion panels, study hubs, and game nights, strengthening member retention and participation.',
+           'represented gdsc at deerhacks, increasing club visibility and driving new member engagement through cross-org presence.'])
+    ];
+  }
+}
+</script>
 </body>
 </html>

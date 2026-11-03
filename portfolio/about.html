@@ -1,536 +1,253 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<script>
-  /* theme: saved choice, else device setting. Runs before CSS paints to avoid a flash. */
-  (function () {
-    var t;
-    try { t = localStorage.getItem('sg-theme'); } catch (e) {}
-    if (t !== 'light' && t !== 'dark') t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', t);
-  })();
-</script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8WV189JDM0"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-8WV189JDM0');
-</script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About – Srishti Gangolly</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300&family=DM+Sans:wght@300;400;500&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Srishti Gangolly — about</title>
+<meta name="theme-color" content="#76BA9D">
+<link rel="icon" href="img/doodle.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Fraunces:ital,wght@1,800;1,900&amp;family=Pixelify+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet">
 <style>
-  .about-hero {
-    min-height: 38vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 8rem 5rem 3rem;
-    background: var(--cream);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .about-eyebrow {
-    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em;
-    text-transform: uppercase; color: var(--muted);
-    display: flex; align-items: center; gap: 0.75rem;
-    margin-bottom: 1rem;
-  }
-  .about-eyebrow::before { content:''; width:1.5rem; height:1px; background:var(--accent); display:block; }
-
-  .about-title {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(3rem, 7vw, 6rem);
-    font-weight: 700;
-    line-height: 0.95;
-    letter-spacing: -0.03em;
-    color: var(--ink);
-  }
-  .about-title em { font-style: italic; font-weight: 300; color: var(--accent); }
-
-  /* ARTICLE */
-  .about-body {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 2rem 2rem 6rem;
-  }
-
-  .about-body p {
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 1.08rem;
-    line-height: 2;
-    color: var(--text);
-    margin-bottom: 2rem;
-    font-weight: 300;
-  }
-  .about-body p strong { font-weight: 700; font-style: normal; }
-  .about-body p em { font-style: italic; font-weight: 300; }
-  .about-body p strong em, .about-body p em strong { font-weight: 700; font-style: italic; }
-
-  /* Drop cap on first paragraph */
-  .about-body p:first-of-type::first-letter {
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 4.5rem;
-    font-weight: 700;
-    line-height: 0.75;
-    float: left;
-    margin-right: 0.12em;
-    margin-top: 0.08em;
-    color: var(--accent);
-  }
-
-  /* Pull quote */
-  .pull-quote {
-    border-left: 3px solid var(--accent);
-    margin: 2.5rem 0;
-    padding: 0.5rem 0 0.5rem 2rem;
-    font-family: 'Fraunces', serif;
-    font-size: 1.3rem;
-    font-weight: 300;
-    font-style: italic;
-    line-height: 1.55;
-    color: var(--ink);
-  }
-
-  /* Section divider */
-  .about-divider {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin: 3rem 0;
-  }
-  .about-divider::before,
-  .about-divider::after { content:''; flex:1; height:1px; background: var(--border); }
-  .about-divider span {
-    font-size: 0.68rem; font-weight: 500; letter-spacing: 0.14em;
-    text-transform: uppercase; color: var(--muted); white-space: nowrap;
-  }
-
-  /* Logo watermark in hero */
-  .about-hero-logo {
-    position: absolute;
-    right: 5rem;
-    bottom: 2rem;
-    height: 110px;
-    width: auto;
-    opacity: 0.7;
-  }
-  .about-hero { position: relative; }
-  .pol-group-photo--mobile { display: none !important; }
-
-  @media (max-width: 768px) {
-    /* Hero */
-    .about-hero { padding: 6rem 1.25rem 2rem; min-height: 28vh; }
-    .about-hero-logo { display: none; }
-
-    /* Intro photo + diary section — strip floats left, diary text wraps around it */
-    .intro-flex-section {
-      display: block !important;
-      padding: 2rem 1.25rem 0 !important;
-      max-width: 100% !important;
-    }
-    .intro-flex-section::after { content: ''; display: block; clear: both; }
-    .intro-flex-section > div {
-      float: left;
-      width: clamp(110px, 34vw, 140px) !important;
-      margin: 0.6rem 1.1rem 0.5rem 0 !important;
-    }
-    .intro-flex-section > div > div:last-child { width: 100% !important; padding: 6px 6px 18px !important; }
-    .intro-flex-section > p { padding-top: 0 !important; font-size: 1rem !important; line-height: 1.85 !important; margin: 0 !important; }
-
-    /* Hey typewriter */
-    .hey-title-wrap { padding: 2rem 1.25rem 0 !important; max-width: 100% !important; }
-    .hey-title-wrap h2 { font-size: 1.5rem !important; }
-
-    /* Article body */
-    .about-body { padding: 1.5rem 1.25rem 4rem; max-width: 100%; }
-    .about-body p { font-size: 1rem; line-height: 1.85; margin-bottom: 1.4rem; }
-
-    /* Disable drop cap on mobile */
-    .about-body p:first-of-type::first-letter { font-size: 1rem; float: none; margin: 0; line-height: inherit; }
-
-    /* Section banners */
-    .section-banner { text-align: center !important; margin: 2rem 0 1.5rem !important; }
-    .section-banner h2 { font-size: clamp(2rem, 10vw, 3rem) !important; }
-
-    /* Floated polaroids — unfloat and center */
-    /* group polaroid: on phones the floated desktop copy is hidden and the
-       copy placed after the first paragraph is shown, centred */
-    .pol-group-photo:not(.pol-group-photo--mobile) { display: none !important; }
-    .pol-group-photo--mobile {
-      float: none !important;
-      display: block !important;
-      margin: 0.5rem auto 2.5rem !important;
-      width: clamp(110px, 40vw, 160px) !important;   /* same size as the intern polaroids */
-    }
-    .pol-float-r {
-      float: none !important;
-      display: block !important;
-      margin: 1rem auto 1.5rem !important;
-      width: clamp(200px, 80vw, 320px) !important;
-    }
-
-    /* Photobooth strip — unfloat, center */
-    .photobooth-strip { float: none !important; margin: 1rem auto 2rem !important; display: block !important; }
-    .photobooth-strip > div:last-child { width: clamp(160px, 65vw, 220px) !important; }
-
-    /* Teaching flex — hide photo, text full width */
-    /* teaching photobooth strip: stacked above the text, centred */
-    .teaching-photo { display: block !important; width: fit-content; margin: 1.5rem auto 2rem !important; }
-    .teaching-photo > div:last-child { width: clamp(200px, 70vw, 250px) !important; }
-    .teaching-flex { display: block !important; }
-    .teaching-flex > div:not(.teaching-photo) { width: 100% !important; }
-
-    /* Intern polaroids — side by side centered */
-    .intern-polaroid-pair { display: flex !important; justify-content: center !important; gap: 1rem !important; margin-bottom: 2rem !important; overflow: visible !important; }
-    .intern-polaroid-pair .pol-float-l, .intern-polaroid-pair .pol-float-r { float: none !important; margin: 0 !important; width: clamp(110px, 40vw, 160px) !important; }
-    .intern-polaroid-pair .pol-float-l > div, .intern-polaroid-pair .pol-float-r > div { width: 100% !important; }
-
-    /* Pull quote */
-    .pull-quote { padding-left: 1.25rem; font-size: 1.1rem; }
-
-    /* Role cards */
-    .role-cards { margin-left: 0 !important; margin-right: 0 !important; }
-
-    /* Currently cards always visible */
-    .currently-card { opacity: 1 !important; animation: none !important; }
-
-    /* Disable scroll-reveal */
-    .pol-float-l, .pol-float-r, .photobooth-strip,
-    .about-body > p, .intro-flex-section > p,
-    .section-banner, .teaching-flex > p, .pull-quote,
-    .hey-title-wrap, .about-eyebrow, .about-title,
-    .wf-word { opacity: 1 !important; filter: none !important; }
-    .wf-word { transform: none !important; }
-  }
+body{margin:0}
+a{color:#97051D}a:hover{color:#04361D}
+.win{background:#F0F2D5;border:3px solid #04361D;box-shadow:6px 6px 0 #04361D;display:flex;flex-direction:column;min-width:0}
+.bar{height:36px;flex:none;background:#04361D;color:#F0F2D5;display:flex;align-items:center;justify-content:space-between;padding:0 6px 0 12px;font-family:'Pixelify Sans',monospace;font-size:16px;font-weight:600}
+.close{width:28px;height:28px;box-sizing:border-box;border:2px solid #F0F2D5;background:#F0F2D5;display:inline-flex;align-items:center;justify-content:center}
+.close:hover{background:#EF233C}
+.h2{margin:0;font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:clamp(36px,4.4vw,52px);line-height:1.05;color:#6B0314}
+.label{font-family:'Pixelify Sans',monospace;font-size:14px;letter-spacing:.1em;color:#97051D}
+.p{margin:0;font-size:15px;line-height:1.75}
+.ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:14px;line-height:1.6}
+.pane{border:3px solid #04361D;background:#FFFFF4;padding:22px 24px;display:flex;flex-direction:column;gap:14px}
+.navrow{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-family:'Pixelify Sans',monospace;font-size:16px}
+.navrow a{color:#04361D}
+.px{image-rendering:pixelated;shape-rendering:crispEdges}
+.btn{font-family:'Pixelify Sans',monospace;font-weight:700;font-size:15px;letter-spacing:.04em;text-transform:lowercase;text-decoration:none;display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:6px 12px;border:3px solid #04361D;box-sizing:border-box;box-shadow:0 4px 0 #04361D}
+.btn:active{transform:translateY(2px);box-shadow:0 2px 0 #04361D}
+.info{display:grid;grid-template-columns:300px minmax(0,1fr);gap:28px;padding:28px;align-items:start}
+@media (max-width:860px){.info{grid-template-columns:minmax(0,1fr)}}
+.card{border:3px solid #04361D;background:#FFFFF4;box-shadow:4px 4px 0 #97051D;padding:22px 20px;display:flex;flex-direction:column;align-items:stretch;gap:18px}
+.strip{position:relative;align-self:center;width:170px;box-sizing:border-box;margin:10px 0 2px;background:#141414;border:3px solid #04361D;box-shadow:5px 5px 0 #97051D;padding:12px 12px 4px;transform:rotate(-2deg);display:flex;flex-direction:column}
+.strip img{display:block;width:100%;aspect-ratio:1;object-fit:cover;border:0;box-sizing:border-box}
+.strip figcaption{font-family:'Pixelify Sans',monospace;font-size:14px;color:#E4E7C3;text-align:center;padding:5px 0 9px}
+.strip .tape{position:absolute;top:-10px;left:50%;width:56px;height:16px;transform:translateX(-50%) rotate(3deg);background:#76BA9D;border:2px solid #04361D}
+.photo{align-self:center;width:150px;height:150px;box-sizing:border-box;border:3px solid #04361D;background:#76BA9D;background-image:radial-gradient(#6AAE91 1px,transparent 1.2px);background-size:8px 8px;display:flex;align-items:center;justify-content:center}
+.photo img{width:120px;height:auto;transform:rotate(6deg)}
+.facts{margin:0;display:flex;flex-direction:column;border-top:2px dashed #04361D}
+.fact{display:grid;grid-template-columns:74px 1fr;gap:10px;padding:9px 0;border-bottom:2px dashed #04361D;font-size:13px;line-height:1.5}
+.fact dt{font-family:'Pixelify Sans',monospace;font-size:14px;color:#97051D}
+.fact dd{margin:0}
+.live{display:inline-block;width:8px;height:8px;background:#3FA66B;border:2px solid #04361D;margin-right:6px;vertical-align:1px;animation:blink 1.6s steps(2) infinite}
+@keyframes blink{50%{opacity:.25}}
+.tabs{display:flex;gap:6px;padding-left:12px}
+.tab{font-family:'Pixelify Sans',monospace;font-size:16px;font-weight:600;color:#04361D;border:3px solid #04361D;border-bottom:0;padding:8px 16px;cursor:pointer;margin-bottom:-3px;position:relative}
+.tab[aria-selected="true"]{z-index:1}
+.tab:focus-visible{outline:3px solid #97051D;outline-offset:2px}
+.sheet{border:3px solid #04361D;background:#FFFFF4;padding:28px 30px 32px;display:flex;flex-direction:column;gap:20px;min-height:520px}
+.timeline{list-style:none;margin:0;padding:0 0 0 26px;border-left:3px solid #04361D;display:flex;flex-direction:column;gap:26px}
+.step{position:relative;display:flex;flex-direction:column;gap:8px}
+.dot{position:absolute;left:-37px;top:9px;width:14px;height:14px;background:#EF233C;border:3px solid #04361D}
+.step-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+.step-head h3{margin:0;font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:30px;line-height:1.1;color:#6B0314}
+.when{font-family:'Pixelify Sans',monospace;font-size:14px;color:#2E5A43}
+.stats{list-style:none;margin:2px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px}
+.stat{background:#04361D;color:#F0F2D5;border:3px solid #04361D;box-shadow:3px 3px 0 #97051D;padding:8px 12px;display:flex;flex-direction:column;gap:2px}
+.stat-num{font-family:'Pixelify Sans',monospace;font-weight:700;font-size:24px;line-height:1.1;color:#F2B33D}
+.stat-name{font-family:'Pixelify Sans',monospace;font-size:13px}
+.role{align-self:flex-start;font-family:'Pixelify Sans',monospace;font-weight:700;font-size:18px;line-height:1.3}
+.rows{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;font-size:14px;line-height:1.5}
+.rows li{padding:7px 0 7px 18px;border-bottom:2px dashed rgba(4,54,29,.3);position:relative}
+.rows li::before{content:"";position:absolute;left:2px;top:14px;width:7px;height:7px;background:#EF233C}
+.tools{display:flex;flex-wrap:wrap;gap:6px}
+.tool{font-family:'Pixelify Sans',monospace;font-size:13px;padding:1px 8px;border:2px solid #04361D;background:#76BA9D}
+.quote{margin:0;position:relative;border:3px solid #04361D;background:#F0F2D5;box-shadow:5px 5px 0 #04361D;padding:30px 28px 20px 28px;display:flex;flex-direction:column;gap:12px}
+.qmark{position:absolute;top:-17px;left:20px;background:#FFFFF4;padding:0 6px;transform:rotate(180deg)}
+.quote blockquote{margin:0;font-family:'Fraunces',serif;font-style:italic;font-weight:800;font-size:22px;line-height:1.55;color:#04361D}
+.quote mark{background:linear-gradient(transparent 55%,#A8D4BF 55%);color:inherit;padding:0 2px}
+.quote figcaption{align-self:flex-end;font-family:'Pixelify Sans',monospace;font-size:16px;color:#97051D}
+.photo-card{margin:10px 0 4px;align-self:center;max-width:280px;background:#FFFFF4;border:3px solid #04361D;box-shadow:5px 5px 0 #97051D;padding:10px 10px 8px;transform:rotate(2deg);display:flex;flex-direction:column;gap:8px}
+.photo-card img{display:block;width:100%;height:auto;border:2px solid #04361D}
+.photo-card figcaption{font-family:'Pixelify Sans',monospace;font-size:14px;text-align:center}
+.photo-pair{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:34px;margin:10px 0 20px}
+.photo-pair .photo-card{margin:0;align-self:auto;width:150px;padding:7px 7px 6px}
+.photo-pair .photo-card figcaption{font-size:12px}
+.collage{position:relative;align-self:center;width:100%;max-width:340px;box-sizing:border-box;margin:22px 0 4px;background:#141414;border:3px solid #04361D;box-shadow:5px 5px 0 #97051D;padding:12px 12px 10px;transform:rotate(-2deg);display:flex;flex-direction:column;gap:10px}
+.collage img{display:block;width:100%;height:auto;border:0;box-sizing:border-box}
+.collage figcaption{font-family:'Pixelify Sans',monospace;font-size:14px;color:#E4E7C3;text-align:center}
+.collage .tape{position:absolute;top:-10px;left:50%;width:64px;height:18px;transform:translateX(-50%) rotate(3deg);background:#76BA9D;border:2px solid #04361D}
+.nows{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+.nows .now{flex:0 1 calc(50% - 7px);box-sizing:border-box;min-width:220px}
+.now{border:3px solid #04361D;background:#F0F2D5;box-shadow:3px 3px 0 #04361D;padding:14px 16px;display:flex;flex-direction:column;gap:6px;font-size:14px;line-height:1.55}
+@media (prefers-reduced-motion:reduce){.live{animation:none}}
+.menubar{height:32px;flex:none;width:100%;box-sizing:border-box;background:#F0F2D5;border-bottom:3px solid #04361D;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-family:'Pixelify Sans',monospace;font-size:15px;position:sticky;top:0;z-index:6}
+.menubar .menus{display:flex;align-items:center;gap:18px}
+.menubar .menus a{color:#04361D;text-decoration:none;padding:2px 6px}
+.menubar .menus a:hover{background:#04361D;color:#F0F2D5}
+.menubar .tray{display:flex;align-items:center;gap:22px}
+.crt{position:fixed;inset:0;pointer-events:none;z-index:5;background:repeating-linear-gradient(rgba(4,54,29,.05) 0 1px,transparent 1px 3px);box-shadow:inset 0 0 140px rgba(4,54,29,.28)}
+@media (max-width:700px){.menubar .menus .opt{display:none}}
+@media (max-width:480px){.menubar{padding:0 10px;font-size:13px}.menubar .tray{gap:10px}.menubar .tray svg{width:14px;height:auto}}
 </style>
+<script src="js/srishti-os.js"></script>
 </head>
 <body>
-
-<nav>
-  <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="Srishti Gangolly"></a>
-  <button class="nav-hamburger" id="hamburger" type="button" aria-label="Menu" aria-controls="nav-links" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-  <ul class="nav-links" id="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="experience.html">Experience</a></li>
-    <li><a href="certifications.html">Certifications</a></li>
-    <li><a href="projects.html">Projects</a></li>
-    <li><a href="https://srishtigangolly.substack.com/" target="_blank">Writing</a></li>
-    <li><a href="about.html" class="active" aria-current="page">About</a></li>
-  </ul>
-  <button class="theme-toggle" type="button" role="switch" aria-label="Dark mode" aria-checked="false">
-    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>
-    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
-  </button>
-</nav>
-
-<!-- HERO -->
-<div class="about-hero">
-  <p class="about-eyebrow">About</p>
-  <h1 class="about-title word-fade">The person<br>behind the <em>work.</em></h1>
-</div>
-
-<!-- SVG filters -->
-<svg width="0" height="0" style="position:absolute;">
-  <filter id="doodle">
-    <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="3" result="noise" seed="2"/>
-    <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G"/>
-  </filter>
-  <filter id="tape-wobble">
-    <feTurbulence type="turbulence" baseFrequency="0.04" numOctaves="2" seed="5"/>
-    <feDisplacementMap in="SourceGraphic" scale="2" xChannelSelector="R" yChannelSelector="G"/>
-  </filter>
-</svg>
-
-<!-- PHOTO + FIRST PARAGRAPH SIDE BY SIDE -->
-<div class="intro-flex-section" style="background:var(--cream);padding:0 5rem 0;max-width:780px;margin:0 auto;display:flex;align-items:center;gap:3rem;">
-
-  <!-- Photobooth strip -- 2009 + 2026 -->
-  <div style="position:relative;flex-shrink:0;transform:rotate(-1.5deg);margin-top:2rem;">
-    <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(1deg);z-index:10;">
-      <svg width="72" height="28" viewBox="0 0 72 28">
-        <rect x="2" y="2" width="68" height="24" rx="2" fill="rgba(226,229,223,0.75)" stroke="#b0b8a8" stroke-width="1" filter="url(#tape-wobble)"/>
-        <line x1="10" y1="9" x2="62" y2="9" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
-        <line x1="10" y1="16" x2="62" y2="16" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
-      </svg>
+<div id="app"></div>
+<template id="page">
+<div style="width: 100%; min-height: 100vh; box-sizing: border-box; background-color: #76BA9D; background-image: radial-gradient(#6AAE91 1px, transparent 1.2px); background-size: 8px 8px; font-family: 'DM Mono', monospace; color: #04361D; display: flex; flex-direction: column; align-items: center; gap: 22px; padding: 24px 16px 0; position: relative">
+  <header class="menubar" style="margin: -24px -16px 0; width: calc(100% + 32px)">
+    <nav class="menus" aria-label="menu">
+      <span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700; padding: 2px 6px">
+        <svg class="px" viewBox="0 0 11 16" width="11" height="16" aria-hidden="true"><path fill="#EF233C" d="M2 0h1v1H2zM5 0h1v1H5zM8 0h1v1H8zM2 1h7v1H2zM2 2h7v3H2zM3 5h5v1H3zM4 6h3v1H4z"/><path fill="#97051D" d="M5 2h1v4H5zM8 2h1v3H8z"/><path fill="#04361D" d="M5 7h1v9H5zM1 9h1v2H1zM2 11h1v1H2zM3 12h2v1H3zM9 8h1v2H9zM8 10h1v1H8zM6 11h2v1H6z"/><path fill="#76BA9D" d="M2 9h1v2H2zM3 11h2v1H3zM8 8h1v2H8zM6 10h2v1H6z"/></svg>
+        srishti os
+      </span>
+    </nav>
+    <div class="tray">
+      <svg class="px" viewBox="0 0 9 7" width="18" height="14" aria-label="wifi" role="img"><path fill="#04361D" d="M2 0h5v1H2zM1 1h1v1H1zM7 1h1v1H7zM0 2h1v1H0zM8 2h1v1H8zM3 2h3v1H3zM2 3h1v1H2zM6 3h1v1H6zM4 5h1v2H4z"/></svg>
+      <svg class="px" viewBox="0 0 12 7" width="24" height="14" aria-label="battery full" role="img"><path fill="#04361D" d="M0 0h10v1H0zM0 6h10v1H0zM0 1h1v5H0zM9 1h1v5H9zM10 2h2v3h-2z"/><path fill="#EF233C" d="M2 2h6v3H2z"/></svg>
+      <time style="white-space: pre; word-spacing: 2px">{{clock}}</time>
     </div>
-    <div style="background:#0e0e0e;padding:8px 8px 24px;box-shadow:3px 5px 0px var(--pol-shadow),0 10px 28px rgba(26,22,20,0.18);width:160px;">
-      <div style="display:flex;flex-direction:column;gap:6px;">
-        <div style="position:relative;">
-          <img loading="eager" src="images/young-srishti.jpg" style="width:100%;display:block;object-fit:cover;aspect-ratio:1/1;object-position:center top;filter:sepia(0.12);">
-          <span style="display:block;font-family:'Times New Roman',Times,serif;font-size:0.65rem;color:rgba(255,255,255,0.5);text-align:center;margin-top:5px;">2009</span>
+  </header>
+
+  <a href="desktop.html" aria-label="back to desktop" style="line-height: 0"><img src="img/doodle.png" alt="Srishti Gangolly" style="width: 92px; height: auto; transform: rotate(6deg)"></a>
+
+  <main class="win" style="width: 100%; max-width: 1120px">
+    <div class="bar">
+      <span>about_me.txt</span>
+      <a class="close" href="desktop.html" aria-label="close, back to desktop"><svg class="px" viewBox="0 0 8 8" width="12" height="12" aria-hidden="true"><path fill="#04361D" d="M0 0h2v1H0zM6 0h2v1H6zM1 1h2v1H1zM5 1h2v1H5zM2 2h4v1H2zM3 3h2v2H3zM2 5h4v1H2zM1 6h2v1H1zM5 6h2v1H5zM0 7h2v1H0zM6 7h2v1H6z"/></svg></a>
+    </div>
+    <div class="info">
+      <!-- left: the "get info" card -->
+      <aside class="card" aria-label="profile">
+        <figure class="strip">
+          <span class="tape" aria-hidden="true"></span>
+          <img src="img/site/me-2009.png" alt="srishti in 2009: a little kid in a navy bucket hat hugging a lavender teddy bear">
+          <figcaption>2009</figcaption>
+          <img src="img/site/me-2026.png" alt="srishti in 2026: a smiling selfie with shoulder-length dark hair">
+          <figcaption>2026</figcaption>
+        </figure>
+        <div style="text-align: center; display: flex; flex-direction: column; gap: 4px">
+          <h1 style="margin: 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 900; font-size: 30px; line-height: 1.1; color: #6B0314">srishti gangolly</h1>
         </div>
-        <div style="position:relative;">
-          <img loading="eager" src="images/srishti-2026.jpg" style="width:100%;display:block;object-fit:cover;aspect-ratio:1/1;object-position:center top;filter:sepia(0.06);">
-          <span style="display:block;font-family:'Times New Roman',Times,serif;font-size:0.65rem;color:rgba(255,255,255,0.5);text-align:center;margin-top:5px;">2026</span>
+        <dl class="facts">
+            <div class="fact"><dt>where</dt><dd>toronto, ontario</dd></div>
+            <div class="fact"><dt>studying</dt><dd>b.sc. applied math, geospatial data science &amp; statistics @ uoft</dd></div>
+            <div class="fact"><dt>into</dt><dd>martech &amp; gtm, growth, product, data</dd></div>
+            <div class="fact"><dt>status</dt><dd><span class="live" aria-hidden="true"></span>open to new roles</dd></div>
+        </dl>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center">
+          <a class="btn" href="https://drive.google.com/file/d/1dasPUW3PCfL3X46S7Zs5TBzfl2K2QQfY/view?usp=sharing" style="background: #04361D; color: #F0F2D5">resume ↗</a>
+          <a class="btn" href="https://www.linkedin.com/in/srishti-gangolly/" style="background: #F0F2D5; color: #04361D">linkedin ↗</a>
+        </div>
+      </aside>
+
+      <!-- right: tabbed story -->
+      <section style="display: flex; flex-direction: column; min-width: 0">
+        <div class="tabs" role="tablist" aria-label="about me">
+          <button type="button" role="tab" class="tab" aria-selected="{{resumeSel}}" style="background: {{resumeBg}}" onClick="{{showResume}}">for the resume</button>
+          <button type="button" role="tab" class="tab" aria-selected="{{beyondSel}}" style="background: {{beyondBg}}" onClick="{{showBeyond}}">beyond the resume</button>
+        </div>
+        <div class="sheet" role="tabpanel">
+          <sc-if value="{{onResume}}" hint-placeholder-val="{{ true }}">
+            <h2 class="h2">for the resume.</h2>
+            <ol class="timeline">
+                <li class="step">
+                  <span class="dot" aria-hidden="true"></span>
+                  <div class="step-head"><h3>uoft</h3><span class="when">studying</span></div>
+                  <p class="p">i'm currently completing a bachelor of science in applied mathematics with geospatial data science and statistics at the university of toronto. beyond lectures and problem sets, i've consistently gravitated toward roles where i could build and connect:</p><ul class="ul"><li>marketing associate at google developer student club (gdsc)</li><li>director of marketing &amp; partnerships at mathematical and computational sciences society (mcss)</li><li>marketing project manager at innovative business association (iba)</li></ul><p class="p">the roles evolved, but the core never changed: build visibility, create impact, and foster the right relationships.</p>
+                </li>
+                <li class="step">
+                  <span class="dot" aria-hidden="true"></span>
+                  <div class="step-head"><h3>deerhacks</h3><span class="when">mcss · 2022 — 2024</span></div>
+                  <ul class="stats"><li class="stat"><span class="stat-num">1,500+</span><span class="stat-name">applicants</span></li><li class="stat"><span class="stat-num">35+</span><span class="stat-name">events</span></li><li class="stat"><span class="stat-num">$15K+</span><span class="stat-name">budget</span></li><li class="stat"><span class="stat-num">3,000+</span><span class="stat-name">followers</span></li></ul><ul class="rows"><li>36-hour hackathon run through mcss</li><li>organized 2 iterations — deerhacks iii stood out most</li><li>community built from scratch</li><li>🏆 named best event of the year (kudos to the whole team!)</li></ul><figure class="photo-card"><img src="img/site/dh3-team-photo.jpg" alt="the deerhacks organizing team in matching deerhacks t-shirts, posing under a purple #DareToGlow neon sign"><figcaption>the deerhacks team ♡</figcaption></figure>
+                </li>
+                <li class="step">
+                  <span class="dot" aria-hidden="true"></span>
+                  <div class="step-head"><h3>vosyn ai</h3><span class="when">summer 2024</span></div>
+                  <span class="role">data analytics &amp; strategy intern</span><ul class="rows"><li>dug into google analytics to understand user &amp; investor behavior</li><li>built tableau dashboards for real-time kpi tracking</li><li>worked with business development &amp; ui/ux teams on growth-focused recommendations</li></ul><div class="tools"><span class="tool">tableau</span><span class="tool">sql</span><span class="tool">product analytics</span><span class="tool">marketing analytics</span><span class="tool">project management</span><span class="tool">marketing strategy</span><span class="tool">data visualization</span><span class="tool">kpi reporting</span></div>
+                </li>
+                <li class="step">
+                  <span class="dot" aria-hidden="true"></span>
+                  <div class="step-head"><h3>intuit canada</h3><span class="when">2024 — 2025</span></div>
+                  <span class="role">digital enablement &amp; data activation intern · turbotax</span><ul class="stats" style="grid-template-columns: minmax(0, 160px)"><li class="stat"><span class="stat-num">5M+</span><span class="stat-name">user base</span></li></ul><ul class="rows"><li>optimized data integration across customer data platforms &amp; mobile attribution</li><li>built custom audiences in segment &amp; braze</li><li>deployed kochava smartlinks for faster stakeholder insights</li><li>led standardization of data organization across marketing teams</li></ul><div class="photo-pair"><figure class="photo-card" style="transform: rotate(-3deg)"><img src="img/site/intuit-wall.jpg" alt="srishti holding up her intuit badge and pointing at the intuit, turbotax, credit karma, quickbooks and mailchimp logo wall"><figcaption>badge secured ✌</figcaption></figure><figure class="photo-card" style="transform: rotate(2deg)"><img src="img/site/intuit-desk.jpg" alt="a laptop open to the turbotax site on a desk by floor-to-ceiling windows overlooking the cn tower"><figcaption>office views</figcaption></figure></div><div class="tools"><span class="tool">data integration</span><span class="tool">growth marketing</span><span class="tool">kochava</span><span class="tool">marketing analytics</span><span class="tool">audience segmentation</span><span class="tool">project management</span><span class="tool">segment cdp</span><span class="tool">claravine</span><span class="tool">quality assurance</span><span class="tool">mobile attribution</span><span class="tool">braze</span></div>
+                </li>
+            </ol>
+          </sc-if>
+          <sc-if value="{{onBeyond}}" hint-placeholder-val="{{ false }}">
+            <h2 class="h2">beyond the resume.</h2>
+            <figure class="quote">
+              <svg class="px qmark" viewBox="0 0 9 6" width="45" height="30" aria-hidden="true"><path fill="#EF233C" d="M0 0h3v3H0zM5 0h3v3H5zM1 3h2v1H1zM6 3h2v1H6zM2 4h1v2H2zM7 4h1v2H7z"/></svg>
+              <blockquote>curiosity has never really been separate from the way i work. at the end of the day, i care about <mark>leading with intention</mark> and showing up with <mark>structure</mark>, <mark>creativity</mark>, and <mark>a genuine desire to learn</mark>, whatever problem is on the table.</blockquote>
+              <figcaption>— srishti</figcaption>
+            </figure>
+            <figure class="collage"><span class="tape" aria-hidden="true"></span><img src="img/site/life-lately.jpg" alt="a taped-up photo collage: two matcha lattes with pastries, black-and-white photobooth strips with a friend, three friends posing together, and a palm-lined street with family in saris"><figcaption>life lately ♡</figcaption></figure>
+            <span class="label" style="margin-top: 10px">currently</span>
+            <ul class="nows">
+                <li class="now"><span class="label">reading</span><span>glossy by marisa meltzer</span></li>
+                <li class="now"><span class="label">working on</span><span>presentation mastery pathway, level 4, speech #1 @ milton escarpment toastmasters</span></li>
+                <li class="now"><span class="label">sidequesting</span><span>grinding through leetcode sql 50, writing a product series on substack, and building in public(ish) (stay tuned)</span></li>
+                <li class="now"><span class="label">obsessed with</span><span>coconut matcha, hyper-specific spotify playlists, eva meloche, office drama by chloe shih, and substack, always substack</span></li>
+                <li class="now"><span class="label">chasing</span><span>that sweet spot between job-hunt crashouts and romanticizing my last semester of undergrad</span></li>
+            </ul>
+          </sc-if>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <nav class="navrow" aria-label="pages" style="width: 100%; max-width: 1080px">
+    <a href="desktop.html">← back to desktop</a>
+    <a href="experience.html">next: experience.exe →</a>
+  </nav>
+
+  <!-- let's work together (footer on every page) -->
+  <footer aria-labelledby="lwt" style="width: calc(100% + 32px); margin: 30px -16px 0; box-sizing: border-box; background: #04361D; color: #F0F2D5; border-top: 3px solid #04361D; display: flex; flex-direction: column; align-items: center; height: 395px">
+    <div style="width: 100%; max-width: 1080px; box-sizing: border-box; padding: 44px 24px 36px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px">
+      <div style="display: flex; flex-direction: column; gap: 14px; flex: 1 1 360px">
+        <h2 id="lwt" style="margin: 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 900; font-size: clamp(34px, 4vw, 46px); line-height: 1.05; color: #F0F2D5">let's work together.</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.7">if you think we'd make a good team, you're probably right. let's talk! :)</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px">
+          <a href="https://www.linkedin.com/in/srishti-gangolly/" style="font-family: 'Pixelify Sans', monospace; font-weight: 700; font-size: 18px; letter-spacing: .05em; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; box-sizing: border-box; border: 3px solid #F0F2D5; background: #EF233C; color: #F0F2D5; box-shadow: 0 4px 0 #97051D"><span aria-hidden="true" style="font-size: 16px; line-height: 1; padding: 1px 3px; border: 2px solid #F0F2D5">in</span> linkedin</a>
+          <a href="https://srishtigangolly.substack.com/" style="font-family: 'Pixelify Sans', monospace; font-weight: 700; font-size: 18px; letter-spacing: .05em; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; box-sizing: border-box; border: 3px solid #F0F2D5; background: #EF233C; color: #F0F2D5; box-shadow: 0 4px 0 #97051D"><svg class="px" viewBox="0 0 10 12" width="15" height="18" aria-hidden="true"><path fill="#F0F2D5" d="M0 0h10v2H0zM0 3h10v2H0zM0 6h10v6l-5-3-5 3z"/></svg> substack</a>
         </div>
       </div>
+      <a href="index.html" style="display: flex; flex-direction: column; align-items: center; gap: 12px; text-decoration: none; color: #F0F2D5">
+        <div aria-hidden="true" style="position: relative; width: 170px; aspect-ratio: 46 / 29">
+          <div style="position: absolute; inset: 0; background: #F0F2D5; border: 3px solid #F0F2D5; box-shadow: 6px 6px 0 #97051D"></div>
+          <div style="position: absolute; left: 3px; right: 3px; top: 3px; height: 58.6%; background: #04361D; clip-path: polygon(0 0, 100% 0, 50% 100%)"></div>
+          <div style="position: absolute; left: 3px; right: 3px; top: 3px; height: 55%; background: #E4E7C3; clip-path: polygon(1% 0, 99% 0, 50% 100%)"></div>
+          <svg class="px" viewBox="0 0 13 12" width="40" height="37" style="position: absolute; left: 50%; top: 58%; transform: translate(-50%, -50%)"><path fill="#04361D" d="M2 0h3v1H2zM8 0h3v1H8zM1 1h1v1H1zM5 1h1v1H5zM7 1h1v1H7zM11 1h1v1h-1zM0 2h1v4H0zM6 2h1v1H6zM12 2h1v4h-1zM1 6h1v1H1zM11 6h1v1h-1zM2 7h1v1H2zM10 7h1v1h-1zM3 8h1v1H3zM9 8h1v1H9zM4 9h1v1H4zM8 9h1v1H8zM5 10h1v1H5zM7 10h1v1H7zM6 11h1v1H6z"/><path fill="#EF233C" d="M2 1h3v1H2zM8 1h3v1H8zM1 2h5v1H1zM7 2h5v1H7zM1 3h11v3H1zM2 6h9v1H2zM3 7h7v1H3zM4 8h5v1H4zM5 9h3v1H5zM6 10h1v1H6z"/><path fill="#F0F2D5" d="M2 2h2v1H2zM2 3h1v1H2z"/></svg>
+        </div>
+        <span style="font-family: 'Pixelify Sans', monospace; font-size: 16px; text-decoration: underline">or leave me a note →</span>
+      </a>
     </div>
-  </div>
-
-
-  <!-- First paragraph (right) -->
-  <p style="font-family:'Kalam',cursive;font-size:1.08rem;line-height:2;color:var(--text);font-weight:300;margin:0;padding-top:1rem;"><em>Dear diary,</em><br>Ever since I was little, I've loved the story behind my name, but there's a small irony about it I've come to love even more. My name, <strong style="font-weight:700;font-style:normal;"><em style="font-style:italic;">Srishti,</em></strong> means <strong style="font-weight:700;"><em style="font-style:italic;">Creation</em></strong> in Sanskrit. My dad chose it because he thought it sounded beautiful, perhaps not realizing how perfectly it would fit. Because whether I'm <em style="font-style:italic;">writing</em>, <em style="font-style:italic;">designing a graphic</em>, <em style="font-style:italic;">building a deck</em>, <em style="font-style:italic;">presenting a speech</em> or <em style="font-style:italic;">making sense of trends</em>, that same <strong style="font-weight:700;"><em style="font-style:italic;">creative pull</em></strong> has always been at the center of who I am. Maybe the name was always meant to be mine.</p>
-
+    <div style="width: 100%; border-top: 2px solid #2E5A43; padding: 12px 16px; box-sizing: border-box; text-align: center; font-family: 'Pixelify Sans', monospace; font-size: 15px">srishti gangolly · your potential future employee. ✦ toronto, ontario · <a href="v1/" style="color: #F0F2D5">see my old portfolio ↗</a></div>
+  </footer>
+  <div class="crt" aria-hidden="true"></div>
 </div>
-
-<!-- HEY TYPEWRITER -->
-<div class="hey-title-wrap" style="max-width:780px;margin:0 auto;padding:3rem 5rem 0;">
-  <h2 id="hey-title" style="font-family:'Times New Roman',Times,serif;font-size:2rem;font-weight:700;font-style:italic;color:var(--accent);text-align:center;"></h2>
-</div>
+</template>
 <script>
-  (function() {
-    const el = document.getElementById('hey-title');
-    const text = "Hey! I'm Srishti :)";
-    const cursor = document.createElement('span');
-    cursor.style.cssText = 'display:inline-block;width:3px;height:0.85em;background:var(--accent);margin-left:3px;vertical-align:middle;';
-    el.appendChild(cursor);
-    let i = 0;
-    function type() {
-      if (i < text.length) {
-        el.insertBefore(document.createTextNode(text[i]), cursor);
-        i++;
-        setTimeout(type, 75);
-      } else {
-        cursor.style.animation = 'blink 0.85s step-start infinite';
-      }
-    }
-    setTimeout(type, 1000);
-  })();
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tab: 'resume' };
+  }
+  renderVals() {
+    const d = new Date();
+    const clock = (d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }).replace(',', '') + '  ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })).toLowerCase();
+    return Object.assign({ clock }, this.pageVals());
+  }
+  pageVals() {
+    const t = this.state.tab;
+    return {
+      onResume: t === 'resume', onBeyond: t === 'beyond',
+      resumeSel: String(t === 'resume'), beyondSel: String(t === 'beyond'),
+      resumeBg: t === 'resume' ? '#FFFFF4' : '#E4E7C3', beyondBg: t === 'beyond' ? '#FFFFF4' : '#E4E7C3',
+      showResume: () => this.setState({ tab: 'resume' }),
+      showBeyond: () => this.setState({ tab: 'beyond' })
+    };
+  }
+}
 </script>
-
-<!-- BODY (remaining paragraphs) -->
-<article class="about-body">
-
-  <!-- Float left -- team portrait, text wraps around -->
-  <div class="pol-float-l pol-group-photo" style="float:left;margin:4.5rem 2rem 1rem 0;position:relative;display:inline-block;width:240px;transform:rotate(-2deg);">
-    <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(1deg);z-index:10;">
-      <svg width="60" height="24" viewBox="0 0 60 24">
-        <rect x="2" y="2" width="56" height="20" rx="2" fill="rgba(226,229,223,0.75)" stroke="#b0b8a8" stroke-width="1" filter="url(#tape-wobble)"/>
-        <line x1="8" y1="8" x2="52" y2="8" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
-        <line x1="8" y1="14" x2="52" y2="14" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
-      </svg>
-    </div>
-    <svg style="position:absolute;top:-4px;left:-4px;width:calc(100% + 8px);height:calc(100% + 8px);overflow:visible;pointer-events:none;z-index:2;" viewBox="0 0 158 226" preserveAspectRatio="none">
-      <rect x="2" y="2" width="154" height="222" rx="3" fill="none" stroke="#1A3A2A" stroke-width="2.5" filter="url(#doodle)"/>
-    </svg>
-    <div style="background:white;padding:5px 5px 22px 5px;box-shadow:3px 5px 0px var(--pol-shadow),0 10px 28px rgba(26,22,20,0.12);">
-      <img loading="eager" src="images/1778266214084.jpg" style="width:100%;display:block;object-fit:cover;aspect-ratio:2/3;">
-    </div>
-  </div>
-
-  <p>I'm currently completing a Bachelor of Science in <strong><em>Applied Mathematics with Geospatial Data Science and Statistics</em></strong> at the <strong>University of Toronto.</strong> Beyond lectures and problem sets, I've consistently gravitated toward roles where I could build and connect:</p>
-  <!-- Same team portrait, phone layout only: sits below the first paragraph -->
-  <div class="pol-float-l pol-group-photo pol-group-photo--mobile" aria-hidden="true" style="float:left;margin:4.5rem 2rem 1rem 0;position:relative;display:inline-block;width:240px;transform:rotate(-2deg);">
-    <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(1deg);z-index:10;">
-      <svg width="60" height="24" viewBox="0 0 60 24">
-        <rect x="2" y="2" width="56" height="20" rx="2" fill="rgba(226,229,223,0.75)" stroke="#b0b8a8" stroke-width="1" filter="url(#tape-wobble)"/>
-        <line x1="8" y1="8" x2="52" y2="8" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
-        <line x1="8" y1="14" x2="52" y2="14" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
-      </svg>
-    </div>
-    <svg style="position:absolute;top:-4px;left:-4px;width:calc(100% + 8px);height:calc(100% + 8px);overflow:visible;pointer-events:none;z-index:2;" viewBox="0 0 158 226" preserveAspectRatio="none">
-      <rect x="2" y="2" width="154" height="222" rx="3" fill="none" stroke="#1A3A2A" stroke-width="2.5" filter="url(#doodle)"/>
-    </svg>
-    <div style="background:white;padding:5px 5px 22px 5px;box-shadow:3px 5px 0px var(--pol-shadow),0 10px 28px rgba(26,22,20,0.12);">
-      <img loading="eager" src="images/1778266214084.jpg" style="width:100%;display:block;object-fit:cover;aspect-ratio:2/3;">
-    </div>
-  </div>
-  <div class="role-cards" style="display:flex;flex-direction:column;gap:0.6rem;margin:0 0 1.5rem 220px;">
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:0.65rem 1rem;font-family:'Fraunces',serif;font-style:italic;color:var(--accent);font-size:1rem;line-height:1.5;"><strong>Marketing Associate</strong> at <strong>Google Developer Student Club (GDSC)</strong></div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:0.65rem 1rem;font-family:'Fraunces',serif;font-style:italic;color:var(--accent);font-size:1rem;line-height:1.5;"><strong>Director of Marketing &amp; Partnerships</strong> at <strong>Mathematical and Computational Sciences Society (MCSS)</strong></div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:0.65rem 1rem;font-family:'Fraunces',serif;font-style:italic;color:var(--accent);font-size:1rem;line-height:1.5;"><strong>Marketing Project Manager</strong> at <strong>Innovative Business Association (IBA)</strong></div>
-  </div>
-  <p>The roles evolved, but the core never changed: <strong><em>build visibility, create impact, and foster the right relationships.</em></strong></p>
-
-  <!-- Float right -- DeerHacks team -->
-  <div class="pol-float-r" style="float:right;margin:0.5rem 0 1rem 2rem;position:relative;display:inline-block;width:320px;transform:rotate(1.5deg);">
-    <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(-1deg);z-index:10;">
-      <svg width="60" height="24" viewBox="0 0 60 24">
-        <rect x="2" y="2" width="56" height="20" rx="2" fill="rgba(226,229,223,0.75)" stroke="#b0b8a8" stroke-width="1" filter="url(#tape-wobble)"/>
-        <line x1="8" y1="8" x2="52" y2="8" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
-        <line x1="8" y1="14" x2="52" y2="14" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
-      </svg>
-    </div>
-    <svg style="position:absolute;top:-4px;left:-4px;width:calc(100% + 8px);height:calc(100% + 8px);overflow:visible;pointer-events:none;z-index:2;" viewBox="0 0 228 160" preserveAspectRatio="none">
-      <rect x="2" y="2" width="224" height="156" rx="3" fill="none" stroke="#1A3A2A" stroke-width="2.5" filter="url(#doodle)"/>
-    </svg>
-    <div style="background:white;padding:5px 5px 22px 5px;box-shadow:3px 5px 0px var(--pol-shadow),0 10px 28px rgba(26,22,20,0.12);">
-      <img loading="eager" src="images/deerhacks-team.jpeg" style="width:100%;display:block;object-fit:cover;aspect-ratio:5/3;">
-    </div>
-  </div>
-
-  <p>A highlight was helping organize <strong>DeerHacks</strong>, a 36-hour hackathon run through <strong>MCSS.</strong> I contributed to two iterations, but <strong>DeerHacks III</strong> stood out most — <strong><em>1,500+ applicants, 35+ events, a $15,000+ budget,</em></strong> and a <strong><em>3,000+ follower community</em></strong> built from scratch. It was later named <strong><em>best event of the year</em></strong> 🏆 (kudos to the whole team!)</p>
-
-  <div class="section-banner" style="text-align:right;margin:3rem 0 2rem;">
-    <h2 style="font-family:'Fraunces',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:700;line-height:0.95;letter-spacing:-0.03em;color:var(--ink);">for the <em style="font-style:italic;font-weight:300;color:var(--accent);">resume.</em></h2>
-  </div>
-
-  <p>That same instinct to connect data with people carried into my internships. At <strong>Vosyn AI</strong>, as a <strong><em>Data Analytics and Strategy Intern,</em></strong> I dug into <strong>Google Analytics</strong> to understand user and investor behavior, built <strong>Tableau</strong> dashboards for <strong><em>real-time KPI tracking,</em></strong> and worked with Business Development and UI/UX teams to turn findings into <strong><em>growth-focused recommendations.</em></strong></p>
-
-  <div class="intern-polaroid-pair">
-    <!-- Polaroid left -- Vosyn -->
-    <div class="pol-float-l" style="float:left;margin:0.5rem 2rem 1rem 0;position:relative;transform:rotate(2deg);">
-      <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(-1deg);z-index:10;">
-        <svg width="72" height="28" viewBox="0 0 72 28">
-          <rect x="2" y="2" width="68" height="24" rx="2" fill="rgba(226,229,223,0.75)" stroke="#b0b8a8" stroke-width="1" filter="url(#tape-wobble)"/>
-          <line x1="10" y1="9" x2="62" y2="9" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
-          <line x1="10" y1="16" x2="62" y2="16" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
-        </svg>
-      </div>
-      <div style="position:relative;display:inline-block;width:220px;">
-        <svg style="position:absolute;top:-4px;left:-4px;width:calc(100% + 8px);height:calc(100% + 8px);overflow:visible;pointer-events:none;z-index:2;" viewBox="0 0 188 260" preserveAspectRatio="none">
-          <rect x="2" y="2" width="184" height="256" rx="3" fill="none" stroke="#1A3A2A" stroke-width="2.5" filter="url(#doodle)"/>
-        </svg>
-        <div style="background:white;padding:6px;display:block;box-shadow:3px 5px 0px var(--pol-shadow),0 10px 28px rgba(26,22,20,0.12);">
-          <img loading="eager" src="images/intern-left.jpg" alt="Office" style="width:100%;display:block;aspect-ratio:3/4;object-fit:cover;object-position:center top;">
-        </div>
-      </div>
-    </div>
-
-    <!-- Polaroid right -- Intuit -->
-    <div class="pol-float-r" style="float:right;margin:0.5rem 0 1rem 2rem;position:relative;transform:rotate(-2.5deg);">
-      <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(1deg);z-index:10;">
-        <svg width="72" height="28" viewBox="0 0 72 28">
-          <rect x="2" y="2" width="68" height="24" rx="2" fill="rgba(226,229,223,0.75)" stroke="#b0b8a8" stroke-width="1" filter="url(#tape-wobble)"/>
-          <line x1="10" y1="9" x2="62" y2="9" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
-          <line x1="10" y1="16" x2="62" y2="16" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
-        </svg>
-      </div>
-      <div style="position:relative;display:inline-block;width:220px;">
-        <svg style="position:absolute;top:-4px;left:-4px;width:calc(100% + 8px);height:calc(100% + 8px);overflow:visible;pointer-events:none;z-index:2;" viewBox="0 0 188 260" preserveAspectRatio="none">
-          <rect x="2" y="2" width="184" height="256" rx="3" fill="none" stroke="#1A3A2A" stroke-width="2.5" filter="url(#doodle)"/>
-        </svg>
-        <div style="background:white;padding:6px;display:block;box-shadow:3px 5px 0px var(--pol-shadow),0 10px 28px rgba(26,22,20,0.12);">
-          <img loading="eager" src="images/intern-right.jpg" alt="Intuit" style="width:100%;display:block;aspect-ratio:3/4;object-fit:cover;object-position:center top;">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <p>From there, I joined <strong>Intuit Canada</strong> as a <strong><em>Digital Enablement &amp; Data Activation Intern</em></strong> on the <strong>TurboTax</strong> team, where the scale jumped — optimizing data integration across <strong><em>Customer Data Platforms</em></strong> and <strong><em>mobile attribution tools</em></strong> for a <strong><em>5M+ user base,</em></strong> building <strong><em>custom audiences</em></strong> in <strong>Segment</strong> and <strong>Braze,</strong> and deploying <strong>Kochava SmartLinks</strong> for faster <strong><em>stakeholder insights.</em></strong> I also led the <strong><em>standardization of data organization</em></strong> across marketing teams, laying groundwork for more consistent, <strong><em>data-driven decisions at scale.</em></strong></p>
-
-  <div style="clear:both;"></div>
-
-  <div class="section-banner" style="text-align:left;margin:3rem 0 2rem;">
-    <h2 style="font-family:'Fraunces',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:700;line-height:0.95;letter-spacing:-0.03em;color:var(--ink);">beyond the <em style="font-style:italic;font-weight:300;color:var(--accent);">resume.</em></h2>
-  </div>
-
-  <!-- Photobooth strip -->
-  <div class="teaching-flex" style="display:flex;justify-content:center;gap:2rem;align-items:flex-start;margin-bottom:2.5rem;">
-
-    <!-- Photobooth strip left -->
-    <div class="teaching-photo" style="flex-shrink:0;position:relative;transform:rotate(-1deg);margin-top:0.5rem;">
-      <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(1deg);z-index:10;">
-        <svg width="72" height="28" viewBox="0 0 72 28">
-          <rect x="2" y="2" width="68" height="24" rx="2" fill="rgba(226,229,223,0.75)" stroke="#b0b8a8" stroke-width="1" filter="url(#tape-wobble)"/>
-          <line x1="10" y1="9" x2="62" y2="9" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
-          <line x1="10" y1="16" x2="62" y2="16" stroke="#a0a89a" stroke-width="0.6" stroke-dasharray="3,3"/>
-        </svg>
-      </div>
-      <div style="background:#0e0e0e;padding:10px;box-shadow:4px 6px 0px var(--pol-shadow),0 12px 36px rgba(26,22,20,0.18);width:380px;max-width:100%;">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;">
-          <img loading="eager" src="images/IMG_9490.jpg" style="width:100%;display:block;object-fit:cover;aspect-ratio:3/4;">
-          <img loading="eager" src="images/IMG_7664.PNG" style="width:100%;display:block;object-fit:cover;aspect-ratio:3/4;">
-          <img loading="eager" src="images/IMG_0348.jpg" style="width:100%;display:block;object-fit:cover;aspect-ratio:3/4;">
-          <img loading="eager" src="images/IMG_5123.jpg" style="width:100%;display:block;object-fit:cover;aspect-ratio:3/4;object-position:center top;">
-        </div>
-      </div>
-    </div>
-
-
-  </div>
-
-
-  <!-- Currently widget -->
-  <style>
-    @keyframes currently-fade-up {
-      from { opacity: 0; transform: translateY(14px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .currently-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.05rem 1.3rem;
-      opacity: 0;
-      transition: background 0.2s ease;
-      cursor: default;
-    }
-    .currently-card.visible {
-      animation: currently-fade-up 0.5s ease forwards;
-    }
-    .currently-card:hover { background: var(--surface-hover); }
-    .currently-card .c-label { font-size:0.72rem;font-weight:700;letter-spacing:0.05em;text-transform:none;color:var(--accent);font-family:'DM Sans',sans-serif;margin:0 0 0.4rem 0;text-align:center; }
-    .currently-card .c-text { margin:0;font-size:0.88rem;color:var(--text);line-height:1.6;font-family:'Fraunces',serif;font-weight:400;font-style:italic;text-align:center; }
-    .currently-card .c-text strong { font-weight:700;font-style:italic;color:var(--accent); }
-    .currently-card .c-text em { font-style:italic;color:var(--accent); }
-    /* prevent drop cap bleed */
-    #currently-widget p::first-letter { font-size:inherit !important; float:none !important; margin:0 !important; line-height:inherit !important; color:inherit !important; }
-  </style>
-  <div id="currently-widget" style="margin:2rem 0;">
-    <p style="font-size:0.82rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink);margin:0 0 0.9rem 0;font-family:'DM Sans',sans-serif;">Currently</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;width:100%;">
-      <div class="currently-card" style="animation-delay:0.05s;">
-        <p class="c-label">📚 reading</p>
-        <p class="c-text"><strong>Glossy</strong> by Marisa Meltzer</p>
-      </div>
-      <div class="currently-card" style="animation-delay:0.15s;">
-        <p class="c-label">🎤 working on</p>
-        <p class="c-text"><strong>Presentation Mastery Pathway</strong>, Level 4, Speech #1 @ <strong>Milton Escarpment Toastmasters</strong></p>
-      </div>
-      <div class="currently-card" style="animation-delay:0.25s;">
-        <p class="c-label">🌀 sidequesting</p>
-        <p class="c-text">Grinding through <strong>LeetCode SQL 50</strong>, writing a <strong>product series on Substack</strong>, and building <strong>in public(ish)</strong> (stay tuned 👀)</p>
-      </div>
-      <div class="currently-card" style="animation-delay:0.35s;">
-        <p class="c-label">☕ obsessed with</p>
-        <p class="c-text"><strong>Coconut matcha</strong>, hyper-specific Spotify playlists, Eva Meloche, <strong>Office Drama</strong> by Chloe Shih, and <strong>Substack, always Substack</strong></p>
-      </div>
-      <div class="currently-card" style="grid-column:1/-1;animation-delay:0.45s;">
-        <p class="c-label">🎯 chasing</p>
-        <p class="c-text">That sweet spot between <strong>job-hunt crashouts</strong> and <strong>romanticizing my last semester</strong> of undergrad</p>
-      </div>
-    </div>
-  </div>
-  <script>
-    (function() {
-      const widget = document.getElementById('currently-widget');
-      const cards = widget.querySelectorAll('.currently-card');
-      const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            cards.forEach(function(card) { card.classList.add('visible'); });
-            observer.disconnect();
-          }
-        });
-      }, { threshold: 0.15 });
-      observer.observe(widget);
-    })();
-  </script>
-
-  <p style="font-family:'Fraunces',serif;font-size:1.25rem;font-weight:300;font-style:italic;line-height:1.75;color:var(--ink);border-top:1px solid var(--border);padding-top:2rem;margin-top:2rem;">Curiosity has never really been separate from the way I work. At the end of the day, I care about <strong style="font-weight:700;color:var(--accent);">leading with intention</strong> and showing up with <strong style="font-weight:700;color:var(--accent);">structure, creativity, and a genuine desire to learn,</strong> regardless of the problem on the table.</p>
-
-  <div style="clear:both;"></div>
-
-</article>
-
-<!-- CONTACT FOOTER -->
-<section id="contact">
-  <h2 class="section-heading word-fade">Let's work <em>together.</em></h2>
-  <p class="contact-sub">If you think we'd make a good team, you're probably right. Let's talk! :)</p>
-  <div class="contact-links">
-<a href="https://www.linkedin.com/in/srishti-gangolly/" target="_blank" class="contact-link outline">LinkedIn</a>
-    <a href="https://srishtigangolly.substack.com/" target="_blank" class="contact-link outline">Substack</a>
-  </div>
-  <p class="footer-note">Srishti Gangolly · <em>Your potential future employee.</em> ✦ Toronto, Ontario</p>
-</section>
-
-<script src="js/script.js"></script>
 </body>
 </html>
