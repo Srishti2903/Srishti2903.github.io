@@ -138,7 +138,7 @@ class Component extends DCLogic {
   constructor(props) {
     super(props);
     let spots = {};
-    try { spots = JSON.parse(localStorage.getItem('srishti-os-icons') || '{}'); } catch (e) {}
+    try { spots = JSON.parse(localStorage.getItem('srishti-os-icons-v2') || '{}'); } catch (e) {}
     this.state = { now: new Date(), spots, lifted: null };
     this.dragged = false;
     setInterval(() => this.setState({ now: new Date() }), 30000);
@@ -150,18 +150,24 @@ class Component extends DCLogic {
     const scale = el.getBoundingClientRect().width / el.offsetWidth || 1;
     const from = this.state.spots[i] || { x: 0, y: 0 };
     const x0 = e.clientX, y0 = e.clientY;
+    // keep the icon inside the desktop, below the menu bar
+    const r = el.getBoundingClientRect(), d = el.closest('.desk-root').getBoundingClientRect();
+    const lim = { x0: (d.left + 4 - r.left) / scale, x1: (d.right - 4 - r.right) / scale, y0: (d.top + 44 - r.top) / scale, y1: (d.bottom - 4 - r.bottom) / scale };
+    const clamp = (v, a, b) => Math.min(Math.max(v, a), b);
     this.dragged = false;
     const move = (ev) => {
-      const dx = (ev.clientX - x0) / scale, dy = (ev.clientY - y0) / scale;
-      if (!this.dragged && Math.hypot(dx, dy) < 4) return;
+      const dx = clamp((ev.clientX - x0) / scale, lim.x0, lim.x1), dy = clamp((ev.clientY - y0) / scale, lim.y0, lim.y1);
+      if (!this.dragged && Math.hypot(ev.clientX - x0, ev.clientY - y0) < 4) return;
       this.dragged = true;
       this.setState({ lifted: i, spots: Object.assign({}, this.state.spots, { [i]: { x: from.x + dx, y: from.y + dy } }) });
     };
     const drop = () => {
       window.removeEventListener('pointermove', move);
       window.removeEventListener('pointerup', drop);
+      // a plain click must not re-render, or the link is swapped out before it opens
+      if (!this.dragged) return;
       this.setState({ lifted: null });
-      try { localStorage.setItem('srishti-os-icons', JSON.stringify(this.state.spots)); } catch (err) {}
+      try { localStorage.setItem('srishti-os-icons-v2', JSON.stringify(this.state.spots)); } catch (err) {}
     };
     window.addEventListener('pointermove', move);
     window.addEventListener('pointerup', drop);
