@@ -33,6 +33,9 @@ a{color:#97051D}a:hover{color:#04361D}
 .crt{position:fixed;inset:0;pointer-events:none;z-index:5;background:repeating-linear-gradient(rgba(4,54,29,.05) 0 1px,transparent 1px 3px);box-shadow:inset 0 0 140px rgba(4,54,29,.28)}
 @media (max-width:700px){.menubar .menus .opt{display:none}}
 @media (max-width:480px){.menubar{padding:0 10px;font-size:13px}.menubar .tray{gap:10px}.menubar .tray svg{width:14px;height:auto}}
+
+/* phones: tighter window padding so content gets the width */
+@media (max-width:560px){[style*="padding: 32px 32px 36px"]{padding:22px 16px 26px!important}.card{padding:16px!important}}
 </style>
 <script src="js/srishti-os.js"></script>
 </head>
@@ -64,7 +67,7 @@ a{color:#97051D}a:hover{color:#04361D}
     <div style="padding: 6px 12px; border-bottom: 2px solid #04361D; font-size: 13px; background: #E4E7C3">~/srishti/projects · 2 items</div>
     <div style="padding: 32px 32px 36px; display: flex; flex-direction: column; gap: 24px">
       <h1 class="h2">work that<br>made an impact.</h1>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 24px">
         <a class="card" href="rsm.html">
           <svg class="px" viewBox="0 0 16 16" width="44" height="44" aria-hidden="true"><path fill="#EF233C" d="M1 4h14v10H1z"/><path fill="#04361D" d="M1 3h5v1H1zM6 4h1v1H6zM7 5h8v1H7zM0 4h1v10H0zM15 6h1v8h-1zM1 14h14v1H1zM1 7h14v1H1z"/></svg>
           <span class="label">utm iba · ready, set, market — fall 2025</span>
