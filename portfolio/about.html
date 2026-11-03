@@ -96,7 +96,7 @@ a{color:#97051D}a:hover{color:#04361D}
   /* same footer on every page: no fixed heights */
   footer,footer > div{height:auto!important}
   /* footer: no "leave me a note" envelope on phones */
-  footer a:has(.note-env){display:none!important}
+  footer .note-link{display:none!important}
   .strip{width:140px!important;padding:10px 10px 4px!important}
   [style*="min-height: 100vh"],.desk-root{min-height:calc(100dvh / .88)!important}
 }
@@ -218,20 +218,20 @@ a{color:#97051D}a:hover{color:#04361D}
       <div style="display: flex; flex-direction: column; gap: 14px; flex: 1 1 360px">
         <h2 id="lwt" style="margin: 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 900; font-size: clamp(34px, 4vw, 46px); line-height: 1.05; color: #F0F2D5">let's work together.</h2>
         <p style="margin: 0; font-size: 16px; line-height: 1.7">if you think we'd make a good team, you're probably right. let's talk! :)</p>
-        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 6px">
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px">
           <a href="https://www.linkedin.com/in/srishti-gangolly/" style="font-family: 'Pixelify Sans', monospace; font-weight: 700; font-size: 18px; letter-spacing: .05em; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; box-sizing: border-box; border: 3px solid #F0F2D5; background: #EF233C; color: #F0F2D5; box-shadow: 0 4px 0 #97051D"><span aria-hidden="true" style="font-size: 16px; line-height: 1; padding: 1px 3px; border: 2px solid #F0F2D5">in</span> linkedin</a>
           <a href="https://srishtigangolly.substack.com/" style="font-family: 'Pixelify Sans', monospace; font-weight: 700; font-size: 18px; letter-spacing: .05em; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; box-sizing: border-box; border: 3px solid #F0F2D5; background: #EF233C; color: #F0F2D5; box-shadow: 0 4px 0 #97051D"><svg class="px" viewBox="0 0 10 12" width="15" height="18" aria-hidden="true"><path fill="#F0F2D5" d="M0 0h10v2H0zM0 3h10v2H0zM0 6h10v6l-5-3-5 3z"/></svg> substack</a>
-          <a href="index.html" style="display: inline-flex; align-items: center; gap: 10px; min-height: 44px; text-decoration: none; color: #F0F2D5">
-            <span class="note-env" aria-hidden="true" style="position: relative; display: block; width: 58px; aspect-ratio: 46 / 29">
-              <span style="position: absolute; inset: 0; background: #F0F2D5; border: 2px solid #F0F2D5; box-shadow: 3px 3px 0 #97051D"></span>
-              <span style="position: absolute; left: 2px; right: 2px; top: 2px; height: 58.6%; background: #04361D; clip-path: polygon(0 0, 100% 0, 50% 100%)"></span>
-              <span style="position: absolute; left: 2px; right: 2px; top: 2px; height: 55%; background: #E4E7C3; clip-path: polygon(1% 0, 99% 0, 50% 100%)"></span>
-              <svg class="px" viewBox="0 0 13 12" width="16" height="15" style="position: absolute; left: 50%; top: 58%; transform: translate(-50%, -50%)"><path fill="#04361D" d="M2 0h3v1H2zM8 0h3v1H8zM1 1h1v1H1zM5 1h1v1H5zM7 1h1v1H7zM11 1h1v1h-1zM0 2h1v4H0zM6 2h1v1H6zM12 2h1v4h-1zM1 6h1v1H1zM11 6h1v1h-1zM2 7h1v1H2zM10 7h1v1h-1zM3 8h1v1H3zM9 8h1v1H9zM4 9h1v1H4zM8 9h1v1H8zM5 10h1v1H5zM7 10h1v1H7zM6 11h1v1H6z"/><path fill="#EF233C" d="M2 1h3v1H2zM8 1h3v1H8zM1 2h5v1H1zM7 2h5v1H7zM1 3h11v3H1zM2 6h9v1H2zM3 7h7v1H3zM4 8h5v1H4zM5 9h3v1H5zM6 10h1v1H6z"/><path fill="#F0F2D5" d="M2 2h2v1H2zM2 3h1v1H2z"/></svg>
-            </span>
-            <span class="note-txt" style="font-family: 'Pixelify Sans', monospace; font-size: 14px; text-decoration: underline">or leave me a note →</span>
-          </a>
         </div>
       </div>
+      <a class="note-link" href="index.html" style="display: flex; flex-direction: column; align-items: center; gap: 12px; text-decoration: none; color: #F0F2D5">
+        <div aria-hidden="true" style="position: relative; width: 170px; aspect-ratio: 46 / 29">
+          <div style="position: absolute; inset: 0; background: #F0F2D5; border: 3px solid #F0F2D5; box-shadow: 6px 6px 0 #97051D"></div>
+          <div style="position: absolute; left: 3px; right: 3px; top: 3px; height: 58.6%; background: #04361D; clip-path: polygon(0 0, 100% 0, 50% 100%)"></div>
+          <div style="position: absolute; left: 3px; right: 3px; top: 3px; height: 55%; background: #E4E7C3; clip-path: polygon(1% 0, 99% 0, 50% 100%)"></div>
+          <svg class="px" viewBox="0 0 13 12" width="40" height="37" style="position: absolute; left: 50%; top: 58%; transform: translate(-50%, -50%)"><path fill="#04361D" d="M2 0h3v1H2zM8 0h3v1H8zM1 1h1v1H1zM5 1h1v1H5zM7 1h1v1H7zM11 1h1v1h-1zM0 2h1v4H0zM6 2h1v1H6zM12 2h1v4h-1zM1 6h1v1H1zM11 6h1v1h-1zM2 7h1v1H2zM10 7h1v1h-1zM3 8h1v1H3zM9 8h1v1H9zM4 9h1v1H4zM8 9h1v1H8zM5 10h1v1H5zM7 10h1v1H7zM6 11h1v1H6z"/><path fill="#EF233C" d="M2 1h3v1H2zM8 1h3v1H8zM1 2h5v1H1zM7 2h5v1H7zM1 3h11v3H1zM2 6h9v1H2zM3 7h7v1H3zM4 8h5v1H4zM5 9h3v1H5zM6 10h1v1H6z"/><path fill="#F0F2D5" d="M2 2h2v1H2zM2 3h1v1H2z"/></svg>
+        </div>
+        <span style="font-family: 'Pixelify Sans', monospace; font-size: 16px; text-decoration: underline">or leave me a note →</span>
+      </a>
     </div>
     <div style="width: 100%; border-top: 2px solid #2E5A43; padding: 12px 16px; box-sizing: border-box; text-align: center; font-family: 'Pixelify Sans', monospace; font-size: 15px">srishti gangolly · your potential future employee. ✦ toronto, ontario <span style="white-space: nowrap">· <a href="v1/" style="color: #F0F2D5">see my old portfolio ↗</a></span></div>
   </footer>
