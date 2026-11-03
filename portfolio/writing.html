@@ -70,13 +70,8 @@ a{color:#97051D}a:hover{color:#04361D}
   footer .note-link{display:none!important}
   [style*="min-height: 100vh"],.desk-root{min-height:calc(100dvh / .88)!important}
 }
-.home-btn{display:none}
-.head-row{display:contents}
-/* phones: a little "homepage" link beside the page heading instead of the "back to desktop" link */
+/* phones: no "back to desktop" link at the bottom */
 @media (max-width:560px){
-  .head-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-  .card > .head-row{justify-content:center;align-items:center}
-  .home-btn{flex:none;display:inline-block;margin-top:6px;font-family:'Pixelify Sans',monospace;font-size:14px;color:#97051D;text-decoration:underline;white-space:nowrap}
   .navrow a[href="desktop.html"],.navrow a[href="Home.dc.html"]{display:none}
 }
 </style>
@@ -110,7 +105,7 @@ a{color:#97051D}a:hover{color:#04361D}
     </div>
     <div style="padding: 28px 30px 32px; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; background: #FFFFF4; background-image: repeating-linear-gradient(transparent 0 31px, #E4E7C3 31px 32px)">
       <svg class="px" viewBox="0 0 16 16" width="44" height="44" aria-hidden="true"><path fill="#EF233C" d="M2 3h12v9H2z"/><path fill="#F0F2D5" d="M4 5h3v3H4zM9 5h3v3H9zM7 10h2v1H7z"/><path fill="#04361D" d="M3 2h10v1H3zM3 12h3v2H3zM10 12h3v2h-3zM1 14h14v1H1z"/></svg>
-      <div class="head-row"><h1 class="h2" style="font-size: clamp(30px, 3.4vw, 40px)">words, on substack.</h1><a class="home-btn" href="desktop.html" aria-label="home: back to the desktop" title="desktop">homepage</a></div>
+      <h1 class="h2" style="font-size: clamp(30px, 3.4vw, 40px)">words, on substack.</h1>
       <p style="margin: 0; font-size: 15px; line-height: 1.75">join my little nook on the internet: love letters to my intrusive thoughts, curated lists of hyperfixations &amp; a mirror into my relationships.</p>
       <a class="btn" href="https://srishtigangolly.substack.com/" style="background: #EF233C; color: #F0F2D5">
         <svg class="px" viewBox="0 0 10 12" width="16" height="20" aria-hidden="true"><path fill="#F0F2D5" d="M0 0h10v2H0zM0 3h10v2H0zM0 6h10v6l-5-3-5 3z"/></svg>

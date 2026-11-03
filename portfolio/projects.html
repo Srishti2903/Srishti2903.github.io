@@ -47,13 +47,8 @@ a{color:#97051D}a:hover{color:#04361D}
   footer .note-link{display:none!important}
   [style*="min-height: 100vh"],.desk-root{min-height:calc(100dvh / .88)!important}
 }
-.home-btn{display:none}
-.head-row{display:contents}
-/* phones: a little "homepage" link beside the page heading instead of the "back to desktop" link */
+/* phones: no "back to desktop" link at the bottom */
 @media (max-width:560px){
-  .head-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-  .card > .head-row{justify-content:center;align-items:center}
-  .home-btn{flex:none;display:inline-block;margin-top:6px;font-family:'Pixelify Sans',monospace;font-size:14px;color:#97051D;text-decoration:underline;white-space:nowrap}
   .navrow a[href="desktop.html"],.navrow a[href="Home.dc.html"]{display:none}
 }
 </style>
@@ -86,7 +81,7 @@ a{color:#97051D}a:hover{color:#04361D}
     </div>
     <div style="padding: 6px 12px; border-bottom: 2px solid #04361D; font-size: 13px; background: #E4E7C3">~/srishti/projects · 2 items</div>
     <div style="padding: 32px 32px 36px; display: flex; flex-direction: column; gap: 24px">
-      <div class="head-row"><h1 class="h2">work that<br>made an impact.</h1><a class="home-btn" href="desktop.html" aria-label="home: back to the desktop" title="desktop">homepage</a></div>
+      <h1 class="h2">work that<br>made an impact.</h1>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 24px">
         <a class="card" href="rsm.html">
           <svg class="px" viewBox="0 0 16 16" width="44" height="44" aria-hidden="true"><path fill="#EF233C" d="M1 4h14v10H1z"/><path fill="#04361D" d="M1 3h5v1H1zM6 4h1v1H6zM7 5h8v1H7zM0 4h1v10H0zM15 6h1v8h-1zM1 14h14v1H1zM1 7h14v1H1z"/></svg>

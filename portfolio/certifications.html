@@ -44,13 +44,8 @@ a{color:#97051D}a:hover{color:#04361D}
   footer .note-link{display:none!important}
   [style*="min-height: 100vh"],.desk-root{min-height:calc(100dvh / .88)!important}
 }
-.home-btn{display:none}
-.head-row{display:contents}
-/* phones: a little "homepage" link beside the page heading instead of the "back to desktop" link */
+/* phones: no "back to desktop" link at the bottom */
 @media (max-width:560px){
-  .head-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-  .card > .head-row{justify-content:center;align-items:center}
-  .home-btn{flex:none;display:inline-block;margin-top:6px;font-family:'Pixelify Sans',monospace;font-size:14px;color:#97051D;text-decoration:underline;white-space:nowrap}
   .navrow a[href="desktop.html"],.navrow a[href="Home.dc.html"]{display:none}
 }
 </style>
@@ -82,7 +77,7 @@ a{color:#97051D}a:hover{color:#04361D}
       <a class="close" href="desktop.html" aria-label="close, back to desktop"><svg class="px" viewBox="0 0 8 8" width="12" height="12" aria-hidden="true"><path fill="#04361D" d="M0 0h2v1H0zM6 0h2v1H6zM1 1h2v1H1zM5 1h2v1H5zM2 2h4v1H2zM3 3h2v2H3zM2 5h4v1H2zM1 6h2v1H1zM5 6h2v1H5zM0 7h2v1H0zM6 7h2v1H6z"></path></svg></a>
     </div>
     <div style="padding: 32px 32px 36px; display: flex; flex-direction: column; gap: 24px">
-      <div class="head-row"><h1 class="h2">always learning.</h1><a class="home-btn" href="desktop.html" aria-label="home: back to the desktop" title="desktop">homepage</a></div>
+      <h1 class="h2">always learning.</h1>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 22px">
         <sc-for list="{{certs}}" as="c" hint-placeholder-count="3">
           <article class="card">

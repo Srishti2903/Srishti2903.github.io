@@ -54,13 +54,8 @@ a{color:#97051D}a:hover{color:#04361D}
   footer .note-link{display:none!important}
   [style*="min-height: 100vh"],.desk-root{min-height:calc(100dvh / .88)!important}
 }
-.home-btn{display:none}
-.head-row{display:contents}
-/* phones: a little "homepage" link beside the page heading instead of the "back to desktop" link */
+/* phones: no "back to desktop" link at the bottom */
 @media (max-width:560px){
-  .head-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-  .card > .head-row{justify-content:center;align-items:center}
-  .home-btn{flex:none;display:inline-block;margin-top:6px;font-family:'Pixelify Sans',monospace;font-size:14px;color:#97051D;text-decoration:underline;white-space:nowrap}
   .navrow a[href="desktop.html"],.navrow a[href="Home.dc.html"]{display:none}
 }
 </style>
@@ -93,7 +88,7 @@ a{color:#97051D}a:hover{color:#04361D}
     </div>
     <div style="padding: 32px 32px 36px; display: flex; flex-direction: column; gap: 24px">
       <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
-        <div class="head-row"><h1 class="h2">where i've been<br>&amp; what i built.</h1><a class="home-btn" href="desktop.html" aria-label="home: back to the desktop" title="desktop">homepage</a></div>
+        <h1 class="h2">where i've been<br>&amp; what i built.</h1>
         <a class="btn" href="https://drive.google.com/file/d/1dasPUW3PCfL3X46S7Zs5TBzfl2K2QQfY/view?usp=sharing" style="background: #F0F2D5; color: #04361D">resume ↗</a>
       </div>
       <div style="display: flex; flex-direction: column; gap: 20px">
