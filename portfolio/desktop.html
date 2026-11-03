@@ -49,6 +49,10 @@ a{color:#97051D}a:hover{color:#04361D}
 .icons .hint a{color:#97051D}
 @media (hover:none),(max-width:900px){.icons .hint{display:block}}
 @media (prefers-reduced-motion:reduce){.icon.lifted svg{animation:none;transform:scale(1.12)}}
+/* touch screens: the welcome window's title bar is a drag handle */
+@media (hover:none),(max-width:900px){.welcome > .bar{touch-action:none;cursor:grab}}
+.welcome{z-index:3}
+.welcome.lifted{z-index:7;box-shadow:10px 12px 0 rgba(4,54,29,.45)}
 .px{image-rendering:pixelated;shape-rendering:crispEdges}
 .menubar{height:32px;flex:none;width:100%;box-sizing:border-box;background:#F0F2D5;border-bottom:3px solid #04361D;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-family:'Pixelify Sans',monospace;font-size:15px;position:relative;z-index:2}
 .menubar .menus{display:flex;align-items:center;gap:18px}
@@ -137,11 +141,11 @@ a{color:#97051D}a:hover{color:#04361D}
         <svg class="px" viewBox="0 0 16 16" width="52" height="52" aria-hidden="true"><path fill="#04361D" d="M1 1h14v14H1z"/><path fill="#F0F2D5" d="M4 1h7v5H4zM3 8h10v6H3z"/><path fill="#04361D" d="M8 2h2v3H8z"/><path fill="#EF233C" d="M4 10h8v1H4zM4 12h6v1H4z"/></svg>
         <span>resume.pdf ↗</span>
       </a>
-      <p class="hint">✿ hold an icon to move it<sc-if value="{{moved}}" hint-placeholder-val="{{ false }}"> · <a href="#" onClick="{{tidy}}">tidy up</a></sc-if></p>
+      <p class="hint">✿ drag things around to move them<sc-if value="{{moved}}" hint-placeholder-val="{{ false }}"> · <a href="#" onClick="{{tidy}}">tidy up</a></sc-if></p>
     </nav>
 
-    <section class="win" aria-label="welcome" style="position: relative; max-width: 700px; width: 100%; justify-self: center">
-      <div class="bar"><span>welcome.txt</span><span class="ctl" aria-hidden="true"><svg class="px" viewBox="0 0 8 8" width="12" height="12"><path fill="#04361D" d="M0 0h2v1H0zM6 0h2v1H6zM1 1h2v1H1zM5 1h2v1H5zM2 2h4v1H2zM3 3h2v2H3zM2 5h4v1H2zM1 6h2v1H1zM5 6h2v1H5zM0 7h2v1H0zM6 7h2v1H6z"/></svg></span></div>
+    <section class="win welcome" aria-label="welcome" style="position: relative; max-width: 700px; width: 100%; justify-self: center; transform: {{winT}}">
+      <div class="bar" onPointerDown="{{grabWin}}"><span>welcome.txt</span><span class="ctl" aria-hidden="true"><svg class="px" viewBox="0 0 8 8" width="12" height="12"><path fill="#04361D" d="M0 0h2v1H0zM6 0h2v1H6zM1 1h2v1H1zM5 1h2v1H5zM2 2h4v1H2zM3 3h2v2H3zM2 5h4v1H2zM1 6h2v1H1zM5 6h2v1H5zM0 7h2v1H0zM6 7h2v1H6z"/></svg></span></div>
       <div style="padding: 32px 32px 30px; display: flex; flex-direction: column; gap: 18px">
         <span class="label">srishti gangolly</span>
         <h2 style="margin: 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 900; font-size: clamp(40px, 4.6vw, 56px); line-height: 1.05; color: #6B0314">a numbers girl<br>with a creative twist.</h2>
@@ -166,7 +170,9 @@ class Component extends DCLogic {
     super(props);
     let spots = {};
     try { spots = JSON.parse(localStorage.getItem('srishti-os-icons-v2') || '{}'); } catch (e) {}
-    this.state = { now: new Date(), spots, lifted: null };
+    let win = null;
+    try { win = JSON.parse(localStorage.getItem('srishti-os-welcome') || 'null'); } catch (e) {}
+    this.state = { now: new Date(), spots, lifted: null, win };
     this.dragged = false;
     setInterval(() => this.setState({ now: new Date() }), 30000);
   }
@@ -244,10 +250,38 @@ class Component extends DCLogic {
     el.addEventListener('touchcancel', end);
     el.addEventListener('contextmenu', noMenu);
   }
+  // touch: drag the welcome window around by its title bar
+  grabWin(e) {
+    if (e.pointerType !== 'touch' || e.target.closest('a')) return;
+    const win = e.currentTarget.closest('.win');
+    const lim = this.limits(win);
+    const from = this.state.win || { x: 0, y: 0 };
+    const x0 = e.clientX, y0 = e.clientY, id = e.pointerId;
+    const clamp = (v, a, b) => Math.min(Math.max(v, a), b);
+    let at = from;
+    win.classList.add('lifted');
+    const move = (ev) => {
+      if (ev.pointerId !== id) return;
+      at = { x: from.x + clamp((ev.clientX - x0) / lim.scale, lim.x0, lim.x1), y: from.y + clamp((ev.clientY - y0) / lim.scale, lim.y0, lim.y1) };
+      win.style.transform = 'translate(' + Math.round(at.x) + 'px, ' + Math.round(at.y) + 'px)';
+    };
+    const drop = (ev) => {
+      if (ev.pointerId !== id) return;
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', drop);
+      window.removeEventListener('pointercancel', drop);
+      win.classList.remove('lifted');
+      try { localStorage.setItem('srishti-os-welcome', JSON.stringify(at)); } catch (err) {}
+      this.setState({ win: at });
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', drop);
+    window.addEventListener('pointercancel', drop);
+  }
   tidy(e) {
     e.preventDefault();
-    try { localStorage.removeItem('srishti-os-icons-v2'); } catch (err) {}
-    this.setState({ spots: {} });
+    try { localStorage.removeItem('srishti-os-icons-v2'); localStorage.removeItem('srishti-os-welcome'); } catch (err) {}
+    this.setState({ spots: {}, win: null });
   }
   tap(e) {
     if (this.dragged) { e.preventDefault(); this.dragged = false; }
@@ -256,7 +290,9 @@ class Component extends DCLogic {
     const d = this.state.now;
     const day = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }).replace(',', '');
     const time = d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-    const vals = { clock: (day + '  ' + time).toLowerCase(), tidy: (e) => this.tidy(e), moved: Object.keys(this.state.spots).length > 0 };
+    const vals = { clock: (day + '  ' + time).toLowerCase(), tidy: (e) => this.tidy(e), moved: Object.keys(this.state.spots).length > 0 || !!this.state.win,
+      winT: this.state.win ? 'translate(' + Math.round(this.state.win.x) + 'px, ' + Math.round(this.state.win.y) + 'px)' : 'none',
+      grabWin: (e) => this.grabWin(e) };
     for (let i = 0; i < 7; i++) {
       const p = this.state.spots[i];
       vals['t' + i] = p ? 'translate(' + Math.round(p.x) + 'px, ' + Math.round(p.y) + 'px)' : 'none';
