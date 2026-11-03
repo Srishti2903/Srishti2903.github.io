@@ -1,812 +1,389 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<script>
-  /* theme: saved choice, else device setting. Runs before CSS paints to avoid a flash. */
-  (function () {
-    var t;
-    try { t = localStorage.getItem('sg-theme'); } catch (e) {}
-    if (t !== 'light' && t !== 'dark') t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', t);
-  })();
-</script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8WV189JDM0"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-8WV189JDM0');
-</script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ready, Set, Market – Srishti Gangolly</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300&family=DM+Sans:wght@300;400;500&family=Kalam:wght@300;400;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Srishti Gangolly — ready, set, market</title>
+<meta name="theme-color" content="#76BA9D">
+<link rel="icon" href="img/doodle.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Fraunces:ital,wght@0,700;1,800;1,900&amp;family=Pixelify+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet">
 <style>
-  .case-hero {
-    min-height: 28vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 9rem 5rem 4rem;
-    background: #1c1a17;
-    border-bottom: 1px solid var(--border);
-  }
-  .case-hero .case-eyebrow { color: rgba(255,255,255,0.45); }
-  .case-hero .case-eyebrow::before { background: rgba(255,255,255,0.3); }
-  .case-hero .case-title { color: #f5ede0; }
-  .case-hero .case-subtitle { color: rgba(255,255,255,0.6); }
-  .case-hero .back-link { color: rgba(255,255,255,0.4); }
-  .case-hero .back-link:hover { color: #f5ede0; }
-  .case-eyebrow {
-    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em;
-    text-transform: uppercase; color: var(--muted);
-    display: flex; align-items: center; gap: 0.75rem;
-    margin-bottom: 1rem;
-  }
-  .case-eyebrow::before { content:''; width:1.5rem; height:1px; background:var(--accent); display:block; }
-  .case-title {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(2.5rem, 6vw, 5rem);
-    font-weight: 700;
-    line-height: 1.08;
-    color: var(--accent);
-    margin-bottom: 0.75rem;
-  }
-  .case-subtitle {
-    font-size: 1rem;
-    color: var(--ink);
-    font-weight: 700;
-    margin-bottom: 0;
-  }
-
-  .case-body {
-    max-width: 740px;
-    margin: 0 auto;
-    padding: 4rem 2rem 6rem;
-  }
-
-  .case-section {
-    margin-bottom: 3.5rem;
-  }
-
-  .case-section-label {
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1rem;
-    padding-bottom: 0.6rem;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .case-section p {
-    font-size: 1.05rem;
-    line-height: 1.75;
-    color: var(--ink);
-    margin-bottom: 1rem;
-  }
-
-  .case-section p:last-child { margin-bottom: 0; }
-
-  .case-problem {
-    background: var(--oxblood-fill);
-    color: #fff;
-    border-radius: 10px;
-    padding: 1.8rem 2rem;
-    margin: 1.5rem 0;
-    font-size: 1.05rem;
-    line-height: 1.7;
-  }
-  .case-problem strong { font-weight: 700; display: block; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.6rem; opacity: 0.75; }
-
-  .case-pillars {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-top: 1.2rem;
-  }
-  .case-pillar {
-    display: flex;
-    gap: 1.2rem;
-    align-items: flex-start;
-    padding: 1.2rem 1.4rem;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    background: var(--surface);
-  }
-  .case-pillar-num {
-    font-family: 'Fraunces', serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--accent);
-    line-height: 1;
-    min-width: 1.8rem;
-  }
-  .case-pillar-content h4 {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--ink);
-    margin-bottom: 0.3rem;
-  }
-  .case-pillar-content p {
-    font-size: 0.9rem;
-    color: var(--muted);
-    margin: 0;
-    line-height: 1.6;
-  }
-
-  .case-outcome {
-    background: var(--oxblood-fill);
-    border: 1px solid transparent;
-    border-radius: 10px;
-    padding: 2rem 2.2rem;
-    font-size: 1.08rem;
-    line-height: 1.75;
-    color: #F4EFE4;
-    margin-top: 1.2rem;
-  }
-  .case-outcome strong { color: #fff; }
-
-  .back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--muted);
-    text-decoration: none;
-    letter-spacing: 0.04em;
-    margin-bottom: 1.5rem;
-    transition: color 0.2s ease;
-  }
-  .back-link:hover { color: var(--accent); }
-  .back-link::before { content: '←'; }
-
-  .case-team {
-    margin-top: 1.5rem;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--ink);
-    letter-spacing: 0.01em;
-    text-align: right;
-  }
-  .case-team span {
-    font-weight: 700;
-    font-style: italic;
-    color: var(--ink);
-  }
-
-  /* Team section */
-  .team-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-  }
-  .team-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    text-decoration: none;
-  }
-  .team-card:hover .team-photo { opacity: 0.8; }
-  .team-photo {
-    width: 140px;
-    height: 140px;
-    object-fit: cover;
-    object-position: top;
-    border-radius: 50%;
-    display: block;
-    filter: grayscale(100%);
-    transition: opacity 0.2s;
-    border: 2px solid var(--ink);
-  }
-  .team-name {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    text-transform: none;
-    color: var(--ink);
-    margin-top: 0.6rem;
-    white-space: nowrap;
-  }
-  @media (max-width: 600px) {
-    .team-grid { grid-template-columns: repeat(2, 1fr); }
-    .team-name { white-space: normal; }
-  }
-  .case-deck-wrapper {
-    max-width: 740px;
-    margin: 0 auto;
-    padding: 2.5rem 2rem 0;
-  }
-  .case-deck-wrapper iframe {
-    width: 100%;
-    height: 480px;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    display: block;
-  }
-
-  @media (max-width: 768px) {
-    .case-hero { padding: 8rem 1.5rem 2.5rem; }
-    .case-body { padding: 2.5rem 1.25rem 4rem; }
-    .case-deck-section { flex-direction: column; padding: 0 1.25rem 3rem; }
-    .case-deck-frame { flex: none; width: 100%; }
-    /* contribution grids → single column */
-    .case-body [style*="grid-template-columns:1fr 1fr"],
-    .case-body [style*="grid-template-columns: 1fr 1fr"] {
-      display: block !important;
-    }
-    .case-body [style*="grid-template-columns:1fr 260px"],
-    .case-body [style*="grid-template-columns: 1fr 260px"] {
-      display: block !important;
-    }
-    /* phone prototype — center on mobile */
-    .case-body [style*="width:240px"],
-    .case-body [style*="width: 240px"] {
-      width: 200px !important;
-      margin: 1.5rem auto 0 !important;
-    }
-    /* nav mockup image */
-    .case-body img[style*="border-radius"] { width: 100% !important; }
-    /* team grid */
-    .team-grid { grid-template-columns: repeat(2, 1fr) !important; }
-  }
+body{margin:0}
+a{color:#97051D}a:hover{color:#04361D}
+.win{background:#F0F2D5;border:3px solid #04361D;box-shadow:6px 6px 0 #04361D;display:flex;flex-direction:column;min-width:0}
+.bar{height:36px;flex:none;background:#04361D;color:#F0F2D5;display:flex;align-items:center;justify-content:space-between;padding:0 6px 0 12px;font-family:'Pixelify Sans',monospace;font-size:16px;font-weight:600}
+.close{width:28px;height:28px;box-sizing:border-box;border:2px solid #F0F2D5;background:#F0F2D5;display:inline-flex;align-items:center;justify-content:center}
+.close:hover{background:#EF233C}
+.navrow{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-family:'Pixelify Sans',monospace;font-size:16px}
+.navrow a{color:#04361D}
+.px{image-rendering:pixelated;shape-rendering:crispEdges}
+.hero{padding:30px 32px 26px;border-bottom:3px solid #04361D;background:#04361D;color:#F0F2D5;display:flex;flex-direction:column;gap:10px}
+.hero a{color:#B9D3C4;font-family:'Pixelify Sans',monospace;font-size:15px;text-decoration:none}
+.hero a:hover{color:#F0F2D5}
+.hero h1{margin:0;font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:clamp(38px,4.8vw,62px);line-height:1.05;color:#F0F2D5}
+.eyebrow{font-family:'Pixelify Sans',monospace;font-size:15px;letter-spacing:.08em;color:#F2B33D}
+.sub{font-family:'Pixelify Sans',monospace;font-size:18px;font-weight:600}
+.sheet{margin:28px 32px 32px;border:3px solid #04361D;background:#FFFFF4;padding:30px 32px 34px;display:flex;flex-direction:column;gap:14px}
+.intro{margin:0 0 6px;padding:14px 18px;border-left:4px solid #EF233C;background:#F0F2D5;font-size:14px;line-height:1.85}
+.sec{margin:24px 0 2px;display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:26px;line-height:1.15;color:#6B0314}
+.sec::before{content:"";flex:none;width:12px;height:12px;background:#EF233C;border:3px solid #04361D}
+.body{margin:0;font-size:15px;line-height:1.8;max-width:760px}
+.body strong,.mini strong{font-weight:500;background:linear-gradient(transparent 60%,#CFE6DA 60%)}
+.callout{margin:0;background:#04361D;color:#F0F2D5;border:3px solid #04361D;box-shadow:5px 5px 0 #97051D;padding:20px 24px;font-family:'Fraunces',serif;font-style:italic;font-weight:800;font-size:22px;line-height:1.45}
+.callout u{text-decoration-color:#F2B33D;text-decoration-thickness:2px;text-underline-offset:4px}
+.team{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;max-width:760px}
+@media (max-width:700px){.team{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.mate{display:flex;flex-direction:column;align-items:center;gap:8px;text-decoration:none;color:#04361D}
+.mate img{display:block;width:100%;max-width:140px;aspect-ratio:1;object-fit:cover;object-position:top;filter:grayscale(1);border:3px solid #04361D;box-shadow:4px 4px 0 #97051D;box-sizing:border-box;transition:filter 150ms}
+.mate:hover img{filter:none}
+.mate span{font-family:'Pixelify Sans',monospace;font-size:15px}
+.mate.me span{color:#97051D}
+.pillars{display:flex;flex-direction:column;gap:12px;max-width:760px}
+.pillar{display:flex;gap:16px;align-items:flex-start;border:3px solid #04361D;background:#F0F2D5;box-shadow:3px 3px 0 #04361D;padding:14px 18px}
+.pillar b{flex:none;font-family:'Pixelify Sans',monospace;font-size:26px;line-height:1;color:#EF233C;min-width:34px}
+.pillar h3{margin:0 0 4px;font-family:'Pixelify Sans',monospace;font-size:18px;font-weight:700}
+.pillar p{margin:0;font-size:14px;line-height:1.65}
+.pillar strong{font-weight:500;background:linear-gradient(transparent 60%,#CFE6DA 60%)}
+.outcome-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-top:24px}
+.deck{font-family:'Pixelify Sans',monospace;font-size:16px;font-weight:700;text-decoration:none;color:#F0F2D5;background:#EF233C;border:3px solid #04361D;padding:6px 14px;box-shadow:0 4px 0 #04361D}
+.deck:hover{background:#97051D;color:#F0F2D5}
+.outcome{margin:0;border:3px dashed #04361D;background:#F0F2D5;padding:18px 22px;font-size:15px;line-height:1.8;max-width:760px}
+.outcome strong{font-weight:500;background:linear-gradient(transparent 60%,#F2D27A 60%)}
+.quiz-title{margin:4px 0 0;font-family:'Fraunces',serif;font-weight:700;font-size:22px}
+.quiz-title em{color:#97051D}
+.tagline{margin:0 0 4px;font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:#2E5A43}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start;padding-bottom:24px;border-bottom:2px dashed rgba(4,54,29,.35)}
+.grid-phone{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:28px;align-items:start}
+@media (max-width:860px){.grid2,.grid-phone{grid-template-columns:minmax(0,1fr)}}
+.label{font-family:'Pixelify Sans',monospace;font-size:14px;letter-spacing:.08em;color:#97051D;margin:6px 0 2px}
+.mini{display:flex;gap:12px;align-items:flex-start}
+.mini b{flex:none;font-family:'Pixelify Sans',monospace;font-size:20px;color:#EF233C;min-width:28px}
+.mini p{margin:2px 0 0;font-size:13px;line-height:1.6}
+.mini h4{margin:0;font-family:'Pixelify Sans',monospace;font-size:16px}
+/* estée lauder nav mockup, shown in a retro window */
+.mock{border:3px solid #04361D;box-shadow:5px 5px 0 #97051D;background:#0d1117;font-family:'DM Mono',monospace}
+.mock-bar{height:24px;background:#04361D;color:#F0F2D5;display:flex;align-items:center;padding:0 8px;font-family:'Pixelify Sans',monospace;font-size:13px}
+.mock .row{padding:7px 14px;border-bottom:1px solid #2a3040;display:flex;justify-content:space-between;font-size:10px;font-weight:500;letter-spacing:.08em;color:#c8d0dc}
+/* phone prototype */
+.phone-wrap{display:flex;flex-direction:column;align-items:center;gap:10px}
+.phone{width:240px;background:#141414;border:3px solid #04361D;border-radius:34px;padding:10px;box-shadow:6px 6px 0 #97051D;box-sizing:border-box}
+.screen{background:#0d1117;border-radius:24px;overflow:hidden;height:420px;display:flex;flex-direction:column;color:#c8d0dc;font-family:'DM Mono',monospace}
+.notch{display:flex;justify-content:center;padding-top:6px;flex:none}
+.notch i{width:80px;height:18px;background:#141414;border-radius:0 0 14px 14px}
+.scr{flex:1;min-height:0;display:flex;flex-direction:column;padding:12px 14px 12px;border-top:1px solid #c9a84c;overflow-y:auto;scrollbar-width:none}
+.brand{font-size:9px;font-weight:500;letter-spacing:.14em;color:#c9a84c;text-transform:uppercase;line-height:1.4}
+.gold{color:#c9a84c}
+.eh{font-family:'Fraunces',serif;font-weight:700;color:#fff;line-height:1.25}
+.small{font-size:9px;line-height:1.6;color:#8a9ab0}
+.prog{display:flex;gap:3px;margin:8px 0 12px}
+.prog i{flex:1;height:2px;background:#2a3040}
+.prog i.on{background:#c9a84c}
+.opt{background:transparent;border:1px solid #2a3040;border-radius:6px;padding:9px 10px;font:inherit;font-size:9.5px;text-align:left;cursor:pointer;color:#c8d0dc;width:100%}
+.opt:hover{border-color:#c9a84c;color:#fff}
+.cta{border:1.5px solid #c9a84c;border-radius:6px;padding:10px 0;font:inherit;font-size:9px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;cursor:pointer;color:#fff;background:transparent;width:100%}
+.cta.fill{background:#c9a84c;color:#0d1117}
+.cta.ghost{border-color:rgba(201,168,76,.38);color:#8a9ab0;text-transform:none;letter-spacing:0}
+.chip{display:inline-block;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.35);border-radius:999px;font-size:8px;color:#c9a84c;padding:3px 7px;margin:2px}
+.box{background:#141c28;border:1px solid #2a3040;border-radius:6px;padding:9px 10px;font-size:9.5px;line-height:1.8}
+.line{display:flex;justify-content:space-between;gap:8px;font-size:9px;margin-bottom:5px}
+.dash{border-top:1px dashed #2a3040;margin:8px 0}
+.homebar{display:flex;justify-content:center;padding:8px 0 10px;flex:none}
+.homebar i{width:60px;height:3px;background:#3a3a3c;border-radius:9px}
+.cap{margin:0;font-size:12px;text-align:center;line-height:1.6;color:#2E5A43}
+.menubar{height:32px;flex:none;width:100%;box-sizing:border-box;background:#F0F2D5;border-bottom:3px solid #04361D;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-family:'Pixelify Sans',monospace;font-size:15px;position:sticky;top:0;z-index:6}
+.menubar .menus{display:flex;align-items:center;gap:18px}
+.menubar .menus a{color:#04361D;text-decoration:none;padding:2px 6px}
+.menubar .menus a:hover{background:#04361D;color:#F0F2D5}
+.menubar .tray{display:flex;align-items:center;gap:22px}
+.crt{position:fixed;inset:0;pointer-events:none;z-index:5;background:repeating-linear-gradient(rgba(4,54,29,.05) 0 1px,transparent 1px 3px);box-shadow:inset 0 0 140px rgba(4,54,29,.28)}
+@media (max-width:700px){.menubar .menus .opt{display:none}}
+@media (max-width:480px){.menubar{padding:0 10px;font-size:13px}.menubar .tray{gap:10px}.menubar .tray svg{width:14px;height:auto}}
 </style>
+<script src="js/srishti-os.js"></script>
 </head>
 <body>
-
-<nav>
-  <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="Srishti Gangolly"></a>
-  <button class="nav-hamburger" id="hamburger" type="button" aria-label="Menu" aria-controls="nav-links" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-  <ul class="nav-links" id="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="experience.html">Experience</a></li>
-    <li><a href="certifications.html">Certifications</a></li>
-    <li><a href="projects.html" class="active" aria-current="page">Projects</a></li>
-    <li><a href="https://srishtigangolly.substack.com/" target="_blank">Writing</a></li>
-    <li><a href="about.html">About</a></li>
-  </ul>
-  <button class="theme-toggle" type="button" role="switch" aria-label="Dark mode" aria-checked="false">
-    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>
-    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
-  </button>
-</nav>
-
-<header class="case-hero">
-  <a href="projects.html" class="back-link">Back to projects</a>
-  <p class="case-eyebrow">Ready, Set, Market · IBA Case Competition</p>
-  <h1 class="case-title">"Heritage in a bottle:<br>Beauty Then, Beauty Now"</h1>
-  <div style="display:flex; justify-content:space-between; align-items:baseline; margin-top:0;">
-    <p class="case-subtitle">Technology Consultant | Fall 2025</p>
-  </div>
-</header>
-
-
-<main class="case-body">
-  <p style="font-family:'IBM Plex Mono', monospace; font-size:0.82rem; line-height:1.9; color:var(--ink); margin-bottom:3rem; padding:1.2rem 1.5rem; border-left:2px solid var(--border); letter-spacing:0.01em;"><em>Ready, Set, Market</em> is UTM's <strong>largest marketing case competition</strong>, hosted by the <strong>Innovative Business Association</strong>. Participants tackle a <em>real-world brand challenge</em> under time pressure, integrating <strong>research, strategy, and creativity</strong> into a compelling business recommendation.</p>
-
-  <section class="case-section">
-    <p class="case-section-label">The Challenge</p>
-    <div class="case-problem" style="font-size:1.05rem; line-height:1.7;">
-      How can <u>Estée Lauder</u> reposition itself as a <u>credible leader in modern skincare</u> while <u>preserving its luxury heritage</u>?
+<div id="app"></div>
+<template id="page">
+<div style="width: 100%; min-height: 100vh; box-sizing: border-box; background-color: #76BA9D; background-image: radial-gradient(#6AAE91 1px, transparent 1.2px); background-size: 8px 8px; font-family: 'DM Mono', monospace; color: #04361D; display: flex; flex-direction: column; align-items: center; gap: 22px; padding: 24px 16px 0; position: relative">
+  <header class="menubar" style="margin: -24px -16px 0; width: calc(100% + 32px)">
+    <nav class="menus" aria-label="menu">
+      <span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700; padding: 2px 6px">
+        <svg class="px" viewBox="0 0 11 16" width="11" height="16" aria-hidden="true"><path fill="#EF233C" d="M2 0h1v1H2zM5 0h1v1H5zM8 0h1v1H8zM2 1h7v1H2zM2 2h7v3H2zM3 5h5v1H3zM4 6h3v1H4z"/><path fill="#97051D" d="M5 2h1v4H5zM8 2h1v3H8z"/><path fill="#04361D" d="M5 7h1v9H5zM1 9h1v2H1zM2 11h1v1H2zM3 12h2v1H3zM9 8h1v2H9zM8 10h1v1H8zM6 11h2v1H6z"/><path fill="#76BA9D" d="M2 9h1v2H2zM3 11h2v1H3zM8 8h1v2H8zM6 10h2v1H6z"/></svg>
+        srishti os
+      </span>
+    </nav>
+    <div class="tray">
+      <svg class="px" viewBox="0 0 9 7" width="18" height="14" aria-label="wifi" role="img"><path fill="#04361D" d="M2 0h5v1H2zM1 1h1v1H1zM7 1h1v1H7zM0 2h1v1H0zM8 2h1v1H8zM3 2h3v1H3zM2 3h1v1H2zM6 3h1v1H6zM4 5h1v2H4z"/></svg>
+      <svg class="px" viewBox="0 0 12 7" width="24" height="14" aria-label="battery full" role="img"><path fill="#04361D" d="M0 0h10v1H0zM0 6h10v1H0zM0 1h1v5H0zM9 1h1v5H9zM10 2h2v3h-2z"/><path fill="#EF233C" d="M2 2h6v3H2z"/></svg>
+      <time style="white-space: pre; word-spacing: 2px">{{clock}}</time>
     </div>
-  </section>
+  </header>
 
-  <section class="case-section">
-    <p class="case-section-label">The Team</p>
-    <div class="team-grid">
-      <a class="team-card" href="https://www.linkedin.com/in/parisphan/" target="_blank">
-        <img class="team-photo" src="images/rsm/paris.jpg" alt="Paris Phan">
-        <p class="team-name">Paris Phan</p>
-      </a>
-      <a class="team-card" href="https://www.linkedin.com/in/kiminguyen/" target="_blank">
-        <img class="team-photo" src="images/rsm/kim.jpg" alt="Kim Nguyen">
-        <p class="team-name">Kim Nguyen</p>
-      </a>
-      <a class="team-card" href="https://www.linkedin.com/in/srishti-gangolly/" target="_blank">
-        <img class="team-photo" src="images/rsm/srishti.jpg" alt="Srishti Gangolly">
-        <p class="team-name">Srishti Gangolly</p>
-      </a>
-      <a class="team-card" href="https://www.linkedin.com/in/sandeepadas/" target="_blank">
-        <img class="team-photo" src="images/rsm/sandeepa.jpg" alt="Sandeepa Das">
-        <p class="team-name">Sandeepa Das</p>
-      </a>
+  <a href="desktop.html" aria-label="back to desktop" style="line-height: 0"><img src="img/doodle.png" alt="Srishti Gangolly" style="width: 92px; height: auto; transform: rotate(6deg)"></a>
+
+  <main class="win" style="width: 100%; max-width: 1080px">
+    <div class="bar">
+      <span>ready_set_market.exe</span>
+      <a class="close" href="projects.html" aria-label="close, back to projects"><svg class="px" viewBox="0 0 8 8" width="12" height="12" aria-hidden="true"><path fill="#04361D" d="M0 0h2v1H0zM6 0h2v1H6zM1 1h2v1H1zM5 1h2v1H5zM2 2h4v1H2zM3 3h2v2H3zM2 5h4v1H2zM1 6h2v1H1zM5 6h2v1H5zM0 7h2v1H0zM6 7h2v1H6z"/></svg></a>
     </div>
-  </section>
+    <div style="padding: 6px 12px; border-bottom: 2px solid #04361D; font-size: 13px; background: #E4E7C3">~/srishti/projects/ready-set-market</div>
 
-  <section class="case-section">
-    <p class="case-section-label">The Analysis</p>
-    <p>Much like the tech industry, the <strong>beauty world is shifting</strong>. People still want <em>luxury</em> — but they also want to know <strong>what's in their products</strong> and <strong>why it works</strong>.</p>
-    <p>This tension between <em>heritage</em> and <em>modern transparency</em> is the insight that shaped our campaign.</p>
-  </section>
+    <header class="hero">
+      <a href="projects.html">← back to projects</a>
+      <span class="eyebrow">ready, set, market · iba case competition</span>
+      <h1>"heritage in a bottle:<br>beauty then, beauty now"</h1>
+      <span class="sub">technology consultant · fall 2025</span>
+    </header>
 
-  <section class="case-section">
-    <p class="case-section-label">The Campaign: <em>Beauty Then, Beauty Now</em></p>
-    <p>We took everything Estée Lauder has stood for across generations (<em>luxury, prestige, legacy</em>) and paired it with the <strong>science and transparency</strong> today's consumers expect. We brought it to life in three ways:</p>
-    <div class="case-pillars">
-      <div class="case-pillar">
-        <span class="case-pillar-num">01</span>
-        <div class="case-pillar-content">
-          <h4>Multigenerational Storytelling</h4>
-          <p>Showing how the brand has stayed <strong>relevant across generations</strong> of women through <em>authentic narrative</em>.</p>
-        </div>
+    <div class="sheet">
+      <p class="intro"><em>ready, set, market</em> is utm's <strong>largest marketing case competition</strong>, hosted by the <strong>innovative business association</strong>. participants tackle a <em>real-world brand challenge</em> under time pressure, integrating <strong>research, strategy, and creativity</strong> into a compelling business recommendation.</p>
+
+      <h2 class="sec">the challenge</h2>
+      <p class="callout">how can <u>estée lauder</u> reposition itself as a <u>credible leader in modern skincare</u> while <u>preserving its luxury heritage</u>?</p>
+
+      <h2 class="sec">the team</h2>
+      <div class="team">
+        <a class="mate" href="https://www.linkedin.com/in/parisphan/"><img src="img/site/rsm-paris.jpg" alt="paris phan"><span>paris phan</span></a>
+        <a class="mate" href="https://www.linkedin.com/in/kiminguyen/"><img src="img/site/rsm-kim.jpg" alt="kim nguyen"><span>kim nguyen</span></a>
+        <a class="mate me" href="https://www.linkedin.com/in/srishti-gangolly/"><img src="img/site/rsm-srishti.jpg" alt="srishti gangolly"><span>srishti gangolly</span></a>
+        <a class="mate" href="https://www.linkedin.com/in/sandeepadas/"><img src="img/site/rsm-sandeepa.jpg" alt="sandeepa das"><span>sandeepa das</span></a>
       </div>
-      <div class="case-pillar">
-        <span class="case-pillar-num">02</span>
-        <div class="case-pillar-content">
-          <h4>Experiential Pop-Ups</h4>
-          <p>Letting people <strong>experience the brand in person</strong> — moving beyond digital into <em>tangible, memorable touchpoints</em>.</p>
-        </div>
-      </div>
-      <div class="case-pillar">
-        <span class="case-pillar-num">03</span>
-        <div class="case-pillar-content">
-          <h4>Personalized Skincare Quiz</h4>
-          <p>Helping customers find <strong>products that actually work for them</strong> through <em>data-driven personalization</em>.</p>
-        </div>
-      </div>
-    </div>
-    <div style="display:flex; justify-content:space-between; align-items:baseline; margin-top:2rem; margin-bottom:1rem;">
-      <p class="case-section-label" style="margin-bottom:0; border-bottom:none; padding-bottom:0;">The Outcome</p>
-      <a href="docs/rsm-deck.pdf" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:0.4rem; font-size:0.82rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--accent); border:1px solid var(--accent); border-radius:999px; padding:0.45rem 1.1rem; text-decoration:none;">View full deck ↗</a>
-    </div>
-    <div class="case-outcome">
-      A campaign that reimagines Estée Lauder's heritage through <strong><em>emotional storytelling</em></strong>, <strong><em>scientific transparency</em></strong>, and a <strong><em>more personal digital experience</em></strong> — without losing what made the brand <strong>iconic</strong>.
-    </div>
-  </section>
 
-  <section class="case-section">
-    <p class="case-section-label">My Contribution · <em>Technology Consultant</em></p>
-    <h3 style="font-family:'Fraunces',serif; font-size:1.3rem; font-weight:700; color:var(--ink); margin-bottom:0.25rem; line-height:1.3;">"A Formula For You" <em>Quiz</em></h3>
-    <p style="font-family:'Fraunces',serif; font-size:0.95rem; font-style:italic; color:var(--muted); margin-bottom:0.9rem;">your skin, your way.</p>
-    <p>Designed and led a <strong>personalized digital experience</strong> that provides <em>unique skincare routine recommendations</em> based on preferences — with <strong>digestible, consumer-friendly ingredient information</strong> built in.</p>
-    <p>Applied <strong>product management principles</strong> and <strong>audience segmentation</strong> to redesign the website journey, aligning the experience with <em>sales, marketing, and customer needs</em>.</p>
+      <h2 class="sec">the analysis</h2>
+      <p class="body">much like the tech industry, the <strong>beauty world is shifting</strong>. people still want <em>luxury</em> — but they also want to know <strong>what's in their products</strong> and <strong>why it works</strong>.</p>
+      <p class="body">this tension between <em>heritage</em> and <em>modern transparency</em> is the insight that shaped our campaign.</p>
 
-    <!-- Top row: nav mockup left | PM principles right -->
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:start; margin-top:1.2rem; margin-bottom:0; padding-bottom:1.8rem; border-bottom:1px solid var(--border);">
-      <!-- Left: current state nav mockup -->
-      <div>
-        <div style="border:1px solid #2a3040; border-radius:10px; overflow:hidden; background:#0d1117; font-family:'DM Sans',sans-serif;">
-          <div style="background:#141c28; padding:4px 14px; text-align:center; border-bottom:1px solid #2a3040;">
-            <span style="font-size:9px; color:#8a9ab0;">12-Piece Holiday Blockbuster &nbsp;<u style="color:#c9a84c; cursor:pointer;">Shop Now</u></span>
-          </div>
-          <div style="background:#0d1117; padding:8px 14px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #2a3040;">
-            <span style="font-size:11px; font-weight:700; letter-spacing:0.12em; color:#fff;">ESTĒE LAUDER</span>
-            <span style="font-size:8px; font-weight:700; color:#c9a84c; letter-spacing:0.06em;">SIGN IN</span>
-          </div>
-          <div style="background:#141c28; padding:7px 14px; border-bottom:1px solid #2a3040; display:flex; align-items:center; gap:6px;">
-            <span style="font-size:10px; color:#8a9ab0;">‹</span>
-            <span style="font-size:9px; font-weight:700; letter-spacing:0.1em; color:#c8d0dc;">SKINCARE</span>
-          </div>
-          <div style="padding:9px 14px; border:1.5px solid #c9a84c; margin:6px 10px 2px; border-radius:4px; background:#141c28;">
-            <span style="font-size:9px; font-weight:700; letter-spacing:0.1em; color:#c9a84c;">SKINCARE ROUTINE FINDER</span>
-          </div>
-          <div style="padding:7px 14px; border-bottom:1px solid #2a3040;"><span style="font-size:9px; font-weight:700; letter-spacing:0.08em; color:#c8d0dc;">SHOP ALL SKINCARE</span></div>
-          <div style="padding:7px 14px; border-bottom:1px solid #2a3040; display:flex; justify-content:space-between;"><span style="font-size:9px; font-weight:700; letter-spacing:0.08em; color:#c8d0dc;">BY CATEGORY</span><span style="font-size:10px; color:#8a9ab0;">›</span></div>
-          <div style="padding:7px 14px; border-bottom:1px solid #2a3040; display:flex; justify-content:space-between;"><span style="font-size:9px; font-weight:700; letter-spacing:0.08em; color:#c8d0dc;">BY CONCERN</span><span style="font-size:10px; color:#8a9ab0;">›</span></div>
-          <div style="padding:7px 14px; border-bottom:1px solid #2a3040; display:flex; justify-content:space-between;"><span style="font-size:9px; font-weight:700; letter-spacing:0.08em; color:#c8d0dc;">COLLECTIONS</span><span style="font-size:10px; color:#8a9ab0;">›</span></div>
-          <div style="padding:5px 14px 8px;"><span style="font-size:9px; font-weight:700; letter-spacing:0.08em; color:#c8d0dc;">FEATURED</span></div>
+      <h2 class="sec">the campaign: beauty then, beauty now</h2>
+      <p class="body">we took everything estée lauder has stood for across generations (<em>luxury, prestige, legacy</em>) and paired it with the <strong>science and transparency</strong> today's consumers expect. we brought it to life in three ways:</p>
+      <div class="pillars">
+        <div class="pillar"><b>01</b><div><h3>multigenerational storytelling</h3><p>showing how the brand has stayed <strong>relevant across generations</strong> of women through <em>authentic narrative</em>.</p></div></div>
+        <div class="pillar"><b>02</b><div><h3>experiential pop-ups</h3><p>letting people <strong>experience the brand in person</strong> — moving beyond digital into <em>tangible, memorable touchpoints</em>.</p></div></div>
+        <div class="pillar"><b>03</b><div><h3>personalized skincare quiz</h3><p>helping customers find <strong>products that actually work for them</strong> through <em>data-driven personalization</em>.</p></div></div>
+      </div>
+
+      <div class="outcome-head">
+        <h2 class="sec" style="margin: 0">the outcome</h2>
+        <a class="deck" href="https://srishtigangolly.com/docs/rsm-deck.pdf">view full deck ↗</a>
+      </div>
+      <p class="outcome">a campaign that reimagines estée lauder's heritage through <strong>emotional storytelling</strong>, <strong>scientific transparency</strong>, and a <strong>more personal digital experience</strong> — without losing what made the brand <strong>iconic</strong>.</p>
+
+      <h2 class="sec">my contribution · technology consultant</h2>
+      <p class="quiz-title">"a formula for you" <em>quiz</em></p>
+      <p class="tagline">your skin, your way.</p>
+      <p class="body">designed and led a <strong>personalized digital experience</strong> that provides <em>unique skincare routine recommendations</em> based on preferences — with <strong>digestible, consumer-friendly ingredient information</strong> built in.</p>
+      <p class="body">applied <strong>product management principles</strong> and <strong>audience segmentation</strong> to redesign the website journey, aligning the experience with <em>sales, marketing, and customer needs</em>.</p>
+
+      <div class="grid2" style="margin-top: 8px">
+        <div class="mock" aria-label="mockup of the estée lauder skincare menu with the routine finder highlighted">
+          <div class="mock-bar">current state · nav menu</div>
+          <div style="background: #141c28; padding: 4px 14px; text-align: center; border-bottom: 1px solid #2a3040; font-size: 9px; color: #8a9ab0">12-piece holiday blockbuster &nbsp;<u style="color: #c9a84c">shop now</u></div>
+          <div class="row" style="font-size: 11px; color: #fff"><span>ESTĒE LAUDER</span><span class="gold" style="font-size: 9px">SIGN IN</span></div>
+          <div class="row" style="background: #141c28"><span>‹ SKINCARE</span></div>
+          <div style="padding: 9px 14px; border: 1.5px solid #c9a84c; margin: 6px 10px 2px; border-radius: 4px; background: #141c28; font-size: 10px; letter-spacing: .1em; color: #c9a84c">SKINCARE ROUTINE FINDER</div>
+          <div class="row"><span>SHOP ALL SKINCARE</span></div>
+          <div class="row"><span>BY CATEGORY</span><span>›</span></div>
+          <div class="row"><span>BY CONCERN</span><span>›</span></div>
+          <div class="row"><span>COLLECTIONS</span><span>›</span></div>
+          <div class="row" style="border: 0"><span>FEATURED</span></div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 14px">
+          <span class="label">the redesign rationale</span>
+          <div class="mini"><b>01</b><div><h4>better visibility</h4><p>moved from a <strong>buried nav dropdown</strong> to a <strong>featured homepage experience</strong>.</p></div></div>
+          <div class="mini"><b>02</b><div><h4>accessibility</h4><p>clear entry points for both <strong>new</strong> and <strong>returning customers</strong>.</p></div></div>
+          <div class="mini"><b>03</b><div><h4>better engagement</h4><p>personalized journeys drive <strong>higher retention time</strong> on the site and convert more <strong>browsers into buyers</strong>.</p></div></div>
         </div>
       </div>
 
-      <!-- Right: PM principles -->
-      <div>
-        <p style="font-size:0.68rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:0.7rem;">The redesign rationale</p>
-        <div style="display:flex; flex-direction:column; gap:0.9rem;">
-          <div style="display:flex; gap:0.8rem; align-items:flex-start;">
-            <span style="font-family:'Fraunces',serif; font-size:1.1rem; font-weight:700; color:var(--accent); min-width:1.4rem; line-height:1.2;">01</span>
-            <div><strong style="font-size:0.88rem;">Better visibility</strong><p style="font-size:0.83rem; color:var(--muted); margin:0.2rem 0 0; line-height:1.6;">Moved from a <strong><em><u>buried nav dropdown</u></em></strong> to a <strong><em><u>featured homepage experience</u></em></strong>.</p></div>
-          </div>
-          <div style="display:flex; gap:0.8rem; align-items:flex-start;">
-            <span style="font-family:'Fraunces',serif; font-size:1.1rem; font-weight:700; color:var(--accent); min-width:1.4rem; line-height:1.2;">02</span>
-            <div><strong style="font-size:0.88rem;">Accessibility</strong><p style="font-size:0.83rem; color:var(--muted); margin:0.2rem 0 0; line-height:1.6;">Clear entry points for both <strong><em><u>new</u></em></strong> and <strong><em><u>returning customers</u></em></strong>.</p></div>
-          </div>
-          <div style="display:flex; gap:0.8rem; align-items:flex-start;">
-            <span style="font-family:'Fraunces',serif; font-size:1.1rem; font-weight:700; color:var(--accent); min-width:1.4rem; line-height:1.2;">03</span>
-            <div><strong style="font-size:0.88rem;">Better engagement</strong><p style="font-size:0.83rem; color:var(--muted); margin:0.2rem 0 0; line-height:1.6;">Personalized journeys drive <strong><em><u>higher retention time</u></em></strong> on the site and converts more <strong><em><u>browsers into buyers</u></em></strong>.</p></div>
-          </div>
+      <span class="label" style="margin-top: 14px">the segmented experience</span>
+      <div class="grid-phone">
+        <div class="pillars">
+          <div class="pillar"><b>01</b><div><h3>new customers</h3><p>encouraged to take a <strong>quiz</strong> to understand their <strong>skin concerns</strong> and receive a <strong>tailored routine</strong>.</p></div></div>
+          <div class="pillar"><b>02</b><div><h3>positive experience</h3><p>get a personalized <strong>"year in review,"</strong> <strong>product recommendations</strong>, and an easy <strong>repurchase option</strong>.</p></div></div>
+          <div class="pillar"><b>03</b><div><h3>negative experience</h3><p>prompted to <strong>retake the quiz</strong> and receive <strong>new skincare recommendations</strong>.</p></div></div>
         </div>
-      </div>
-    </div>
 
-    <!-- Bottom row: pillar cards left | prototype right -->
-    <p style="font-size:0.68rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-top:1.8rem; margin-bottom:1rem;">The segmented experience</p>
-    <div style="display:grid; grid-template-columns:1fr 260px; gap:2rem; align-items:start; margin-top:0;">
-      <div class="case-pillars" style="margin-top:0;">
-        <div class="case-pillar">
-          <span class="case-pillar-num">01</span>
-          <div class="case-pillar-content">
-            <h4>New customers</h4>
-            <p>Encouraged to take a <strong><em><u>quiz</u></em></strong> to understand their <strong><em><u>skin concerns</u></em></strong> and receive a <strong><em><u>tailored routine</u></em></strong>.</p>
-          </div>
-        </div>
-        <div class="case-pillar">
-          <span class="case-pillar-num">02</span>
-          <div class="case-pillar-content">
-            <h4>Positive experience</h4>
-            <p>Get a personalized <strong><em><u>"Year in Review,"</u></em></strong> <strong><em><u>product recommendations</u></em></strong>, and an easy <strong><em><u>repurchase option</u></em></strong>.</p>
-          </div>
-        </div>
-        <div class="case-pillar">
-          <span class="case-pillar-num">03</span>
-          <div class="case-pillar-content">
-            <h4>Negative experience</h4>
-            <p>Prompted to <strong><em><u>retake the quiz</u></em></strong> and receive <strong><em><u>new skincare recommendations</u></em></strong>.</p>
-          </div>
-        </div>
-      </div>
+        <div class="phone-wrap">
+          <div class="phone" aria-label="clickable prototype of the a formula for you quiz">
+            <div class="screen">
+              <div class="notch"><i></i></div>
 
-      <!-- Right: iPhone 12 prototype -->
-      <div style="display:flex; flex-direction:column; align-items:center; gap:0.75rem; padding-top:0.2rem;">
-        <div style="position:relative; width:240px; user-select:none;">
-          <!-- side buttons -->
-          <div style="position:absolute; left:-3px; top:76px; width:3px; height:20px; background:#2c2c2e; border-radius:2px 0 0 2px;"></div>
-          <div style="position:absolute; left:-3px; top:104px; width:3px; height:34px; background:#2c2c2e; border-radius:2px 0 0 2px;"></div>
-          <div style="position:absolute; left:-3px; top:144px; width:3px; height:34px; background:#2c2c2e; border-radius:2px 0 0 2px;"></div>
-          <div style="position:absolute; right:-3px; top:110px; width:3px; height:46px; background:#2c2c2e; border-radius:0 2px 2px 0;"></div>
-          <!-- body -->
-          <div style="background:#1c1c1e; border-radius:44px; padding:10px; box-shadow:0 24px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.07);">
-            <div style="background:#0d1117; border-radius:36px; overflow:hidden;">
-              <!-- notch -->
-              <div style="background:#0d1117; display:flex; justify-content:center; padding-top:6px;">
-                <div style="width:90px; height:22px; background:#1c1c1e; border-radius:0 0 20px 20px; display:flex; align-items:center; justify-content:center; gap:5px;">
-                  <div style="width:9px; height:9px; background:#0d1117; border-radius:50%;"></div>
-                  <div style="width:5px; height:5px; background:#2a2a2c; border-radius:50%;"></div>
+              <sc-if value="{{isHome}}" hint-placeholder-val="{{ true }}">
+                <div class="scr">
+                  <div style="display: flex; justify-content: space-between"><span class="brand">estée<br>lauder</span><span style="width: 12px; height: 12px; border: 1.5px solid #c9a84c; border-radius: 2px"></span></div>
+                  <p class="brand" style="text-align: center; margin: 22px 0 8px; font-size: 8.5px">a formula for you</p>
+                  <p class="eh" style="font-size: 22px; text-align: center; margin: 0 0 10px">your skin.<br>your way.</p>
+                  <p class="small" style="text-align: center; margin: 0">discover your personalized routine, crafted with over 75 years of skincare expertise.</p>
+                  <div style="display: flex; flex-direction: column; gap: 8px; margin-top: auto">
+                    <button class="cta" type="button" onClick="{{goQ1}}">begin your skin consultation</button>
+                    <button class="cta" type="button" style="border-color: rgba(201,168,76,.38)" onClick="{{goReturning}}">returning customer</button>
+                  </div>
+                  <p class="small" style="text-align: center; margin: 9px 0 0; font-size: 7.5px; color: #4a5568">dermatologist tested · expert formulated</p>
                 </div>
-              </div>
-              <!-- screen -->
-              <div style="height:370px; overflow:hidden; position:relative;">
+              </sc-if>
 
-                <!-- HOME -->
-                <div class="qs on" id="rqs-home">
-                  <div style="height:1px; background:#c9a84c;"></div>
-                  <div style="padding:12px 14px 10px; display:flex; flex-direction:column; flex:1; overflow:hidden;">
-                    <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:7px;">
-                      <p style="font-size:8px; font-weight:700; letter-spacing:0.12em; color:#c9a84c; text-transform:uppercase; line-height:1.4;">ESTÉE<br>LAUDER</p>
-                      <div style="width:12px; height:12px; border:1.5px solid #c9a84c; border-radius:2px; flex-shrink:0;"></div>
-                    </div>
-                    <div style="height:1px; background:#c9a84c; opacity:0.45; margin-bottom:16px;"></div>
-                    <div style="width:28px; height:1px; background:#c9a84c; opacity:0.6; margin:0 auto 10px;"></div>
-                    <p style="font-size:7.5px; letter-spacing:0.13em; color:#c9a84c; text-transform:uppercase; text-align:center; margin-bottom:8px;">A Formula For You</p>
-                    <h2 style="font-family:'Fraunces',serif; font-size:21px; font-weight:700; color:#fff; line-height:1.2; text-align:center; margin-bottom:6px;">Your skin.<br>Your way.</h2>
-                    <div style="width:28px; height:1px; background:#c9a84c; opacity:0.5; margin:0 auto 12px;"></div>
-                    <p style="font-size:8px; color:#8a9ab0; line-height:1.6; text-align:center; margin-bottom:auto;">Discover your personalized routine, crafted with over 75 years of skincare expertise.</p>
-                    <div style="display:flex; flex-direction:column; gap:8px; margin-top:14px;">
-                      <button onclick="rgo('rqs-q1')" style="background:transparent; border:1.5px solid #c9a84c; border-radius:7px; padding:10px 0; font-size:7.5px; font-weight:700; letter-spacing:0.09em; text-transform:uppercase; cursor:pointer; color:#fff; width:100%; line-height:1.4;">BEGIN YOUR SKIN<br>CONSULTATION</button>
-                      <button onclick="rgo('rqs-returning')" style="background:transparent; border:1.5px solid rgba(201,168,76,0.38); border-radius:7px; padding:10px 0; font-size:7.5px; font-weight:700; letter-spacing:0.09em; text-transform:uppercase; cursor:pointer; color:#fff; width:100%;">RETURNING CUSTOMER</button>
-                    </div>
-                    <p style="font-size:6.5px; color:#4a5568; text-align:center; margin-top:9px; letter-spacing:0.05em;">Dermatologist tested · Expert formulated</p>
+              <sc-if value="{{isQuestion}}" hint-placeholder-val="{{ false }}">
+                <div class="scr">
+                  <span class="brand" style="font-size: 8.5px">skin consultation</span>
+                  <div class="prog"><i class="{{p1}}"></i><i class="{{p2}}"></i><i class="{{p3}}"></i></div>
+                  <p class="eh" style="font-size: 14px; margin: 0 0 12px">{{question}}</p>
+                  <div style="display: flex; flex-direction: column; gap: 7px">
+                    <sc-for list="{{answers}}" as="a" hint-placeholder-count="4">
+                      <button class="opt" type="button" onClick="{{a.pick}}">{{a.t}}</button>
+                    </sc-for>
                   </div>
                 </div>
+              </sc-if>
 
-                <!-- Q1 -->
-                <div class="qs" id="rqs-q1">
-                  <div style="height:1px; background:#c9a84c;"></div>
-                  <div style="padding:12px 14px 10px; display:flex; flex-direction:column; flex:1;">
-                    <p style="font-size:7.5px; letter-spacing:0.1em; color:#c9a84c; text-transform:uppercase; margin-bottom:4px;">Skin Consultation</p>
-                    <div style="height:1px; background:#c9a84c; opacity:0.28; margin-bottom:11px;"></div>
-                    <div style="display:flex; gap:3px; margin-bottom:13px;">
-                      <div style="flex:1; height:2px; background:#c9a84c; border-radius:1px;"></div>
-                      <div style="flex:1; height:2px; background:#2a3040; border-radius:1px;"></div>
-                      <div style="flex:1; height:2px; background:#2a3040; border-radius:1px;"></div>
-                    </div>
-                    <p style="font-family:'Fraunces',serif; font-size:13px; font-weight:700; color:#fff; line-height:1.35; margin-bottom:13px;">What's your main skin concern?</p>
-                    <div style="display:flex; flex-direction:column; gap:7px; flex:1;">
-                      <button onclick="rpick(this,'rqs-q2')" class="ropt" style="background:transparent; border:1px solid #2a3040; border-radius:7px; padding:9px 10px; font-size:8px; text-align:left; cursor:pointer; color:#c8d0dc;">Dryness &amp; dehydration</button>
-                      <button onclick="rpick(this,'rqs-q2')" class="ropt" style="background:transparent; border:1px solid #2a3040; border-radius:7px; padding:9px 10px; font-size:8px; text-align:left; cursor:pointer; color:#c8d0dc;">Dullness &amp; uneven tone</button>
-                      <button onclick="rpick(this,'rqs-q2')" class="ropt" style="background:transparent; border:1px solid #2a3040; border-radius:7px; padding:9px 10px; font-size:8px; text-align:left; cursor:pointer; color:#c8d0dc;">Fine lines &amp; aging</button>
-                      <button onclick="rpick(this,'rqs-q2')" class="ropt" style="background:transparent; border:1px solid #2a3040; border-radius:7px; padding:9px 10px; font-size:8px; text-align:left; cursor:pointer; color:#c8d0dc;">Acne &amp; sensitivity</button>
-                    </div>
+              <sc-if value="{{isResult}}" hint-placeholder-val="{{ false }}">
+                <div class="scr">
+                  <span class="chip" style="align-self: flex-start; border-radius: 4px; margin: 0 0 8px">your formula</span>
+                  <p class="eh" style="font-size: 14px; margin: 0 0 6px">advanced night repair system</p>
+                  <p class="small" style="margin: 0 0 9px">clinically proven hydration with full ingredient transparency — matched to your skin profile.</p>
+                  <div class="box" style="margin-bottom: 8px"><span class="gold">am</span>&nbsp; cleanser → serum → spf 50<br><span class="gold">pm</span>&nbsp; oil cleanser → anr serum → cream</div>
+                  <div><span class="chip">hyaluronic acid</span><span class="chip">bifida ferment</span><span class="chip">vitamin c</span></div>
+                  <div style="display: flex; flex-direction: column; gap: 7px; margin-top: auto">
+                    <button class="cta fill" type="button" onClick="{{goReceiptNew}}">shop my routine</button>
+                    <button class="cta ghost" type="button" onClick="{{goQ1}}">retake quiz ↺</button>
                   </div>
                 </div>
+              </sc-if>
 
-                <!-- Q2 -->
-                <div class="qs" id="rqs-q2">
-                  <div style="height:1px; background:#c9a84c;"></div>
-                  <div style="padding:12px 14px 10px; display:flex; flex-direction:column; flex:1;">
-                    <p style="font-size:7.5px; letter-spacing:0.1em; color:#c9a84c; text-transform:uppercase; margin-bottom:4px;">Skin Consultation</p>
-                    <div style="height:1px; background:#c9a84c; opacity:0.28; margin-bottom:11px;"></div>
-                    <div style="display:flex; gap:3px; margin-bottom:13px;">
-                      <div style="flex:1; height:2px; background:#c9a84c; border-radius:1px;"></div>
-                      <div style="flex:1; height:2px; background:#c9a84c; border-radius:1px;"></div>
-                      <div style="flex:1; height:2px; background:#2a3040; border-radius:1px;"></div>
-                    </div>
-                    <p style="font-family:'Fraunces',serif; font-size:13px; font-weight:700; color:#fff; line-height:1.35; margin-bottom:13px;">How would you describe your skin type?</p>
-                    <div style="display:flex; flex-direction:column; gap:7px; flex:1;">
-                      <button onclick="rpick(this,'rqs-q3')" class="ropt" style="background:transparent; border:1px solid #2a3040; border-radius:7px; padding:9px 10px; font-size:8px; text-align:left; cursor:pointer; color:#c8d0dc;">Dry</button>
-                      <button onclick="rpick(this,'rqs-q3')" class="ropt" style="background:transparent; border:1px solid #2a3040; border-radius:7px; padding:9px 10px; font-size:8px; text-align:left; cursor:pointer; color:#c8d0dc;">Oily</button>
-                      <button onclick="rpick(this,'rqs-q3')" class="ropt" style="background:transparent; border:1px solid #2a3040; border-radius:7px; padding:9px 10px; font-size:8px; text-align:left; cursor:pointer; color:#c8d0dc;">Combination</button>
-                      <button onclick="rpick(this,'rqs-q3')" class="ropt" style="background:transparent; border:1px solid #2a3040; border-radius:7px; padding:9px 10px; font-size:8px; text-align:left; cursor:pointer; color:#c8d0dc;">Normal / unsure</button>
-                    </div>
+              <sc-if value="{{isReturning}}" hint-placeholder-val="{{ false }}">
+                <div class="scr">
+                  <span class="brand">estée<br>lauder</span>
+                  <p class="eh" style="font-size: 15px; margin: 16px 0 6px">welcome back,<br><span class="gold">sarah.</span></p>
+                  <p class="small" style="margin: 0 0 14px">how has your skin been feeling with your current routine?</p>
+                  <div style="display: flex; flex-direction: column; gap: 9px">
+                    <button class="opt" type="button" style="padding: 12px" onClick="{{goPositive}}">loving it — my skin has improved</button>
+                    <button class="opt" type="button" style="padding: 12px" onClick="{{goNegative}}">not quite right — i need something new</button>
+                  </div>
+                  <button class="cta ghost" type="button" style="margin-top: auto" onClick="{{goHome}}">← back</button>
+                </div>
+              </sc-if>
+
+              <sc-if value="{{isPositive}}" hint-placeholder-val="{{ false }}">
+                <div class="scr">
+                  <span class="chip" style="align-self: flex-start; border-radius: 4px; margin: 0 0 8px">2025 · year in review</span>
+                  <p class="eh" style="font-size: 14px; margin: 0 0 10px">your skin journey,<br><span class="gold">this year.</span></p>
+                  <div style="display: flex; gap: 8px; margin-bottom: 10px">
+                    <div class="box" style="flex: 1; text-align: center"><div class="eh gold" style="font-size: 22px">12</div><div class="small" style="font-size: 7.5px">products used</div></div>
+                    <div class="box" style="flex: 1; text-align: center"><div class="eh gold" style="font-size: 22px">94%</div><div class="small" style="font-size: 7.5px">hydration score</div></div>
+                  </div>
+                  <p class="small" style="margin: 0 0 6px">recommended for you</p>
+                  <div style="display: flex; gap: 8px">
+                    <div class="box" style="flex: 1; text-align: center; line-height: 1.4">anr eye concentrate<div class="gold" style="font-size: 8px; margin-top: 4px">add →</div></div>
+                    <div class="box" style="flex: 1; text-align: center; line-height: 1.4">micro essence lotion<div class="gold" style="font-size: 8px; margin-top: 4px">add →</div></div>
+                  </div>
+                  <div style="display: flex; flex-direction: column; gap: 7px; margin-top: auto">
+                    <button class="cta fill" type="button" onClick="{{goReceiptReturning}}">repurchase my routine</button>
+                    <button class="cta ghost" type="button" onClick="{{goReturning}}">← back</button>
                   </div>
                 </div>
+              </sc-if>
 
-                <!-- Q3 -->
-                <div class="qs" id="rqs-q3">
-                  <div style="height:1px; background:#c9a84c;"></div>
-                  <div style="padding:12px 14px 10px; display:flex; flex-direction:column; flex:1;">
-                    <p style="font-size:7.5px; letter-spacing:0.1em; color:#c9a84c; text-transform:uppercase; margin-bottom:4px;">Skin Consultation</p>
-                    <div style="height:1px; background:#c9a84c; opacity:0.28; margin-bottom:11px;"></div>
-                    <div style="display:flex; gap:3px; margin-bottom:13px;">
-                      <div style="flex:1; height:2px; background:#c9a84c; border-radius:1px;"></div>
-                      <div style="flex:1; height:2px; background:#c9a84c; border-radius:1px;"></div>
-                      <div style="flex:1; height:2px; background:#c9a84c; border-radius:1px;"></div>
-                    </div>
-                    <p style="font-family:'Fraunces',serif; font-size:13px; font-weight:700; color:#fff; line-height:1.35; margin-bottom:13px;">What matters most to you?</p>
-                    <div style="display:flex; flex-direction:column; gap:7px; flex:1;">
-                      <button onclick="rpick(this,'rqs-new-result')" class="ropt" style="background:transparent; border:1px solid #2a3040; border-radius:7px; padding:9px 10px; font-size:8px; text-align:left; cursor:pointer; color:#c8d0dc;">Ingredient transparency</button>
-                      <button onclick="rpick(this,'rqs-new-result')" class="ropt" style="background:transparent; border:1px solid #2a3040; border-radius:7px; padding:9px 10px; font-size:8px; text-align:left; cursor:pointer; color:#c8d0dc;">Fast, visible results</button>
-                      <button onclick="rpick(this,'rqs-new-result')" class="ropt" style="background:transparent; border:1px solid #2a3040; border-radius:7px; padding:9px 10px; font-size:8px; text-align:left; cursor:pointer; color:#c8d0dc;">Clean / gentle formula</button>
-                      <button onclick="rpick(this,'rqs-new-result')" class="ropt" style="background:transparent; border:1px solid #2a3040; border-radius:7px; padding:9px 10px; font-size:8px; text-align:left; cursor:pointer; color:#c8d0dc;">Luxury feel &amp; ritual</button>
-                    </div>
+              <sc-if value="{{isNegative}}" hint-placeholder-val="{{ false }}">
+                <div class="scr">
+                  <span class="chip" style="align-self: flex-start; border-radius: 4px; margin: 0 0 8px">routine refresh</span>
+                  <p class="eh" style="font-size: 14px; margin: 0 0 6px">let's find what works for you.</p>
+                  <p class="small" style="margin: 0 0 10px">skin changes — and so should your routine. retake the consultation for updated recommendations.</p>
+                  <div class="box"><span class="gold" style="font-size: 8px">why your routine may have changed</span><br><span class="chip">season shift</span><span class="chip">hormonal changes</span><span class="chip">new concerns</span></div>
+                  <div style="display: flex; flex-direction: column; gap: 7px; margin-top: auto">
+                    <button class="cta" type="button" onClick="{{goQ1}}">retake consultation</button>
+                    <button class="cta ghost" type="button" onClick="{{goReturning}}">← back</button>
                   </div>
                 </div>
+              </sc-if>
 
-                <!-- NEW RESULT -->
-                <div class="qs" id="rqs-new-result">
-                  <div style="height:1px; background:#c9a84c;"></div>
-                  <div style="padding:12px 14px 10px; display:flex; flex-direction:column; flex:1; overflow:hidden;">
-                    <span style="display:inline-block; font-size:7px; letter-spacing:0.08em; text-transform:uppercase; color:#c9a84c; border:1px solid rgba(201,168,76,0.4); border-radius:4px; padding:2px 6px; margin-bottom:8px; align-self:flex-start;">Your formula</span>
-                    <p style="font-family:'Fraunces',serif; font-size:13px; font-weight:700; color:#fff; line-height:1.3; margin-bottom:5px;">Advanced Night Repair System</p>
-                    <div style="width:28px; height:1px; background:#c9a84c; opacity:0.5; margin:0 0 9px;"></div>
-                    <p style="font-size:7.5px; color:#8a9ab0; line-height:1.6; margin-bottom:9px;">Clinically proven hydration with full ingredient transparency — matched to your skin profile.</p>
-                    <div style="background:#141c28; border:1px solid #2a3040; border-radius:7px; padding:9px 10px; font-size:8px; color:#c8d0dc; line-height:1.85; margin-bottom:9px;">
-                      <span style="color:#c9a84c; font-weight:700;">AM</span> &nbsp;Cleanser → Serum → SPF 50<br>
-                      <span style="color:#c9a84c; font-weight:700;">PM</span> &nbsp;Oil Cleanser → ANR Serum → Cream
-                    </div>
-                    <div style="margin-bottom:auto;">
-                      <span style="display:inline-block; background:rgba(201,168,76,0.12); border:1px solid rgba(201,168,76,0.35); border-radius:999px; font-size:7px; color:#c9a84c; padding:3px 7px; margin:2px;">Hyaluronic Acid</span>
-                      <span style="display:inline-block; background:rgba(201,168,76,0.12); border:1px solid rgba(201,168,76,0.35); border-radius:999px; font-size:7px; color:#c9a84c; padding:3px 7px; margin:2px;">Bifida Ferment</span>
-                      <span style="display:inline-block; background:rgba(201,168,76,0.12); border:1px solid rgba(201,168,76,0.35); border-radius:999px; font-size:7px; color:#c9a84c; padding:3px 7px; margin:2px;">Vitamin C</span>
-                    </div>
-                    <button onclick="rgo('rqs-receipt-new')" style="margin-top:11px; background:#c9a84c; border:none; border-radius:7px; padding:11px 0; font-size:7.5px; font-weight:700; letter-spacing:0.09em; text-transform:uppercase; cursor:pointer; color:#0d1117; width:100%;">SHOP MY ROUTINE</button>
-                    <button onclick="rgo('rqs-q1')" style="margin-top:7px; background:transparent; border:1.5px solid rgba(201,168,76,0.38); border-radius:7px; padding:8px 0; font-size:7px; font-weight:700; cursor:pointer; color:#8a9ab0; width:100%;">Retake quiz ↺</button>
-                  </div>
+              <sc-if value="{{isReceipt}}" hint-placeholder-val="{{ false }}">
+                <div class="scr">
+                  <p class="brand" style="text-align: center; margin: 0">estée lauder</p>
+                  <p class="small" style="text-align: center; margin: 2px 0 0; font-size: 7.5px; color: #4a5568">esteelauder.com · order {{order}}</p>
+                  <div class="dash"></div>
+                  <sc-for list="{{items}}" as="it" hint-placeholder-count="4">
+                    <div class="line"><span>{{it.name}}</span><span>{{it.price}}</span></div>
+                  </sc-for>
+                  <div class="dash"></div>
+                  <div class="line" style="color: #8a9ab0"><span>subtotal</span><span>{{subtotal}}</span></div>
+                  <div class="line" style="color: #8a9ab0"><span>shipping</span><span style="color: #5a9a6a">free</span></div>
+                  <div class="line" style="color: #8a9ab0"><span>{{discountName}}</span><span style="color: #5a9a6a">{{discount}}</span></div>
+                  <div class="dash"></div>
+                  <div class="line" style="font-size: 11px; color: #fff"><span>total</span><span class="gold">{{total}}</span></div>
+                  <button class="cta fill" type="button" style="margin-top: auto" onClick="{{goHome}}">done</button>
                 </div>
+              </sc-if>
 
-                <!-- RETURNING -->
-                <div class="qs" id="rqs-returning">
-                  <div style="height:1px; background:#c9a84c;"></div>
-                  <div style="padding:12px 14px 10px; display:flex; flex-direction:column; flex:1;">
-                    <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:7px;">
-                      <p style="font-size:8px; font-weight:700; letter-spacing:0.12em; color:#c9a84c; text-transform:uppercase; line-height:1.4;">ESTÉE<br>LAUDER</p>
-                      <div style="width:12px; height:12px; border:1.5px solid #c9a84c; border-radius:2px;"></div>
-                    </div>
-                    <div style="height:1px; background:#c9a84c; opacity:0.45; margin-bottom:14px;"></div>
-                    <p style="font-family:'Fraunces',serif; font-size:14px; font-weight:700; color:#fff; line-height:1.3; margin-bottom:6px;">Welcome back,<br><span style="color:#c9a84c;">Sarah.</span></p>
-                    <p style="font-size:8px; color:#8a9ab0; line-height:1.6; margin-bottom:16px;">How has your skin been feeling with your current routine?</p>
-                    <div style="display:flex; flex-direction:column; gap:10px; flex:1;">
-                      <button onclick="rgo('rqs-positive')" class="ropt" style="background:transparent; border:1px solid #2a3040; border-radius:7px; padding:13px 12px; font-size:8.5px; text-align:left; cursor:pointer; color:#c8d0dc;">Loving it — my skin has improved</button>
-                      <button onclick="rgo('rqs-negative')" class="ropt" style="background:transparent; border:1px solid #2a3040; border-radius:7px; padding:13px 12px; font-size:8.5px; text-align:left; cursor:pointer; color:#c8d0dc;">Not quite right — I need something new</button>
-                    </div>
-                    <button onclick="rgo('rqs-home')" style="margin-top:12px; background:transparent; border:1.5px solid rgba(201,168,76,0.38); border-radius:7px; padding:9px 0; font-size:7.5px; font-weight:700; cursor:pointer; color:#8a9ab0; width:100%;">← Back</button>
-                  </div>
-                </div>
-
-                <!-- POSITIVE -->
-                <div class="qs" id="rqs-positive">
-                  <div style="height:1px; background:#c9a84c;"></div>
-                  <div style="padding:12px 14px 10px; display:flex; flex-direction:column; flex:1; overflow:hidden;">
-                    <span style="display:inline-block; font-size:7px; letter-spacing:0.08em; text-transform:uppercase; color:#c9a84c; border:1px solid rgba(201,168,76,0.4); border-radius:4px; padding:2px 6px; margin-bottom:8px; align-self:flex-start;">2025 · Year in Review</span>
-                    <p style="font-family:'Fraunces',serif; font-size:13px; font-weight:700; color:#fff; line-height:1.3; margin-bottom:4px;">Your skin journey,<br><span style="color:#c9a84c;">this year.</span></p>
-                    <div style="height:1px; background:#c9a84c; opacity:0.45; margin:8px 0;"></div>
-                    <div style="display:flex; gap:8px; margin-bottom:10px;">
-                      <div style="flex:1; background:#141c28; border:1px solid #2a3040; border-radius:7px; padding:8px; text-align:center;">
-                        <div style="font-family:'Fraunces',serif; font-size:24px; font-weight:700; color:#c9a84c; line-height:1;">12</div>
-                        <div style="font-size:6.5px; color:#8a9ab0; text-transform:uppercase; letter-spacing:0.07em;">products used</div>
-                      </div>
-                      <div style="flex:1; background:#141c28; border:1px solid #2a3040; border-radius:7px; padding:8px; text-align:center;">
-                        <div style="font-family:'Fraunces',serif; font-size:24px; font-weight:700; color:#c9a84c; line-height:1;">94%</div>
-                        <div style="font-size:6.5px; color:#8a9ab0; text-transform:uppercase; letter-spacing:0.07em;">hydration score</div>
-                      </div>
-                    </div>
-                    <p style="font-size:7.5px; color:#8a9ab0; margin-bottom:7px; letter-spacing:0.05em; text-transform:uppercase;">Recommended for you</p>
-                    <div style="display:flex; gap:8px; margin-bottom:10px;">
-                      <div style="flex:1; background:#141c28; border:1px solid #2a3040; border-radius:7px; padding:8px 7px; text-align:center;">
-                        <div style="font-size:7.5px; color:#c8d0dc; line-height:1.4;">ANR Eye<br>Concentrate</div>
-                        <div style="font-size:7px; color:#c9a84c; text-transform:uppercase; letter-spacing:0.06em; margin-top:4px;">Add →</div>
-                      </div>
-                      <div style="flex:1; background:#141c28; border:1px solid #2a3040; border-radius:7px; padding:8px 7px; text-align:center;">
-                        <div style="font-size:7.5px; color:#c8d0dc; line-height:1.4;">Micro Essence<br>Lotion</div>
-                        <div style="font-size:7px; color:#c9a84c; text-transform:uppercase; letter-spacing:0.06em; margin-top:4px;">Add →</div>
-                      </div>
-                    </div>
-                    <button onclick="rgo('rqs-receipt-returning')" style="background:#c9a84c; border:none; border-radius:7px; padding:11px 0; font-size:7.5px; font-weight:700; letter-spacing:0.09em; text-transform:uppercase; cursor:pointer; color:#0d1117; width:100%;">REPURCHASE MY ROUTINE</button>
-                    <button onclick="rgo('rqs-returning')" style="margin-top:7px; background:transparent; border:1.5px solid rgba(201,168,76,0.38); border-radius:7px; padding:8px 0; font-size:7px; font-weight:700; cursor:pointer; color:#8a9ab0; width:100%;">← Back</button>
-                  </div>
-                </div>
-
-                <!-- NEGATIVE -->
-                <div class="qs" id="rqs-negative">
-                  <div style="height:1px; background:#c9a84c;"></div>
-                  <div style="padding:12px 14px 10px; display:flex; flex-direction:column; flex:1;">
-                    <span style="display:inline-block; font-size:7px; letter-spacing:0.08em; text-transform:uppercase; color:#c9a84c; border:1px solid rgba(201,168,76,0.4); border-radius:4px; padding:2px 6px; margin-bottom:8px; align-self:flex-start;">Routine refresh</span>
-                    <p style="font-family:'Fraunces',serif; font-size:13px; font-weight:700; color:#fff; line-height:1.3; margin-bottom:6px;">Let's find what works for you.</p>
-                    <p style="font-size:8px; color:#8a9ab0; line-height:1.6; margin-bottom:12px;">Skin changes — and so should your routine. Retake the consultation for updated recommendations.</p>
-                    <div style="background:#141c28; border:1px solid #2a3040; border-radius:7px; padding:10px 11px; margin-bottom:10px;">
-                      <p style="font-size:7.5px; color:#c9a84c; letter-spacing:0.07em; text-transform:uppercase; margin-bottom:6px;">Why your routine may have changed</p>
-                      <span style="display:inline-block; background:rgba(201,168,76,0.12); border:1px solid rgba(201,168,76,0.35); border-radius:999px; font-size:7px; color:#c9a84c; padding:3px 7px; margin:2px;">Season shift</span>
-                      <span style="display:inline-block; background:rgba(201,168,76,0.12); border:1px solid rgba(201,168,76,0.35); border-radius:999px; font-size:7px; color:#c9a84c; padding:3px 7px; margin:2px;">Hormonal changes</span>
-                      <span style="display:inline-block; background:rgba(201,168,76,0.12); border:1px solid rgba(201,168,76,0.35); border-radius:999px; font-size:7px; color:#c9a84c; padding:3px 7px; margin:2px;">New concerns</span>
-                    </div>
-                    <p style="font-size:8px; color:#8a9ab0; line-height:1.6; margin-bottom:auto;">A fresh consultation takes under 2 minutes and gives you a completely updated formula.</p>
-                    <button onclick="rgo('rqs-q1')" style="margin-top:12px; background:transparent; border:1.5px solid #c9a84c; border-radius:7px; padding:11px 0; font-size:7.5px; font-weight:700; letter-spacing:0.09em; text-transform:uppercase; cursor:pointer; color:#fff; width:100%;">RETAKE CONSULTATION</button>
-                    <button onclick="rgo('rqs-returning')" style="margin-top:7px; background:transparent; border:1.5px solid rgba(201,168,76,0.38); border-radius:7px; padding:8px 0; font-size:7px; font-weight:700; cursor:pointer; color:#8a9ab0; width:100%;">← Back</button>
-                  </div>
-                </div>
-
-                <!-- RECEIPT: NEW -->
-                <div class="qs" id="rqs-receipt-new">
-                  <div style="height:1px; background:#c9a84c;"></div>
-                  <div style="padding:12px 14px 10px; display:flex; flex-direction:column; flex:1; overflow:hidden;">
-                    <div style="flex:1; overflow-y:auto; scrollbar-width:none;">
-                      <div style="text-align:center; margin-bottom:10px;">
-                        <div style="font-size:8.5px; font-weight:700; letter-spacing:0.14em; color:#c9a84c; text-transform:uppercase;">Estée Lauder</div>
-                        <div style="font-size:7px; color:#4a5568; margin-top:2px; letter-spacing:0.04em;">esteelauder.com · ORDER #EL-20847</div>
-                      </div>
-                      <div style="border-top:1px dashed #2a3040; margin:8px 0;"></div>
-                      <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                        <div style="font-size:7.5px; color:#c8d0dc; flex:1; line-height:1.4;">Advanced Night Repair Serum<br><span style="font-size:6.5px; color:#4a5568;">50ml · Bestseller</span></div>
-                        <div style="font-family:'IBM Plex Mono',monospace; font-size:8px; color:#c8d0dc; margin-left:8px;">$115.00</div>
-                      </div>
-                      <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                        <div style="font-size:7.5px; color:#c8d0dc; flex:1; line-height:1.4;">Perfectly Clean Foam Cleanser<br><span style="font-size:6.5px; color:#4a5568;">150ml</span></div>
-                        <div style="font-family:'IBM Plex Mono',monospace; font-size:8px; color:#c8d0dc; margin-left:8px;">$42.00</div>
-                      </div>
-                      <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                        <div style="font-size:7.5px; color:#c8d0dc; flex:1; line-height:1.4;">Revitalizing Supreme+ Cream<br><span style="font-size:6.5px; color:#4a5568;">50ml</span></div>
-                        <div style="font-family:'IBM Plex Mono',monospace; font-size:8px; color:#c8d0dc; margin-left:8px;">$78.00</div>
-                      </div>
-                      <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                        <div style="font-size:7.5px; color:#c8d0dc; flex:1; line-height:1.4;">Micro Fluid Lip Balm SPF 50<br><span style="font-size:6.5px; color:#4a5568;">Daily protect</span></div>
-                        <div style="font-family:'IBM Plex Mono',monospace; font-size:8px; color:#c8d0dc; margin-left:8px;">$28.00</div>
-                      </div>
-                      <div style="border-top:1px dashed #2a3040; margin:8px 0;"></div>
-                      <div style="display:flex; justify-content:space-between; margin-bottom:3px;">
-                        <div style="font-size:7px; color:#4a5568;">Subtotal</div>
-                        <div style="font-family:'IBM Plex Mono',monospace; font-size:7px; color:#4a5568;">$263.00</div>
-                      </div>
-                      <div style="display:flex; justify-content:space-between; margin-bottom:3px;">
-                        <div style="font-size:7px; color:#4a5568;">Shipping</div>
-                        <div style="font-family:'IBM Plex Mono',monospace; font-size:7px; color:#5a9a6a;">FREE</div>
-                      </div>
-                      <div style="display:flex; justify-content:space-between; margin-bottom:3px;">
-                        <div style="font-size:7px; color:#4a5568;">New customer discount (10%)</div>
-                        <div style="font-family:'IBM Plex Mono',monospace; font-size:7px; color:#5a9a6a;">−$26.30</div>
-                      </div>
-                      <div style="border-top:1px dashed #2a3040; margin:8px 0;"></div>
-                      <div style="display:flex; justify-content:space-between; align-items:baseline;">
-                        <div style="font-size:8.5px; font-weight:700; color:#fff; letter-spacing:0.06em; text-transform:uppercase;">Total</div>
-                        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:700; color:#c9a84c;">$236.70</div>
-                      </div>
-                      <p style="font-size:7px; color:#5a9a6a; text-align:center; margin-top:5px;">You saved $26.30 with your first-order discount</p>
-                      <div style="border-top:1px dashed #2a3040; margin:8px 0;"></div>
-                      <div id="rbc1" style="display:flex; justify-content:center; gap:1px; margin:8px auto 3px;"></div>
-                      <div style="font-family:'IBM Plex Mono',monospace; font-size:6.5px; color:#4a5568; text-align:center; letter-spacing:0.1em;">EL-20847 · THANK YOU</div>
-                    </div>
-                    <button onclick="rgo('rqs-home')" style="margin-top:10px; flex-shrink:0; background:#c9a84c; border:none; border-radius:7px; padding:11px 0; font-size:7.5px; font-weight:700; letter-spacing:0.09em; text-transform:uppercase; cursor:pointer; color:#0d1117; width:100%;">DONE</button>
-                  </div>
-                </div>
-
-                <!-- RECEIPT: RETURNING -->
-                <div class="qs" id="rqs-receipt-returning">
-                  <div style="height:1px; background:#c9a84c;"></div>
-                  <div style="padding:12px 14px 10px; display:flex; flex-direction:column; flex:1; overflow:hidden;">
-                    <div style="flex:1; overflow-y:auto; scrollbar-width:none;">
-                      <div style="text-align:center; margin-bottom:6px; font-size:16px;">✨</div>
-                      <div style="text-align:center; margin-bottom:10px;">
-                        <div style="font-size:8.5px; font-weight:700; letter-spacing:0.14em; color:#c9a84c; text-transform:uppercase;">Estée Lauder</div>
-                        <div style="font-size:7px; color:#4a5568; margin-top:2px; letter-spacing:0.04em;">esteelauder.com · ORDER #EL-31092</div>
-                      </div>
-                      <div style="border-top:1px dashed #2a3040; margin:8px 0;"></div>
-                      <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                        <div style="font-size:7.5px; color:#c8d0dc; flex:1; line-height:1.4;">Advanced Night Repair Serum<br><span style="font-size:6.5px; color:#4a5568;">50ml · Your staple</span></div>
-                        <div style="font-family:'IBM Plex Mono',monospace; font-size:8px; color:#c8d0dc; margin-left:8px;">$115.00</div>
-                      </div>
-                      <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                        <div style="font-size:7.5px; color:#c8d0dc; flex:1; line-height:1.4;">Revitalizing Supreme+ Cream<br><span style="font-size:6.5px; color:#4a5568;">50ml</span></div>
-                        <div style="font-family:'IBM Plex Mono',monospace; font-size:8px; color:#c8d0dc; margin-left:8px;">$78.00</div>
-                      </div>
-                      <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                        <div style="font-size:7.5px; color:#c8d0dc; flex:1; line-height:1.4;">ANR Eye Concentrate<br><span style="font-size:6.5px; color:#4a5568;">15ml · New add</span></div>
-                        <div style="font-family:'IBM Plex Mono',monospace; font-size:8px; color:#c8d0dc; margin-left:8px;">$72.00</div>
-                      </div>
-                      <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                        <div style="font-size:7.5px; color:#c8d0dc; flex:1; line-height:1.4;">Micro Essence Lotion<br><span style="font-size:6.5px; color:#4a5568;">200ml · New add</span></div>
-                        <div style="font-family:'IBM Plex Mono',monospace; font-size:8px; color:#c8d0dc; margin-left:8px;">$58.00</div>
-                      </div>
-                      <div style="border-top:1px dashed #2a3040; margin:8px 0;"></div>
-                      <div style="display:flex; justify-content:space-between; margin-bottom:3px;">
-                        <div style="font-size:7px; color:#4a5568;">Subtotal</div>
-                        <div style="font-family:'IBM Plex Mono',monospace; font-size:7px; color:#4a5568;">$323.00</div>
-                      </div>
-                      <div style="display:flex; justify-content:space-between; margin-bottom:3px;">
-                        <div style="font-size:7px; color:#4a5568;">Shipping</div>
-                        <div style="font-family:'IBM Plex Mono',monospace; font-size:7px; color:#5a9a6a;">FREE</div>
-                      </div>
-                      <div style="display:flex; justify-content:space-between; margin-bottom:3px;">
-                        <div style="font-size:7px; color:#4a5568;">Loyalty reward (15%)</div>
-                        <div style="font-family:'IBM Plex Mono',monospace; font-size:7px; color:#5a9a6a;">−$48.45</div>
-                      </div>
-                      <div style="border-top:1px dashed #2a3040; margin:8px 0;"></div>
-                      <div style="display:flex; justify-content:space-between; align-items:baseline;">
-                        <div style="font-size:8.5px; font-weight:700; color:#fff; letter-spacing:0.06em; text-transform:uppercase;">Total</div>
-                        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:700; color:#c9a84c;">$274.55</div>
-                      </div>
-                      <p style="font-size:7px; color:#5a9a6a; text-align:center; margin-top:5px;">You saved $48.45 with your loyalty reward</p>
-                      <div style="border-top:1px dashed #2a3040; margin:8px 0;"></div>
-                      <div id="rbc2" style="display:flex; justify-content:center; gap:1px; margin:8px auto 3px;"></div>
-                      <div style="font-family:'IBM Plex Mono',monospace; font-size:6.5px; color:#4a5568; text-align:center; letter-spacing:0.1em;">EL-31092 · WELCOME BACK</div>
-                    </div>
-                    <button onclick="rgo('rqs-home')" style="margin-top:10px; flex-shrink:0; background:#c9a84c; border:none; border-radius:7px; padding:11px 0; font-size:7.5px; font-weight:700; letter-spacing:0.09em; text-transform:uppercase; cursor:pointer; color:#0d1117; width:100%;">DONE</button>
-                  </div>
-                </div>
-
-              </div>
-              <!-- home bar -->
-              <div style="background:#0d1117; padding:8px 0 12px; display:flex; justify-content:center;">
-                <div style="width:62px; height:3px; background:#3a3a3c; border-radius:999px;"></div>
-              </div>
+              <div class="homebar"><i></i></div>
             </div>
           </div>
+          <p class="cap">click through it! designed on figma, powered by claude.<br><em>(post-competition)</em></p>
         </div>
-        <p style="font-family:'IBM Plex Mono',monospace; font-size:0.65rem; color:var(--ink); text-align:center; letter-spacing:0.03em; line-height:1.6;">designed on figma, powered by claude.<br><em>(post-competition)</em></p>
       </div>
     </div>
-  </section>
+  </main>
 
-  <style>
-    .qs { display:none; flex-direction:column; height:100%; }
-    .qs.on { display:flex; }
-  </style>
+  <nav class="navrow" aria-label="pages" style="width: 100%; max-width: 1080px">
+    <a href="projects.html">← projects/</a>
+    <a href="desktop.html">back to desktop</a>
+  </nav>
 
-  <script>
-    function rgo(id) {
-      document.querySelectorAll('.qs').forEach(function(s){ s.classList.remove('on'); });
-      document.getElementById(id).classList.add('on');
-    }
-    function rpick(btn, next) {
-      btn.closest('div').querySelectorAll('.ropt').forEach(function(b){
-        b.style.background='transparent'; b.style.borderColor='#2a3040'; b.style.color='#c8d0dc';
-      });
-      btn.style.background='rgba(201,168,76,0.14)'; btn.style.borderColor='#c9a84c'; btn.style.color='#fff';
-      setTimeout(function(){ rgo(next); }, 370);
-    }
-    (function makeBarcode(id) {
-      var heights = [18,12,20,10,16,22,10,14,18,10,20,12,16,22,10,18,14,10,20,16];
-      ['rbc1','rbc2'].forEach(function(id){
-        var el = document.getElementById(id);
-        if (!el) return;
-        heights.forEach(function(h){
-          var b = document.createElement('div');
-          b.style.cssText = 'width:2px;height:'+h+'px;background:#2a3040;border-radius:1px;';
-          el.appendChild(b);
-        });
-      });
-    })();
-  </script>
-
-</main>
-
-<!-- ===================== CONTACT ===================== -->
-<section id="contact">
-  <h2 class="section-heading word-fade">Let's work <em>together.</em></h2>
-  <p class="contact-sub">If you think we'd make a good team, you're probably right. Let's talk! :)</p>
-  <div class="contact-links">
-<a href="https://www.linkedin.com/in/srishti-gangolly/" target="_blank" class="contact-link outline">LinkedIn</a>
-    <a href="https://srishtigangolly.substack.com/" target="_blank" class="contact-link outline">Substack</a>
-  </div>
-  <p class="footer-note">Srishti Gangolly · <em>Your potential future employee.</em> &#10022; Toronto, Ontario</p>
-</section>
-
-
-<script src="js/script.js"></script>
+  <!-- let's work together (footer on every page) -->
+  <footer aria-labelledby="lwt" style="width: calc(100% + 32px); margin: 30px -16px 0; box-sizing: border-box; background: #04361D; color: #F0F2D5; border-top: 3px solid #04361D; display: flex; flex-direction: column; align-items: center">
+    <div style="width: 100%; max-width: 1080px; box-sizing: border-box; padding: 44px 24px 36px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px">
+      <div style="display: flex; flex-direction: column; gap: 14px; flex: 1 1 360px">
+        <h2 id="lwt" style="margin: 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 900; font-size: clamp(34px, 4vw, 46px); line-height: 1.05; color: #F0F2D5">let's work together.</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.7">if you think we'd make a good team, you're probably right. let's talk! :)</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px">
+          <a href="https://www.linkedin.com/in/srishti-gangolly/" style="font-family: 'Pixelify Sans', monospace; font-weight: 700; font-size: 18px; letter-spacing: .05em; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; box-sizing: border-box; border: 3px solid #F0F2D5; background: #EF233C; color: #F0F2D5; box-shadow: 0 4px 0 #97051D"><span aria-hidden="true" style="font-size: 16px; line-height: 1; padding: 1px 3px; border: 2px solid #F0F2D5">in</span> linkedin</a>
+          <a href="https://srishtigangolly.substack.com/" style="font-family: 'Pixelify Sans', monospace; font-weight: 700; font-size: 18px; letter-spacing: .05em; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; box-sizing: border-box; border: 3px solid #F0F2D5; background: #EF233C; color: #F0F2D5; box-shadow: 0 4px 0 #97051D"><svg class="px" viewBox="0 0 10 12" width="15" height="18" aria-hidden="true"><path fill="#F0F2D5" d="M0 0h10v2H0zM0 3h10v2H0zM0 6h10v6l-5-3-5 3z"/></svg> substack</a>
+        </div>
+      </div>
+    </div>
+    <div style="width: 100%; border-top: 2px solid #2E5A43; padding: 12px 16px; box-sizing: border-box; text-align: center; font-family: 'Pixelify Sans', monospace; font-size: 15px">srishti gangolly · your potential future employee. ✦ toronto, ontario</div>
+  </footer>
+  <div class="crt" aria-hidden="true"></div>
+</div>
+</template>
+<script>
+const QUESTIONS = [
+  { q: "what's your main skin concern?", a: ['dryness & dehydration', 'dullness & uneven tone', 'fine lines & aging', 'acne & sensitivity'] },
+  { q: 'how would you describe your skin type?', a: ['dry', 'oily', 'combination', 'normal / unsure'] },
+  { q: 'what matters most to you?', a: ['ingredient transparency', 'fast, visible results', 'clean / gentle formula', 'luxury feel & ritual'] }
+];
+const RECEIPTS = {
+  new: { order: '#EL-20847', items: [['anr serum 50ml', '$115.00'], ['foam cleanser 150ml', '$42.00'], ['supreme+ cream 50ml', '$78.00'], ['lip balm spf 50', '$28.00']],
+    subtotal: '$263.00', discountName: 'new customer (10%)', discount: '−$26.30', total: '$236.70' },
+  returning: { order: '#EL-31092', items: [['anr serum 50ml', '$115.00'], ['supreme+ cream 50ml', '$78.00'], ['anr eye concentrate', '$72.00'], ['micro essence lotion', '$58.00']],
+    subtotal: '$323.00', discountName: 'loyalty reward (15%)', discount: '−$48.45', total: '$274.55' }
+};
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { scr: 'home', q: 0, receipt: 'new' };
+  }
+  renderVals() {
+    const d = new Date();
+    const clock = (d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }).replace(',', '') + '  ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })).toLowerCase();
+    return Object.assign({ clock }, this.pageVals());
+  }
+  pageVals() {
+    const s = this.state;
+    const go = (scr, extra) => () => this.setState(Object.assign({ scr }, extra || {}));
+    const Q = QUESTIONS[s.q], R = RECEIPTS[s.receipt];
+    return {
+      isHome: s.scr === 'home', isQuestion: s.scr === 'question', isResult: s.scr === 'result',
+      isReturning: s.scr === 'returning', isPositive: s.scr === 'positive', isNegative: s.scr === 'negative', isReceipt: s.scr === 'receipt',
+      question: Q.q,
+      p1: 'on', p2: s.q >= 1 ? 'on' : '', p3: s.q >= 2 ? 'on' : '',
+      answers: Q.a.map((t) => ({ t, pick: () => this.setState(s.q < 2 ? { q: s.q + 1 } : { scr: 'result' }) })),
+      order: R.order, items: R.items.map(([name, price]) => ({ name, price })),
+      subtotal: R.subtotal, discountName: R.discountName, discount: R.discount, total: R.total,
+      goHome: go('home'), goQ1: go('question', { q: 0 }), goReturning: go('returning'),
+      goPositive: go('positive'), goNegative: go('negative'),
+      goReceiptNew: go('receipt', { receipt: 'new' }), goReceiptReturning: go('receipt', { receipt: 'returning' })
+    };
+  }
+}
+</script>
 </body>
 </html>

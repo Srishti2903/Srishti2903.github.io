@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Srishti Gangolly — writing</title>
+<meta name="theme-color" content="#76BA9D">
+<link rel="icon" href="img/doodle.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Fraunces:ital,wght@1,800;1,900&amp;family=Pixelify+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#97051D}a:hover{color:#04361D}
+.btn{font-family:'Pixelify Sans',monospace;font-weight:700;font-size:19px;letter-spacing:.05em;text-transform:lowercase;text-decoration:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 18px;border:3px solid #04361D;box-sizing:border-box;box-shadow:inset -3px -3px 0 rgba(4,54,29,.28),inset 3px 3px 0 rgba(255,255,255,.35),0 4px 0 #04361D}
+.win{background:#F0F2D5;border:3px solid #04361D;box-shadow:6px 6px 0 #04361D;display:flex;flex-direction:column;min-width:0}
+.bar{height:36px;flex:none;background:#04361D;color:#F0F2D5;display:flex;align-items:center;justify-content:space-between;padding:0 6px 0 12px;font-family:'Pixelify Sans',monospace;font-size:16px;font-weight:600}
+.close{width:28px;height:28px;box-sizing:border-box;border:2px solid #F0F2D5;background:#F0F2D5;display:inline-flex;align-items:center;justify-content:center}
+.close:hover{background:#EF233C}
+.h2{margin:0;font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:clamp(36px,4.4vw,52px);line-height:1.05;color:#6B0314}
+.navrow{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-family:'Pixelify Sans',monospace;font-size:16px}
+.navrow a{color:#04361D}
+.px{image-rendering:pixelated;shape-rendering:crispEdges}
+.tg{flex:0 1 340px;box-sizing:border-box;background:#F0F2D5;transform:rotate(1deg)}
+.tg-body{padding:18px 20px 22px;display:flex;flex-direction:column;gap:12px}
+.tg-body h2{margin:0;font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:24px;color:#6B0314}
+.tg-sub{margin:0;font-size:13px;line-height:1.6;color:#2E5A43}
+.tg-field{display:flex;flex-direction:column;gap:4px;font-family:'Pixelify Sans',monospace;font-size:14px}
+.tg-field select{font-family:'DM Mono',monospace;font-size:14px;color:#04361D;background:#FFFFFB;border:2px solid #04361D;box-shadow:inset 2px 2px 0 #C7CCA6,3px 3px 0 #04361D;padding:7px 8px;border-radius:0;cursor:pointer}
+.tg-field select:focus{outline:2px solid #97051D;outline-offset:2px}
+.tg-go{margin-top:4px;font-family:'Pixelify Sans',monospace;font-weight:700;font-size:17px;color:#F0F2D5;background:#EF233C;border:3px solid #04361D;padding:8px 14px;cursor:pointer;box-shadow:0 4px 0 #04361D}
+.tg-go:active{transform:translateY(2px);box-shadow:0 2px 0 #04361D}
+.tg-note{margin:0;min-height:16px;font-family:'Pixelify Sans',monospace;font-size:13px;color:#97051D}
+.tg-card{background:#FFFFF4;border:3px solid #04361D;box-shadow:4px 4px 0 #97051D;padding:14px 16px;display:flex;flex-direction:column;gap:8px;background-image:repeating-linear-gradient(transparent 0 23px,#E4E7C3 23px 24px);animation:tgIn 220ms ease-out}
+@keyframes tgIn{from{opacity:0;transform:translateY(6px)}}
+@media (prefers-reduced-motion:reduce){.tg-card{animation:none}}
+.tg-tag{align-self:flex-start;font-family:'Pixelify Sans',monospace;font-size:12px;padding:1px 8px;background:#76BA9D;border:2px solid #04361D}
+.tg-card p{margin:0;font-family:'Fraunces',serif;font-style:italic;font-weight:800;font-size:19px;line-height:1.45;color:#04361D}
+.tg-fmt{font-family:'Pixelify Sans',monospace;font-size:13px;color:#97051D}
+.desk-row{width:100%;max-width:1020px;display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:28px}
+.menubar{height:32px;flex:none;width:100%;box-sizing:border-box;background:#F0F2D5;border-bottom:3px solid #04361D;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-family:'Pixelify Sans',monospace;font-size:15px;position:sticky;top:0;z-index:6}
+.menubar .menus{display:flex;align-items:center;gap:18px}
+.menubar .menus a{color:#04361D;text-decoration:none;padding:2px 6px}
+.menubar .menus a:hover{background:#04361D;color:#F0F2D5}
+.menubar .tray{display:flex;align-items:center;gap:22px}
+.crt{position:fixed;inset:0;pointer-events:none;z-index:5;background:repeating-linear-gradient(rgba(4,54,29,.05) 0 1px,transparent 1px 3px);box-shadow:inset 0 0 140px rgba(4,54,29,.28)}
+@media (max-width:700px){.menubar .menus .opt{display:none}}
+@media (max-width:480px){.menubar{padding:0 10px;font-size:13px}.menubar .tray{gap:10px}.menubar .tray svg{width:14px;height:auto}}
+</style>
+<script src="js/srishti-os.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<template id="page">
+<div style="width: 100%; min-height: 100vh; box-sizing: border-box; background-color: #76BA9D; background-image: radial-gradient(#6AAE91 1px, transparent 1.2px); background-size: 8px 8px; font-family: 'DM Mono', monospace; color: #04361D; display: flex; flex-direction: column; align-items: center; gap: 22px; padding: 24px 16px 0; position: relative">
+  <header class="menubar" style="margin: -24px -16px 0; width: calc(100% + 32px)">
+    <nav class="menus" aria-label="menu">
+      <span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700; padding: 2px 6px">
+        <svg class="px" viewBox="0 0 11 16" width="11" height="16" aria-hidden="true"><path fill="#EF233C" d="M2 0h1v1H2zM5 0h1v1H5zM8 0h1v1H8zM2 1h7v1H2zM2 2h7v3H2zM3 5h5v1H3zM4 6h3v1H4z"/><path fill="#97051D" d="M5 2h1v4H5zM8 2h1v3H8z"/><path fill="#04361D" d="M5 7h1v9H5zM1 9h1v2H1zM2 11h1v1H2zM3 12h2v1H3zM9 8h1v2H9zM8 10h1v1H8zM6 11h2v1H6z"/><path fill="#76BA9D" d="M2 9h1v2H2zM3 11h2v1H3zM8 8h1v2H8zM6 10h2v1H6z"/></svg>
+        srishti os
+      </span>
+    </nav>
+    <div class="tray">
+      <svg class="px" viewBox="0 0 9 7" width="18" height="14" aria-label="wifi" role="img"><path fill="#04361D" d="M2 0h5v1H2zM1 1h1v1H1zM7 1h1v1H7zM0 2h1v1H0zM8 2h1v1H8zM3 2h3v1H3zM2 3h1v1H2zM6 3h1v1H6zM4 5h1v2H4z"/></svg>
+      <svg class="px" viewBox="0 0 12 7" width="24" height="14" aria-label="battery full" role="img"><path fill="#04361D" d="M0 0h10v1H0zM0 6h10v1H0zM0 1h1v5H0zM9 1h1v5H9zM10 2h2v3h-2z"/><path fill="#EF233C" d="M2 2h6v3H2z"/></svg>
+      <time style="white-space: pre; word-spacing: 2px">{{clock}}</time>
+    </div>
+  </header>
+
+  <a href="desktop.html" aria-label="back to desktop" style="line-height: 0"><img src="img/doodle.png" alt="Srishti Gangolly" style="width: 92px; height: auto; transform: rotate(6deg)"></a>
+
+  <div class="desk-row">
+  <main class="win" style="flex: 1 1 520px; max-width: 640px; min-width: 0">
+    <div class="bar">
+      <span>train_of_thoughts</span>
+      <a class="close" href="desktop.html" aria-label="close, back to desktop"><svg class="px" viewBox="0 0 8 8" width="12" height="12" aria-hidden="true"><path fill="#04361D" d="M0 0h2v1H0zM6 0h2v1H6zM1 1h2v1H1zM5 1h2v1H5zM2 2h4v1H2zM3 3h2v2H3zM2 5h4v1H2zM1 6h2v1H1zM5 6h2v1H5zM0 7h2v1H0zM6 7h2v1H6z"/></svg></a>
+    </div>
+    <div style="padding: 28px 30px 32px; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; background: #FFFFF4; background-image: repeating-linear-gradient(transparent 0 31px, #E4E7C3 31px 32px)">
+      <svg class="px" viewBox="0 0 16 16" width="44" height="44" aria-hidden="true"><path fill="#EF233C" d="M2 3h12v9H2z"/><path fill="#F0F2D5" d="M4 5h3v3H4zM9 5h3v3H9zM7 10h2v1H7z"/><path fill="#04361D" d="M3 2h10v1H3zM3 12h3v2H3zM10 12h3v2h-3zM1 14h14v1H1z"/></svg>
+      <h1 class="h2" style="font-size: clamp(30px, 3.4vw, 40px)">words, on substack.</h1>
+      <p style="margin: 0; font-size: 15px; line-height: 1.75">join my little nook on the internet: love letters to my intrusive thoughts, curated lists of hyperfixations &amp; a mirror into my relationships.</p>
+      <a class="btn" href="https://srishtigangolly.substack.com/" style="background: #EF233C; color: #F0F2D5">
+        <svg class="px" viewBox="0 0 10 12" width="16" height="20" aria-hidden="true"><path fill="#F0F2D5" d="M0 0h10v2H0zM0 3h10v2H0zM0 6h10v6l-5-3-5 3z"/></svg>
+        subscribe to train of thoughts →
+      </a>
+    </div>
+
+  </main>
+    <!-- topic generator: pick an age + interest, get a writing prompt -->
+    <section class="tg win" aria-labelledby="tg-title">
+      <div class="bar" style="align-self: stretch"><span>prompt_generator.exe</span><span aria-hidden="true">✎</span></div>
+      <div class="tg-body">
+        <h2 id="tg-title">writer's block?</h2>
+        <p class="tg-sub">tell me a little about you and i'll hand you something to write about.</p>
+        <label class="tg-field"><span>your age</span>
+          <select onChange="{{onAge}}" aria-label="your age">
+            <option value="">pick one</option>
+            <optgroup data-sc-for list="{{ages}}" as="o" hint-placeholder-count="5"><option value="{{o.v}}">{{o.v}}</option></optgroup>
+          </select>
+        </label>
+        <label class="tg-field"><span>topics of interest</span>
+          <select onChange="{{onTopic}}" aria-label="topics of interest">
+            <option value="">pick one</option>
+            <optgroup data-sc-for list="{{topics}}" as="o" hint-placeholder-count="10"><option value="{{o.v}}">{{o.label}}</option></optgroup>
+          </select>
+        </label>
+        <label class="tg-field"><span>format</span>
+          <select onChange="{{onFormat}}" aria-label="format">
+            <optgroup data-sc-for list="{{formats}}" as="o" hint-placeholder-count="4"><option value="{{o.v}}">{{o.v}}</option></optgroup>
+          </select>
+        </label>
+        <button type="button" class="tg-go" onClick="{{generate}}" aria-disabled="{{cantGo}}" style="opacity: {{goOpacity}}">{{goLabel}}</button>
+        <p class="tg-note" aria-live="polite">{{note}}</p>
+        <sc-if value="{{hasPrompt}}" hint-placeholder-val="{{ false }}">
+          <div class="tg-card" aria-live="polite">
+            <span class="tg-tag">{{topic}} · {{age}}</span>
+            <p>{{prompt}}</p>
+            <sc-if value="{{hasFormat}}" hint-placeholder-val="{{ false }}"><span class="tg-fmt">✎ {{formatLine}}</span></sc-if>
+          </div>
+        </sc-if>
+      </div>
+    </section>
+  </div>
+
+  <nav class="navrow" aria-label="pages" style="width: 100%; max-width: 1020px">
+    <a href="projects.html">← projects/</a>
+    <a href="desktop.html">back to desktop</a>
+  </nav>
+
+  <!-- let's work together (footer on every page) -->
+  <footer aria-labelledby="lwt" style="width: calc(100% + 32px); margin: 30px -16px 0; box-sizing: border-box; background: #04361D; color: #F0F2D5; border-top: 3px solid #04361D; display: flex; flex-direction: column; align-items: center">
+    <div style="width: 100%; max-width: 1080px; box-sizing: border-box; padding: 44px 24px 36px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px">
+      <div style="display: flex; flex-direction: column; gap: 14px; flex: 1 1 360px">
+        <h2 id="lwt" style="margin: 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 900; font-size: clamp(34px, 4vw, 46px); line-height: 1.05; color: #F0F2D5">let's work together.</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.7">if you think we'd make a good team, you're probably right. let's talk! :)</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px">
+          <a href="https://www.linkedin.com/in/srishti-gangolly/" style="font-family: 'Pixelify Sans', monospace; font-weight: 700; font-size: 18px; letter-spacing: .05em; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; box-sizing: border-box; border: 3px solid #F0F2D5; background: #EF233C; color: #F0F2D5; box-shadow: 0 4px 0 #97051D"><span aria-hidden="true" style="font-size: 16px; line-height: 1; padding: 1px 3px; border: 2px solid #F0F2D5">in</span> linkedin</a>
+          <a href="https://srishtigangolly.substack.com/" style="font-family: 'Pixelify Sans', monospace; font-weight: 700; font-size: 18px; letter-spacing: .05em; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; box-sizing: border-box; border: 3px solid #F0F2D5; background: #EF233C; color: #F0F2D5; box-shadow: 0 4px 0 #97051D"><svg class="px" viewBox="0 0 10 12" width="15" height="18" aria-hidden="true"><path fill="#F0F2D5" d="M0 0h10v2H0zM0 3h10v2H0zM0 6h10v6l-5-3-5 3z"/></svg> substack</a>
+        </div>
+      </div>
+      <a href="index.html" style="display: flex; flex-direction: column; align-items: center; gap: 12px; text-decoration: none; color: #F0F2D5">
+        <div aria-hidden="true" style="position: relative; width: 170px; aspect-ratio: 46 / 29">
+          <div style="position: absolute; inset: 0; background: #F0F2D5; border: 3px solid #F0F2D5; box-shadow: 6px 6px 0 #97051D"></div>
+          <div style="position: absolute; left: 3px; right: 3px; top: 3px; height: 58.6%; background: #04361D; clip-path: polygon(0 0, 100% 0, 50% 100%)"></div>
+          <div style="position: absolute; left: 3px; right: 3px; top: 3px; height: 55%; background: #E4E7C3; clip-path: polygon(1% 0, 99% 0, 50% 100%)"></div>
+          <svg class="px" viewBox="0 0 13 12" width="40" height="37" style="position: absolute; left: 50%; top: 58%; transform: translate(-50%, -50%)"><path fill="#04361D" d="M2 0h3v1H2zM8 0h3v1H8zM1 1h1v1H1zM5 1h1v1H5zM7 1h1v1H7zM11 1h1v1h-1zM0 2h1v4H0zM6 2h1v1H6zM12 2h1v4h-1zM1 6h1v1H1zM11 6h1v1h-1zM2 7h1v1H2zM10 7h1v1h-1zM3 8h1v1H3zM9 8h1v1H9zM4 9h1v1H4zM8 9h1v1H8zM5 10h1v1H5zM7 10h1v1H7zM6 11h1v1H6z"/><path fill="#EF233C" d="M2 1h3v1H2zM8 1h3v1H8zM1 2h5v1H1zM7 2h5v1H7zM1 3h11v3H1zM2 6h9v1H2zM3 7h7v1H3zM4 8h5v1H4zM5 9h3v1H5zM6 10h1v1H6z"/><path fill="#F0F2D5" d="M2 2h2v1H2zM2 3h1v1H2z"/></svg>
+        </div>
+        <span style="font-family: 'Pixelify Sans', monospace; font-size: 16px; text-decoration: underline">or leave me a note →</span>
+      </a>
+    </div>
+    <div style="width: 100%; border-top: 2px solid #2E5A43; padding: 12px 16px; box-sizing: border-box; text-align: center; font-family: 'Pixelify Sans', monospace; font-size: 15px">srishti gangolly · your potential future employee. ✦ toronto, ontario</div>
+  </footer>
+  <div class="crt" aria-hidden="true"></div>
+</div>
+</template>
+<script>
+// writing prompts by topic, then by age group (teen 13–17, young 18–24, adult 25+)
+const PROMPTS = {
+  'general': {
+    teen: ["write about the best day you've had this year.", "what's something you're weirdly good at?", "describe your week using only song titles, then explain them."],
+    young: ["write about a small thing that made you happy today.", "what's a rule you live by, and where did it come from?", "describe the last time you surprised yourself."],
+    adult: ["write about a decision you're glad you made.", "what's something you've changed your mind about recently?", "describe an ordinary moment you want to remember forever."]
+  },
+  'love & relationships': {
+    teen: ["write about the first time you realized you had a crush.", "describe a friendship that felt like a love story.", "what does a 'perfect date' look like to you right now?"],
+    young: ["write a letter to someone you never got closure with.", "what's a green flag you didn't know you needed?", "describe the moment you knew a relationship had changed."],
+    adult: ["how has your idea of love changed in the last ten years?", "write about the small, boring thing someone does that makes you feel loved.", "what would you tell your younger self about heartbreak?"]
+  },
+  'school & career': {
+    teen: ["what class would you invent if you could add one to school?", "write about a teacher who changed how you see yourself.", "what do you want people to say about you at graduation?"],
+    young: ["describe your dream job without using its title.", "write about the first time you felt like an adult at work.", "what's something school never taught you that you had to learn fast?"],
+    adult: ["write about a career pivot you made — or wish you had.", "what does 'success' mean to you now vs. five years ago?", "describe the best manager you ever had in three scenes."]
+  },
+  'hobbies & hyperfixations': {
+    teen: ["what's the thing you could talk about for an hour straight? go.", "write a love letter to your current obsession.", "describe a hobby you picked up and dropped — what happened?"],
+    young: ["make a list of every hyperfixation you've had this year.", "write about a niche corner of the internet you love.", "what hobby would you pick up if money and time didn't matter?"],
+    adult: ["write about a hobby you returned to after years away.", "what's a skill you're slowly getting better at, and how does it feel?", "describe a weekend spent entirely on something you love."]
+  },
+  'family': {
+    teen: ["write about a family tradition you secretly love.", "what's a recipe or smell that feels like home?", "describe your family as if they were characters in a sitcom."],
+    young: ["write about the first time you saw a parent as a person.", "what's something you inherited that isn't an object?", "describe a phone call home you still think about."],
+    adult: ["what do you want to pass down, and what do you want to leave behind?", "write about a family member you understand better now.", "describe a holiday from three different years."]
+  },
+  'self & identity': {
+    teen: ["write about who you are when nobody's watching.", "what's a label people give you that doesn't fit?", "describe your personality as a weather forecast."],
+    young: ["write about a version of yourself you've outgrown.", "what's a belief you held at 15 that you've completely flipped on?", "describe your ideal ordinary tuesday."],
+    adult: ["write a thank-you note to your past self.", "what parts of you have stayed exactly the same since childhood?", "describe the moment you stopped caring what others thought (or haven't yet)."]
+  },
+  'tech': {
+    teen: ["write about the first piece of tech you ever called your own.", "if you could invent one app to fix your school day, what would it do?", "describe a future gadget you think will exist by the time you're 30."],
+    young: ["write about a piece of tech that changed how you work or study.", "what's an app you'd delete if you could — and why haven't you?", "describe how you'd explain ai to your grandparents."],
+    adult: ["write about how tech has changed your job since you started.", "what's a piece of old tech you miss?", "describe a time technology made you feel more connected — or less."]
+  },
+  'the internet': {
+    teen: ["write about the first video that made you laugh until you cried.", "what would your life look like without your phone for a week?", "describe an online friend you've never met."],
+    young: ["write about a trend you loved and a trend you hated.", "what does your screen time say about you this week?", "describe your perfect corner of the internet."],
+    adult: ["how has the internet changed the way you make friends?", "write about the first website you remember visiting.", "what would you tell your 13-year-old self about going online?"]
+  },
+  'food & comfort': {
+    teen: ["write about your ultimate comfort snack and why.", "describe the best meal you've ever had in five senses.", "what food reminds you of a specific person?"],
+    young: ["write about the first meal you cooked for someone else.", "describe your go-to order and what it says about you.", "what's a dish you're still trying to get right?"],
+    adult: ["write about a meal that marked a big moment in your life.", "describe your kitchen at 7am and 11pm.", "what recipe would you want someone to remember you by?"]
+  },
+  'places & travel': {
+    teen: ["write about a place you've only seen in pictures but want to visit.", "describe your bedroom to someone who's never been inside.", "what's the best road trip you've been on?"],
+    young: ["write about a city that changed you.", "describe the view from somewhere you've lived.", "what's a place you go to think?"],
+    adult: ["write about a place you've returned to after many years.", "describe a home you've left behind.", "where would you live for a year if you could pick anywhere?"]
+  }
+};
+const EMOJI = { 'general': '✨', 'family': '🏡', 'food & comfort': '🍜', 'hobbies & hyperfixations': '🧶', 'love & relationships': '💌',
+  'places & travel': '🗺️', 'school & career': '🎓', 'self & identity': '🪞', 'tech': '💻', 'the internet': '🌐' };
+// general stays on top, the rest alphabetical
+const TOPICS = ['general'].concat(Object.keys(PROMPTS).filter((t) => t !== 'general').sort());
+const FORMATS = {
+  'journal entry': 'write it as a journal entry.',
+  'short story': 'turn it into a short story.',
+  'list': 'write it as a list of 10 things.',
+  'poem': 'write it as a poem.'
+};
+const AGES = ['13–15', '16–17', '18–20', '21–24', '25+'];
+// 13–17 get teen prompts, 18–24 young-adult ones, 25+ adult ones
+const ageGroup = (a) => (a === '13–15' || a === '16–17') ? 'teen' : (a === '18–20' || a === '21–24') ? 'young' : 'adult';
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { age: '', topic: '', format: 'journal entry', prompt: '', note: '' };
+  }
+  renderVals() {
+    const d = new Date();
+    const clock = (d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }).replace(',', '') + '  ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })).toLowerCase();
+    return Object.assign({ clock }, this.pageVals());
+  }
+  pageVals() {
+    const s = this.state, ready = s.age && s.topic;
+    return {
+      ages: AGES.map((v) => ({ v })), topics: TOPICS.map((v) => ({ v, label: EMOJI[v] + ' ' + v })), formats: Object.keys(FORMATS).map((v) => ({ v })),
+      onAge: (e) => this.setState({ age: e.target.value, note: '' }),
+      onTopic: (e) => this.setState({ topic: e.target.value, note: '' }),
+      onFormat: (e) => this.setState({ format: e.target.value }),
+      generate: () => this.generate(),
+      cantGo: String(!ready), goOpacity: ready ? '1' : '.6',
+      goLabel: s.prompt ? 'give me another ↻' : 'generate a prompt ✎',
+      note: s.note, hasPrompt: !!s.prompt, prompt: s.prompt, topic: s.shownTopic ? EMOJI[s.shownTopic] + ' ' + s.shownTopic : '', age: s.shownAge,
+      hasFormat: !!FORMATS[s.shownFormat], formatLine: FORMATS[s.shownFormat] || ''
+    };
+  }
+  // pick a prompt for the chosen age + topic, never the same one twice in a row
+  generate() {
+    const s = this.state;
+    if (!s.age || !s.topic) return this.setState({ note: !s.age ? 'pick your age first!' : 'pick a topic first!' });
+    const pool = PROMPTS[s.topic][ageGroup(s.age)].filter((p) => p !== s.prompt);
+    const prompt = pool[Math.floor(Math.random() * pool.length)];
+    this.setState({ prompt, note: '', shownTopic: s.topic, shownAge: s.age, shownFormat: s.format });
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Srishti Gangolly — desktop</title>
+<meta name="theme-color" content="#76BA9D">
+<link rel="icon" href="img/doodle.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Fraunces:ital,wght@1,800;1,900&amp;family=Pixelify+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#97051D}a:hover{color:#04361D}
+.btn{font-family:'Pixelify Sans',monospace;font-weight:700;font-size:19px;letter-spacing:.05em;text-transform:lowercase;text-decoration:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 18px;border:3px solid #04361D;box-sizing:border-box;box-shadow:inset -3px -3px 0 rgba(4,54,29,.28),inset 3px 3px 0 rgba(255,255,255,.35),0 4px 0 #04361D;transition:transform 60ms}
+.btn:active{transform:translateY(2px);box-shadow:inset 3px 3px 0 rgba(4,54,29,.28),0 2px 0 #04361D}
+.win{background:#F0F2D5;border:3px solid #04361D;box-shadow:6px 6px 0 #04361D;display:flex;flex-direction:column;min-width:0}
+.bar{height:36px;flex:none;background:#04361D;color:#F0F2D5;display:flex;align-items:center;justify-content:space-between;padding:0 6px 0 12px;font-family:'Pixelify Sans',monospace;font-size:16px;font-weight:600}
+.ctl{width:24px;height:24px;box-sizing:border-box;border:2px solid #04361D;background:#F0F2D5;display:inline-flex;align-items:center;justify-content:center}
+.label{font-family:'Pixelify Sans',monospace;font-size:14px;letter-spacing:.1em;color:#97051D}
+.chip{font-family:'Pixelify Sans',monospace;font-size:14px;padding:3px 10px;border:2px solid #04361D;background:#76BA9D}
+.icon{position:relative;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-user-drag:none;cursor:grab;display:flex;flex-direction:column;align-items:center;gap:6px;width:104px;text-decoration:none;color:#04361D}
+.icon span{font-family:'Pixelify Sans',monospace;font-size:14px;line-height:1.2;text-align:center;padding:2px 4px;background:rgba(240,242,213,.88)}
+.icon:hover span,.icon:focus span{background:#04361D;color:#F0F2D5}
+.icon:hover svg{transform:translateY(-2px)}
+.icon:active{cursor:grabbing}
+.icon svg{pointer-events:none}
+.screen{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:32px;align-items:center;width:100%;max-width:1280px;flex:1;min-height:0}
+.icons{display:grid;grid-template-columns:repeat(2,104px);gap:20px 8px;align-content:center}
+@media (max-width:900px){
+  .desk-root{height:auto!important;overflow:visible!important}
+  .screen{grid-template-columns:minmax(0,1fr);gap:24px;align-items:start}
+  .icons{grid-template-columns:repeat(4,minmax(0,1fr));justify-items:center}
+  .spacer{display:none}
+}
+@media (max-width:560px){
+  .icons{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 4px}
+  .icon{width:100%}
+  .icon span{font-size:13px;overflow-wrap:anywhere}
+  .win h2{font-size:34px!important}
+}
+@media (max-width:900px){.icon{touch-action:auto;cursor:pointer}}
+.px{image-rendering:pixelated;shape-rendering:crispEdges}
+.menubar{height:32px;flex:none;width:100%;box-sizing:border-box;background:#F0F2D5;border-bottom:3px solid #04361D;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-family:'Pixelify Sans',monospace;font-size:15px;position:relative;z-index:2}
+.menubar .menus{display:flex;align-items:center;gap:18px}
+.menubar .menus a{color:#04361D;text-decoration:none;padding:2px 6px}
+.menubar .menus a:hover{background:#04361D;color:#F0F2D5}
+.menubar .tray{display:flex;align-items:center;gap:22px}
+.crt{position:absolute;inset:0;pointer-events:none;z-index:5;background:repeating-linear-gradient(rgba(4,54,29,.05) 0 1px,transparent 1px 3px);box-shadow:inset 0 0 140px rgba(4,54,29,.28)}
+@media (max-width:700px){.menubar .menus .opt{display:none}}
+@media (max-width:480px){.menubar{padding:0 10px;font-size:13px}.menubar .tray{gap:10px}.menubar .tray svg{width:14px;height:auto}}
+</style>
+<script src="js/srishti-os.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<template id="page">
+<div class="desk-root" style="width: 100%; height: 100vh; min-height: 640px; box-sizing: border-box; overflow: hidden; background-color: #A9D8F0; background-image: url(img/site/meadow-bg.jpg); background-size: cover; background-position: center; image-rendering: pixelated; font-family: 'DM Mono', monospace; color: #04361D; display: flex; flex-direction: column; align-items: center; position: relative">
+
+  <!-- menu bar: makes the page read as a computer screen -->
+  <header class="menubar">
+    <nav class="menus" aria-label="menu">
+      <span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700; padding: 2px 6px">
+        <svg class="px" viewBox="0 0 11 16" width="11" height="16" aria-hidden="true"><path fill="#EF233C" d="M2 0h1v1H2zM5 0h1v1H5zM8 0h1v1H8zM2 1h7v1H2zM2 2h7v3H2zM3 5h5v1H3zM4 6h3v1H4z"/><path fill="#97051D" d="M5 2h1v4H5zM8 2h1v3H8z"/><path fill="#04361D" d="M5 7h1v9H5zM1 9h1v2H1zM2 11h1v1H2zM3 12h2v1H3zM9 8h1v2H9zM8 10h1v1H8zM6 11h2v1H6z"/><path fill="#76BA9D" d="M2 9h1v2H2zM3 11h2v1H3zM8 8h1v2H8zM6 10h2v1H6z"/></svg>
+        srishti os
+      </span>
+      <a class="opt" href="about.html">about</a>
+      <a class="opt" href="experience.html">experience</a>
+      <a class="opt" href="projects.html">projects</a>
+      <a class="opt" href="writing.html">writing</a>
+      <a class="opt" href="https://drive.google.com/file/d/1dasPUW3PCfL3X46S7Zs5TBzfl2K2QQfY/view?usp=sharing">resume ↗</a>
+      <a class="opt" href="https://www.linkedin.com/in/srishti-gangolly/">linkedin ↗</a>
+    </nav>
+    <div class="tray">
+      <svg class="px" viewBox="0 0 9 7" width="18" height="14" aria-label="wifi" role="img"><path fill="#04361D" d="M2 0h5v1H2zM1 1h1v1H1zM7 1h1v1H7zM0 2h1v1H0zM8 2h1v1H8zM3 2h3v1H3zM2 3h1v1H2zM6 3h1v1H6zM4 5h1v2H4z"/></svg>
+      <svg class="px" viewBox="0 0 12 7" width="24" height="14" aria-label="battery full" role="img"><path fill="#04361D" d="M0 0h10v1H0zM0 6h10v1H0zM0 1h1v5H0zM9 1h1v5H9zM10 2h2v3h-2z"/><path fill="#EF233C" d="M2 2h6v3H2z"/></svg>
+      <time style="white-space: pre; word-spacing: 2px">{{clock}}</time>
+    </div>
+  </header>
+
+  <div style="flex: 1; min-height: 0; width: 100%; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; padding: 20px 24px 32px">
+
+  <h1 style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Srishti Gangolly</h1>
+
+  <div class="screen">
+    <nav class="icons" aria-label="open a page">
+      <a class="icon" href="about.html" draggable="false" style="transform: {{t0}}; z-index: {{z0}}" onPointerDown="{{grab0}}" onClick="{{tap0}}">
+        <svg class="px" viewBox="0 0 16 16" width="52" height="52" aria-hidden="true"><path fill="#F0F2D5" d="M3 2h10v12H3z"/><path fill="#04361D" d="M3 1h10v1H3zM3 14h10v1H3zM2 2h1v12H2zM13 2h1v12h-1zM5 5h6v1H5zM5 8h6v1H5zM5 11h4v1H5z"/><path fill="#EF233C" d="M4 0h1v3H4zM7 0h1v3H7zM10 0h1v3h-1z"/></svg>
+        <span>about_me.txt</span>
+      </a>
+      <a class="icon" href="experience.html" draggable="false" style="transform: {{t1}}; z-index: {{z1}}" onPointerDown="{{grab1}}" onClick="{{tap1}}">
+        <svg class="px" viewBox="0 0 16 16" width="52" height="52" aria-hidden="true"><path fill="#EF233C" d="M1 6h14v7H1z"/><path fill="#97051D" d="M1 9h14v1H1z"/><path fill="#04361D" d="M1 5h14v1H1zM1 13h14v1H1zM0 6h1v7H0zM15 6h1v7h-1zM6 2h4v1H6zM5 3h1v2H5zM10 3h1v2h-1z"/><path fill="#F0F2D5" d="M7 8h2v3H7z"/></svg>
+        <span>experience.exe</span>
+      </a>
+      <a class="icon" href="certifications.html" draggable="false" style="transform: {{t2}}; z-index: {{z2}}" onPointerDown="{{grab2}}" onClick="{{tap2}}">
+        <svg class="px" viewBox="0 0 21 20" width="52" height="50" aria-hidden="true"><path fill="#161F2B" d="M8 0h1v1H8zM9 0h1v1H9zM10 0h1v1H10zM11 0h1v1H11zM12 0h1v1H12zM7 1h1v1H7zM13 1h1v1H13zM6 2h1v1H6zM14 2h1v1H14zM5 3h1v1H5zM15 3h1v1H15zM4 4h1v1H4zM16 4h1v1H16zM4 5h1v1H4zM16 5h1v1H16zM4 6h1v1H4zM16 6h1v1H16zM4 7h1v1H4zM16 7h1v1H16zM4 8h1v1H4zM16 8h1v1H16zM5 9h1v1H5zM15 9h1v1H15zM5 10h1v1H5zM15 10h1v1H15zM4 11h1v1H4zM16 11h1v1H16zM3 12h1v1H3zM17 12h1v1H17zM2 13h1v1H2zM10 13h1v1H10zM18 13h1v1H18zM1 14h1v1H1zM9 14h1v1H9zM11 14h1v1H11zM19 14h1v1H19zM0 15h1v1H0zM1 15h1v1H1zM2 15h1v1H2zM3 15h1v1H3zM4 15h1v1H4zM8 15h1v1H8zM12 15h1v1H12zM16 15h1v1H16zM17 15h1v1H17zM18 15h1v1H18zM19 15h1v1H19zM20 15h1v1H20zM4 16h1v1H4zM7 16h1v1H7zM13 16h1v1H13zM16 16h1v1H16zM4 17h1v1H4zM6 17h1v1H6zM14 17h1v1H14zM16 17h1v1H16zM4 18h1v1H4zM5 18h1v1H5zM15 18h1v1H15zM16 18h1v1H16zM4 19h1v1H4zM16 19h1v1H16z"/><path fill="#FCBF39" d="M8 1h1v1H8zM10 2h1v1H10zM11 2h1v1H11zM12 2h1v1H12zM8 3h1v1H8zM9 3h1v1H9zM10 3h1v1H10zM13 3h1v1H13zM7 4h1v1H7zM8 4h1v1H8zM9 4h1v1H9zM10 4h1v1H10zM11 4h1v1H11zM14 4h1v1H14zM7 5h1v1H7zM8 5h1v1H8zM9 5h1v1H9zM10 5h1v1H10zM11 5h1v1H11zM12 5h1v1H12zM14 5h1v1H14zM7 6h1v1H7zM8 6h1v1H8zM9 6h1v1H9zM10 6h1v1H10zM11 6h1v1H11zM12 6h1v1H12zM14 6h1v1H14zM7 7h1v1H7zM8 7h1v1H8zM9 7h1v1H9zM10 7h1v1H10zM11 7h1v1H11zM12 7h1v1H12zM13 7h1v1H13zM14 7h1v1H14zM7 8h1v1H7zM8 8h1v1H8zM9 8h1v1H9zM10 8h1v1H10zM11 8h1v1H11zM12 8h1v1H12zM13 8h1v1H13zM15 8h1v1H15zM8 9h1v1H8zM9 9h1v1H9zM10 9h1v1H10zM11 9h1v1H11zM12 9h1v1H12zM14 9h1v1H14z"/><path fill="#FFEE84" d="M9 1h1v1H9zM10 1h1v1H10zM11 1h1v1H11zM12 1h1v1H12zM13 2h1v1H13zM11 3h1v1H11zM12 3h1v1H12zM14 3h1v1H14zM12 4h1v1H12zM13 4h1v1H13zM15 4h1v1H15zM13 5h1v1H13zM15 5h1v1H15zM13 6h1v1H13zM15 6h1v1H15zM15 7h1v1H15z"/><path fill="#DD9E29" d="M7 2h1v1H7zM8 2h1v1H8zM9 2h1v1H9zM6 3h1v1H6zM5 4h1v1H5zM5 5h1v1H5zM5 6h1v1H5zM5 7h1v1H5zM5 8h1v1H5zM14 8h1v1H14zM6 9h1v1H6zM7 10h1v1H7zM13 10h1v1H13zM8 11h1v1H8zM9 11h1v1H9zM10 11h1v1H10zM11 11h1v1H11zM12 11h1v1H12z"/><path fill="#A25523" d="M7 3h1v1H7zM6 4h1v1H6zM6 5h1v1H6zM6 6h1v1H6zM6 7h1v1H6zM6 8h1v1H6zM7 9h1v1H7zM13 9h1v1H13zM8 10h1v1H8zM9 10h1v1H9zM10 10h1v1H10zM11 10h1v1H11zM12 10h1v1H12z"/><path fill="#5F2345" d="M6 10h1v1H6zM14 10h1v1H14zM7 11h1v1H7zM13 11h1v1H13zM8 12h1v1H8zM9 12h1v1H9zM10 12h1v1H10zM11 12h1v1H11zM12 12h1v1H12z"/><path fill="#9D3041" d="M5 11h1v1H5zM15 11h1v1H15zM7 12h1v1H7zM9 13h1v1H9zM11 13h1v1H11zM2 14h1v1H2zM3 14h1v1H3zM8 14h1v1H8zM12 14h1v1H12zM17 14h1v1H17zM18 14h1v1H18zM5 16h1v1H5zM15 16h1v1H15zM5 17h1v1H5zM15 17h1v1H15z"/><path fill="#C3485C" d="M6 11h1v1H6zM14 11h1v1H14zM4 12h1v1H4zM6 12h1v1H6zM13 12h1v1H13zM14 12h1v1H14zM16 12h1v1H16zM3 13h1v1H3zM6 13h1v1H6zM8 13h1v1H8zM12 13h1v1H12zM14 13h1v1H14zM17 13h1v1H17zM4 14h1v1H4zM5 14h1v1H5zM7 14h1v1H7zM13 14h1v1H13zM15 14h1v1H15zM16 14h1v1H16zM5 15h1v1H5zM6 15h1v1H6zM7 15h1v1H7zM13 15h1v1H13zM14 15h1v1H14zM15 15h1v1H15zM6 16h1v1H6zM14 16h1v1H14z"/><path fill="#FF9D79" d="M5 12h1v1H5zM15 12h1v1H15zM4 13h1v1H4zM5 13h1v1H5zM15 13h1v1H15zM16 13h1v1H16zM6 14h1v1H6zM14 14h1v1H14z"/><path fill="#E75958" d="M7 13h1v1H7zM13 13h1v1H13z"/></svg>
+        <span>certifications</span>
+      </a>
+      <a class="icon" href="projects.html" draggable="false" style="transform: {{t3}}; z-index: {{z3}}" onPointerDown="{{grab3}}" onClick="{{tap3}}">
+        <svg class="px" viewBox="0 0 16 16" width="52" height="52" aria-hidden="true"><path fill="#F0F2D5" d="M1 4h14v10H1z"/><path fill="#04361D" d="M1 3h5v1H1zM6 4h1v1H6zM7 5h8v1H7zM0 4h1v10H0zM15 6h1v8h-1zM1 14h14v1H1zM1 7h14v1H1z"/><path fill="#EF233C" d="M2 9h3v1H2z"/></svg>
+        <span>projects/</span>
+      </a>
+      <a class="icon" href="https://srishtigangolly.substack.com/" draggable="false" style="transform: {{t4}}; z-index: {{z4}}" onPointerDown="{{grab4}}" onClick="{{tap4}}">
+        <svg class="px" viewBox="0 0 16 16" width="52" height="52" aria-hidden="true"><path fill="#EF233C" d="M2 3h12v9H2z"/><path fill="#F0F2D5" d="M4 5h3v3H4zM9 5h3v3H9zM7 10h2v1H7z"/><path fill="#04361D" d="M3 2h10v1H3zM3 12h3v2H3zM10 12h3v2h-3zM1 14h14v1H1z"/></svg>
+        <span>substack ↗</span>
+      </a>
+      <a class="icon" href="index.html" draggable="false" style="transform: {{t5}}; z-index: {{z5}}" onPointerDown="{{grab5}}" onClick="{{tap5}}">
+        <svg class="px" viewBox="0 0 16 16" width="52" height="52" aria-hidden="true"><path fill="#F0F2D5" d="M1 4h14v9H1z"/><path fill="#04361D" d="M1 3h14v1H1zM1 13h14v1H1zM0 4h1v9H0zM15 4h1v9h-1zM2 4h1v1H2zM3 5h1v1H3zM4 6h1v1H4zM13 4h1v1h-1zM12 5h1v1h-1zM11 6h1v1h-1z"/><path fill="#EF233C" d="M5 7h2v1H5zM8 7h2v1H8zM5 8h5v1H5zM6 9h3v1H6zM7 10h1v1H7z"/></svg>
+        <span>mailbox</span>
+      </a>
+      <a class="icon" href="https://drive.google.com/file/d/1dasPUW3PCfL3X46S7Zs5TBzfl2K2QQfY/view?usp=sharing" draggable="false" style="transform: {{t6}}; z-index: {{z6}}" onPointerDown="{{grab6}}" onClick="{{tap6}}">
+        <svg class="px" viewBox="0 0 16 16" width="52" height="52" aria-hidden="true"><path fill="#04361D" d="M1 1h14v14H1z"/><path fill="#F0F2D5" d="M4 1h7v5H4zM3 8h10v6H3z"/><path fill="#04361D" d="M8 2h2v3H8z"/><path fill="#EF233C" d="M4 10h8v1H4zM4 12h6v1H4z"/></svg>
+        <span>resume.pdf ↗</span>
+      </a>
+    </nav>
+
+    <section class="win" aria-label="welcome" style="position: relative; max-width: 700px; width: 100%; justify-self: center">
+      <div class="bar"><span>welcome.txt</span><span class="ctl" aria-hidden="true"><svg class="px" viewBox="0 0 8 8" width="12" height="12"><path fill="#04361D" d="M0 0h2v1H0zM6 0h2v1H6zM1 1h2v1H1zM5 1h2v1H5zM2 2h4v1H2zM3 3h2v2H3zM2 5h4v1H2zM1 6h2v1H1zM5 6h2v1H5zM0 7h2v1H0zM6 7h2v1H6z"/></svg></span></div>
+      <div style="padding: 32px 32px 30px; display: flex; flex-direction: column; gap: 18px">
+        <span class="label">srishti gangolly</span>
+        <h2 style="margin: 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 900; font-size: clamp(40px, 4.6vw, 56px); line-height: 1.05; color: #6B0314">a numbers girl<br>with a creative edge.</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.7">living at the intersection of data, technology, &amp; marketing.<br>where insights don't just inform, they build.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px">
+          <span class="chip">martech &amp; gtm</span><span class="chip">growth</span><span class="chip">product management</span><span class="chip">data analytics</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="spacer" style="width: 216px"></div>
+  </div>
+  </div>
+
+  <div class="crt" aria-hidden="true"></div>
+
+</div>
+</template>
+<script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    let spots = {};
+    try { spots = JSON.parse(localStorage.getItem('srishti-os-icons') || '{}'); } catch (e) {}
+    this.state = { now: new Date(), spots, lifted: null };
+    this.dragged = false;
+    setInterval(() => this.setState({ now: new Date() }), 30000);
+  }
+  // drag an icon to a new spot; a press without movement still opens it
+  grab(i, e) {
+    if (e.button !== 0 || e.pointerType === 'touch') return;
+    const el = e.currentTarget;
+    const scale = el.getBoundingClientRect().width / el.offsetWidth || 1;
+    const from = this.state.spots[i] || { x: 0, y: 0 };
+    const x0 = e.clientX, y0 = e.clientY;
+    this.dragged = false;
+    const move = (ev) => {
+      const dx = (ev.clientX - x0) / scale, dy = (ev.clientY - y0) / scale;
+      if (!this.dragged && Math.hypot(dx, dy) < 4) return;
+      this.dragged = true;
+      this.setState({ lifted: i, spots: Object.assign({}, this.state.spots, { [i]: { x: from.x + dx, y: from.y + dy } }) });
+    };
+    const drop = () => {
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', drop);
+      this.setState({ lifted: null });
+      try { localStorage.setItem('srishti-os-icons', JSON.stringify(this.state.spots)); } catch (err) {}
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', drop);
+  }
+  tap(e) {
+    if (this.dragged) { e.preventDefault(); this.dragged = false; }
+  }
+  renderVals() {
+    const d = this.state.now;
+    const day = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }).replace(',', '');
+    const time = d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+    const vals = { clock: (day + '  ' + time).toLowerCase() };
+    for (let i = 0; i < 7; i++) {
+      const p = this.state.spots[i];
+      vals['t' + i] = p ? 'translate(' + Math.round(p.x) + 'px, ' + Math.round(p.y) + 'px)' : 'none';
+      vals['z' + i] = this.state.lifted === i ? '4' : p ? '2' : 'auto';
+      vals['grab' + i] = (e) => this.grab(i, e);
+      vals['tap' + i] = (e) => this.tap(e);
+    }
+    return vals;
+  }
+}
+</script>
+</body>
+</html>
