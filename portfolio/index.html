@@ -131,6 +131,18 @@ a.ctl:hover{background:var(--cherry)}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 
 /* make a bouquet */
+/* on computers the toggle is just the "don't feel like writing?" label; on phones it opens the bouquet as a dropdown */
+.bq-toggle{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:default;pointer-events:none}
+.bq-more{display:none}
+@media (max-width:560px){
+  .flower-side{gap:12px;padding:4px 0 0}
+  .bq-toggle{pointer-events:auto;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px;padding:8px 12px;box-sizing:border-box;background:var(--paper);border:3px solid var(--ink);box-shadow:3px 3px 0 var(--wine);font-family:var(--pixel);font-size:15px}
+  .bq-more{display:inline-flex;align-items:center;gap:6px;color:var(--heading);font-weight:700}
+  .bq-toggle .caret{display:inline-block;transition:transform 150ms}
+  .bq-toggle[aria-expanded="true"] .caret{transform:rotate(180deg)}
+  .flower-side:not(.open) .sticker{display:none}
+  .sticker{transform:none!important}
+}
 .flower-side{flex:1 1 200px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:16px 0}
 .sticker{position:relative;width:172px;box-sizing:border-box;transform:rotate(-2deg);background:var(--paper);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--wine);padding:16px 6px 8px}
 .sticker .tape{position:absolute;top:-8px;left:50%;width:38px;height:11px;transform:translateX(-50%) rotate(3deg);background:var(--sage);border:2px solid var(--ink);opacity:.9}
@@ -283,8 +295,8 @@ a.ctl:hover{background:var(--cherry)}
           </form>
 
           <aside class="flower-side" aria-labelledby="flower-title">
-            <span class="label" style="font-size:15px">don't feel like writing?</span>
-            <div class="sticker">
+            <button class="bq-toggle" type="button" id="bq-toggle" aria-expanded="false" aria-controls="bq-sticker"><span class="label" style="font-size:15px">don't feel like writing?</span><span class="bq-more"> make a bouquet <span class="caret" aria-hidden="true">▾</span></span></button>
+            <div class="sticker" id="bq-sticker">
               <span class="tape" aria-hidden="true"></span>
               <h3 class="display" id="flower-title">make a bouquet</h3>
               <p class="sub" id="bq-sub" aria-live="polite">pick your flowers</p>
@@ -543,6 +555,13 @@ a.ctl:hover{background:var(--cherry)}
   $("bq-undo").addEventListener("click", () => { picks = picks.slice(0, -1); renderBouquet(); });
   $("bq-clear").addEventListener("click", () => { picks = []; renderBouquet(); });
   renderBouquet();
+
+  // phones: the bouquet folds away behind a dropdown
+  $("bq-toggle").addEventListener("click", () => {
+    const side = $("bq-toggle").closest(".flower-side");
+    const open = side.classList.toggle("open");
+    $("bq-toggle").setAttribute("aria-expanded", String(open));
+  });
 
   $("bq-send").addEventListener("click", async (e) => {
     if (!picks.length) return;
