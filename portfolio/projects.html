@@ -36,6 +36,12 @@ a{color:#97051D}a:hover{color:#04361D}
 
 /* phones: tighter window padding so content gets the width */
 @media (max-width:560px){[style*="padding: 32px 32px 36px"]{padding:22px 16px 26px!important}.card{padding:16px!important}}
+
+/* phones: everything a little smaller and tighter; full-height blocks are scaled back up to fill the screen */
+@media (max-width:560px){
+  body{zoom:.88}
+  [style*="min-height: 100vh"],.desk-root{min-height:calc(100dvh / .88)!important}
+}
 </style>
 <script src="js/srishti-os.js"></script>
 </head>
