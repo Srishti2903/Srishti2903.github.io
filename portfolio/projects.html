@@ -41,6 +41,8 @@ a{color:#97051D}a:hover{color:#04361D}
 @media (max-width:560px){
   body{zoom:.88}
   footer [style*="gap: 12px; margin-top: 6px"]{justify-content:center}
+  /* same footer on every page: no fixed heights */
+  footer,footer > div{height:auto!important}
   /* footer: no "leave me a note" envelope on phones */
   footer a:has(.note-env){display:none!important}
   [style*="min-height: 100vh"],.desk-root{min-height:calc(100dvh / .88)!important}
