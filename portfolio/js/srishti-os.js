@@ -6,7 +6,7 @@
 */
 (function () {
   const HOLE = /\{\{\s*([^}]+?)\s*\}\}/g;
-  const EVENTS = { onclick: 'click', oninput: 'input', onkeydown: 'keydown', onchange: 'change', onpointerdown: 'pointerdown' };
+  const EVENTS = { onclick: 'click', oninput: 'input', onkeydown: 'keydown', onchange: 'change', onpointerdown: 'pointerdown', ondblclick: 'dblclick' };
 
   function lookup(scope, path) {
     return path.split('.').reduce((v, k) => (v == null ? undefined : v[k]), scope);
