@@ -33,7 +33,7 @@ a{color:#97051D}a:hover{color:#04361D}
 .tg-note{margin:0;min-height:16px;font-family:'Pixelify Sans',monospace;font-size:13px;color:#97051D}
 .tg-card{background:#FFFFF4;border:3px solid #04361D;box-shadow:4px 4px 0 #97051D;padding:14px 16px;display:flex;flex-direction:column;gap:8px;background-image:repeating-linear-gradient(transparent 0 23px,#E4E7C3 23px 24px);animation:tgIn 220ms ease-out}
 @keyframes tgIn{from{opacity:0;transform:translateY(6px)}}
-@media (prefers-reduced-motion:reduce){.tg-card{animation:none}}
+@media (prefers-reduced-motion:reduce){.tg-card,.pencil{animation:none}}
 .tg-tag{align-self:flex-start;font-family:'Pixelify Sans',monospace;font-size:12px;padding:1px 8px;background:#76BA9D;border:2px solid #04361D}
 .tg-card p{margin:0;font-family:'Fraunces',serif;font-style:italic;font-weight:800;font-size:19px;line-height:1.45;color:#04361D}
 .tg-fmt{font-family:'Pixelify Sans',monospace;font-size:13px;color:#97051D}
@@ -43,11 +43,16 @@ a{color:#97051D}a:hover{color:#04361D}
   .tg{flex-basis:auto;width:100%;transform:none}
   .tg:not(.open){background:none;border:0;box-shadow:none}
   .tg > .bar,.tg:not(.open) > .tg-body{display:none}
-  .tg-toggle{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;min-height:44px;padding:8px 12px;box-sizing:border-box;font-family:'Pixelify Sans',monospace;font-size:15px;color:#F0F2D5;background:#97051D;border:3px solid #04361D;box-shadow:3px 3px 0 #04361D;cursor:pointer}
+  .tg-toggle{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:100%;min-height:44px;padding:12px 10px 11px;box-sizing:border-box;font-family:'Pixelify Sans',monospace;font-size:15px;color:#F0F2D5;background:#97051D;border:3px solid #04361D;box-shadow:3px 3px 0 #04361D;cursor:pointer}
   .tg.open .tg-toggle{border-width:0 0 3px;box-shadow:none}
-  .tg-more{display:inline-flex;align-items:center;gap:6px;font-weight:700}
-  .tg-toggle .caret{display:inline-block;transition:transform 150ms}
-  .tg-toggle[aria-expanded="true"] .caret{transform:rotate(180deg)}
+  .tg-q{font-size:13px;color:#F7C6CD}
+  .tg-cta{font-size:16px;font-weight:700}
+  .tg-close{display:none;font-size:14px;font-weight:700}
+  .tg-toggle[aria-expanded="true"] .tg-q,.tg-toggle[aria-expanded="true"] .tg-cta{display:none}
+  .tg-toggle[aria-expanded="true"] .tg-close{display:block}
+  /* a little pencil scribbling so the button reads "tap me" */
+  .pencil{display:inline-block;animation:scribble 1.6s ease-in-out infinite;transform-origin:30% 80%}
+  @keyframes scribble{0%,100%{transform:rotate(0)}20%{transform:rotate(-14deg) translateX(-1px)}40%{transform:rotate(8deg) translateX(1px)}60%{transform:rotate(-10deg)}80%{transform:rotate(4deg)}}
 }
 .desk-row{width:100%;max-width:1020px;display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:28px}
 .menubar{height:32px;flex:none;width:100%;box-sizing:border-box;background:#F0F2D5;border-bottom:3px solid #04361D;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-family:'Pixelify Sans',monospace;font-size:15px;position:sticky;top:0;z-index:6}
@@ -117,7 +122,7 @@ a{color:#97051D}a:hover{color:#04361D}
   </main>
     <!-- topic generator: pick an age + interest, get a writing prompt -->
     <section class="{{tgCls}}" aria-labelledby="tg-title">
-      <button class="tg-toggle" type="button" onClick="{{toggleTg}}" aria-expanded="{{tgOpen}}"><span>writer's block?</span><span class="tg-more">get a prompt ✎ <span class="caret" aria-hidden="true">▾</span></span></button>
+      <button class="tg-toggle" type="button" onClick="{{toggleTg}}" aria-expanded="{{tgOpen}}"><span class="tg-q">writer's block?</span><span class="tg-cta">tap for a writing prompt <span class="pencil" aria-hidden="true">✎</span> →</span><span class="tg-close">hide the prompt generator ▴</span></button>
       <div class="bar" style="align-self: stretch"><span>prompt_generator.exe</span><span aria-hidden="true">✎</span></div>
       <div class="tg-body">
         <h2 id="tg-title">writer's block?</h2>
