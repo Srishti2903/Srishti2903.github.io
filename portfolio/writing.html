@@ -55,10 +55,10 @@ a{color:#97051D}a:hover{color:#04361D}
   @keyframes scribble{0%,100%{transform:rotate(0)}20%{transform:rotate(-14deg) translateX(-1px)}40%{transform:rotate(8deg) translateX(1px)}60%{transform:rotate(-10deg)}80%{transform:rotate(4deg)}}
 }
 .desk-row{width:100%;max-width:1020px;display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:28px}
-/* computers: give the two windows room, and let the prompt generator sit off to the right, a little lower */
+/* computers: give the two windows room, and let the prompt generator sit off to the right, a little lower and straight */
 @media (min-width:901px){
   .desk-row{max-width:1200px;justify-content:space-between;gap:48px 64px}
-  .tg{margin-top:56px;margin-right:8px;transform:rotate(2deg)}
+  .tg{margin-top:56px;margin-right:8px;transform:none}
 }
 .menubar{height:32px;flex:none;width:100%;box-sizing:border-box;background:#F0F2D5;border-bottom:3px solid #04361D;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-family:'Pixelify Sans',monospace;font-size:15px;position:sticky;top:0;z-index:6}
 .menubar .menus{display:flex;align-items:center;gap:18px}
