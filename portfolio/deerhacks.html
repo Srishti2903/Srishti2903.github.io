@@ -92,6 +92,9 @@ a{color:#97051D}a:hover{color:#04361D}
 @media (max-width:560px){
   .navrow a[href="desktop.html"],.navrow a[href="Home.dc.html"]{display:none}
 }
+.team-photos-phone{display:none}
+/* phones: the team photos sit right under the team names instead of below the write-up */
+@media (max-width:560px){.team-photos-phone{display:flex}.team-photos{display:none!important}}
 </style>
 <script src="js/srishti-os.js"></script>
 </head>
@@ -199,6 +202,10 @@ a{color:#97051D}a:hover{color:#04361D}
         <div class="team">
           <a href="https://www.linkedin.com/in/a1t/">akira takaki</a><a href="https://www.linkedin.com/in/anthonytedja/">anthony tedja</a><a href="https://www.linkedin.com/in/crastars/">carina rastorgueva</a><a href="https://www.linkedin.com/in/ivanvarquez/">ivan varquez</a><a href="https://www.linkedin.com/in/jasmineguru/">jasmine guruparan</a><a href="https://www.linkedin.com/in/ninaricci29/">nina ricci lu</a><a href="https://www.linkedin.com/in/shiva-mulwani/">shiva mulwani</a><a href="https://www.linkedin.com/in/manojvis2001/">vishnu manoj</a>
         </div>
+        <div class="team-photos-phone" style="flex-direction: column; gap: 22px; margin-top: 18px">
+            <figure class="pol"><img loading="lazy" decoding="async" src="img/site/dh3-team-photo.jpg" alt="the deerhacks iii organizing team in matching deerhacks t-shirts under a purple #DareToGlow neon sign"><figcaption>deerhacks iii team ♡</figcaption></figure>
+            <figure class="pol" style="transform: rotate(-2deg)"><img loading="lazy" decoding="async" src="img/site/dh3-team-2.jpg" alt="the full deerhacks iii team"><figcaption>the full crew</figcaption></figure>
+        </div>
 
         <div class="split">
           <div style="display: flex; flex-direction: column; gap: 12px">
@@ -213,7 +220,7 @@ a{color:#97051D}a:hover{color:#04361D}
               <li>supported development of <strong>onboarding packages</strong> for hackers, mentors, volunteers, and judges to streamline orientation and ensure a smooth event-day experience alongside <a href="https://www.linkedin.com/in/ivanvarquez/">ivan</a> and <a href="https://www.linkedin.com/in/ninaricci29/">nina</a>.</li>
             </ul>
           </div>
-          <div style="display: flex; flex-direction: column; gap: 22px; margin-top: 30px">
+          <div class="team-photos" style="display: flex; flex-direction: column; gap: 22px; margin-top: 30px">
             <figure class="pol"><img loading="lazy" decoding="async" src="img/site/dh3-team-photo.jpg" alt="the deerhacks iii organizing team in matching deerhacks t-shirts under a purple #DareToGlow neon sign"><figcaption>deerhacks iii team ♡</figcaption></figure>
             <figure class="pol" style="transform: rotate(-2deg)"><img loading="lazy" decoding="async" src="img/site/dh3-team-2.jpg" alt="the full deerhacks iii team"><figcaption>the full crew</figcaption></figure>
           </div>
