@@ -21,10 +21,12 @@
 <meta name="theme-color" content="#76BA9D">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" href="fonts/MonAmour.woff2" as="font" type="font/woff2" crossorigin>
+<!-- warm up the desktop so "log in" opens instantly -->
+<link rel="prefetch" href="desktop.html">
+<link rel="prefetch" href="img/site/meadow-bg.jpg">
+<link rel="prefetch" href="js/srishti-os.js?v=2">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,wght@1,900&family=Pixelify+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-@font-face{font-family:'Mon Amour';src:url('fonts/MonAmour.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
 :root{
   --ink:#04361D;--sage:#76BA9D;--paper:#F0F2D5;--cherry:#EF233C;--wine:#97051D;--heading:#6B0314;
   --sage-dot:#6AAE91;--paper-2:#E4E7C3;--letter:#FFFFF4;--muted:#2E5A43;--bevel:#C7CCA6;
@@ -402,10 +404,6 @@ a.ctl:hover{background:var(--cherry)}
   const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
   const track = (name, params) => { if (typeof window.gtag === "function") window.gtag("event", name, params || {}); };
 
-  // Mon Amour is upright; switch .display off the italic fallback once it loads
-  if (document.fonts && document.fonts.load) {
-    document.fonts.load("400 1em 'Mon Amour'").then((f) => { if (f.length) document.documentElement.classList.add("has-monamour"); }).catch(() => {});
-  }
 
   /* steps */
   const steps = { seal: $("step-seal"), write: $("step-write"), sent: $("step-sent") };
