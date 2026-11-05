@@ -53,10 +53,10 @@ a{color:#97051D}a:hover{color:#04361D}
 /* touch screens: the welcome window's title bar is a drag handle */
 @media (hover:none),(max-width:900px){.welcome > .bar{touch-action:none;cursor:grab}}
 .welcome{z-index:3}
-/* computers: a pixel grip in the corner resizes the welcome window; the heading grows and shrinks with it */
+/* computers: a pixel grip in the corner changes the welcome window's width; the heading grows and shrinks with it */
 .welcome{container-type:inline-size}
 .welcome-body{flex:1;min-height:0;overflow:auto}
-.grip{position:absolute;right:3px;bottom:3px;width:16px;height:16px;display:flex;align-items:flex-end;justify-content:flex-end;cursor:nwse-resize;touch-action:none}
+.grip{position:absolute;right:3px;bottom:3px;width:16px;height:16px;display:flex;align-items:flex-end;justify-content:flex-end;cursor:ew-resize;touch-action:none}
 .welcome.sizing{user-select:none}
 @media (min-width:901px){.welcome h2{font-size:clamp(28px,8cqi,72px)!important}}
 @media (hover:none),(max-width:900px){.grip{display:none}}
@@ -162,7 +162,7 @@ a{color:#97051D}a:hover{color:#04361D}
           <span class="chip">martech &amp; gtm</span><span class="chip">growth</span><span class="chip">product management</span><span class="chip">data analytics</span>
         </div>
       </div>
-      <span class="grip" onPointerDown="{{grabSize}}" onDblClick="{{resetSize}}" title="drag to resize · double-click to reset" aria-hidden="true"><svg class="px" viewBox="0 0 7 7" width="14" height="14"><path fill="#04361D" d="M6 0h1v1H6zM4 2h1v1H4zM6 2h1v1H6zM2 4h1v1H2zM4 4h1v1H4zM6 4h1v1H6zM0 6h1v1H0zM2 6h1v1H2zM4 6h1v1H4zM6 6h1v1H6z"/></svg></span>
+      <span class="grip" onPointerDown="{{grabSize}}" onDblClick="{{resetSize}}" title="drag to make wider or narrower · double-click to reset" aria-hidden="true"><svg class="px" viewBox="0 0 7 7" width="14" height="14"><path fill="#04361D" d="M6 0h1v1H6zM4 2h1v1H4zM6 2h1v1H6zM2 4h1v1H2zM4 4h1v1H4zM6 4h1v1H6zM0 6h1v1H0zM2 6h1v1H2zM4 6h1v1H4zM6 6h1v1H6z"/></svg></span>
     </section>
 
     <div class="spacer" style="width: 216px"></div>
@@ -288,24 +288,23 @@ class Component extends DCLogic {
     window.addEventListener('pointerup', drop);
     window.addEventListener('pointercancel', drop);
   }
-  // computers: drag the corner grip to resize the welcome window (it scrolls if made short)
+  // computers: drag the corner grip to make the welcome window wider or narrower (its height follows the content)
   grabSize(e) {
     if (e.button !== 0 || e.pointerType === 'touch') return;
     e.preventDefault();
     const grip = e.currentTarget, win = grip.closest('.win');
     const screen = win.parentElement, cols = getComputedStyle(screen).gridTemplateColumns.split(' ').map(parseFloat);
-    const desk = win.closest('.desk-root').getBoundingClientRect(), bar = win.closest('.desk-root').querySelector('.menubar').getBoundingClientRect();
     const r = win.getBoundingClientRect(), scale = r.width / win.offsetWidth || 1;
-    const maxW = (cols[1] || r.width) + 60, maxH = (desk.bottom - bar.bottom - 40) / scale;
-    const w0 = win.offsetWidth, h0 = win.offsetHeight, x0 = e.clientX, y0 = e.clientY;
+    const maxW = (cols[1] || r.width) + 60;
+    const w0 = win.offsetWidth, x0 = e.clientX;
     const clamp = (v, a, b) => Math.min(Math.max(v, a), b);
-    let size = { w: w0, h: h0 };
+    let size = { w: w0 };
     grip.setPointerCapture(e.pointerId);
     win.classList.add('sizing');
     const move = (ev) => {
       // the window is centred, so widening by dx needs 2*dx to keep the corner under the pointer
-      size = { w: Math.round(clamp(w0 + 2 * (ev.clientX - x0) / scale, 340, maxW)), h: Math.round(clamp(h0 + (ev.clientY - y0) / scale, 220, maxH)) };
-      win.style.maxWidth = 'none'; win.style.width = size.w + 'px'; win.style.height = size.h + 'px';
+      size = { w: Math.round(clamp(w0 + 2 * (ev.clientX - x0) / scale, 340, maxW)) };
+      win.style.maxWidth = 'none'; win.style.width = size.w + 'px';
     };
     const drop = () => {
       grip.removeEventListener('pointermove', move);
@@ -341,7 +340,7 @@ class Component extends DCLogic {
       grabSize: (e) => this.grabSize(e), resetSize: () => this.resetSize(),
       winMax: this.state.size ? 'none' : '700px',
       winW: this.state.size ? this.state.size.w + 'px' : '100%',
-      winH: this.state.size ? this.state.size.h + 'px' : 'auto' };
+      winH: 'auto' };
     for (let i = 0; i < 7; i++) {
       const p = this.state.spots[i];
       vals['t' + i] = p ? 'translate(' + Math.round(p.x) + 'px, ' + Math.round(p.y) + 'px)' : 'none';
