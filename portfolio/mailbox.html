@@ -21,7 +21,7 @@
 <meta name="theme-color" content="#76BA9D">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- warm up the desktop so "log in" opens instantly -->
+<!-- warm up the desktop so the × opens it instantly -->
 <link rel="prefetch" href="./">
 <link rel="prefetch" href="img/site/meadow-bg.jpg">
 <link rel="prefetch" href="js/srishti-os.js?v=2">
@@ -128,7 +128,7 @@ a.ctl:hover{background:var(--cherry)}
 .small{margin:0;font-size:14px;color:var(--muted)}
 .errors{margin:0;font-family:var(--pixel);font-size:16px;color:var(--wine)}
 .errors:empty{display:none}
-.send-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.send-row{display:flex;justify-content:flex-end;align-items:center;gap:12px;flex-wrap:wrap}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 
 /* make a bouquet */
@@ -315,7 +315,6 @@ a.ctl:hover{background:var(--cherry)}
             <div class="field"><label for="f-msg">message</label><textarea id="f-msg" name="message" rows="5" required></textarea></div>
             <p class="errors" id="errors" role="alert"></p>
             <div class="send-row">
-              <a class="small" href="./">or skip the form →</a>
               <button class="btn ink" type="submit" id="send">send</button>
             </div>
           </form>
@@ -358,7 +357,6 @@ a.ctl:hover{background:var(--cherry)}
         <p class="hint" id="sent-msg">i'll write back soon :)</p>
         <div class="actions">
           <button class="btn" type="button" id="again">write another</button>
-          <a class="btn ink home" href="./" title="log in to srishti os">log in</a>
         </div>
       </div>
     </div>
