@@ -1,11 +1,4 @@
 <!doctype html>
-<!--
-  TODO before launch
-  (Letters go to Formspree form xeaaryel. Visitors always see "sent!" even if delivery fails;
-   failed sends show up only as a console warning and a GA "contact_failed" event.)
-  1. fonts/MonAmour.woff2: upload the Mon Amour web font (needs the web licence). Fraunces is the fallback.
-  2. og.png: a 1200×630 share image next to this file (referenced by the Open Graph tags).
--->
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -19,595 +12,352 @@
 <meta property="og:image" content="https://srishtigangolly.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#76BA9D">
+<link rel="icon" href="img/doodle.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- warm up the desktop so "log in" opens instantly -->
-<link rel="prefetch" href="desktop.html">
-<link rel="prefetch" href="img/site/meadow-bg.jpg">
-<link rel="prefetch" href="js/srishti-os.js?v=2">
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,wght@1,900&family=Pixelify+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Fraunces:ital,wght@1,800;1,900&amp;family=Pixelify+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet">
 <style>
-:root{
-  --ink:#04361D;--sage:#76BA9D;--paper:#F0F2D5;--cherry:#EF233C;--wine:#97051D;--heading:#6B0314;
-  --sage-dot:#6AAE91;--paper-2:#E4E7C3;--letter:#FFFFF4;--muted:#2E5A43;--bevel:#C7CCA6;
-  --display:'Mon Amour','Fraunces',Georgia,serif;
-  --pixel:'Pixelify Sans',ui-monospace,monospace;
-  --mono:'DM Mono',ui-monospace,monospace;
+body{margin:0}
+a{color:#97051D}a:hover{color:#04361D}
+.btn{font-family:'Pixelify Sans',monospace;font-weight:700;font-size:19px;letter-spacing:.05em;text-transform:lowercase;text-decoration:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 18px;border:3px solid #04361D;box-sizing:border-box;box-shadow:inset -3px -3px 0 rgba(4,54,29,.28),inset 3px 3px 0 rgba(255,255,255,.35),0 4px 0 #04361D;transition:transform 60ms}
+.btn:active{transform:translateY(2px);box-shadow:inset 3px 3px 0 rgba(4,54,29,.28),0 2px 0 #04361D}
+.win{background:#F0F2D5;border:3px solid #04361D;box-shadow:6px 6px 0 #04361D;display:flex;flex-direction:column;min-width:0}
+.bar{height:36px;flex:none;background:#04361D;color:#F0F2D5;display:flex;align-items:center;justify-content:space-between;padding:0 6px 0 12px;font-family:'Pixelify Sans',monospace;font-size:16px;font-weight:600}
+.ctl{width:24px;height:24px;box-sizing:border-box;border:2px solid #04361D;background:#F0F2D5;display:inline-flex;align-items:center;justify-content:center}
+.label{font-family:'Pixelify Sans',monospace;font-size:14px;letter-spacing:.1em;color:#97051D}
+.chip{font-family:'Pixelify Sans',monospace;font-size:14px;padding:3px 10px;border:2px solid #04361D;background:#76BA9D}
+.icon{position:relative;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-user-drag:none;cursor:grab;display:flex;flex-direction:column;align-items:center;gap:6px;width:104px;text-decoration:none;color:#04361D}
+.icon span{font-family:'Pixelify Sans',monospace;font-size:14px;line-height:1.2;text-align:center;padding:2px 4px;background:rgba(240,242,213,.88)}
+.icon:hover span,.icon:focus span{background:#04361D;color:#F0F2D5}
+.icon:hover svg{transform:translateY(-2px)}
+.icon:active{cursor:grabbing}
+.icon svg{pointer-events:none}
+.screen{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:32px;align-items:center;width:100%;max-width:1280px;flex:1;min-height:0}
+.icons{display:grid;grid-template-columns:repeat(2,104px);gap:20px 8px;align-content:center}
+@media (max-width:900px){
+  .desk-root{height:auto!important;min-height:100vh!important;min-height:100dvh!important;overflow:visible!important}
+  .screen{grid-template-columns:minmax(0,1fr);gap:24px;align-items:start}
+  .icons{grid-template-columns:repeat(4,minmax(0,1fr));justify-items:center}
+  .spacer{display:none}
 }
-*,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;min-height:100vh;background-color:var(--sage);background-image:radial-gradient(var(--sage-dot) 1px,transparent 1.2px);background-size:8px 8px;font-family:var(--mono);color:var(--ink);overflow-x:hidden}
-a{color:var(--wine)}a:hover{color:var(--ink)}
-:focus-visible{outline:3px solid var(--wine);outline-offset:3px}
-.px{image-rendering:pixelated;shape-rendering:crispEdges;display:block}
-.display{font-family:var(--display);font-style:italic;font-weight:900}
-/* Mon Amour is upright; only the Fraunces fallback is italic */
-.has-monamour .display{font-style:normal;font-weight:400}
-
-/* page */
-.page{min-height:100vh;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:40px 16px 56px}
-/* the mailbox is a small popup window on its own page */
-.page > .win,.page > .links{zoom:.7}
-.page > .win{animation:popIn 360ms cubic-bezier(.2,1.4,.4,1) both}
-@keyframes popIn{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
-a.ctl{text-decoration:none;cursor:pointer}
-a.ctl:hover{background:var(--cherry)}
-.top{text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px}
-.logo{margin:0;line-height:0}
-.logo img{width:clamp(120px,14vw,170px);height:auto;transform:rotate(6deg)}
-
-/* window chrome */
-.win{width:100%;max-width:760px;background:var(--paper);border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);display:flex;flex-direction:column;min-width:0}
-.bar{height:36px;flex:none;background:var(--ink);color:var(--paper);border-bottom:3px solid var(--ink);display:flex;align-items:center;justify-content:space-between;padding:0 6px 0 12px;font-family:var(--pixel);font-size:16px;font-weight:600}
-.bar h2{margin:0;font:inherit}
-.ctl{width:24px;height:24px;border:2px solid var(--ink);background:var(--paper);display:inline-flex;align-items:center;justify-content:center;box-shadow:inset -2px -2px 0 var(--bevel)}
-
-/* pixel buttons */
-.btn{font-family:var(--pixel);font-weight:700;font-size:20px;letter-spacing:.06em;text-transform:lowercase;text-decoration:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 20px;border:3px solid var(--ink);background:var(--paper);color:var(--ink);box-shadow:inset -3px -3px 0 rgba(4,54,29,.28),inset 3px 3px 0 rgba(255,255,255,.35),0 4px 0 var(--ink);transition:transform 60ms}
-.btn:hover{color:var(--ink);background:#F7F8E4}
-.btn:active{transform:translateY(2px);box-shadow:inset 3px 3px 0 rgba(4,54,29,.28),0 2px 0 var(--ink)}
-.btn.cherry{background:var(--cherry);color:var(--paper)}
-.btn.cherry:hover{background:#F23B51;color:var(--paper)}
-.btn.ink{background:var(--ink);color:var(--paper)}
-.btn.ink:hover{background:#0B4A2A;color:var(--paper)}
-.btn[disabled]{cursor:progress;opacity:.75}
-
-/* mail window */
-.stage{flex:1;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:32px 20px;min-height:520px;text-align:center}
-.stage[data-step="sent"]{min-height:0;padding:40px 20px 36px;gap:20px}
-/* writing step: a tighter window so the letter feels compact */
-.win:has(.stage[data-step="write"]){max-width:680px}
-.stage[data-step="write"]{min-height:0;padding:22px 18px}
-.stage[data-step="write"] .write{gap:18px 20px}
-.stage[data-step="write"] .letter{padding:18px 16px 14px;gap:10px}
-.stage[data-step="write"] .field textarea{min-height:84px}
-.stage[data-step="write"] .letter-head .display{font-size:28px}
-.stage[data-step="write"] .chip{font-size:13px;min-height:32px;padding:2px 9px;gap:6px}
-.stage[data-step="write"] .chips{gap:6px}
-.step[hidden]{display:none!important}
-.step{width:100%;display:flex;flex-direction:column;align-items:center;gap:24px}
-.step-title{margin:0;font-size:clamp(34px,4.5vw,46px);line-height:1;color:var(--heading)}
-.hint{margin:0;font-family:var(--pixel);font-size:18px}
-
-/* envelope */
-.env{position:relative;width:min(460px,100%);aspect-ratio:46/29;perspective:900px}
-.env-body{position:absolute;inset:0;z-index:2;background:var(--paper);border:4px solid var(--ink);box-shadow:8px 8px 0 var(--wine)}
-.flap{position:absolute;left:4px;right:4px;top:4px;height:58.6%;z-index:3;transform-origin:50% 0}
-.flap i{position:absolute;inset:0;background:var(--ink);clip-path:polygon(0 0,100% 0,50% 100%)}
-.flap i+i{bottom:5%;background:var(--paper-2);clip-path:polygon(1% 0,99% 0,50% 100%)}
-.peek{position:absolute;left:8%;right:8%;top:8%;height:80%;z-index:1;background:var(--letter);border:3px solid var(--ink);background-image:repeating-linear-gradient(transparent 0 15px,var(--paper-2) 15px 16px)}
-.seal{position:absolute;z-index:4;left:50%;top:58%;width:22.6%;aspect-ratio:13/12;transform:translate(-50%,-50%);background:none;border:0;padding:0;cursor:pointer;transition:transform 120ms}
-.seal:hover{transform:translate(-50%,-50%) scale(1.06)}
-.seal svg{width:100%;height:100%}
-.env.opening .seal{opacity:0;transition:opacity 80ms}
-.env.opening .flap{animation:flapOpen 240ms ease-in forwards}
-.env.opening .peek{animation:peekUp 240ms 160ms ease-out forwards}
-@keyframes flapOpen{0%{transform:rotateX(0);z-index:3}49%{z-index:3}50%{z-index:0}100%{transform:rotateX(180deg);z-index:0}}
-@keyframes peekUp{to{transform:translateY(-58%)}}
-
-/* letter (step 2) */
-.write{display:flex;flex-wrap:wrap;gap:24px 28px;align-items:stretch;width:100%;max-width:760px;text-align:left}
-.letter{flex:999 1 380px;min-width:0;background:var(--letter);border:3px solid var(--ink);box-shadow:6px 6px 0 var(--wine);padding:24px 22px 20px;display:flex;flex-direction:column;gap:14px;background-image:repeating-linear-gradient(transparent 0 31px,var(--paper-2) 31px 32px)}
-.step.write-in .write{animation:slideUp 320ms ease-out}
-@keyframes slideUp{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
-.letter-head{display:flex;justify-content:space-between;align-items:baseline}
-.dear{margin:0;font-size:32px;color:var(--heading)}
-.row2{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
-.field{display:flex;flex-direction:column;gap:4px;min-width:0}
-.field label,.label{font-family:var(--pixel);font-size:14px}
-.field label small{font-size:14px;color:var(--muted)}
-.field input,.field textarea{font-family:var(--mono);font-size:16px;color:var(--ink);background:#FFFFFB;border:2px solid var(--ink);border-radius:0;box-shadow:inset 2px 2px 0 var(--bevel);padding:8px 10px;outline:none;width:100%}
-.field input::placeholder,.field textarea::placeholder{color:#5E7A68}
-.field input:focus,.field textarea:focus{border-color:var(--wine);box-shadow:inset 2px 2px 0 var(--bevel),0 0 0 2px var(--wine)}
-.field textarea{resize:vertical;min-height:120px}
-.field [aria-invalid="true"]{border-color:var(--wine)}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{font-family:var(--pixel);font-size:15px;color:var(--ink);background:var(--paper);border:2px solid var(--ink);box-shadow:inset -2px -2px 0 var(--bevel),0 2px 0 var(--ink);min-height:40px;padding:4px 12px;display:inline-flex;align-items:center;gap:8px;cursor:pointer}
-.chip[aria-pressed="true"]{background:var(--sage);box-shadow:inset 2px 2px 0 rgba(4,54,29,.3)}
-.chip svg{width:16px;height:16px;flex:none}
-.small{margin:0;font-size:14px;color:var(--muted)}
-.errors{margin:0;font-family:var(--pixel);font-size:16px;color:var(--wine)}
-.errors:empty{display:none}
-.send-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-
-/* make a bouquet */
-/* on computers the toggle is just the "don't feel like writing?" label; on phones it opens the bouquet as a dropdown */
-.bq-toggle{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:default;pointer-events:none}
-.bq-more{display:none}
-.lilies{display:none}
 @media (max-width:560px){
-  .flower-side{gap:12px;padding:4px 0 0}
-  .bq-toggle{pointer-events:auto;cursor:pointer;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:12px 10px 10px;box-sizing:border-box;background:var(--wine);color:var(--paper);border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);font-family:var(--pixel);font-size:15px}
-  .flower-side:not(.open) .sticker{display:none}
-  .bq-toggle .label{display:none}
-  .bq-more{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;color:#F0F2D5;font-weight:700}
-  .bq-cta{font-size:15px}
-  .bq-close{display:none;font-size:14px}
-  .bq-toggle[aria-expanded="true"]{padding:8px 12px}
-  .bq-toggle[aria-expanded="true"] .lilies,.bq-toggle[aria-expanded="true"] .bq-cta{display:none}
-  .bq-toggle[aria-expanded="true"] .bq-close{display:block}
-  /* five little coral-pink roses on the bouquet button, swaying so it reads "tap me" */
-  .lilies{display:flex;justify-content:center;gap:8px}
-  .lily{width:30px;height:26px;animation:roseSway 2.4s ease-in-out infinite;animation-delay:calc(var(--i) * -.4s);transform-origin:50% 100%}
-  @keyframes roseSway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg) translateY(-2px)}}
-  .sticker{transform:none!important}
+  .icons{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 4px}
+  .icon{width:100%}
+  .icon span{font-size:13px;overflow-wrap:anywhere}
+  .win h2{font-size:34px!important}
 }
-.flower-side{flex:1 1 200px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:16px 0}
-.sticker{position:relative;width:172px;box-sizing:border-box;transform:rotate(-2deg);background:var(--paper);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--wine);padding:16px 6px 8px}
-.sticker .tape{position:absolute;top:-8px;left:50%;width:38px;height:11px;transform:translateX(-50%) rotate(3deg);background:var(--sage);border:2px solid var(--ink);opacity:.9}
-.sticker .heart{position:absolute;right:-8px;bottom:-8px}
-.sticker h3{margin:0 0 2px;text-align:center;font-size:19px;line-height:1;color:var(--heading)}
-.sticker ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
-.flower{position:relative;width:100%;font:inherit;color:var(--ink);background:none;border:2px solid transparent;cursor:pointer;display:grid;grid-template-columns:20px 1fr 22px;align-items:center;gap:6px;padding:2px 6px;text-align:left}
-.flower:hover,.flower:focus-visible{background:var(--ink);color:var(--paper);outline:none}
-.flower svg{transition:transform 120ms}
-.flower:hover svg{transform:translateY(-2px) rotate(-4deg)}
-.flower .name{font-family:var(--pixel);font-size:14px;font-weight:600}
-.flower.in{background:var(--sage)}
-.bq-tools{display:flex;justify-content:center;align-items:center;gap:6px;margin:0 0 8px;font-family:var(--pixel);font-size:11px;color:var(--muted)}
-.bq-tools[hidden]{display:none}
-.bq-tools button{font-family:var(--pixel);font-size:11px;color:var(--muted);background:none;border:0;padding:0;text-decoration:underline;cursor:pointer}
-.flower .mark{font-family:var(--pixel);font-size:13px;font-weight:700}
-.sticker .sub{margin:0 0 6px;text-align:center;font-family:var(--pixel);font-size:11px;color:var(--muted)}
-/* the bouquet: picked stems fanned out of a paper wrap, all in % so it scales */
-.bq{position:relative;width:100%;aspect-ratio:100/110}
-.bq .stem{position:absolute;width:30%;transform-origin:50% 100%;line-height:0}
-.bq .stem svg{display:block;width:100%;height:auto}
-.bq .wrap{position:absolute;left:var(--wrap-l,30%);top:50%;width:var(--wrap-w,40%);height:auto;z-index:9}
-.bq.empty .wrap{opacity:.35}
-.bq .empty-txt{position:absolute;left:0;right:0;top:22%;text-align:center;font-family:var(--pixel);font-size:13px;color:var(--muted)}
-.bq-box{width:var(--box-w,100px);max-width:100%;margin:8px auto 6px;transition:width 200ms}
-.bq-send{position:relative;width:100%;font-size:16px;min-height:40px;padding:6px 10px}
-.bq-send:disabled{opacity:.45;cursor:not-allowed;transform:none}
-/* phones: the opened bouquet is a wide mint panel, flowers in one row, no title */
-@media (max-width:560px){
-  .sticker{width:100%;background:#CFE6DA;padding:14px 12px 12px;box-shadow:3px 3px 0 var(--wine)}
-  .sticker .tape,.sticker h3,.sticker .sub{display:none}
-  .sticker ul{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
-  .flower{grid-template-columns:1fr;justify-items:center;gap:2px;padding:6px 2px;text-align:center}
-  .flower svg{width:24px;height:auto}
-  .flower .name{font-size:12px}
-  .flower.in{background:var(--paper)}
-  .sticker .heart{display:none}
+@media (max-width:900px){.icon{touch-action:auto;cursor:pointer}}
+.icon{-webkit-touch-callout:none}
+/* a held icon wiggles, like rearranging apps on a phone */
+.icon.lifted{z-index:6!important}
+.icon.lifted svg{animation:wiggle 260ms ease-in-out infinite;filter:drop-shadow(3px 4px 0 rgba(4,54,29,.35))}
+.icon.lifted span{background:#04361D;color:#F0F2D5}
+@keyframes wiggle{0%,100%{transform:rotate(-4deg) scale(1.12)}50%{transform:rotate(4deg) scale(1.12)}}
+.icons .hint{display:none;grid-column:1/-1;margin:2px 0 0;justify-self:center;font-family:'Pixelify Sans',monospace;font-size:13px;color:#04361D;background:rgba(240,242,213,.88);padding:2px 8px}
+.icons .hint a{color:#97051D}
+@media (hover:none),(max-width:900px){.icons .hint{display:block}}
+@media (prefers-reduced-motion:reduce){.icon.lifted svg{animation:none;transform:scale(1.12)}}
+/* touch screens: the welcome window's title bar is a drag handle */
+@media (hover:none),(max-width:900px){.welcome > .bar{touch-action:none;cursor:grab}}
+.welcome{z-index:3}
+/* computers: a pixel grip in the corner changes the welcome window's width; the heading grows and shrinks with it */
+.welcome{container-type:inline-size}
+.welcome-body{flex:1;min-height:0;overflow:auto}
+.grip{position:absolute;right:3px;bottom:3px;width:16px;height:16px;display:flex;align-items:flex-end;justify-content:flex-end;cursor:ew-resize;touch-action:none}
+.welcome.sizing{user-select:none}
+@media (min-width:901px){.welcome h2{font-size:clamp(28px,8cqi,72px)!important}}
+@media (hover:none),(max-width:900px){.grip{display:none}}
+.welcome.lifted{z-index:7;box-shadow:10px 12px 0 rgba(4,54,29,.45)}
+.px{image-rendering:pixelated;shape-rendering:crispEdges}
+.menubar{height:32px;flex:none;width:100%;box-sizing:border-box;background:#F0F2D5;border-bottom:3px solid #04361D;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-family:'Pixelify Sans',monospace;font-size:15px;position:relative;z-index:2}
+.menubar .menus{display:flex;align-items:center;gap:18px}
+.menubar .menus a{color:#04361D;text-decoration:none;padding:2px 6px}
+.menubar .menus a:hover{background:#04361D;color:#F0F2D5}
+.menubar .tray{display:flex;align-items:center;gap:22px}
+.crt{position:absolute;inset:0;pointer-events:none;z-index:5;background:repeating-linear-gradient(rgba(4,54,29,.05) 0 1px,transparent 1px 3px);box-shadow:inset 0 0 140px rgba(4,54,29,.28)}
+.menubar .menus{margin:0 auto 0 12px;min-width:0}
+.menubar .menus a,.menubar .brand,.menubar time{white-space:nowrap}
+@media (max-width:1100px){.menubar .menus{gap:6px}.menubar .tray{gap:14px}}
+/* tablets and phones: tabs get their own scrollable row under the menu bar */
+@media (max-width:860px){
+  .menubar{height:auto;flex-wrap:wrap;row-gap:0;padding-top:4px}
+  .menubar .brand{order:1}
+  .menubar .tray{order:2;min-height:28px}
+  .menubar .menus{order:3;flex:1 0 100%;margin:4px -14px 0;padding:4px 10px;border-top:2px solid #04361D;overflow-x:auto;scrollbar-width:none}
+  .menubar .menus::-webkit-scrollbar{display:none}
 }
-.pop{position:absolute;left:50%;top:0;width:14px;height:12px;pointer-events:none;opacity:0;animation:heartUp 900ms ease-out forwards}
-.pop svg{width:100%;height:100%}
-@keyframes heartUp{0%{transform:translate(-50%,0) scale(.6);opacity:0}15%{opacity:1}100%{transform:translate(calc(-50% + var(--dx)),-96px) rotate(var(--rot)) scale(1.15);opacity:0}}
-
-/* sent (step 3) */
-/* "sent!" envelope: the homepage envelope closing again. Resting styles are the sealed end
-   state, so with reduced motion it simply shows sealed. */
-.env-sm{width:min(200px,50%);margin-top:64px}
-.env-sm .env-body{border-width:3px;box-shadow:6px 6px 0 var(--wine)}
-/* a bouquet send puts the bouquet on the letter instead of writing lines */
-.peek-bq{display:none;width:30%}
-.env-sm.has-bq .peek{background-image:none;display:flex;justify-content:center;padding-top:7%}
-.env-sm.has-bq .peek-bq{display:block}
-.seal-icon{position:absolute;z-index:4;left:50%;top:58%;width:22.6%;aspect-ratio:13/12;transform:translate(-50%,-50%)}
-.seal-icon svg{width:100%;height:100%}
-.step.sent-in .env-sm .peek{animation:peekIn 1.5s ease-in-out backwards}
-.step.sent-in .env-sm .flap{animation:flapClose 1.5s ease-in-out backwards}
-.step.sent-in .env-sm .seal-icon{animation:sealPop 1.5s ease-out backwards}
-@keyframes peekIn{0%,12%{transform:translateY(-58%)}45%,100%{transform:translateY(0)}}
-@keyframes flapClose{0%,45%{transform:rotateX(180deg);z-index:0}59%{z-index:0}60%{z-index:3}75%,100%{transform:rotateX(0);z-index:3}}
-@keyframes sealPop{0%,75%{transform:translate(-50%,-50%) scale(0)}87%{transform:translate(-50%,-50%) scale(1.3)}95%,100%{transform:translate(-50%,-50%) scale(1)}}
-.sent-title{outline:none}
-.actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
-
-/* tracker */
-.tracker{flex:none;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:0;padding:10px;list-style:none;border-top:2px solid var(--ink);font-family:var(--pixel);font-size:14px;color:var(--muted)}
-.tracker li[aria-current="step"]{color:var(--wine);font-weight:700}
-.tracker .arrow{color:var(--ink)}
-
-/* read me & connect with me */
-.links{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:center;align-items:flex-end}
-.links .item{display:flex;flex-direction:column;align-items:center;gap:8px}
-.links .item > span{font-family:var(--pixel);font-size:15px}
-.amp{font-size:28px;color:var(--ink);padding-bottom:8px}
-.in{font-size:18px;line-height:1;padding:1px 3px;border:2px solid var(--paper)}
-
-@media (max-width:767px){
-  .page{padding:28px 16px 40px;gap:18px}
-  .page > .win,.page > .links{zoom:.85}
-  .stage{min-height:0;padding:28px 16px}
-  .letter{padding:18px 16px 16px}
-}
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation:none!important;transition:none!important}
-}
-@media (prefers-reduced-motion:reduce){.lily{opacity:1!important}}
+@media (max-width:480px){.menubar{padding:4px 10px 0;font-size:13px}.menubar .menus{margin:4px -10px 0}.menubar .tray{gap:10px}.menubar .tray svg{width:14px;height:auto}}
 
 /* phones: everything a little smaller and tighter; full-height blocks are scaled back up to fill the screen */
 @media (max-width:560px){
   body{zoom:.88}
-  /* iPhones zoom into any field under 16px; after the .88 shrink these need 16 / .88 to land at 16 */
-  input,textarea,select{font-size:18.2px!important}
-  /* keep "substack & linkedin" on one line */
-  .links,.mini{gap:10px!important;flex-wrap:nowrap!important}
-  [style*="min-height: 100vh"],.page,.desk-root{min-height:calc(100dvh / .88)!important}
+  [style*="min-height: 100vh"],.desk-root{min-height:calc(100dvh / .88)!important}
 }
-@media (max-width:560px){.page > .win,.page > .links{zoom:.9}}
 </style>
+<script src="js/srishti-os.js?v=2"></script>
 </head>
 <body>
-<div class="page">
-  <header class="top">
-    <h1 class="logo"><img src="img/doodle.png" alt="Srishti Gangolly" width="455" height="420"></h1>
+<div id="app"></div>
+<template id="page">
+<div class="desk-root" style="width: 100%; height: 100vh; min-height: 640px; box-sizing: border-box; overflow: hidden; background-color: #A9D8F0; background-image: url(img/site/meadow-bg.jpg); background-size: cover; background-position: center; image-rendering: pixelated; font-family: 'DM Mono', monospace; color: #04361D; display: flex; flex-direction: column; align-items: center; position: relative">
+
+  <!-- menu bar: makes the page read as a computer screen -->
+  <header class="menubar">
+    <span class="brand" style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700; padding: 2px 6px">
+        <svg class="px" viewBox="0 0 11 16" width="11" height="16" aria-hidden="true"><path fill="#EF233C" d="M2 0h1v1H2zM5 0h1v1H5zM8 0h1v1H8zM2 1h7v1H2zM2 2h7v3H2zM3 5h5v1H3zM4 6h3v1H4z"/><path fill="#97051D" d="M5 2h1v4H5zM8 2h1v3H8z"/><path fill="#04361D" d="M5 7h1v9H5zM1 9h1v2H1zM2 11h1v1H2zM3 12h2v1H3zM9 8h1v2H9zM8 10h1v1H8zM6 11h2v1H6z"/><path fill="#76BA9D" d="M2 9h1v2H2zM3 11h2v1H3zM8 8h1v2H8zM6 10h2v1H6z"/></svg>
+      srishti os
+    </span>
+    <nav class="menus" aria-label="menu">
+      <a class="opt" href="about.html">about</a>
+      <a class="opt" href="experience.html">experience</a>
+      <a class="opt" href="projects.html">projects</a>
+      <a class="opt" href="writing.html">writing</a>
+      <a class="opt" href="https://drive.google.com/file/d/1dasPUW3PCfL3X46S7Zs5TBzfl2K2QQfY/view?usp=sharing">resume ↗</a>
+      <a class="opt" href="https://www.linkedin.com/in/srishti-gangolly/">linkedin ↗</a>
+    </nav>
+    <div class="tray">
+      <svg class="px" viewBox="0 0 9 7" width="18" height="14" aria-label="wifi" role="img"><path fill="#04361D" d="M2 0h5v1H2zM1 1h1v1H1zM7 1h1v1H7zM0 2h1v1H0zM8 2h1v1H8zM3 2h3v1H3zM2 3h1v1H2zM6 3h1v1H6zM4 5h1v2H4z"/></svg>
+      <svg class="px" viewBox="0 0 12 7" width="24" height="14" aria-label="battery full" role="img"><path fill="#04361D" d="M0 0h10v1H0zM0 6h10v1H0zM0 1h1v5H0zM9 1h1v5H9zM10 2h2v3h-2z"/><path fill="#EF233C" d="M2 2h6v3H2z"/></svg>
+      <time style="white-space: pre; word-spacing: 2px">{{clock}}</time>
+    </div>
   </header>
 
-  <main class="win" aria-labelledby="mail-title">
-    <div class="bar">
-      <h2 id="mail-title">mail — new message</h2>
-      <a class="ctl" href="desktop.html" aria-label="close and go to the srishti os desktop" title="close"><svg class="px" viewBox="0 0 8 8" width="12" height="12"><path fill="#04361D" d="M0 0h2v1H0zM6 0h2v1H6zM1 1h2v1H1zM5 1h2v1H5zM2 2h4v1H2zM3 3h2v2H3zM2 5h4v1H2zM1 6h2v1H1zM5 6h2v1H5zM0 7h2v1H0zM6 7h2v1H6z"/></svg></a>
-    </div>
+  <div style="flex: 1; min-height: 0; width: 100%; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; padding: 20px 24px 32px">
 
-    <div class="stage">
-      <!-- 1 · sealed -->
-      <div class="step" id="step-seal">
-        <p class="step-title display" aria-hidden="true">my mailbox is open</p>
-        <div class="env" id="env">
-          <div class="peek" aria-hidden="true"></div>
-          <div class="env-body" aria-hidden="true"></div>
-          <div class="flap" aria-hidden="true"><i></i><i></i></div>
-          <button class="seal" id="seal" type="button" aria-label="My mailbox is open. Break the heart seal to open the letter">
-            <svg class="px" viewBox="0 0 13 12" aria-hidden="true"><path fill="#04361D" d="M2 0h3v1H2zM8 0h3v1H8zM1 1h1v1H1zM5 1h1v1H5zM7 1h1v1H7zM11 1h1v1h-1zM0 2h1v4H0zM6 2h1v1H6zM12 2h1v4h-1zM1 6h1v1H1zM11 6h1v1h-1zM2 7h1v1H2zM10 7h1v1h-1zM3 8h1v1H3zM9 8h1v1H9zM4 9h1v1H4zM8 9h1v1H8zM5 10h1v1H5zM7 10h1v1H7zM6 11h1v1H6z"/><path fill="#EF233C" d="M2 1h3v1H2zM8 1h3v1H8zM1 2h5v1H1zM7 2h5v1H7zM1 3h11v3H1zM2 6h9v1H2zM3 7h7v1H3zM4 8h5v1H4zM5 9h3v1H5zM6 10h1v1H6z"/><path fill="#F0F2D5" d="M2 2h2v1H2zM2 3h1v1H2z"/></svg>
-          </button>
-        </div>
-        <p class="hint">tap the heart to break the seal</p>
-      </div>
+  <h1 style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Srishti Gangolly</h1>
 
-      <!-- 2 · write -->
-      <div class="step" id="step-write" hidden>
-        <div class="write">
-          <form class="letter" id="mail-form" novalidate>
-            <div class="letter-head">
-              <h3 class="dear display">dear srishti,</h3>
-              <svg class="px" viewBox="0 0 7 6" width="28" height="24" aria-hidden="true"><path fill="#EF233C" d="M1 0h2v1H1zM4 0h2v1H4zM0 1h7v2H0zM1 3h5v1H1zM2 4h3v1H2zM3 5h1v1H3z"/></svg>
-            </div>
-            <div class="row2">
-              <div class="field"><label for="f-name">your name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
-              <div class="field"><label for="f-email">your email <small>(optional)</small></label><input id="f-email" name="email" type="email" autocomplete="email"></div>
-            </div>
-
-            <div class="field" role="group" aria-labelledby="chips-label">
-              <span class="label" id="chips-label">what's on your mind?</span>
-              <div class="chips">
-                <button type="button" class="chip" data-prompt="note" aria-pressed="false">
-                  <svg class="px" viewBox="0 0 8 6" aria-hidden="true"><path fill="#04361D" d="M0 0h8v6H0z"/><path fill="#F0F2D5" d="M1 1h6v4H1z"/><path fill="#EF233C" d="M1 1h1v1H1zM6 1h1v1H6zM2 2h1v1H2zM5 2h1v1H5zM3 3h2v1H3z"/></svg>
-                  leave me a lil note
-                </button>
-                <button type="button" class="chip" data-prompt="day" aria-pressed="false">
-                  <svg class="px" viewBox="0 0 8 8" aria-hidden="true"><path fill="#EF233C" d="M3 0h2v1H3zM3 7h2v1H3zM0 3h1v2H0zM7 3h1v2H7zM1 1h1v1H1zM6 1h1v1H6zM1 6h1v1H1zM6 6h1v1H6z"/><path fill="#97051D" d="M2 2h4v4H2z"/></svg>
-                  how's your day going?
-                </button>
-                <button type="button" class="chip" data-prompt="hyperfixation" aria-pressed="false">
-                  <svg class="px" viewBox="0 0 8 8" aria-hidden="true"><path fill="#EF233C" d="M3 0h2v2H3zM0 2h8v2H0zM1 4h6v1H1zM1 5h2v1H1zM5 5h2v1H5zM0 6h2v2H0zM6 6h2v2H6z"/></svg>
-                  your current hyperfixation
-                </button>
-              </div>
-              <p class="small">hiring? that works too — tell me about the role :)</p>
-            </div>
-
-            <input type="hidden" name="prompt" id="f-prompt">
-            <div class="hp" aria-hidden="true"><label for="f-gotcha">leave this empty</label><input id="f-gotcha" name="_gotcha" type="text" tabindex="-1" autocomplete="off"></div>
-
-            <div class="field"><label for="f-msg">message</label><textarea id="f-msg" name="message" rows="5" required></textarea></div>
-            <p class="errors" id="errors" role="alert"></p>
-            <div class="send-row">
-              <a class="small" href="desktop.html">or skip the form →</a>
-              <button class="btn ink" type="submit" id="send">send</button>
-            </div>
-          </form>
-
-          <aside class="flower-side" aria-labelledby="flower-title">
-            <button class="bq-toggle" type="button" id="bq-toggle" aria-expanded="false" aria-controls="bq-sticker"><span class="label" style="font-size:15px">don't feel like writing?</span><span class="bq-more"><span class="lilies" aria-hidden="true"><svg width="0" height="0" style="position:absolute"><symbol id="pink-rose" viewBox="0 0 33 28"><path fill="#7A2A1F" d="M11 0h5v1H11zM10 1h1v1H10zM16 1h1v1H16zM8 2h2v1H8zM17 2h1v1H17zM19 2h6v1H19zM7 3h1v1H7zM15 3h4v1H15zM25 3h1v1H25zM6 4h1v1H6zM13 4h2v1H13zM19 4h1v1H19zM26 4h1v1H26zM6 5h1v1H6zM12 5h1v1H12zM20 5h1v1H20zM27 5h1v1H27zM6 6h1v1H6zM11 6h1v1H11zM16 6h3v1H16zM21 6h3v1H21zM27 6h1v1H27zM4 7h3v1H4zM11 7h1v1H11zM15 7h1v1H15zM19 7h1v1H19zM24 7h1v1H24zM27 7h3v1H27zM3 8h1v1H3zM6 8h1v1H6zM10 8h1v1H10zM14 8h1v1H14zM16 8h2v1H16zM20 8h1v1H20zM25 8h1v1H25zM27 8h1v1H27zM30 8h1v1H30zM2 9h1v1H2zM6 9h1v1H6zM10 9h1v1H10zM14 9h1v1H14zM16 9h1v1H16zM18 9h1v1H18zM20 9h1v1H20zM22 9h1v1H22zM25 9h1v1H25zM27 9h1v1H27zM31 9h1v1H31zM1 10h1v1H1zM6 10h1v1H6zM9 10h1v1H9zM11 10h1v1H11zM13 10h1v1H13zM17 10h1v1H17zM19 10h1v1H19zM22 10h1v1H22zM25 10h1v1H25zM27 10h1v1H27zM32 10h1v1H32zM0 11h1v1H0zM6 11h1v1H6zM9 11h1v1H9zM12 11h1v1H12zM14 11h3v1H14zM18 11h1v1H18zM22 11h1v1H22zM25 11h2v1H25zM32 11h1v1H32zM0 12h1v1H0zM7 12h1v1H7zM9 12h1v1H9zM12 12h1v1H12zM17 12h1v1H17zM22 12h1v1H22zM24 12h3v1H24zM32 12h1v1H32zM0 13h1v1H0zM7 13h1v1H7zM9 13h1v1H9zM12 13h1v1H12zM22 13h2v1H22zM26 13h1v1H26zM32 13h1v1H32zM0 14h1v1H0zM8 14h2v1H8zM19 14h3v1H19zM25 14h1v1H25zM32 14h1v1H32zM1 15h1v1H1zM7 15h3v1H7zM17 15h1v1H17zM24 15h1v1H24zM31 15h1v1H31zM1 16h1v1H1zM6 16h1v1H6zM9 16h1v1H9zM14 16h1v1H14zM16 16h1v1H16zM18 16h1v1H18zM23 16h2v1H23zM31 16h1v1H31zM1 17h1v1H1zM5 17h1v1H5zM10 17h1v1H10zM12 17h1v1H12zM15 17h1v1H15zM17 17h1v1H17zM20 17h3v1H20zM24 17h1v1H24zM30 17h1v1H30zM2 18h1v1H2zM4 18h1v1H4zM11 18h1v1H11zM13 18h1v1H13zM15 18h2v1H15zM23 18h1v1H23zM29 18h1v1H29zM31 18h1v1H31zM3 19h2v1H3zM12 19h1v1H12zM15 19h1v1H15zM22 19h1v1H22zM28 19h1v1H28zM32 19h1v1H32zM5 20h1v1H5zM13 20h3v1H13zM20 20h2v1H20zM26 20h2v1H26zM32 20h1v1H32zM5 21h1v1H5zM16 21h10v1H16zM32 21h1v1H32zM5 22h1v1H5zM19 22h1v1H19zM32 22h1v1H32zM6 23h1v1H6zM18 23h1v1H18zM31 23h1v1H31zM7 24h1v1H7zM17 24h2v1H17zM30 24h1v1H30zM8 25h2v1H8zM15 25h2v1H15zM19 25h1v1H19zM29 25h1v1H29zM10 26h5v1H10zM20 26h2v1H20zM26 26h3v1H26zM22 27h4v1H22z"/><path fill="#FFD9C7" d="M11 1h4v1H11zM10 2h3v1H10zM8 3h3v1H8zM20 3h5v1H20zM7 4h3v1H7zM15 4h4v1H15zM24 4h2v1H24zM7 5h2v1H7zM13 5h1v1H13zM19 5h1v1H19zM25 5h2v1H25zM7 6h1v1H7zM12 6h1v1H12zM19 6h2v1H19zM26 6h1v1H26zM7 7h1v1H7zM12 7h1v1H12zM18 7h1v1H18zM21 7h1v1H21zM23 7h1v1H23zM26 7h1v1H26zM4 8h2v1H4zM7 8h1v1H7zM12 8h1v1H12zM15 8h1v1H15zM18 8h2v1H18zM21 8h1v1H21zM24 8h1v1H24zM28 8h2v1H28zM3 9h2v1H3zM12 9h1v1H12zM15 9h1v1H15zM21 9h1v1H21zM24 9h1v1H24zM29 9h2v1H29zM2 10h2v1H2zM10 10h1v1H10zM12 10h1v1H12zM15 10h2v1H15zM20 10h1v1H20zM24 10h1v1H24zM29 10h3v1H29zM1 11h1v1H1zM10 11h1v1H10zM13 11h1v1H13zM19 11h1v1H19zM24 11h1v1H24zM30 11h2v1H30zM1 12h2v1H1zM10 12h1v1H10zM14 12h3v1H14zM18 12h1v1H18zM30 12h2v1H30zM1 13h2v1H1zM10 13h2v1H10zM17 13h1v1H17zM24 13h2v1H24zM30 13h2v1H30zM1 14h3v1H1zM11 14h1v1H11zM22 14h3v1H22zM30 14h2v1H30zM2 15h2v1H2zM11 15h2v1H11zM18 15h6v1H18zM29 15h2v1H29zM3 16h1v1H3zM12 16h2v1H12zM17 16h1v1H17zM19 16h4v1H19zM29 16h2v1H29zM3 17h1v1H3zM6 17h1v1H6zM13 17h1v1H13zM16 17h1v1H16zM28 17h2v1H28zM5 18h1v1H5zM14 18h1v1H14zM27 18h2v1H27zM5 19h1v1H5zM25 19h3v1H25zM6 20h1v1H6zM23 20h3v1H23zM31 20h1v1H31zM6 21h1v1H6zM31 21h1v1H31zM6 22h2v1H6zM18 22h1v1H18zM29 22h1v1H29zM31 22h1v1H31zM7 23h1v1H7zM9 23h1v1H9zM17 23h1v1H17zM29 23h2v1H29zM8 24h3v1H8zM15 24h2v1H15zM19 24h1v1H19zM28 24h2v1H28zM10 25h5v1H10zM20 25h2v1H20zM26 25h3v1H26zM22 26h4v1H22z"/><path fill="#FF8A6E" d="M15 1h1v1H15zM13 2h4v1H13zM11 3h4v1H11zM19 3h1v1H19zM10 4h3v1H10zM20 4h4v1H20zM9 5h3v1H9zM14 5h5v1H14zM23 5h2v1H23zM8 6h2v1H8zM13 6h1v1H13zM15 6h1v1H15zM24 6h2v1H24zM8 7h1v1H8zM16 7h2v1H16zM20 7h1v1H20zM22 7h1v1H22zM25 7h1v1H25zM8 8h1v1H8zM11 8h1v1H11zM22 8h2v1H22zM26 8h1v1H26zM5 9h1v1H5zM7 9h2v1H7zM11 9h1v1H11zM17 9h1v1H17zM19 9h1v1H19zM23 9h1v1H23zM26 9h1v1H26zM28 9h1v1H28zM4 10h2v1H4zM7 10h2v1H7zM18 10h1v1H18zM21 10h1v1H21zM23 10h1v1H23zM26 10h1v1H26zM28 10h1v1H28zM2 11h3v1H2zM7 11h2v1H7zM11 11h1v1H11zM17 11h1v1H17zM20 11h2v1H20zM23 11h1v1H23zM28 11h2v1H28zM3 12h2v1H3zM8 12h1v1H8zM11 12h1v1H11zM13 12h1v1H13zM19 12h2v1H19zM23 12h1v1H23zM29 12h1v1H29zM3 13h2v1H3zM8 13h1v1H8zM13 13h4v1H13zM29 13h1v1H29zM4 14h2v1H4zM14 14h4v1H14zM28 14h2v1H28zM4 15h2v1H4zM28 15h1v1H28zM2 16h1v1H2zM4 16h2v1H4zM7 16h2v1H7zM27 16h2v1H27zM2 17h1v1H2zM4 17h1v1H4zM7 17h3v1H7zM26 17h2v1H26zM3 18h1v1H3zM6 18h3v1H6zM26 18h1v1H26zM30 18h1v1H30zM6 19h3v1H6zM30 19h2v1H30zM7 20h2v1H7zM29 20h2v1H29zM7 21h3v1H7zM28 21h3v1H28zM8 22h3v1H8zM15 22h3v1H15zM27 22h2v1H27zM30 22h1v1H30zM8 23h1v1H8zM10 23h7v1H10zM25 23h4v1H25zM11 24h4v1H11zM20 24h8v1H20zM22 25h4v1H22z"/><path fill="#E0574A" d="M21 5h2v1H21zM10 6h1v1H10zM14 6h1v1H14zM9 7h2v1H9zM13 7h2v1H13zM9 8h1v1H9zM13 8h1v1H13zM9 9h1v1H9zM13 9h1v1H13zM14 10h1v1H14zM5 11h1v1H5zM27 11h1v1H27zM5 12h2v1H5zM21 12h1v1H21zM27 12h2v1H27zM5 13h2v1H5zM18 13h4v1H18zM27 13h2v1H27zM6 14h2v1H6zM10 14h1v1H10zM12 14h2v1H12zM18 14h1v1H18zM26 14h2v1H26zM6 15h1v1H6zM10 15h1v1H10zM13 15h4v1H13zM25 15h3v1H25zM10 16h2v1H10zM15 16h1v1H15zM25 16h2v1H25zM11 17h1v1H11zM14 17h1v1H14zM18 17h2v1H18zM23 17h1v1H23zM25 17h1v1H25zM9 18h2v1H9zM12 18h1v1H12zM17 18h6v1H17zM24 18h2v1H24zM9 19h3v1H9zM13 19h2v1H13zM16 19h6v1H16zM23 19h2v1H23zM29 19h1v1H29zM9 20h4v1H9zM16 20h4v1H16zM22 20h1v1H22zM28 20h1v1H28zM10 21h6v1H10zM26 21h2v1H26zM11 22h4v1H11zM20 22h7v1H20zM19 23h6v1H19z"/></symbol></svg><svg class="px lily" style="--i:0" viewBox="0 0 33 28"><use href="#pink-rose"/></svg><svg class="px lily" style="--i:1" viewBox="0 0 33 28"><use href="#pink-rose"/></svg><svg class="px lily" style="--i:2" viewBox="0 0 33 28"><use href="#pink-rose"/></svg><svg class="px lily" style="--i:3" viewBox="0 0 33 28"><use href="#pink-rose"/></svg><svg class="px lily" style="--i:4" viewBox="0 0 33 28"><use href="#pink-rose"/></svg></span><span class="bq-cta">not a writer? make me a bouquet →</span><span class="bq-close">hide the bouquet ▴</span></span></button>
-            <div class="sticker" id="bq-sticker">
-              <span class="tape" aria-hidden="true"></span>
-              <h3 class="display" id="flower-title">make a bouquet</h3>
-              <p class="sub" id="bq-sub" aria-live="polite">pick your flowers</p>
-              <ul>
-                <li><button class="flower" type="button" data-flower="rose"><svg class="px" viewBox="0 0 200 270" width="20" height="27" aria-hidden="true"><path fill="#8B324C" d="M83 44.3h37v6.5h-37zM70.8 50.4h12.6v6.5h-12.6zM119.6 50.4h6.5v6.5h-6.5zM64.7 56.5h6.5v6.5h-6.5zM125.7 56.5h12.6v6.5h-12.6zM58.6 62.6h6.5v6.5h-6.5zM137.9 62.6h6.5v6.5h-6.5zM52.5 68.7h6.5v6.5h-6.5zM137.9 68.7h6.5v6.5h-6.5zM52.5 74.8h6.5v6.5h-6.5zM137.9 74.8h6.5v6.5h-6.5zM52.5 80.9h6.5v6.5h-6.5zM137.9 80.9h6.5v6.5h-6.5zM58.6 87h6.5v6.5h-6.5zM131.8 87h6.5v6.5h-6.5zM64.7 93.1h6.5v6.5h-6.5zM64.7 99.2h6.5v6.5h-6.5zM64.7 105.3h6.5v6.5h-6.5zM64.7 111.4h12.6v6.5h-12.6zM119.6 111.4h12.6v6.5h-12.6zM76.9 117.5h12.6v6.5h-12.6zM101.3 117.5h18.7v6.5h-18.7zM89.1 184.6h6.5v6.5h-6.5zM89.1 190.7h6.5v6.5h-6.5zM89.1 196.8h6.5v6.5h-6.5zM76.9 215.1h6.5v6.5h-6.5zM70.8 221.2h6.5v6.5h-6.5zM70.8 227.3h6.5v6.5h-6.5zM83 227.3h6.5v6.5h-6.5zM113.5 227.3h6.5v6.5h-6.5zM83 233.4h6.5v6.5h-6.5zM76.9 239.5h6.5v6.5h-6.5zM64.7 245.6h6.5v6.5h-6.5z"/><path fill="#EE98B1" d="M83 50.4h37v6.5h-37zM83 56.5h6.5v6.5h-6.5zM76.9 62.6h6.5v6.5h-6.5zM95.2 62.6h6.5v6.5h-6.5zM125.7 62.6h6.5v6.5h-6.5zM58.6 68.7h6.5v6.5h-6.5zM76.9 68.7h6.5v6.5h-6.5zM89.1 68.7h6.5v6.5h-6.5zM107.4 68.7h6.5v6.5h-6.5zM58.6 74.8h6.5v6.5h-6.5zM76.9 74.8h6.5v6.5h-6.5zM95.2 74.8h12.6v6.5h-12.6zM58.6 80.9h12.6v6.5h-12.6zM83 80.9h12.6v6.5h-12.6zM70.8 87h6.5v6.5h-6.5zM89.1 87h24.8v6.5h-24.8zM70.8 93.1h12.6v6.5h-12.6zM95.2 190.7h6.5v6.5h-6.5z"/><path fill="#E37998" d="M70.8 56.5h12.6v6.5h-12.6zM89.1 56.5h6.5v6.5h-6.5zM107.4 56.5h18.7v6.5h-18.7zM70.8 62.6h6.5v6.5h-6.5zM83 62.6h12.6v6.5h-12.6zM113.5 62.6h12.6v6.5h-12.6zM64.7 68.7h12.6v6.5h-12.6zM119.6 68.7h6.5v6.5h-6.5zM131.8 68.7h6.5v6.5h-6.5zM64.7 74.8h6.5v6.5h-6.5zM83 74.8h6.5v6.5h-6.5zM113.5 74.8h12.6v6.5h-12.6zM131.8 74.8h6.5v6.5h-6.5zM76.9 80.9h6.5v6.5h-6.5zM113.5 80.9h6.5v6.5h-6.5zM131.8 80.9h6.5v6.5h-6.5zM64.7 87h6.5v6.5h-6.5zM83 93.1h6.5v6.5h-6.5zM70.8 105.3h37v6.5h-37zM125.7 105.3h6.5v6.5h-6.5zM76.9 111.4h30.9v6.5h-30.9zM58.6 190.7h6.5v6.5h-6.5zM113.5 190.7h6.5v6.5h-6.5zM137.9 190.7h6.5v6.5h-6.5zM64.7 196.8h6.5v6.5h-6.5zM113.5 196.8h6.5v6.5h-6.5zM131.8 196.8h6.5v6.5h-6.5zM76.9 221.2h6.5v6.5h-6.5zM119.6 221.2h6.5v6.5h-6.5z"/><path fill="#D05C7E" d="M95.2 56.5h12.6v6.5h-12.6zM64.7 62.6h6.5v6.5h-6.5zM131.8 62.6h6.5v6.5h-6.5zM83 68.7h6.5v6.5h-6.5zM95.2 68.7h12.6v6.5h-12.6zM113.5 68.7h6.5v6.5h-6.5zM125.7 68.7h6.5v6.5h-6.5zM70.8 74.8h6.5v6.5h-6.5zM89.1 74.8h6.5v6.5h-6.5zM107.4 74.8h6.5v6.5h-6.5zM125.7 74.8h6.5v6.5h-6.5zM70.8 80.9h6.5v6.5h-6.5zM95.2 80.9h12.6v6.5h-12.6zM125.7 80.9h6.5v6.5h-6.5zM119.6 87h12.6v6.5h-12.6zM89.1 93.1h37v6.5h-37zM76.9 99.2h18.7v6.5h-18.7zM107.4 99.2h12.6v6.5h-12.6zM125.7 99.2h6.5v6.5h-6.5zM119.6 105.3h6.5v6.5h-6.5zM107.4 111.4h12.6v6.5h-12.6zM70.8 184.6h18.7v6.5h-18.7zM113.5 184.6h18.7v6.5h-18.7zM83 190.7h6.5v6.5h-6.5zM101.3 190.7h6.5v6.5h-6.5zM83 196.8h6.5v6.5h-6.5zM101.3 196.8h6.5v6.5h-6.5zM83 215.1h6.5v6.5h-6.5zM113.5 215.1h6.5v6.5h-6.5zM83 221.2h6.5v6.5h-6.5zM113.5 221.2h6.5v6.5h-6.5zM76.9 233.4h6.5v6.5h-6.5zM119.6 233.4h6.5v6.5h-6.5zM70.8 245.6h6.5v6.5h-6.5zM125.7 245.6h6.5v6.5h-6.5z"/><path fill="#E98AA5" d="M101.3 62.6h6.5v6.5h-6.5zM58.6 178.5h24.8v6.5h-24.8zM119.6 178.5h24.8v6.5h-24.8zM58.6 184.6h12.6v6.5h-12.6zM131.8 184.6h12.6v6.5h-12.6zM64.7 190.7h18.7v6.5h-18.7zM119.6 190.7h18.7v6.5h-18.7zM70.8 196.8h12.6v6.5h-12.6zM95.2 196.8h6.5v6.5h-6.5zM119.6 196.8h12.6v6.5h-12.6zM76.9 227.3h6.5v6.5h-6.5zM119.6 227.3h6.5v6.5h-6.5zM70.8 233.4h6.5v6.5h-6.5zM125.7 233.4h6.5v6.5h-6.5zM70.8 239.5h6.5v6.5h-6.5zM125.7 239.5h6.5v6.5h-6.5z"/><path fill="#A63A5A" d="M107.4 62.6h6.5v6.5h-6.5zM107.4 80.9h6.5v6.5h-6.5zM119.6 80.9h6.5v6.5h-6.5zM76.9 87h12.6v6.5h-12.6zM113.5 87h6.5v6.5h-6.5zM125.7 93.1h6.5v6.5h-6.5zM70.8 99.2h6.5v6.5h-6.5zM95.2 99.2h12.6v6.5h-12.6zM119.6 99.2h6.5v6.5h-6.5zM107.4 105.3h12.6v6.5h-12.6zM89.1 117.5h12.6v6.5h-12.6z"/><path fill="#224127" d="M52.5 99.2h12.6v6.5h-12.6zM131.8 99.2h12.6v6.5h-12.6zM58.6 105.3h6.5v6.5h-6.5zM34.2 123.6h6.5v6.5h-6.5zM46.4 123.6h6.5v6.5h-6.5zM58.6 123.6h6.5v6.5h-6.5zM89.1 123.6h6.5v6.5h-6.5zM101.3 123.6h6.5v6.5h-6.5zM119.6 129.7h6.5v6.5h-6.5zM95.2 135.8h6.5v6.5h-6.5zM144 135.8h6.5v6.5h-6.5zM95.2 141.9h6.5v6.5h-6.5zM137.9 148h6.5v6.5h-6.5zM52.5 154.1h6.5v6.5h-6.5zM113.5 154.1h6.5v6.5h-6.5zM76.9 160.2h6.5v6.5h-6.5zM95.2 160.2h6.5v6.5h-6.5zM83 166.3h12.6v6.5h-12.6zM95.2 221.2h6.5v6.5h-6.5zM95.2 227.3h6.5v6.5h-6.5zM95.2 233.4h6.5v6.5h-6.5zM95.2 239.5h6.5v6.5h-6.5zM95.2 245.6h6.5v6.5h-6.5zM95.2 251.7h6.5v6.5h-6.5zM95.2 257.8h6.5v6.5h-6.5zM95.2 263.9h6.5v6.5h-6.5z"/><path fill="#2A4F29" d="M131.8 105.3h6.5v6.5h-6.5zM125.7 123.6h37v6.5h-37zM125.7 129.7h18.7v6.5h-18.7zM150.1 129.7h6.5v6.5h-6.5zM113.5 135.8h18.7v6.5h-18.7zM58.6 141.9h6.5v6.5h-6.5zM70.8 141.9h6.5v6.5h-6.5zM113.5 141.9h6.5v6.5h-6.5zM144 141.9h6.5v6.5h-6.5zM70.8 148h6.5v6.5h-6.5zM107.4 148h6.5v6.5h-6.5zM107.4 154.1h6.5v6.5h-6.5zM119.6 154.1h18.7v6.5h-18.7zM107.4 160.2h6.5v6.5h-6.5zM107.4 166.3h6.5v6.5h-6.5z"/><path fill="#1B3F21" d="M40.3 123.6h6.5v6.5h-6.5zM52.5 123.6h6.5v6.5h-6.5zM95.2 123.6h6.5v6.5h-6.5zM40.3 129.7h6.5v6.5h-6.5zM64.7 129.7h12.6v6.5h-12.6zM95.2 129.7h6.5v6.5h-6.5zM40.3 135.8h6.5v6.5h-6.5zM76.9 135.8h6.5v6.5h-6.5zM40.3 141.9h6.5v6.5h-6.5zM64.7 141.9h6.5v6.5h-6.5zM76.9 141.9h6.5v6.5h-6.5zM46.4 148h6.5v6.5h-6.5zM76.9 148h12.6v6.5h-12.6zM95.2 148h6.5v6.5h-6.5zM58.6 154.1h30.9v6.5h-30.9zM95.2 154.1h6.5v6.5h-6.5zM83 160.2h6.5v6.5h-6.5zM95.2 166.3h6.5v6.5h-6.5zM89.1 172.4h18.7v6.5h-18.7zM95.2 178.5h12.6v6.5h-12.6zM95.2 209h6.5v6.5h-6.5zM95.2 215.1h6.5v6.5h-6.5z"/><path fill="#507724" d="M46.4 129.7h18.7v6.5h-18.7zM144 129.7h6.5v6.5h-6.5zM46.4 135.8h30.9v6.5h-30.9zM131.8 135.8h12.6v6.5h-12.6zM46.4 141.9h12.6v6.5h-12.6zM119.6 141.9h24.8v6.5h-24.8zM52.5 148h18.7v6.5h-18.7zM113.5 148h24.8v6.5h-24.8zM101.3 166.3h6.5v6.5h-6.5z"/><path fill="#8C3851" d="M58.6 172.4h24.8v6.5h-24.8zM119.6 172.4h24.8v6.5h-24.8zM52.5 178.5h6.5v6.5h-6.5zM83 178.5h6.5v6.5h-6.5zM113.5 178.5h6.5v6.5h-6.5zM144 178.5h6.5v6.5h-6.5zM52.5 184.6h6.5v6.5h-6.5zM95.2 184.6h18.7v6.5h-18.7zM144 184.6h6.5v6.5h-6.5zM52.5 190.7h6.5v6.5h-6.5zM107.4 190.7h6.5v6.5h-6.5zM144 190.7h6.5v6.5h-6.5zM58.6 196.8h6.5v6.5h-6.5zM107.4 196.8h6.5v6.5h-6.5zM137.9 196.8h6.5v6.5h-6.5zM64.7 202.9h73.6v6.5h-73.6zM83 209h12.6v6.5h-12.6zM107.4 209h12.6v6.5h-12.6zM89.1 215.1h6.5v6.5h-6.5zM107.4 215.1h6.5v6.5h-6.5zM119.6 215.1h6.5v6.5h-6.5zM89.1 221.2h6.5v6.5h-6.5zM107.4 221.2h6.5v6.5h-6.5zM125.7 221.2h6.5v6.5h-6.5zM125.7 227.3h6.5v6.5h-6.5zM64.7 233.4h6.5v6.5h-6.5zM113.5 233.4h6.5v6.5h-6.5zM131.8 233.4h6.5v6.5h-6.5zM64.7 239.5h6.5v6.5h-6.5zM119.6 239.5h6.5v6.5h-6.5zM131.8 239.5h6.5v6.5h-6.5zM76.9 245.6h6.5v6.5h-6.5zM119.6 245.6h6.5v6.5h-6.5zM131.8 245.6h6.5v6.5h-6.5zM64.7 251.7h12.6v6.5h-12.6zM125.7 251.7h12.6v6.5h-12.6z"/></svg><span class="name">rose</span><span class="mark" aria-hidden="true">+</span></button></li>
-                <li><button class="flower" type="button" data-flower="daisy"><svg class="px" viewBox="0 0 200 270" width="20" height="27" aria-hidden="true"><path fill="#8F7857" d="M78.8 34.8h20v10.2h-20zM127.8 44.6h20v10.2h-20zM39.6 54.4h10.2v10.2h-10.2zM59.2 54.4h20v10.2h-20zM98.4 54.4h10.2v10.2h-10.2zM118 54.4h10.2v10.2h-10.2zM69 64.2h10.2v10.2h-10.2zM108.2 64.2h10.2v10.2h-10.2zM29.8 74h10.2v10.2h-10.2zM78.8 74h10.2v10.2h-10.2zM137.6 74h10.2v10.2h-10.2zM39.6 83.8h10.2v10.2h-10.2zM78.8 83.8h10.2v10.2h-10.2zM137.6 83.8h10.2v10.2h-10.2zM49.4 93.6h29.8v10.2h-29.8zM167 93.6h10.2v10.2h-10.2zM39.6 103.4h10.2v10.2h-10.2zM167 103.4h10.2v10.2h-10.2zM29.8 113.2h10.2v10.2h-10.2zM78.8 113.2h10.2v10.2h-10.2zM127.8 113.2h29.8v10.2h-29.8zM29.8 123h10.2v10.2h-10.2zM98.4 123h10.2v10.2h-10.2zM137.6 123h10.2v10.2h-10.2zM39.6 132.8h10.2v10.2h-10.2zM59.2 152.4h10.2v10.2h-10.2zM118 152.4h29.8v10.2h-29.8zM69 162.2h10.2v10.2h-10.2z"/><path fill="#8E7757" d="M69 44.6h10.2v10.2h-10.2zM98.4 44.6h10.2v10.2h-10.2zM49.4 54.4h10.2v10.2h-10.2zM147.4 54.4h10.2v10.2h-10.2zM29.8 64.2h10.2v10.2h-10.2zM98.4 64.2h10.2v10.2h-10.2zM147.4 64.2h10.2v10.2h-10.2zM98.4 74h10.2v10.2h-10.2zM127.8 83.8h10.2v10.2h-10.2zM147.4 83.8h20v10.2h-20zM157.2 113.2h10.2v10.2h-10.2zM69 123h10.2v10.2h-10.2zM49.4 132.8h20v10.2h-20zM98.4 132.8h10.2v10.2h-10.2zM147.4 132.8h10.2v10.2h-10.2zM59.2 142.6h10.2v10.2h-10.2zM108.2 142.6h10.2v10.2h-10.2zM147.4 142.6h10.2v10.2h-10.2zM88.6 152.4h10.2v10.2h-10.2zM78.8 162.2h10.2v10.2h-10.2z"/><path fill="#F5EDD6" d="M78.8 44.6h10.2v10.2h-10.2zM78.8 54.4h10.2v10.2h-10.2zM127.8 54.4h10.2v10.2h-10.2zM39.6 64.2h29.8v10.2h-29.8zM78.8 64.2h10.2v10.2h-10.2zM118 64.2h10.2v10.2h-10.2zM59.2 74h20v10.2h-20zM108.2 74h10.2v10.2h-10.2zM137.6 93.6h20v10.2h-20zM49.4 103.4h20v10.2h-20zM39.6 113.2h20v10.2h-20zM39.6 123h10.2v10.2h-10.2zM78.8 123h10.2v10.2h-10.2zM127.8 123h10.2v10.2h-10.2zM69 132.8h10.2v10.2h-10.2zM127.8 132.8h20v10.2h-20zM69 142.6h10.2v10.2h-10.2z"/><path fill="#F2E5C9" d="M88.6 44.6h10.2v10.2h-10.2zM88.6 54.4h10.2v10.2h-10.2zM127.8 64.2h10.2v10.2h-10.2zM118 74h10.2v10.2h-10.2zM157.2 93.6h10.2v10.2h-10.2zM59.2 113.2h10.2v10.2h-10.2zM49.4 123h10.2v10.2h-10.2zM118 123h10.2v10.2h-10.2zM78.8 132.8h10.2v10.2h-10.2zM118 132.8h10.2v10.2h-10.2zM137.6 142.6h10.2v10.2h-10.2z"/><path fill="#E2CEA8" d="M137.6 54.4h10.2v10.2h-10.2zM49.4 74h10.2v10.2h-10.2zM78.8 142.6h10.2v10.2h-10.2z"/><path fill="#D9C19A" d="M88.6 64.2h10.2v10.2h-10.2zM137.6 64.2h10.2v10.2h-10.2zM39.6 74h10.2v10.2h-10.2zM88.6 74h10.2v10.2h-10.2zM127.8 74h10.2v10.2h-10.2zM49.4 83.8h29.8v10.2h-29.8zM118 83.8h10.2v10.2h-10.2zM127.8 93.6h10.2v10.2h-10.2zM69 103.4h10.2v10.2h-10.2zM127.8 103.4h39.6v10.2h-39.6zM69 113.2h10.2v10.2h-10.2zM118 113.2h10.2v10.2h-10.2zM59.2 123h10.2v10.2h-10.2zM88.6 123h10.2v10.2h-10.2zM108.2 123h10.2v10.2h-10.2zM88.6 132.8h10.2v10.2h-10.2zM108.2 132.8h10.2v10.2h-10.2zM88.6 142.6h10.2v10.2h-10.2zM118 142.6h20v10.2h-20zM69 152.4h20v10.2h-20z"/><path fill="#E49C1A" d="M88.6 83.8h29.8v10.2h-29.8zM78.8 93.6h49.4v10.2h-49.4zM78.8 103.4h49.4v10.2h-49.4zM88.6 113.2h29.8v10.2h-29.8z"/><path fill="#124722" d="M98.4 142.6h10.2v10.2h-10.2zM49.4 181.8h20v10.2h-20zM137.6 181.8h29.8v10.2h-29.8zM49.4 191.6h10.2v10.2h-10.2zM69 191.6h10.2v10.2h-10.2zM98.4 191.6h10.2v10.2h-10.2zM118 191.6h10.2v10.2h-10.2zM137.6 201.4h10.2v10.2h-10.2zM59.2 211.2h10.2v10.2h-10.2zM127.8 211.2h20v10.2h-20zM69 221h20v10.2h-20zM98.4 240.6h10.2v10.2h-10.2zM88.6 260.2h10.2v10.2h-10.2z"/><path fill="#134624" d="M98.4 152.4h10.2v10.2h-10.2zM98.4 162.2h10.2v10.2h-10.2zM98.4 172h10.2v10.2h-10.2zM39.6 181.8h10.2v10.2h-10.2zM98.4 181.8h10.2v10.2h-10.2zM127.8 181.8h10.2v10.2h-10.2zM147.4 191.6h10.2v10.2h-10.2zM49.4 201.4h10.2v10.2h-10.2zM78.8 201.4h10.2v10.2h-10.2zM98.4 201.4h20v10.2h-20zM78.8 211.2h10.2v10.2h-10.2zM98.4 211.2h10.2v10.2h-10.2zM98.4 221h10.2v10.2h-10.2zM118 221h10.2v10.2h-10.2zM88.6 230.8h29.8v10.2h-29.8zM98.4 250.4h10.2v10.2h-10.2z"/><path fill="#7C804A" d="M59.2 191.6h10.2v10.2h-10.2zM127.8 191.6h10.2v10.2h-10.2zM118 201.4h10.2v10.2h-10.2z"/><path fill="#175026" d="M137.6 191.6h10.2v10.2h-10.2zM59.2 201.4h20v10.2h-20zM127.8 201.4h10.2v10.2h-10.2zM69 211.2h10.2v10.2h-10.2zM108.2 211.2h20v10.2h-20zM108.2 221h10.2v10.2h-10.2z"/></svg><span class="name">daisy</span><span class="mark" aria-hidden="true">+</span></button></li>
-                <li><button class="flower" type="button" data-flower="sunflower"><svg class="px" viewBox="0 0 200 270" width="20" height="27" aria-hidden="true"><path fill="#F4AF1A" d="M89.9 27.6h20.6v10.5h-20.6zM120.2 37.7h20.6v10.5h-20.6zM69.7 47.8h10.5v10.5h-10.5zM100 47.8h10.5v10.5h-10.5zM130.3 47.8h10.5v10.5h-10.5zM59.6 57.9h10.5v10.5h-10.5zM130.3 57.9h10.5v10.5h-10.5zM39.4 68h20.6v10.5h-20.6zM150.5 68h10.5v10.5h-10.5zM150.5 98.3h20.6v10.5h-20.6zM150.5 118.5h10.5v10.5h-10.5zM49.5 128.6h10.5v10.5h-10.5zM150.5 128.6h10.5v10.5h-10.5zM59.6 148.8h20.6v10.5h-20.6z"/><path fill="#F3C356" d="M59.6 37.7h10.5v10.5h-10.5zM89.9 37.7h10.5v10.5h-10.5zM59.6 47.8h10.5v10.5h-10.5zM89.9 47.8h10.5v10.5h-10.5zM120.2 47.8h10.5v10.5h-10.5zM39.4 57.9h20.6v10.5h-20.6zM120.2 57.9h10.5v10.5h-10.5zM140.4 68h10.5v10.5h-10.5zM29.3 88.2h20.6v10.5h-20.6zM140.4 88.2h30.7v10.5h-30.7zM39.4 118.5h20.6v10.5h-20.6zM140.4 118.5h10.5v10.5h-10.5zM140.4 128.6h10.5v10.5h-10.5zM59.6 138.7h10.5v10.5h-10.5zM89.9 138.7h10.5v10.5h-10.5zM120.2 138.7h10.5v10.5h-10.5z"/><path fill="#F4B01A" d="M69.7 37.7h10.5v10.5h-10.5zM100 37.7h10.5v10.5h-10.5zM69.7 57.9h10.5v10.5h-10.5zM89.9 57.9h20.6v10.5h-20.6zM140.4 57.9h20.6v10.5h-20.6zM69.7 68h10.5v10.5h-10.5zM120.2 68h10.5v10.5h-10.5zM49.5 88.2h10.5v10.5h-10.5zM29.3 98.3h30.7v10.5h-30.7zM140.4 98.3h10.5v10.5h-10.5zM39.4 128.6h10.5v10.5h-10.5zM69.7 138.7h10.5v10.5h-10.5zM100 138.7h10.5v10.5h-10.5zM130.3 138.7h10.5v10.5h-10.5zM89.9 148.8h20.6v10.5h-20.6zM120.2 148.8h20.6v10.5h-20.6z"/><path fill="#E18D1A" d="M79.8 47.8h10.5v10.5h-10.5zM110.1 47.8h10.5v10.5h-10.5zM79.8 57.9h10.5v10.5h-10.5zM110.1 57.9h10.5v10.5h-10.5zM59.6 68h10.5v10.5h-10.5zM130.3 68h10.5v10.5h-10.5zM49.5 78.1h20.6v10.5h-20.6zM130.3 78.1h20.6v10.5h-20.6zM49.5 108.4h10.5v10.5h-10.5zM140.4 108.4h10.5v10.5h-10.5zM59.6 118.5h10.5v10.5h-10.5zM130.3 118.5h10.5v10.5h-10.5zM59.6 128.6h20.6v10.5h-20.6zM120.2 128.6h20.6v10.5h-20.6zM79.8 138.7h10.5v10.5h-10.5zM110.1 138.7h10.5v10.5h-10.5z"/><path fill="#6B361F" d="M79.8 68h40.8v10.5h-40.8zM69.7 78.1h20.6v10.5h-20.6zM110.1 78.1h10.5v10.5h-10.5zM59.6 88.2h20.6v10.5h-20.6zM100 88.2h10.5v10.5h-10.5zM59.6 98.3h10.5v10.5h-10.5zM100 98.3h20.6v10.5h-20.6zM59.6 108.4h20.6v10.5h-20.6zM89.9 108.4h20.6v10.5h-20.6zM120.2 108.4h10.5v10.5h-10.5zM69.7 118.5h20.6v10.5h-20.6zM110.1 118.5h10.5v10.5h-10.5z"/><path fill="#774024" d="M89.9 78.1h20.6v10.5h-20.6zM79.8 88.2h20.6v10.5h-20.6zM110.1 88.2h10.5v10.5h-10.5zM69.7 98.3h30.7v10.5h-30.7zM120.2 98.3h10.5v10.5h-10.5zM79.8 108.4h10.5v10.5h-10.5zM110.1 108.4h10.5v10.5h-10.5zM89.9 118.5h20.6v10.5h-20.6z"/><path fill="#4E381E" d="M120.2 78.1h10.5v10.5h-10.5zM120.2 88.2h20.6v10.5h-20.6zM130.3 98.3h10.5v10.5h-10.5zM130.3 108.4h10.5v10.5h-10.5zM120.2 118.5h10.5v10.5h-10.5zM79.8 128.6h40.8v10.5h-40.8z"/><path fill="#2C4F1E" d="M29.3 158.9h10.5v10.5h-10.5zM100 158.9h10.5v10.5h-10.5zM29.3 169h10.5v10.5h-10.5zM69.7 169h10.5v10.5h-10.5zM100 169h10.5v10.5h-10.5zM39.4 179.1h10.5v10.5h-10.5zM69.7 179.1h10.5v10.5h-10.5zM100 179.1h10.5v10.5h-10.5zM130.3 179.1h20.6v10.5h-20.6zM170.7 179.1h10.5v10.5h-10.5zM69.7 189.2h20.6v10.5h-20.6zM100 189.2h10.5v10.5h-10.5zM120.2 189.2h10.5v10.5h-10.5zM100 199.3h10.5v10.5h-10.5zM120.2 199.3h10.5v10.5h-10.5zM100 209.4h30.7v10.5h-30.7zM39.4 219.5h10.5v10.5h-10.5zM79.8 219.5h10.5v10.5h-10.5zM100 219.5h10.5v10.5h-10.5zM69.7 229.6h20.6v10.5h-20.6zM100 229.6h10.5v10.5h-10.5zM100 239.7h10.5v10.5h-10.5zM100 249.8h10.5v10.5h-10.5zM100 259.9h10.5v10.5h-10.5z"/><path fill="#3A672A" d="M39.4 158.9h30.7v10.5h-30.7zM89.9 158.9h10.5v10.5h-10.5zM59.6 169h10.5v10.5h-10.5zM140.4 169h40.8v10.5h-40.8zM49.5 189.2h20.6v10.5h-20.6zM160.6 189.2h10.5v10.5h-10.5zM150.5 199.3h10.5v10.5h-10.5zM49.5 209.4h30.7v10.5h-30.7zM130.3 209.4h20.6v10.5h-20.6zM49.5 229.6h20.6v10.5h-20.6zM89.9 239.7h10.5v10.5h-10.5zM89.9 249.8h10.5v10.5h-10.5zM89.9 259.9h10.5v10.5h-10.5z"/><path fill="#627F2C" d="M39.4 169h20.6v10.5h-20.6zM89.9 169h10.5v10.5h-10.5zM89.9 179.1h10.5v10.5h-10.5zM150.5 179.1h10.5v10.5h-10.5zM89.9 189.2h10.5v10.5h-10.5zM130.3 189.2h20.6v10.5h-20.6zM89.9 199.3h10.5v10.5h-10.5zM89.9 209.4h10.5v10.5h-10.5zM49.5 219.5h20.6v10.5h-20.6zM89.9 219.5h10.5v10.5h-10.5zM89.9 229.6h10.5v10.5h-10.5z"/><path fill="#48672E" d="M49.5 179.1h20.6v10.5h-20.6zM160.6 179.1h10.5v10.5h-10.5zM150.5 189.2h10.5v10.5h-10.5zM130.3 199.3h20.6v10.5h-20.6zM69.7 219.5h10.5v10.5h-10.5z"/></svg><span class="name">sunflower</span><span class="mark" aria-hidden="true">+</span></button></li>
-                <li><button class="flower" type="button" data-flower="tulip"><svg class="px" viewBox="0 0 200 270" width="20" height="27" aria-hidden="true"><path fill="#801A10" d="M80.4 5.4h20v10.2h-20zM51 15.2h10.2v10.2h-10.2zM70.6 15.2h10.2v10.2h-10.2zM100 15.2h10.2v10.2h-10.2zM119.6 15.2h10.2v10.2h-10.2zM51 25h29.8v10.2h-29.8zM100 25h10.2v10.2h-10.2zM51 34.8h10.2v10.2h-10.2zM70.6 34.8h10.2v10.2h-10.2zM51 44.6h10.2v10.2h-10.2zM80.4 44.6h10.2v10.2h-10.2zM51 54.4h10.2v10.2h-10.2zM51 64.2h10.2v10.2h-10.2zM60.8 74h10.2v10.2h-10.2zM60.8 83.8h10.2v10.2h-10.2zM90.2 83.8h10.2v10.2h-10.2zM100 93.6h10.2v10.2h-10.2z"/><path fill="#C56F2A" d="M80.4 15.2h10.2v10.2h-10.2zM80.4 25h10.2v10.2h-10.2zM119.6 25h10.2v10.2h-10.2zM60.8 34.8h10.2v10.2h-10.2zM109.8 34.8h10.2v10.2h-10.2zM70.6 44.6h10.2v10.2h-10.2zM100 44.6h10.2v10.2h-10.2zM80.4 54.4h10.2v10.2h-10.2zM100 64.2h10.2v10.2h-10.2zM100 74h10.2v10.2h-10.2z"/><path fill="#D13810" d="M90.2 15.2h10.2v10.2h-10.2zM90.2 25h10.2v10.2h-10.2zM80.4 34.8h10.2v10.2h-10.2zM119.6 34.8h10.2v10.2h-10.2zM60.8 44.6h10.2v10.2h-10.2zM109.8 44.6h10.2v10.2h-10.2zM60.8 54.4h20v10.2h-20zM100 54.4h20v10.2h-20zM60.8 64.2h29.8v10.2h-29.8zM109.8 64.2h10.2v10.2h-10.2zM70.6 74h10.2v10.2h-10.2zM100 83.8h10.2v10.2h-10.2z"/><path fill="#6B1B1A" d="M129.4 15.2h10.2v10.2h-10.2zM109.8 25h10.2v10.2h-10.2zM129.4 25h10.2v10.2h-10.2zM100 34.8h10.2v10.2h-10.2zM129.4 34.8h10.2v10.2h-10.2zM90.2 44.6h10.2v10.2h-10.2zM129.4 44.6h10.2v10.2h-10.2zM90.2 54.4h10.2v10.2h-10.2zM129.4 54.4h10.2v10.2h-10.2zM90.2 64.2h10.2v10.2h-10.2zM129.4 64.2h10.2v10.2h-10.2zM90.2 74h10.2v10.2h-10.2zM119.6 74h10.2v10.2h-10.2zM119.6 83.8h10.2v10.2h-10.2zM70.6 93.6h10.2v10.2h-10.2zM109.8 93.6h10.2v10.2h-10.2z"/><path fill="#9D200E" d="M90.2 34.8h10.2v10.2h-10.2zM119.6 44.6h10.2v10.2h-10.2zM119.6 54.4h10.2v10.2h-10.2zM119.6 64.2h10.2v10.2h-10.2zM80.4 74h10.2v10.2h-10.2zM109.8 74h10.2v10.2h-10.2zM70.6 83.8h20v10.2h-20zM109.8 83.8h10.2v10.2h-10.2zM80.4 93.6h20v10.2h-20z"/><path fill="#0B3C20" d="M158.8 93.6h10.2v10.2h-10.2zM158.8 103.4h10.2v10.2h-10.2zM158.8 113.2h10.2v10.2h-10.2zM158.8 123h10.2v10.2h-10.2zM158.8 132.8h10.2v10.2h-10.2zM60.8 142.6h10.2v10.2h-10.2zM158.8 142.6h10.2v10.2h-10.2zM70.6 152.4h10.2v10.2h-10.2zM90.2 152.4h10.2v10.2h-10.2zM149 152.4h10.2v10.2h-10.2zM70.6 162.2h10.2v10.2h-10.2zM149 162.2h10.2v10.2h-10.2zM80.4 172h10.2v10.2h-10.2zM139.2 172h10.2v10.2h-10.2zM80.4 181.8h10.2v10.2h-10.2zM139.2 181.8h10.2v10.2h-10.2zM129.4 191.6h10.2v10.2h-10.2zM90.2 201.4h10.2v10.2h-10.2zM119.6 201.4h10.2v10.2h-10.2zM119.6 211.2h10.2v10.2h-10.2zM109.8 221h10.2v10.2h-10.2zM90.2 230.8h10.2v10.2h-10.2zM109.8 230.8h10.2v10.2h-10.2zM100 240.6h10.2v10.2h-10.2zM100 250.4h10.2v10.2h-10.2zM100 260.2h10.2v10.2h-10.2z"/><path fill="#0F3C1F" d="M80.4 103.4h10.2v10.2h-10.2zM100 103.4h10.2v10.2h-10.2zM90.2 113.2h10.2v10.2h-10.2zM41.2 123h10.2v10.2h-10.2zM90.2 123h10.2v10.2h-10.2zM51 132.8h10.2v10.2h-10.2zM90.2 132.8h10.2v10.2h-10.2zM90.2 142.6h10.2v10.2h-10.2zM90.2 162.2h10.2v10.2h-10.2zM90.2 211.2h10.2v10.2h-10.2zM90.2 221h10.2v10.2h-10.2z"/><path fill="#114524" d="M90.2 103.4h10.2v10.2h-10.2zM149 103.4h10.2v10.2h-10.2zM31.4 113.2h10.2v10.2h-10.2zM139.2 113.2h10.2v10.2h-10.2zM31.4 123h10.2v10.2h-10.2zM129.4 123h10.2v10.2h-10.2zM31.4 132.8h10.2v10.2h-10.2zM119.6 132.8h10.2v10.2h-10.2zM31.4 142.6h10.2v10.2h-10.2zM109.8 142.6h10.2v10.2h-10.2zM31.4 152.4h10.2v10.2h-10.2zM109.8 152.4h10.2v10.2h-10.2zM31.4 162.2h10.2v10.2h-10.2zM109.8 162.2h10.2v10.2h-10.2zM41.2 172h10.2v10.2h-10.2zM90.2 172h10.2v10.2h-10.2zM109.8 172h10.2v10.2h-10.2zM41.2 181.8h10.2v10.2h-10.2zM90.2 181.8h10.2v10.2h-10.2zM109.8 181.8h10.2v10.2h-10.2zM51 191.6h10.2v10.2h-10.2zM90.2 191.6h20v10.2h-20zM51 201.4h10.2v10.2h-10.2zM60.8 211.2h10.2v10.2h-10.2zM70.6 221h10.2v10.2h-10.2zM80.4 230.8h10.2v10.2h-10.2zM90.2 240.6h10.2v10.2h-10.2zM90.2 250.4h10.2v10.2h-10.2zM90.2 260.2h10.2v10.2h-10.2z"/><path fill="#2E6C33" d="M149 113.2h10.2v10.2h-10.2zM149 123h10.2v10.2h-10.2zM41.2 132.8h10.2v10.2h-10.2zM149 132.8h10.2v10.2h-10.2zM51 142.6h10.2v10.2h-10.2zM139.2 142.6h20v10.2h-20zM60.8 152.4h10.2v10.2h-10.2zM139.2 152.4h10.2v10.2h-10.2zM60.8 162.2h10.2v10.2h-10.2zM129.4 162.2h20v10.2h-20zM70.6 172h10.2v10.2h-10.2zM129.4 172h10.2v10.2h-10.2zM70.6 181.8h10.2v10.2h-10.2zM129.4 181.8h10.2v10.2h-10.2zM80.4 191.6h10.2v10.2h-10.2zM119.6 191.6h10.2v10.2h-10.2zM80.4 201.4h10.2v10.2h-10.2zM109.8 201.4h10.2v10.2h-10.2zM80.4 211.2h10.2v10.2h-10.2zM100 211.2h20v10.2h-20zM80.4 221h10.2v10.2h-10.2zM100 221h10.2v10.2h-10.2zM100 230.8h10.2v10.2h-10.2z"/><path fill="#5D963D" d="M139.2 123h10.2v10.2h-10.2zM129.4 132.8h10.2v10.2h-10.2zM119.6 142.6h20v10.2h-20zM41.2 152.4h20v10.2h-20zM119.6 152.4h20v10.2h-20zM41.2 162.2h20v10.2h-20zM119.6 162.2h10.2v10.2h-10.2zM51 172h20v10.2h-20zM119.6 172h10.2v10.2h-10.2zM51 181.8h20v10.2h-20zM119.6 181.8h10.2v10.2h-10.2zM60.8 191.6h10.2v10.2h-10.2zM109.8 191.6h10.2v10.2h-10.2zM60.8 201.4h20v10.2h-20zM100 201.4h10.2v10.2h-10.2zM70.6 211.2h10.2v10.2h-10.2z"/><path fill="#357633" d="M139.2 132.8h10.2v10.2h-10.2zM41.2 142.6h10.2v10.2h-10.2zM70.6 191.6h10.2v10.2h-10.2z"/></svg><span class="name">tulip</span><span class="mark" aria-hidden="true">+</span></button></li>
-                <li><button class="flower" type="button" data-flower="lily"><svg class="px" viewBox="0 0 200 270" width="20" height="27" aria-hidden="true"><path fill="#232932" d="M71.8 1.6h30.9v6.5h-30.9zM65.7 7.7h6.5v6.5h-6.5zM102.3 7.7h6.5v6.5h-6.5zM108.4 13.8h6.5v6.5h-6.5zM151.1 13.8h18.7v6.5h-18.7zM114.5 19.9h6.5v6.5h-6.5zM138.9 19.9h12.6v6.5h-12.6zM169.4 19.9h6.5v6.5h-6.5zM114.5 26h6.5v6.5h-6.5zM132.8 26h6.5v6.5h-6.5zM175.5 26h6.5v6.5h-6.5zM114.5 32.1h6.5v6.5h-6.5zM126.7 32.1h6.5v6.5h-6.5zM120.6 38.2h6.5v6.5h-6.5zM169.4 38.2h6.5v6.5h-6.5zM65.7 44.3h6.5v6.5h-6.5zM120.6 44.3h6.5v6.5h-6.5zM163.3 50.4h6.5v6.5h-6.5zM157.2 62.6h6.5v6.5h-6.5zM163.3 68.7h6.5v6.5h-6.5zM181.6 80.9h6.5v6.5h-6.5zM187.7 99.2h6.5v6.5h-6.5zM163.3 105.3h6.5v6.5h-6.5zM138.9 111.4h12.6v6.5h-12.6zM175.5 111.4h6.5v6.5h-6.5zM181.6 117.5h6.5v6.5h-6.5zM151.1 141.9h6.5v6.5h-6.5zM41.3 190.7h6.5v6.5h-6.5zM47.4 202.9h6.5v6.5h-6.5zM59.6 215.1h6.5v6.5h-6.5zM65.7 221.2h6.5v6.5h-6.5zM90.1 257.8h6.5v6.5h-6.5zM96.2 263.9h12.6v6.5h-12.6z"/><path fill="#B3C4ED" d="M71.8 7.7h12.6v6.5h-12.6zM77.9 13.8h6.5v6.5h-6.5zM77.9 19.9h6.5v6.5h-6.5zM151.1 19.9h18.7v6.5h-18.7zM77.9 26h6.5v6.5h-6.5zM138.9 26h12.6v6.5h-12.6zM157.2 26h6.5v6.5h-6.5zM169.4 26h6.5v6.5h-6.5zM77.9 32.1h6.5v6.5h-6.5zM163.3 32.1h6.5v6.5h-6.5zM77.9 38.2h12.6v6.5h-12.6zM84 44.3h6.5v6.5h-6.5zM108.4 44.3h12.6v6.5h-12.6zM84 50.4h6.5v6.5h-6.5zM90.1 56.5h6.5v6.5h-6.5zM138.9 56.5h6.5v6.5h-6.5zM71.8 62.6h6.5v6.5h-6.5zM151.1 62.6h6.5v6.5h-6.5zM47.4 68.7h6.5v6.5h-6.5zM65.7 68.7h6.5v6.5h-6.5zM65.7 74.8h12.6v6.5h-12.6zM151.1 74.8h6.5v6.5h-6.5zM163.3 74.8h6.5v6.5h-6.5zM163.3 80.9h6.5v6.5h-6.5zM175.5 80.9h6.5v6.5h-6.5zM151.1 87h12.6v6.5h-12.6zM175.5 87h12.6v6.5h-12.6zM145 93.1h6.5v6.5h-6.5zM181.6 93.1h6.5v6.5h-6.5zM59.6 99.2h6.5v6.5h-6.5zM145 99.2h12.6v6.5h-12.6zM175.5 99.2h6.5v6.5h-6.5zM71.8 105.3h6.5v6.5h-6.5zM90.1 111.4h12.6v6.5h-12.6zM84 117.5h18.7v6.5h-18.7zM77.9 123.6h6.5v6.5h-6.5zM108.4 123.6h24.8v6.5h-24.8zM71.8 129.7h6.5v6.5h-6.5zM114.5 129.7h6.5v6.5h-6.5zM59.6 141.9h6.5v6.5h-6.5zM126.7 148h6.5v6.5h-6.5zM138.9 148h6.5v6.5h-6.5zM126.7 154.1h6.5v6.5h-6.5zM138.9 154.1h6.5v6.5h-6.5z"/><path fill="#92B2E5" d="M84 7.7h12.6v6.5h-12.6zM90.1 13.8h6.5v6.5h-6.5zM90.1 19.9h6.5v6.5h-6.5zM96.2 26h6.5v6.5h-6.5zM96.2 32.1h6.5v6.5h-6.5zM151.1 32.1h6.5v6.5h-6.5zM96.2 38.2h12.6v6.5h-12.6zM126.7 38.2h6.5v6.5h-6.5zM145 38.2h6.5v6.5h-6.5zM96.2 44.3h6.5v6.5h-6.5zM126.7 44.3h6.5v6.5h-6.5zM138.9 44.3h6.5v6.5h-6.5zM29.1 50.4h24.8v6.5h-24.8zM71.8 50.4h6.5v6.5h-6.5zM90.1 50.4h12.6v6.5h-12.6zM108.4 50.4h12.6v6.5h-12.6zM126.7 50.4h6.5v6.5h-6.5zM138.9 50.4h12.6v6.5h-12.6zM23 56.5h12.6v6.5h-12.6zM53.5 56.5h12.6v6.5h-12.6zM71.8 56.5h12.6v6.5h-12.6zM96.2 56.5h6.5v6.5h-6.5zM108.4 56.5h6.5v6.5h-6.5zM145 56.5h6.5v6.5h-6.5zM157.2 56.5h6.5v6.5h-6.5zM65.7 62.6h6.5v6.5h-6.5zM77.9 62.6h6.5v6.5h-6.5zM90.1 62.6h6.5v6.5h-6.5zM102.3 62.6h6.5v6.5h-6.5zM145 62.6h6.5v6.5h-6.5zM71.8 68.7h18.7v6.5h-18.7zM96.2 68.7h6.5v6.5h-6.5zM145 68.7h6.5v6.5h-6.5zM53.5 74.8h6.5v6.5h-6.5zM84 74.8h6.5v6.5h-6.5zM145 74.8h6.5v6.5h-6.5zM65.7 80.9h24.8v6.5h-24.8zM132.8 80.9h6.5v6.5h-6.5zM145 80.9h18.7v6.5h-18.7zM71.8 87h12.6v6.5h-12.6zM145 87h6.5v6.5h-6.5zM163.3 87h12.6v6.5h-12.6zM65.7 93.1h12.6v6.5h-12.6zM138.9 93.1h6.5v6.5h-6.5zM175.5 93.1h6.5v6.5h-6.5zM65.7 99.2h18.7v6.5h-18.7zM132.8 99.2h12.6v6.5h-12.6zM157.2 99.2h6.5v6.5h-6.5zM181.6 99.2h6.5v6.5h-6.5zM77.9 105.3h6.5v6.5h-6.5zM90.1 105.3h12.6v6.5h-12.6zM132.8 105.3h18.7v6.5h-18.7zM175.5 105.3h12.6v6.5h-12.6zM71.8 111.4h6.5v6.5h-6.5zM84 111.4h6.5v6.5h-6.5zM102.3 111.4h6.5v6.5h-6.5zM114.5 111.4h18.7v6.5h-18.7zM181.6 111.4h6.5v6.5h-6.5zM108.4 117.5h24.8v6.5h-24.8zM59.6 123.6h6.5v6.5h-6.5zM59.6 129.7h6.5v6.5h-6.5zM53.5 135.8h18.7v6.5h-18.7z"/><path fill="#CDD5F2" d="M96.2 7.7h6.5v6.5h-6.5zM96.2 13.8h12.6v6.5h-12.6zM138.9 38.2h6.5v6.5h-6.5zM163.3 38.2h6.5v6.5h-6.5zM35.2 44.3h6.5v6.5h-6.5zM90.1 44.3h6.5v6.5h-6.5zM163.3 44.3h6.5v6.5h-6.5zM35.2 56.5h6.5v6.5h-6.5zM157.2 74.8h6.5v6.5h-6.5zM169.4 74.8h6.5v6.5h-6.5zM169.4 80.9h6.5v6.5h-6.5zM151.1 93.1h6.5v6.5h-6.5zM59.6 105.3h12.6v6.5h-12.6zM53.5 111.4h18.7v6.5h-18.7zM53.5 117.5h12.6v6.5h-12.6zM138.9 117.5h6.5v6.5h-6.5zM53.5 123.6h6.5v6.5h-6.5zM65.7 123.6h6.5v6.5h-6.5zM138.9 123.6h12.6v6.5h-12.6zM53.5 129.7h6.5v6.5h-6.5zM65.7 129.7h6.5v6.5h-6.5zM138.9 129.7h12.6v6.5h-12.6zM138.9 135.8h12.6v6.5h-12.6zM138.9 141.9h12.6v6.5h-12.6z"/><path fill="#1D292C" d="M65.7 13.8h12.6v6.5h-12.6zM71.8 19.9h6.5v6.5h-6.5zM71.8 26h6.5v6.5h-6.5zM71.8 32.1h6.5v6.5h-6.5zM169.4 32.1h6.5v6.5h-6.5zM71.8 38.2h6.5v6.5h-6.5zM71.8 44.3h6.5v6.5h-6.5zM169.4 44.3h6.5v6.5h-6.5zM84 56.5h6.5v6.5h-6.5zM163.3 56.5h6.5v6.5h-6.5zM84 62.6h6.5v6.5h-6.5zM90.1 68.7h6.5v6.5h-6.5zM157.2 68.7h6.5v6.5h-6.5zM169.4 68.7h6.5v6.5h-6.5zM175.5 74.8h6.5v6.5h-6.5zM96.2 80.9h6.5v6.5h-6.5zM187.7 87h6.5v6.5h-6.5zM187.7 93.1h6.5v6.5h-6.5zM151.1 105.3h12.6v6.5h-12.6zM187.7 105.3h6.5v6.5h-6.5zM187.7 111.4h6.5v6.5h-6.5zM145 117.5h6.5v6.5h-6.5zM151.1 123.6h6.5v6.5h-6.5zM96.2 129.7h6.5v6.5h-6.5zM151.1 129.7h6.5v6.5h-6.5zM96.2 135.8h6.5v6.5h-6.5zM151.1 135.8h6.5v6.5h-6.5zM90.1 141.9h6.5v6.5h-6.5zM16.9 148h18.7v6.5h-18.7zM90.1 148h6.5v6.5h-6.5zM16.9 154.1h6.5v6.5h-6.5zM35.2 154.1h18.7v6.5h-18.7zM90.1 154.1h6.5v6.5h-6.5zM102.3 154.1h6.5v6.5h-6.5zM23 160.2h6.5v6.5h-6.5zM53.5 160.2h6.5v6.5h-6.5zM90.1 160.2h6.5v6.5h-6.5zM29.1 166.3h6.5v6.5h-6.5zM59.6 166.3h6.5v6.5h-6.5zM90.1 166.3h6.5v6.5h-6.5zM35.2 172.4h6.5v6.5h-6.5zM65.7 172.4h6.5v6.5h-6.5zM90.1 172.4h6.5v6.5h-6.5zM145 172.4h30.9v6.5h-30.9zM35.2 178.5h6.5v6.5h-6.5zM53.5 178.5h6.5v6.5h-6.5zM65.7 178.5h6.5v6.5h-6.5zM90.1 178.5h6.5v6.5h-6.5zM132.8 178.5h12.6v6.5h-12.6zM41.3 184.6h6.5v6.5h-6.5zM71.8 184.6h6.5v6.5h-6.5zM90.1 184.6h6.5v6.5h-6.5zM126.7 184.6h6.5v6.5h-6.5zM157.2 184.6h6.5v6.5h-6.5zM71.8 190.7h6.5v6.5h-6.5zM90.1 190.7h6.5v6.5h-6.5zM120.6 190.7h6.5v6.5h-6.5zM145 190.7h6.5v6.5h-6.5zM47.4 196.8h6.5v6.5h-6.5zM77.9 196.8h6.5v6.5h-6.5zM90.1 196.8h6.5v6.5h-6.5zM114.5 196.8h6.5v6.5h-6.5zM138.9 196.8h6.5v6.5h-6.5zM77.9 202.9h6.5v6.5h-6.5zM90.1 202.9h6.5v6.5h-6.5zM108.4 202.9h6.5v6.5h-6.5zM53.5 209h6.5v6.5h-6.5zM77.9 209h6.5v6.5h-6.5zM90.1 209h6.5v6.5h-6.5zM102.3 209h6.5v6.5h-6.5zM84 215.1h12.6v6.5h-12.6zM126.7 215.1h6.5v6.5h-6.5zM84 221.2h12.6v6.5h-12.6zM102.3 221.2h6.5v6.5h-6.5zM126.7 221.2h6.5v6.5h-6.5zM71.8 227.3h6.5v6.5h-6.5zM120.6 227.3h6.5v6.5h-6.5zM77.9 233.4h6.5v6.5h-6.5zM114.5 233.4h6.5v6.5h-6.5zM84 239.5h6.5v6.5h-6.5zM102.3 239.5h12.6v6.5h-12.6zM102.3 245.6h6.5v6.5h-6.5zM90.1 251.7h6.5v6.5h-6.5zM102.3 251.7h6.5v6.5h-6.5zM102.3 257.8h6.5v6.5h-6.5z"/><path fill="#D5DCF4" d="M84 13.8h6.5v6.5h-6.5zM84 19.9h6.5v6.5h-6.5zM96.2 19.9h18.7v6.5h-18.7zM84 26h12.6v6.5h-12.6zM102.3 26h12.6v6.5h-12.6zM151.1 26h6.5v6.5h-6.5zM84 32.1h12.6v6.5h-12.6zM102.3 32.1h12.6v6.5h-12.6zM132.8 32.1h18.7v6.5h-18.7zM157.2 32.1h6.5v6.5h-6.5zM90.1 38.2h6.5v6.5h-6.5zM108.4 38.2h12.6v6.5h-12.6zM132.8 38.2h6.5v6.5h-6.5zM151.1 38.2h12.6v6.5h-12.6zM41.3 44.3h24.8v6.5h-24.8zM145 44.3h18.7v6.5h-18.7zM53.5 50.4h18.7v6.5h-18.7zM151.1 50.4h12.6v6.5h-12.6zM41.3 56.5h12.6v6.5h-12.6zM65.7 56.5h6.5v6.5h-6.5zM41.3 62.6h24.8v6.5h-24.8zM53.5 68.7h12.6v6.5h-12.6zM59.6 74.8h6.5v6.5h-6.5zM157.2 93.1h18.7v6.5h-18.7zM163.3 99.2h12.6v6.5h-12.6zM77.9 111.4h6.5v6.5h-6.5zM71.8 117.5h12.6v6.5h-12.6zM71.8 123.6h6.5v6.5h-6.5zM120.6 129.7h12.6v6.5h-12.6zM120.6 135.8h12.6v6.5h-12.6zM120.6 141.9h12.6v6.5h-12.6z"/><path fill="#5D9DB8" d="M163.3 26h6.5v6.5h-6.5zM102.3 44.3h6.5v6.5h-6.5zM132.8 44.3h6.5v6.5h-6.5zM120.6 50.4h6.5v6.5h-6.5zM114.5 56.5h6.5v6.5h-6.5zM126.7 56.5h6.5v6.5h-6.5zM96.2 62.6h6.5v6.5h-6.5zM114.5 62.6h6.5v6.5h-6.5zM132.8 62.6h6.5v6.5h-6.5zM102.3 68.7h6.5v6.5h-6.5zM114.5 68.7h6.5v6.5h-6.5zM126.7 68.7h12.6v6.5h-12.6zM77.9 74.8h6.5v6.5h-6.5zM96.2 74.8h12.6v6.5h-12.6zM120.6 74.8h12.6v6.5h-12.6zM59.6 80.9h6.5v6.5h-6.5zM90.1 80.9h6.5v6.5h-6.5zM102.3 80.9h6.5v6.5h-6.5zM120.6 80.9h6.5v6.5h-6.5zM138.9 80.9h6.5v6.5h-6.5zM84 87h12.6v6.5h-12.6zM102.3 87h6.5v6.5h-6.5zM126.7 87h18.7v6.5h-18.7zM96.2 93.1h6.5v6.5h-6.5zM120.6 93.1h18.7v6.5h-18.7zM84 99.2h12.6v6.5h-12.6zM114.5 99.2h18.7v6.5h-18.7zM84 105.3h6.5v6.5h-6.5zM102.3 105.3h12.6v6.5h-12.6zM132.8 111.4h6.5v6.5h-6.5zM132.8 117.5h6.5v6.5h-6.5zM132.8 123.6h6.5v6.5h-6.5zM132.8 129.7h6.5v6.5h-6.5zM132.8 135.8h6.5v6.5h-6.5zM132.8 141.9h6.5v6.5h-6.5zM132.8 148h6.5v6.5h-6.5zM132.8 154.1h6.5v6.5h-6.5zM126.7 160.2h12.6v6.5h-12.6z"/><path fill="#183038" d="M35.2 38.2h6.5v6.5h-6.5zM29.1 44.3h6.5v6.5h-6.5zM23 50.4h6.5v6.5h-6.5zM120.6 56.5h6.5v6.5h-6.5zM132.8 56.5h6.5v6.5h-6.5zM16.9 62.6h6.5v6.5h-6.5zM29.1 62.6h6.5v6.5h-6.5zM120.6 62.6h6.5v6.5h-6.5zM41.3 68.7h6.5v6.5h-6.5zM108.4 68.7h6.5v6.5h-6.5zM120.6 68.7h6.5v6.5h-6.5zM47.4 74.8h6.5v6.5h-6.5zM108.4 74.8h6.5v6.5h-6.5zM132.8 74.8h12.6v6.5h-12.6zM53.5 80.9h6.5v6.5h-6.5zM108.4 80.9h12.6v6.5h-12.6zM126.7 80.9h6.5v6.5h-6.5zM59.6 87h12.6v6.5h-12.6zM108.4 87h6.5v6.5h-6.5zM120.6 87h6.5v6.5h-6.5zM59.6 93.1h6.5v6.5h-6.5zM77.9 93.1h18.7v6.5h-18.7zM114.5 93.1h6.5v6.5h-6.5zM96.2 99.2h18.7v6.5h-18.7zM53.5 105.3h6.5v6.5h-6.5zM114.5 105.3h18.7v6.5h-18.7zM47.4 111.4h6.5v6.5h-6.5zM108.4 111.4h6.5v6.5h-6.5zM47.4 117.5h6.5v6.5h-6.5zM102.3 117.5h6.5v6.5h-6.5zM47.4 123.6h6.5v6.5h-6.5zM84 123.6h24.8v6.5h-24.8zM47.4 129.7h6.5v6.5h-6.5zM77.9 129.7h6.5v6.5h-6.5zM102.3 129.7h6.5v6.5h-6.5zM47.4 135.8h6.5v6.5h-6.5zM71.8 135.8h6.5v6.5h-6.5zM114.5 135.8h6.5v6.5h-6.5zM53.5 141.9h6.5v6.5h-6.5zM65.7 141.9h6.5v6.5h-6.5zM114.5 141.9h6.5v6.5h-6.5zM59.6 148h6.5v6.5h-6.5zM102.3 148h6.5v6.5h-6.5zM120.6 148h6.5v6.5h-6.5zM120.6 160.2h6.5v6.5h-6.5zM138.9 160.2h6.5v6.5h-6.5zM120.6 166.3h6.5v6.5h-6.5z"/><path fill="#162A30" d="M41.3 38.2h24.8v6.5h-24.8zM77.9 50.4h6.5v6.5h-6.5zM16.9 56.5h6.5v6.5h-6.5zM23 62.6h6.5v6.5h-6.5zM35.2 62.6h6.5v6.5h-6.5zM151.1 68.7h6.5v6.5h-6.5zM90.1 74.8h6.5v6.5h-6.5zM96.2 87h6.5v6.5h-6.5zM53.5 99.2h6.5v6.5h-6.5zM169.4 105.3h6.5v6.5h-6.5zM108.4 129.7h6.5v6.5h-6.5zM65.7 148h6.5v6.5h-6.5zM145 148h6.5v6.5h-6.5zM120.6 154.1h6.5v6.5h-6.5zM145 154.1h6.5v6.5h-6.5zM126.7 166.3h12.6v6.5h-12.6zM163.3 178.5h6.5v6.5h-6.5zM151.1 184.6h6.5v6.5h-6.5zM132.8 202.9h6.5v6.5h-6.5zM132.8 209h6.5v6.5h-6.5zM102.3 215.1h6.5v6.5h-6.5zM90.1 227.3h6.5v6.5h-6.5zM102.3 227.3h6.5v6.5h-6.5zM90.1 233.4h6.5v6.5h-6.5zM102.3 233.4h6.5v6.5h-6.5zM90.1 239.5h6.5v6.5h-6.5zM90.1 245.6h6.5v6.5h-6.5z"/><path fill="#8AA6BD" d="M77.9 44.3h6.5v6.5h-6.5zM151.1 56.5h6.5v6.5h-6.5zM65.7 117.5h6.5v6.5h-6.5z"/><path fill="#285B4F" d="M102.3 50.4h6.5v6.5h-6.5zM132.8 50.4h6.5v6.5h-6.5zM102.3 56.5h6.5v6.5h-6.5zM108.4 62.6h6.5v6.5h-6.5zM126.7 62.6h6.5v6.5h-6.5zM138.9 62.6h6.5v6.5h-6.5zM138.9 68.7h6.5v6.5h-6.5zM114.5 74.8h6.5v6.5h-6.5zM114.5 87h6.5v6.5h-6.5zM102.3 93.1h12.6v6.5h-12.6zM102.3 135.8h6.5v6.5h-6.5zM102.3 141.9h6.5v6.5h-6.5zM53.5 166.3h6.5v6.5h-6.5zM53.5 172.4h6.5v6.5h-6.5zM59.6 190.7h6.5v6.5h-6.5zM65.7 196.8h12.6v6.5h-12.6zM65.7 202.9h12.6v6.5h-12.6zM65.7 209h12.6v6.5h-12.6zM65.7 215.1h18.7v6.5h-18.7zM108.4 215.1h12.6v6.5h-12.6zM71.8 221.2h12.6v6.5h-12.6zM108.4 221.2h12.6v6.5h-12.6zM77.9 227.3h12.6v6.5h-12.6zM108.4 227.3h12.6v6.5h-12.6zM84 233.4h6.5v6.5h-6.5zM108.4 233.4h6.5v6.5h-6.5zM96.2 239.5h6.5v6.5h-6.5zM96.2 245.6h6.5v6.5h-6.5zM96.2 251.7h6.5v6.5h-6.5zM96.2 257.8h6.5v6.5h-6.5z"/><path fill="#477C55" d="M96.2 141.9h6.5v6.5h-6.5zM96.2 148h6.5v6.5h-6.5zM23 154.1h12.6v6.5h-12.6zM96.2 154.1h6.5v6.5h-6.5zM29.1 160.2h24.8v6.5h-24.8zM96.2 160.2h6.5v6.5h-6.5zM35.2 166.3h18.7v6.5h-18.7zM96.2 166.3h6.5v6.5h-6.5zM41.3 172.4h12.6v6.5h-12.6zM59.6 172.4h6.5v6.5h-6.5zM96.2 172.4h6.5v6.5h-6.5zM41.3 178.5h12.6v6.5h-12.6zM59.6 178.5h6.5v6.5h-6.5zM96.2 178.5h6.5v6.5h-6.5zM145 178.5h18.7v6.5h-18.7zM47.4 184.6h24.8v6.5h-24.8zM96.2 184.6h6.5v6.5h-6.5zM132.8 184.6h18.7v6.5h-18.7zM47.4 190.7h12.6v6.5h-12.6zM65.7 190.7h6.5v6.5h-6.5zM96.2 190.7h6.5v6.5h-6.5zM126.7 190.7h18.7v6.5h-18.7zM53.5 196.8h12.6v6.5h-12.6zM96.2 196.8h6.5v6.5h-6.5zM120.6 196.8h18.7v6.5h-18.7zM53.5 202.9h12.6v6.5h-12.6zM96.2 202.9h6.5v6.5h-6.5zM114.5 202.9h18.7v6.5h-18.7zM59.6 209h6.5v6.5h-6.5zM96.2 209h6.5v6.5h-6.5zM108.4 209h24.8v6.5h-24.8zM96.2 215.1h6.5v6.5h-6.5zM120.6 215.1h6.5v6.5h-6.5zM96.2 221.2h6.5v6.5h-6.5zM120.6 221.2h6.5v6.5h-6.5zM96.2 227.3h6.5v6.5h-6.5zM96.2 233.4h6.5v6.5h-6.5z"/></svg><span class="name">lily</span><span class="mark" aria-hidden="true">+</span></button></li>
-              </ul>
-              <div class="bq-box" id="bq-preview" aria-live="polite"></div>
-              <div class="bq-tools" id="bq-tools" hidden>
-                <button type="button" id="bq-undo" aria-label="undo, remove the last flower">↶ undo</button>
-                <span aria-hidden="true">·</span>
-                <button type="button" id="bq-clear">start over</button>
-              </div>
-              <button class="btn ink bq-send" type="button" id="bq-send" disabled>send</button>
-              <svg class="px heart" viewBox="0 0 7 6" width="14" height="12" aria-hidden="true"><path fill="#EF233C" d="M1 0h2v1H1zM4 0h2v1H4zM0 1h7v2H0zM1 3h5v1H1zM2 4h3v1H2zM3 5h1v1H3z"/></svg>
-            </div>
-          </aside>
-        </div>
-      </div>
-
-      <!-- 3 · sent -->
-      <div class="step" id="step-sent" hidden>
-        <div class="env env-sm" id="env-sm" aria-hidden="true">
-          <div class="peek"><div class="peek-bq" id="bq-letter"></div></div>
-          <div class="env-body"></div>
-          <div class="flap"><i></i><i></i></div>
-          <span class="seal-icon"><svg class="px" viewBox="0 0 13 12" aria-hidden="true"><path fill="#04361D" d="M2 0h3v1H2zM8 0h3v1H8zM1 1h1v1H1zM5 1h1v1H5zM7 1h1v1H7zM11 1h1v1h-1zM0 2h1v4H0zM6 2h1v1H6zM12 2h1v4h-1zM1 6h1v1H1zM11 6h1v1h-1zM2 7h1v1H2zM10 7h1v1h-1zM3 8h1v1H3zM9 8h1v1H9zM4 9h1v1H4zM8 9h1v1H8zM5 10h1v1H5zM7 10h1v1H7zM6 11h1v1H6z"/><path fill="#EF233C" d="M2 1h3v1H2zM8 1h3v1H8zM1 2h5v1H1zM7 2h5v1H7zM1 3h11v3H1zM2 6h9v1H2zM3 7h7v1H3zM4 8h5v1H4zM5 9h3v1H5zM6 10h1v1H6z"/><path fill="#F0F2D5" d="M2 2h2v1H2zM2 3h1v1H2z"/></svg></span>
-        </div>
-        <h3 class="step-title display sent-title" id="sent-title" tabindex="-1">sent!</h3>
-        <p class="hint" id="sent-msg">i'll write back soon :)</p>
-        <div class="actions">
-          <button class="btn" type="button" id="again">write another</button>
-          <a class="btn ink home" href="desktop.html" title="log in to srishti os">log in</a>
-        </div>
-      </div>
-    </div>
-
-    <ol class="tracker" aria-label="progress">
-      <li id="t-seal" aria-current="step">1 · seal</li><li class="arrow" aria-hidden="true">→</li>
-      <li id="t-write">2 · write</li><li class="arrow" aria-hidden="true">→</li>
-      <li id="t-sent">3 · sent</li>
-    </ol>
-  </main>
-
-  <nav class="links" aria-label="elsewhere">
-    <div class="item">
-      <span>read me</span>
-      <a class="btn cherry" href="https://srishtigangolly.substack.com/" target="_blank" rel="noopener" data-track="substack_click" data-location="links">
-        <svg class="px" viewBox="0 0 10 12" width="16" height="20" aria-hidden="true"><path fill="#F0F2D5" d="M0 0h10v2H0zM0 3h10v2H0zM0 6h10v6l-5-3-5 3z"/></svg>
-        substack ↗
+  <div class="screen">
+    <nav class="icons" aria-label="open a page">
+      <a class="icon" href="about.html" draggable="false" style="transform: {{t0}}; z-index: {{z0}}" onPointerDown="{{grab0}}" onClick="{{tap0}}">
+        <svg class="px" viewBox="0 0 16 16" width="52" height="52" aria-hidden="true"><path fill="#F0F2D5" d="M3 2h10v12H3z"/><path fill="#04361D" d="M3 1h10v1H3zM3 14h10v1H3zM2 2h1v12H2zM13 2h1v12h-1zM5 5h6v1H5zM5 8h6v1H5zM5 11h4v1H5z"/><path fill="#EF233C" d="M4 0h1v3H4zM7 0h1v3H7zM10 0h1v3h-1z"/></svg>
+        <span>about_me.txt</span>
       </a>
-    </div>
-    <span class="amp display" aria-hidden="true">&amp;</span>
-    <div class="item">
-      <span>connect with me</span>
-      <a class="btn cherry" href="https://www.linkedin.com/in/srishti-gangolly/" target="_blank" rel="noopener" data-track="linkedin_click" data-location="links">
-        <span class="in" aria-hidden="true">in</span>
-        linkedin ↗
+      <a class="icon" href="experience.html" draggable="false" style="transform: {{t1}}; z-index: {{z1}}" onPointerDown="{{grab1}}" onClick="{{tap1}}">
+        <svg class="px" viewBox="0 0 16 16" width="52" height="52" aria-hidden="true"><path fill="#EF233C" d="M1 6h14v7H1z"/><path fill="#97051D" d="M1 9h14v1H1z"/><path fill="#04361D" d="M1 5h14v1H1zM1 13h14v1H1zM0 6h1v7H0zM15 6h1v7h-1zM6 2h4v1H6zM5 3h1v2H5zM10 3h1v2h-1z"/><path fill="#F0F2D5" d="M7 8h2v3H7z"/></svg>
+        <span>experience.exe</span>
       </a>
-    </div>
-  </nav>
+      <a class="icon" href="certifications.html" draggable="false" style="transform: {{t2}}; z-index: {{z2}}" onPointerDown="{{grab2}}" onClick="{{tap2}}">
+        <svg class="px" viewBox="0 0 21 20" width="52" height="50" aria-hidden="true"><path fill="#161F2B" d="M8 0h1v1H8zM9 0h1v1H9zM10 0h1v1H10zM11 0h1v1H11zM12 0h1v1H12zM7 1h1v1H7zM13 1h1v1H13zM6 2h1v1H6zM14 2h1v1H14zM5 3h1v1H5zM15 3h1v1H15zM4 4h1v1H4zM16 4h1v1H16zM4 5h1v1H4zM16 5h1v1H16zM4 6h1v1H4zM16 6h1v1H16zM4 7h1v1H4zM16 7h1v1H16zM4 8h1v1H4zM16 8h1v1H16zM5 9h1v1H5zM15 9h1v1H15zM5 10h1v1H5zM15 10h1v1H15zM4 11h1v1H4zM16 11h1v1H16zM3 12h1v1H3zM17 12h1v1H17zM2 13h1v1H2zM10 13h1v1H10zM18 13h1v1H18zM1 14h1v1H1zM9 14h1v1H9zM11 14h1v1H11zM19 14h1v1H19zM0 15h1v1H0zM1 15h1v1H1zM2 15h1v1H2zM3 15h1v1H3zM4 15h1v1H4zM8 15h1v1H8zM12 15h1v1H12zM16 15h1v1H16zM17 15h1v1H17zM18 15h1v1H18zM19 15h1v1H19zM20 15h1v1H20zM4 16h1v1H4zM7 16h1v1H7zM13 16h1v1H13zM16 16h1v1H16zM4 17h1v1H4zM6 17h1v1H6zM14 17h1v1H14zM16 17h1v1H16zM4 18h1v1H4zM5 18h1v1H5zM15 18h1v1H15zM16 18h1v1H16zM4 19h1v1H4zM16 19h1v1H16z"/><path fill="#FCBF39" d="M8 1h1v1H8zM10 2h1v1H10zM11 2h1v1H11zM12 2h1v1H12zM8 3h1v1H8zM9 3h1v1H9zM10 3h1v1H10zM13 3h1v1H13zM7 4h1v1H7zM8 4h1v1H8zM9 4h1v1H9zM10 4h1v1H10zM11 4h1v1H11zM14 4h1v1H14zM7 5h1v1H7zM8 5h1v1H8zM9 5h1v1H9zM10 5h1v1H10zM11 5h1v1H11zM12 5h1v1H12zM14 5h1v1H14zM7 6h1v1H7zM8 6h1v1H8zM9 6h1v1H9zM10 6h1v1H10zM11 6h1v1H11zM12 6h1v1H12zM14 6h1v1H14zM7 7h1v1H7zM8 7h1v1H8zM9 7h1v1H9zM10 7h1v1H10zM11 7h1v1H11zM12 7h1v1H12zM13 7h1v1H13zM14 7h1v1H14zM7 8h1v1H7zM8 8h1v1H8zM9 8h1v1H9zM10 8h1v1H10zM11 8h1v1H11zM12 8h1v1H12zM13 8h1v1H13zM15 8h1v1H15zM8 9h1v1H8zM9 9h1v1H9zM10 9h1v1H10zM11 9h1v1H11zM12 9h1v1H12zM14 9h1v1H14z"/><path fill="#FFEE84" d="M9 1h1v1H9zM10 1h1v1H10zM11 1h1v1H11zM12 1h1v1H12zM13 2h1v1H13zM11 3h1v1H11zM12 3h1v1H12zM14 3h1v1H14zM12 4h1v1H12zM13 4h1v1H13zM15 4h1v1H15zM13 5h1v1H13zM15 5h1v1H15zM13 6h1v1H13zM15 6h1v1H15zM15 7h1v1H15z"/><path fill="#DD9E29" d="M7 2h1v1H7zM8 2h1v1H8zM9 2h1v1H9zM6 3h1v1H6zM5 4h1v1H5zM5 5h1v1H5zM5 6h1v1H5zM5 7h1v1H5zM5 8h1v1H5zM14 8h1v1H14zM6 9h1v1H6zM7 10h1v1H7zM13 10h1v1H13zM8 11h1v1H8zM9 11h1v1H9zM10 11h1v1H10zM11 11h1v1H11zM12 11h1v1H12z"/><path fill="#A25523" d="M7 3h1v1H7zM6 4h1v1H6zM6 5h1v1H6zM6 6h1v1H6zM6 7h1v1H6zM6 8h1v1H6zM7 9h1v1H7zM13 9h1v1H13zM8 10h1v1H8zM9 10h1v1H9zM10 10h1v1H10zM11 10h1v1H11zM12 10h1v1H12z"/><path fill="#5F2345" d="M6 10h1v1H6zM14 10h1v1H14zM7 11h1v1H7zM13 11h1v1H13zM8 12h1v1H8zM9 12h1v1H9zM10 12h1v1H10zM11 12h1v1H11zM12 12h1v1H12z"/><path fill="#9D3041" d="M5 11h1v1H5zM15 11h1v1H15zM7 12h1v1H7zM9 13h1v1H9zM11 13h1v1H11zM2 14h1v1H2zM3 14h1v1H3zM8 14h1v1H8zM12 14h1v1H12zM17 14h1v1H17zM18 14h1v1H18zM5 16h1v1H5zM15 16h1v1H15zM5 17h1v1H5zM15 17h1v1H15z"/><path fill="#C3485C" d="M6 11h1v1H6zM14 11h1v1H14zM4 12h1v1H4zM6 12h1v1H6zM13 12h1v1H13zM14 12h1v1H14zM16 12h1v1H16zM3 13h1v1H3zM6 13h1v1H6zM8 13h1v1H8zM12 13h1v1H12zM14 13h1v1H14zM17 13h1v1H17zM4 14h1v1H4zM5 14h1v1H5zM7 14h1v1H7zM13 14h1v1H13zM15 14h1v1H15zM16 14h1v1H16zM5 15h1v1H5zM6 15h1v1H6zM7 15h1v1H7zM13 15h1v1H13zM14 15h1v1H14zM15 15h1v1H15zM6 16h1v1H6zM14 16h1v1H14z"/><path fill="#FF9D79" d="M5 12h1v1H5zM15 12h1v1H15zM4 13h1v1H4zM5 13h1v1H5zM15 13h1v1H15zM16 13h1v1H16zM6 14h1v1H6zM14 14h1v1H14z"/><path fill="#E75958" d="M7 13h1v1H7zM13 13h1v1H13z"/></svg>
+        <span>certifications</span>
+      </a>
+      <a class="icon" href="projects.html" draggable="false" style="transform: {{t3}}; z-index: {{z3}}" onPointerDown="{{grab3}}" onClick="{{tap3}}">
+        <svg class="px" viewBox="0 0 16 16" width="52" height="52" aria-hidden="true"><path fill="#F0F2D5" d="M1 4h14v10H1z"/><path fill="#04361D" d="M1 3h5v1H1zM6 4h1v1H6zM7 5h8v1H7zM0 4h1v10H0zM15 6h1v8h-1zM1 14h14v1H1zM1 7h14v1H1z"/><path fill="#EF233C" d="M2 9h3v1H2z"/></svg>
+        <span>projects/</span>
+      </a>
+      <a class="icon" href="https://srishtigangolly.substack.com/" draggable="false" style="transform: {{t4}}; z-index: {{z4}}" onPointerDown="{{grab4}}" onClick="{{tap4}}">
+        <svg class="px" viewBox="0 0 16 16" width="52" height="52" aria-hidden="true"><path fill="#EF233C" d="M2 3h12v9H2z"/><path fill="#F0F2D5" d="M4 5h3v3H4zM9 5h3v3H9zM7 10h2v1H7z"/><path fill="#04361D" d="M3 2h10v1H3zM3 12h3v2H3zM10 12h3v2h-3zM1 14h14v1H1z"/></svg>
+        <span>substack ↗</span>
+      </a>
+      <a class="icon" href="mailbox.html" draggable="false" style="transform: {{t5}}; z-index: {{z5}}" onPointerDown="{{grab5}}" onClick="{{tap5}}">
+        <svg class="px" viewBox="0 0 16 16" width="52" height="52" aria-hidden="true"><path fill="#F0F2D5" d="M1 4h14v9H1z"/><path fill="#04361D" d="M1 3h14v1H1zM1 13h14v1H1zM0 4h1v9H0zM15 4h1v9h-1zM2 4h1v1H2zM3 5h1v1H3zM4 6h1v1H4zM13 4h1v1h-1zM12 5h1v1h-1zM11 6h1v1h-1z"/><path fill="#EF233C" d="M5 7h2v1H5zM8 7h2v1H8zM5 8h5v1H5zM6 9h3v1H6zM7 10h1v1H7z"/></svg>
+        <span>mailbox</span>
+      </a>
+      <a class="icon" href="https://drive.google.com/file/d/1dasPUW3PCfL3X46S7Zs5TBzfl2K2QQfY/view?usp=sharing" draggable="false" style="transform: {{t6}}; z-index: {{z6}}" onPointerDown="{{grab6}}" onClick="{{tap6}}">
+        <svg class="px" viewBox="0 0 16 16" width="52" height="52" aria-hidden="true"><path fill="#04361D" d="M1 1h14v14H1z"/><path fill="#F0F2D5" d="M4 1h7v5H4zM3 8h10v6H3z"/><path fill="#04361D" d="M8 2h2v3H8z"/><path fill="#EF233C" d="M4 10h8v1H4zM4 12h6v1H4z"/></svg>
+        <span>resume.pdf ↗</span>
+      </a>
+      <p class="hint">✿ drag things around to move them<sc-if value="{{moved}}" hint-placeholder-val="{{ false }}"> · <a href="#" onClick="{{tidy}}">tidy up</a></sc-if></p>
+    </nav>
+
+    <section class="win welcome" aria-label="welcome" style="position: relative; max-width: {{winMax}}; width: {{winW}}; height: {{winH}}; justify-self: center; transform: {{winT}}">
+      <div class="bar" onPointerDown="{{grabWin}}"><span>welcome.txt</span><span class="ctl" aria-hidden="true"><svg class="px" viewBox="0 0 8 8" width="12" height="12"><path fill="#04361D" d="M0 0h2v1H0zM6 0h2v1H6zM1 1h2v1H1zM5 1h2v1H5zM2 2h4v1H2zM3 3h2v2H3zM2 5h4v1H2zM1 6h2v1H1zM5 6h2v1H5zM0 7h2v1H0zM6 7h2v1H6z"/></svg></span></div>
+      <div class="welcome-body" style="padding: 32px 32px 30px; display: flex; flex-direction: column; gap: 18px">
+        <span class="label">srishti gangolly</span>
+        <h2 style="margin: 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 900; font-size: clamp(40px, 4.6vw, 56px); line-height: 1.05; color: #6B0314">a numbers girl<br>with a creative twist.</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.7">living at the intersection of data, technology, &amp; marketing.<br>where insights don't just inform, they build.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px">
+          <span class="chip">martech &amp; gtm</span><span class="chip">growth</span><span class="chip">product management</span><span class="chip">data analytics</span>
+        </div>
+      </div>
+      <span class="grip" onPointerDown="{{grabSize}}" onDblClick="{{resetSize}}" title="drag to make wider or narrower · double-click to reset" aria-hidden="true"><svg class="px" viewBox="0 0 7 7" width="14" height="14"><path fill="#04361D" d="M6 0h1v1H6zM4 2h1v1H4zM6 2h1v1H6zM2 4h1v1H2zM4 4h1v1H4zM6 4h1v1H6zM0 6h1v1H0zM2 6h1v1H2zM4 6h1v1H4zM6 6h1v1H6z"/></svg></span>
+    </section>
+
+    <div class="spacer" style="width: 216px"></div>
+  </div>
+  </div>
+
+  <div class="crt" aria-hidden="true"></div>
+
 </div>
-
+</template>
 <script>
-(function () {
-  const FORM_ENDPOINT = "https://formspree.io/f/xeaaryel";
-  const DEMO = new URLSearchParams(location.search).has("demo");
-
-  const PROMPTS = {
-    note: { name: "leave me a lil note", placeholder: "hi srishti! just wanted to say…" },
-    day: { name: "how's your day going?", placeholder: "honestly? today was…" },
-    hyperfixation: { name: "your current hyperfixation", placeholder: "lately I can't stop thinking about…" }
-  };
-
-  const $ = (id) => document.getElementById(id);
-  const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const track = (name, params) => { if (typeof window.gtag === "function") window.gtag("event", name, params || {}); };
-
-
-  /* steps */
-  const steps = { seal: $("step-seal"), write: $("step-write"), sent: $("step-sent") };
-  const trackers = { seal: $("t-seal"), write: $("t-write"), sent: $("t-sent") };
-  function show(step) {
-    document.querySelector(".stage").dataset.step = step;
-    for (const k in steps) {
-      steps[k].hidden = k !== step;
-      steps[k].classList.remove("write-in", "sent-in");
-      if (k === step) trackers[k].setAttribute("aria-current", "step");
-      else trackers[k].removeAttribute("aria-current");
-    }
-    if (step === "write") { steps.write.classList.add("write-in"); $("f-name").focus(); }
-    if (step === "sent") { steps.sent.classList.add("sent-in"); $("sent-title").focus(); }
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    let spots = {};
+    try { spots = JSON.parse(localStorage.getItem('srishti-os-icons-v2') || '{}'); } catch (e) {}
+    let win = null, size = null;
+    try { win = JSON.parse(localStorage.getItem('srishti-os-welcome') || 'null'); } catch (e) {}
+    try { size = JSON.parse(localStorage.getItem('srishti-os-welcome-size') || 'null'); } catch (e) {}
+    this.state = { now: new Date(), spots, lifted: null, win, size };
+    this.dragged = false;
+    setInterval(() => this.setState({ now: new Date() }), 30000);
   }
-
-  /* 1 · seal */
-  const env = $("env");
-  $("seal").addEventListener("click", () => {
-    track("envelope_open");
-    if (reduced()) return show("write");
-    env.classList.add("opening");
-    setTimeout(() => { env.classList.remove("opening"); show("write"); }, 400);
-  });
-
-  /* 2 · write */
-  const form = $("mail-form"), msg = $("f-msg"), nameEl = $("f-name"), errors = $("errors"), send = $("send");
-  const chips = Array.from(document.querySelectorAll(".chip"));
-  let prompt = "note";
-  function pick(key, fromUser) {
-    prompt = key;
-    chips.forEach((c) => c.setAttribute("aria-pressed", String(c.dataset.prompt === key)));
-    msg.placeholder = PROMPTS[key].placeholder;
-    $("f-prompt").value = PROMPTS[key].name;
-    if (fromUser) { track("prompt_select", { prompt_name: PROMPTS[key].name }); msg.focus(); }
+  // drag an icon to a new spot; a press without movement still opens it
+  // how far an icon may travel: inside the desktop, below the menu bar
+  limits(el) {
+    const scale = el.getBoundingClientRect().width / el.offsetWidth || 1;
+    const r = el.getBoundingClientRect(), d = el.closest('.desk-root').getBoundingClientRect();
+    const top = el.closest('.desk-root').querySelector('.menubar').getBoundingClientRect().bottom;
+    return { scale, x0: (d.left + 4 - r.left) / scale, x1: (d.right - 4 - r.right) / scale, y0: (top + 8 - r.top) / scale, y1: (d.bottom - 4 - r.bottom) / scale };
   }
-  chips.forEach((c) => c.addEventListener("click", () => pick(c.dataset.prompt, true)));
-  pick("note", false);
-
-  function validate() {
-    const problems = [];
-    nameEl.removeAttribute("aria-invalid"); msg.removeAttribute("aria-invalid");
-    if (!nameEl.value.trim()) { problems.push("who's writing? add your name."); nameEl.setAttribute("aria-invalid", "true"); }
-    if (msg.value.trim().length < 2) { problems.push("say a little something first."); msg.setAttribute("aria-invalid", "true"); }
-    errors.textContent = problems.join(" ");
-    if (problems.length) (nameEl.getAttribute("aria-invalid") ? nameEl : msg).focus();
-    return problems.length === 0;
-  }
-
-  let sending = false;
-
-  // posts to Formspree (or skips it, with ?demo). The visitor always moves on to "sent!";
-  // a failed post is only logged to the console.
-  async function deliver(fd, promptName) {
-    if (DEMO) return;
-    try {
-      const res = await fetch(FORM_ENDPOINT, { method: "POST", body: fd, headers: { Accept: "application/json" } });
-      if (!res.ok) throw new Error("Formspree responded " + res.status);
-      track("contact_submit", { prompt_name: promptName });
-    } catch (err) {
-      console.warn("message not delivered:", err);
-      track("contact_failed", { prompt_name: promptName });
-    }
-  }
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    if (sending || !validate()) return;
-    sending = true; send.disabled = true; send.textContent = "sending…"; errors.textContent = "";
-    await deliver(new FormData(form), PROMPTS[prompt].name);
-    $("env-sm").classList.remove("has-bq");
-    $("sent-msg").textContent = prompt === "hyperfixation" ? "ooh, noted. i'll write back soon :)" : "i'll write back soon :)";
-    show("sent");
-    sending = false; send.disabled = false; send.textContent = "send";
-  });
-
-  /* 3 · sent */
-  $("again").addEventListener("click", () => {
-    form.reset(); errors.textContent = "";
-    pick("note", false);
-    picks = []; renderBouquet();
-    show("seal"); $("seal").focus();
-  });
-
-  /* make a bouquet: pick flowers, then sending it bursts hearts and counts as a send */
-  const HEART = '<svg class="px" viewBox="0 0 7 6" aria-hidden="true"><path fill="#EF233C" d="M1 0h2v1H1zM4 0h2v1H4zM0 1h7v2H0zM1 3h5v1H1zM2 4h3v1H2zM3 5h1v1H3z"/></svg>';
-  function burst(sticker) {
-    const count = reduced() ? 1 : 5;
-    for (let i = 0; i < count; i++) {
-      const h = document.createElement("span");
-      h.className = "pop";
-      h.innerHTML = HEART;
-      h.style.setProperty("--dx", (Math.random() * 80 - 40).toFixed(0) + "px");
-      h.style.setProperty("--rot", (Math.random() * 40 - 20).toFixed(0) + "deg");
-      h.style.animationDelay = i * 90 + "ms";
-      if (reduced()) { h.style.opacity = "1"; h.style.transform = "translate(-50%,-40px)"; }
-      sticker.appendChild(h);
-      setTimeout(() => h.remove(), 1000 + i * 90);
-    }
-  }
-
-  const FLOWER_ART = {
-    rose: '<path fill="#8B324C" d="M83 44.3h37v6.5h-37zM70.8 50.4h12.6v6.5h-12.6zM119.6 50.4h6.5v6.5h-6.5zM64.7 56.5h6.5v6.5h-6.5zM125.7 56.5h12.6v6.5h-12.6zM58.6 62.6h6.5v6.5h-6.5zM137.9 62.6h6.5v6.5h-6.5zM52.5 68.7h6.5v6.5h-6.5zM137.9 68.7h6.5v6.5h-6.5zM52.5 74.8h6.5v6.5h-6.5zM137.9 74.8h6.5v6.5h-6.5zM52.5 80.9h6.5v6.5h-6.5zM137.9 80.9h6.5v6.5h-6.5zM58.6 87h6.5v6.5h-6.5zM131.8 87h6.5v6.5h-6.5zM64.7 93.1h6.5v6.5h-6.5zM64.7 99.2h6.5v6.5h-6.5zM64.7 105.3h6.5v6.5h-6.5zM64.7 111.4h12.6v6.5h-12.6zM119.6 111.4h12.6v6.5h-12.6zM76.9 117.5h12.6v6.5h-12.6zM101.3 117.5h18.7v6.5h-18.7zM89.1 184.6h6.5v6.5h-6.5zM89.1 190.7h6.5v6.5h-6.5zM89.1 196.8h6.5v6.5h-6.5zM76.9 215.1h6.5v6.5h-6.5zM70.8 221.2h6.5v6.5h-6.5zM70.8 227.3h6.5v6.5h-6.5zM83 227.3h6.5v6.5h-6.5zM113.5 227.3h6.5v6.5h-6.5zM83 233.4h6.5v6.5h-6.5zM76.9 239.5h6.5v6.5h-6.5zM64.7 245.6h6.5v6.5h-6.5z"/><path fill="#EE98B1" d="M83 50.4h37v6.5h-37zM83 56.5h6.5v6.5h-6.5zM76.9 62.6h6.5v6.5h-6.5zM95.2 62.6h6.5v6.5h-6.5zM125.7 62.6h6.5v6.5h-6.5zM58.6 68.7h6.5v6.5h-6.5zM76.9 68.7h6.5v6.5h-6.5zM89.1 68.7h6.5v6.5h-6.5zM107.4 68.7h6.5v6.5h-6.5zM58.6 74.8h6.5v6.5h-6.5zM76.9 74.8h6.5v6.5h-6.5zM95.2 74.8h12.6v6.5h-12.6zM58.6 80.9h12.6v6.5h-12.6zM83 80.9h12.6v6.5h-12.6zM70.8 87h6.5v6.5h-6.5zM89.1 87h24.8v6.5h-24.8zM70.8 93.1h12.6v6.5h-12.6zM95.2 190.7h6.5v6.5h-6.5z"/><path fill="#E37998" d="M70.8 56.5h12.6v6.5h-12.6zM89.1 56.5h6.5v6.5h-6.5zM107.4 56.5h18.7v6.5h-18.7zM70.8 62.6h6.5v6.5h-6.5zM83 62.6h12.6v6.5h-12.6zM113.5 62.6h12.6v6.5h-12.6zM64.7 68.7h12.6v6.5h-12.6zM119.6 68.7h6.5v6.5h-6.5zM131.8 68.7h6.5v6.5h-6.5zM64.7 74.8h6.5v6.5h-6.5zM83 74.8h6.5v6.5h-6.5zM113.5 74.8h12.6v6.5h-12.6zM131.8 74.8h6.5v6.5h-6.5zM76.9 80.9h6.5v6.5h-6.5zM113.5 80.9h6.5v6.5h-6.5zM131.8 80.9h6.5v6.5h-6.5zM64.7 87h6.5v6.5h-6.5zM83 93.1h6.5v6.5h-6.5zM70.8 105.3h37v6.5h-37zM125.7 105.3h6.5v6.5h-6.5zM76.9 111.4h30.9v6.5h-30.9zM58.6 190.7h6.5v6.5h-6.5zM113.5 190.7h6.5v6.5h-6.5zM137.9 190.7h6.5v6.5h-6.5zM64.7 196.8h6.5v6.5h-6.5zM113.5 196.8h6.5v6.5h-6.5zM131.8 196.8h6.5v6.5h-6.5zM76.9 221.2h6.5v6.5h-6.5zM119.6 221.2h6.5v6.5h-6.5z"/><path fill="#D05C7E" d="M95.2 56.5h12.6v6.5h-12.6zM64.7 62.6h6.5v6.5h-6.5zM131.8 62.6h6.5v6.5h-6.5zM83 68.7h6.5v6.5h-6.5zM95.2 68.7h12.6v6.5h-12.6zM113.5 68.7h6.5v6.5h-6.5zM125.7 68.7h6.5v6.5h-6.5zM70.8 74.8h6.5v6.5h-6.5zM89.1 74.8h6.5v6.5h-6.5zM107.4 74.8h6.5v6.5h-6.5zM125.7 74.8h6.5v6.5h-6.5zM70.8 80.9h6.5v6.5h-6.5zM95.2 80.9h12.6v6.5h-12.6zM125.7 80.9h6.5v6.5h-6.5zM119.6 87h12.6v6.5h-12.6zM89.1 93.1h37v6.5h-37zM76.9 99.2h18.7v6.5h-18.7zM107.4 99.2h12.6v6.5h-12.6zM125.7 99.2h6.5v6.5h-6.5zM119.6 105.3h6.5v6.5h-6.5zM107.4 111.4h12.6v6.5h-12.6zM70.8 184.6h18.7v6.5h-18.7zM113.5 184.6h18.7v6.5h-18.7zM83 190.7h6.5v6.5h-6.5zM101.3 190.7h6.5v6.5h-6.5zM83 196.8h6.5v6.5h-6.5zM101.3 196.8h6.5v6.5h-6.5zM83 215.1h6.5v6.5h-6.5zM113.5 215.1h6.5v6.5h-6.5zM83 221.2h6.5v6.5h-6.5zM113.5 221.2h6.5v6.5h-6.5zM76.9 233.4h6.5v6.5h-6.5zM119.6 233.4h6.5v6.5h-6.5zM70.8 245.6h6.5v6.5h-6.5zM125.7 245.6h6.5v6.5h-6.5z"/><path fill="#E98AA5" d="M101.3 62.6h6.5v6.5h-6.5zM58.6 178.5h24.8v6.5h-24.8zM119.6 178.5h24.8v6.5h-24.8zM58.6 184.6h12.6v6.5h-12.6zM131.8 184.6h12.6v6.5h-12.6zM64.7 190.7h18.7v6.5h-18.7zM119.6 190.7h18.7v6.5h-18.7zM70.8 196.8h12.6v6.5h-12.6zM95.2 196.8h6.5v6.5h-6.5zM119.6 196.8h12.6v6.5h-12.6zM76.9 227.3h6.5v6.5h-6.5zM119.6 227.3h6.5v6.5h-6.5zM70.8 233.4h6.5v6.5h-6.5zM125.7 233.4h6.5v6.5h-6.5zM70.8 239.5h6.5v6.5h-6.5zM125.7 239.5h6.5v6.5h-6.5z"/><path fill="#A63A5A" d="M107.4 62.6h6.5v6.5h-6.5zM107.4 80.9h6.5v6.5h-6.5zM119.6 80.9h6.5v6.5h-6.5zM76.9 87h12.6v6.5h-12.6zM113.5 87h6.5v6.5h-6.5zM125.7 93.1h6.5v6.5h-6.5zM70.8 99.2h6.5v6.5h-6.5zM95.2 99.2h12.6v6.5h-12.6zM119.6 99.2h6.5v6.5h-6.5zM107.4 105.3h12.6v6.5h-12.6zM89.1 117.5h12.6v6.5h-12.6z"/><path fill="#224127" d="M52.5 99.2h12.6v6.5h-12.6zM131.8 99.2h12.6v6.5h-12.6zM58.6 105.3h6.5v6.5h-6.5zM34.2 123.6h6.5v6.5h-6.5zM46.4 123.6h6.5v6.5h-6.5zM58.6 123.6h6.5v6.5h-6.5zM89.1 123.6h6.5v6.5h-6.5zM101.3 123.6h6.5v6.5h-6.5zM119.6 129.7h6.5v6.5h-6.5zM95.2 135.8h6.5v6.5h-6.5zM144 135.8h6.5v6.5h-6.5zM95.2 141.9h6.5v6.5h-6.5zM137.9 148h6.5v6.5h-6.5zM52.5 154.1h6.5v6.5h-6.5zM113.5 154.1h6.5v6.5h-6.5zM76.9 160.2h6.5v6.5h-6.5zM95.2 160.2h6.5v6.5h-6.5zM83 166.3h12.6v6.5h-12.6zM95.2 221.2h6.5v6.5h-6.5zM95.2 227.3h6.5v6.5h-6.5zM95.2 233.4h6.5v6.5h-6.5zM95.2 239.5h6.5v6.5h-6.5zM95.2 245.6h6.5v6.5h-6.5zM95.2 251.7h6.5v6.5h-6.5zM95.2 257.8h6.5v6.5h-6.5zM95.2 263.9h6.5v6.5h-6.5z"/><path fill="#2A4F29" d="M131.8 105.3h6.5v6.5h-6.5zM125.7 123.6h37v6.5h-37zM125.7 129.7h18.7v6.5h-18.7zM150.1 129.7h6.5v6.5h-6.5zM113.5 135.8h18.7v6.5h-18.7zM58.6 141.9h6.5v6.5h-6.5zM70.8 141.9h6.5v6.5h-6.5zM113.5 141.9h6.5v6.5h-6.5zM144 141.9h6.5v6.5h-6.5zM70.8 148h6.5v6.5h-6.5zM107.4 148h6.5v6.5h-6.5zM107.4 154.1h6.5v6.5h-6.5zM119.6 154.1h18.7v6.5h-18.7zM107.4 160.2h6.5v6.5h-6.5zM107.4 166.3h6.5v6.5h-6.5z"/><path fill="#1B3F21" d="M40.3 123.6h6.5v6.5h-6.5zM52.5 123.6h6.5v6.5h-6.5zM95.2 123.6h6.5v6.5h-6.5zM40.3 129.7h6.5v6.5h-6.5zM64.7 129.7h12.6v6.5h-12.6zM95.2 129.7h6.5v6.5h-6.5zM40.3 135.8h6.5v6.5h-6.5zM76.9 135.8h6.5v6.5h-6.5zM40.3 141.9h6.5v6.5h-6.5zM64.7 141.9h6.5v6.5h-6.5zM76.9 141.9h6.5v6.5h-6.5zM46.4 148h6.5v6.5h-6.5zM76.9 148h12.6v6.5h-12.6zM95.2 148h6.5v6.5h-6.5zM58.6 154.1h30.9v6.5h-30.9zM95.2 154.1h6.5v6.5h-6.5zM83 160.2h6.5v6.5h-6.5zM95.2 166.3h6.5v6.5h-6.5zM89.1 172.4h18.7v6.5h-18.7zM95.2 178.5h12.6v6.5h-12.6zM95.2 209h6.5v6.5h-6.5zM95.2 215.1h6.5v6.5h-6.5z"/><path fill="#507724" d="M46.4 129.7h18.7v6.5h-18.7zM144 129.7h6.5v6.5h-6.5zM46.4 135.8h30.9v6.5h-30.9zM131.8 135.8h12.6v6.5h-12.6zM46.4 141.9h12.6v6.5h-12.6zM119.6 141.9h24.8v6.5h-24.8zM52.5 148h18.7v6.5h-18.7zM113.5 148h24.8v6.5h-24.8zM101.3 166.3h6.5v6.5h-6.5z"/><path fill="#8C3851" d="M58.6 172.4h24.8v6.5h-24.8zM119.6 172.4h24.8v6.5h-24.8zM52.5 178.5h6.5v6.5h-6.5zM83 178.5h6.5v6.5h-6.5zM113.5 178.5h6.5v6.5h-6.5zM144 178.5h6.5v6.5h-6.5zM52.5 184.6h6.5v6.5h-6.5zM95.2 184.6h18.7v6.5h-18.7zM144 184.6h6.5v6.5h-6.5zM52.5 190.7h6.5v6.5h-6.5zM107.4 190.7h6.5v6.5h-6.5zM144 190.7h6.5v6.5h-6.5zM58.6 196.8h6.5v6.5h-6.5zM107.4 196.8h6.5v6.5h-6.5zM137.9 196.8h6.5v6.5h-6.5zM64.7 202.9h73.6v6.5h-73.6zM83 209h12.6v6.5h-12.6zM107.4 209h12.6v6.5h-12.6zM89.1 215.1h6.5v6.5h-6.5zM107.4 215.1h6.5v6.5h-6.5zM119.6 215.1h6.5v6.5h-6.5zM89.1 221.2h6.5v6.5h-6.5zM107.4 221.2h6.5v6.5h-6.5zM125.7 221.2h6.5v6.5h-6.5zM125.7 227.3h6.5v6.5h-6.5zM64.7 233.4h6.5v6.5h-6.5zM113.5 233.4h6.5v6.5h-6.5zM131.8 233.4h6.5v6.5h-6.5zM64.7 239.5h6.5v6.5h-6.5zM119.6 239.5h6.5v6.5h-6.5zM131.8 239.5h6.5v6.5h-6.5zM76.9 245.6h6.5v6.5h-6.5zM119.6 245.6h6.5v6.5h-6.5zM131.8 245.6h6.5v6.5h-6.5zM64.7 251.7h12.6v6.5h-12.6zM125.7 251.7h12.6v6.5h-12.6z"/>',
-    daisy: '<path fill="#8F7857" d="M78.8 34.8h20v10.2h-20zM127.8 44.6h20v10.2h-20zM39.6 54.4h10.2v10.2h-10.2zM59.2 54.4h20v10.2h-20zM98.4 54.4h10.2v10.2h-10.2zM118 54.4h10.2v10.2h-10.2zM69 64.2h10.2v10.2h-10.2zM108.2 64.2h10.2v10.2h-10.2zM29.8 74h10.2v10.2h-10.2zM78.8 74h10.2v10.2h-10.2zM137.6 74h10.2v10.2h-10.2zM39.6 83.8h10.2v10.2h-10.2zM78.8 83.8h10.2v10.2h-10.2zM137.6 83.8h10.2v10.2h-10.2zM49.4 93.6h29.8v10.2h-29.8zM167 93.6h10.2v10.2h-10.2zM39.6 103.4h10.2v10.2h-10.2zM167 103.4h10.2v10.2h-10.2zM29.8 113.2h10.2v10.2h-10.2zM78.8 113.2h10.2v10.2h-10.2zM127.8 113.2h29.8v10.2h-29.8zM29.8 123h10.2v10.2h-10.2zM98.4 123h10.2v10.2h-10.2zM137.6 123h10.2v10.2h-10.2zM39.6 132.8h10.2v10.2h-10.2zM59.2 152.4h10.2v10.2h-10.2zM118 152.4h29.8v10.2h-29.8zM69 162.2h10.2v10.2h-10.2z"/><path fill="#8E7757" d="M69 44.6h10.2v10.2h-10.2zM98.4 44.6h10.2v10.2h-10.2zM49.4 54.4h10.2v10.2h-10.2zM147.4 54.4h10.2v10.2h-10.2zM29.8 64.2h10.2v10.2h-10.2zM98.4 64.2h10.2v10.2h-10.2zM147.4 64.2h10.2v10.2h-10.2zM98.4 74h10.2v10.2h-10.2zM127.8 83.8h10.2v10.2h-10.2zM147.4 83.8h20v10.2h-20zM157.2 113.2h10.2v10.2h-10.2zM69 123h10.2v10.2h-10.2zM49.4 132.8h20v10.2h-20zM98.4 132.8h10.2v10.2h-10.2zM147.4 132.8h10.2v10.2h-10.2zM59.2 142.6h10.2v10.2h-10.2zM108.2 142.6h10.2v10.2h-10.2zM147.4 142.6h10.2v10.2h-10.2zM88.6 152.4h10.2v10.2h-10.2zM78.8 162.2h10.2v10.2h-10.2z"/><path fill="#F5EDD6" d="M78.8 44.6h10.2v10.2h-10.2zM78.8 54.4h10.2v10.2h-10.2zM127.8 54.4h10.2v10.2h-10.2zM39.6 64.2h29.8v10.2h-29.8zM78.8 64.2h10.2v10.2h-10.2zM118 64.2h10.2v10.2h-10.2zM59.2 74h20v10.2h-20zM108.2 74h10.2v10.2h-10.2zM137.6 93.6h20v10.2h-20zM49.4 103.4h20v10.2h-20zM39.6 113.2h20v10.2h-20zM39.6 123h10.2v10.2h-10.2zM78.8 123h10.2v10.2h-10.2zM127.8 123h10.2v10.2h-10.2zM69 132.8h10.2v10.2h-10.2zM127.8 132.8h20v10.2h-20zM69 142.6h10.2v10.2h-10.2z"/><path fill="#F2E5C9" d="M88.6 44.6h10.2v10.2h-10.2zM88.6 54.4h10.2v10.2h-10.2zM127.8 64.2h10.2v10.2h-10.2zM118 74h10.2v10.2h-10.2zM157.2 93.6h10.2v10.2h-10.2zM59.2 113.2h10.2v10.2h-10.2zM49.4 123h10.2v10.2h-10.2zM118 123h10.2v10.2h-10.2zM78.8 132.8h10.2v10.2h-10.2zM118 132.8h10.2v10.2h-10.2zM137.6 142.6h10.2v10.2h-10.2z"/><path fill="#E2CEA8" d="M137.6 54.4h10.2v10.2h-10.2zM49.4 74h10.2v10.2h-10.2zM78.8 142.6h10.2v10.2h-10.2z"/><path fill="#D9C19A" d="M88.6 64.2h10.2v10.2h-10.2zM137.6 64.2h10.2v10.2h-10.2zM39.6 74h10.2v10.2h-10.2zM88.6 74h10.2v10.2h-10.2zM127.8 74h10.2v10.2h-10.2zM49.4 83.8h29.8v10.2h-29.8zM118 83.8h10.2v10.2h-10.2zM127.8 93.6h10.2v10.2h-10.2zM69 103.4h10.2v10.2h-10.2zM127.8 103.4h39.6v10.2h-39.6zM69 113.2h10.2v10.2h-10.2zM118 113.2h10.2v10.2h-10.2zM59.2 123h10.2v10.2h-10.2zM88.6 123h10.2v10.2h-10.2zM108.2 123h10.2v10.2h-10.2zM88.6 132.8h10.2v10.2h-10.2zM108.2 132.8h10.2v10.2h-10.2zM88.6 142.6h10.2v10.2h-10.2zM118 142.6h20v10.2h-20zM69 152.4h20v10.2h-20z"/><path fill="#E49C1A" d="M88.6 83.8h29.8v10.2h-29.8zM78.8 93.6h49.4v10.2h-49.4zM78.8 103.4h49.4v10.2h-49.4zM88.6 113.2h29.8v10.2h-29.8z"/><path fill="#124722" d="M98.4 142.6h10.2v10.2h-10.2zM49.4 181.8h20v10.2h-20zM137.6 181.8h29.8v10.2h-29.8zM49.4 191.6h10.2v10.2h-10.2zM69 191.6h10.2v10.2h-10.2zM98.4 191.6h10.2v10.2h-10.2zM118 191.6h10.2v10.2h-10.2zM137.6 201.4h10.2v10.2h-10.2zM59.2 211.2h10.2v10.2h-10.2zM127.8 211.2h20v10.2h-20zM69 221h20v10.2h-20zM98.4 240.6h10.2v10.2h-10.2zM88.6 260.2h10.2v10.2h-10.2z"/><path fill="#134624" d="M98.4 152.4h10.2v10.2h-10.2zM98.4 162.2h10.2v10.2h-10.2zM98.4 172h10.2v10.2h-10.2zM39.6 181.8h10.2v10.2h-10.2zM98.4 181.8h10.2v10.2h-10.2zM127.8 181.8h10.2v10.2h-10.2zM147.4 191.6h10.2v10.2h-10.2zM49.4 201.4h10.2v10.2h-10.2zM78.8 201.4h10.2v10.2h-10.2zM98.4 201.4h20v10.2h-20zM78.8 211.2h10.2v10.2h-10.2zM98.4 211.2h10.2v10.2h-10.2zM98.4 221h10.2v10.2h-10.2zM118 221h10.2v10.2h-10.2zM88.6 230.8h29.8v10.2h-29.8zM98.4 250.4h10.2v10.2h-10.2z"/><path fill="#7C804A" d="M59.2 191.6h10.2v10.2h-10.2zM127.8 191.6h10.2v10.2h-10.2zM118 201.4h10.2v10.2h-10.2z"/><path fill="#175026" d="M137.6 191.6h10.2v10.2h-10.2zM59.2 201.4h20v10.2h-20zM127.8 201.4h10.2v10.2h-10.2zM69 211.2h10.2v10.2h-10.2zM108.2 211.2h20v10.2h-20zM108.2 221h10.2v10.2h-10.2z"/>',
-    sunflower: '<path fill="#F4AF1A" d="M89.9 27.6h20.6v10.5h-20.6zM120.2 37.7h20.6v10.5h-20.6zM69.7 47.8h10.5v10.5h-10.5zM100 47.8h10.5v10.5h-10.5zM130.3 47.8h10.5v10.5h-10.5zM59.6 57.9h10.5v10.5h-10.5zM130.3 57.9h10.5v10.5h-10.5zM39.4 68h20.6v10.5h-20.6zM150.5 68h10.5v10.5h-10.5zM150.5 98.3h20.6v10.5h-20.6zM150.5 118.5h10.5v10.5h-10.5zM49.5 128.6h10.5v10.5h-10.5zM150.5 128.6h10.5v10.5h-10.5zM59.6 148.8h20.6v10.5h-20.6z"/><path fill="#F3C356" d="M59.6 37.7h10.5v10.5h-10.5zM89.9 37.7h10.5v10.5h-10.5zM59.6 47.8h10.5v10.5h-10.5zM89.9 47.8h10.5v10.5h-10.5zM120.2 47.8h10.5v10.5h-10.5zM39.4 57.9h20.6v10.5h-20.6zM120.2 57.9h10.5v10.5h-10.5zM140.4 68h10.5v10.5h-10.5zM29.3 88.2h20.6v10.5h-20.6zM140.4 88.2h30.7v10.5h-30.7zM39.4 118.5h20.6v10.5h-20.6zM140.4 118.5h10.5v10.5h-10.5zM140.4 128.6h10.5v10.5h-10.5zM59.6 138.7h10.5v10.5h-10.5zM89.9 138.7h10.5v10.5h-10.5zM120.2 138.7h10.5v10.5h-10.5z"/><path fill="#F4B01A" d="M69.7 37.7h10.5v10.5h-10.5zM100 37.7h10.5v10.5h-10.5zM69.7 57.9h10.5v10.5h-10.5zM89.9 57.9h20.6v10.5h-20.6zM140.4 57.9h20.6v10.5h-20.6zM69.7 68h10.5v10.5h-10.5zM120.2 68h10.5v10.5h-10.5zM49.5 88.2h10.5v10.5h-10.5zM29.3 98.3h30.7v10.5h-30.7zM140.4 98.3h10.5v10.5h-10.5zM39.4 128.6h10.5v10.5h-10.5zM69.7 138.7h10.5v10.5h-10.5zM100 138.7h10.5v10.5h-10.5zM130.3 138.7h10.5v10.5h-10.5zM89.9 148.8h20.6v10.5h-20.6zM120.2 148.8h20.6v10.5h-20.6z"/><path fill="#E18D1A" d="M79.8 47.8h10.5v10.5h-10.5zM110.1 47.8h10.5v10.5h-10.5zM79.8 57.9h10.5v10.5h-10.5zM110.1 57.9h10.5v10.5h-10.5zM59.6 68h10.5v10.5h-10.5zM130.3 68h10.5v10.5h-10.5zM49.5 78.1h20.6v10.5h-20.6zM130.3 78.1h20.6v10.5h-20.6zM49.5 108.4h10.5v10.5h-10.5zM140.4 108.4h10.5v10.5h-10.5zM59.6 118.5h10.5v10.5h-10.5zM130.3 118.5h10.5v10.5h-10.5zM59.6 128.6h20.6v10.5h-20.6zM120.2 128.6h20.6v10.5h-20.6zM79.8 138.7h10.5v10.5h-10.5zM110.1 138.7h10.5v10.5h-10.5z"/><path fill="#6B361F" d="M79.8 68h40.8v10.5h-40.8zM69.7 78.1h20.6v10.5h-20.6zM110.1 78.1h10.5v10.5h-10.5zM59.6 88.2h20.6v10.5h-20.6zM100 88.2h10.5v10.5h-10.5zM59.6 98.3h10.5v10.5h-10.5zM100 98.3h20.6v10.5h-20.6zM59.6 108.4h20.6v10.5h-20.6zM89.9 108.4h20.6v10.5h-20.6zM120.2 108.4h10.5v10.5h-10.5zM69.7 118.5h20.6v10.5h-20.6zM110.1 118.5h10.5v10.5h-10.5z"/><path fill="#774024" d="M89.9 78.1h20.6v10.5h-20.6zM79.8 88.2h20.6v10.5h-20.6zM110.1 88.2h10.5v10.5h-10.5zM69.7 98.3h30.7v10.5h-30.7zM120.2 98.3h10.5v10.5h-10.5zM79.8 108.4h10.5v10.5h-10.5zM110.1 108.4h10.5v10.5h-10.5zM89.9 118.5h20.6v10.5h-20.6z"/><path fill="#4E381E" d="M120.2 78.1h10.5v10.5h-10.5zM120.2 88.2h20.6v10.5h-20.6zM130.3 98.3h10.5v10.5h-10.5zM130.3 108.4h10.5v10.5h-10.5zM120.2 118.5h10.5v10.5h-10.5zM79.8 128.6h40.8v10.5h-40.8z"/><path fill="#2C4F1E" d="M29.3 158.9h10.5v10.5h-10.5zM100 158.9h10.5v10.5h-10.5zM29.3 169h10.5v10.5h-10.5zM69.7 169h10.5v10.5h-10.5zM100 169h10.5v10.5h-10.5zM39.4 179.1h10.5v10.5h-10.5zM69.7 179.1h10.5v10.5h-10.5zM100 179.1h10.5v10.5h-10.5zM130.3 179.1h20.6v10.5h-20.6zM170.7 179.1h10.5v10.5h-10.5zM69.7 189.2h20.6v10.5h-20.6zM100 189.2h10.5v10.5h-10.5zM120.2 189.2h10.5v10.5h-10.5zM100 199.3h10.5v10.5h-10.5zM120.2 199.3h10.5v10.5h-10.5zM100 209.4h30.7v10.5h-30.7zM39.4 219.5h10.5v10.5h-10.5zM79.8 219.5h10.5v10.5h-10.5zM100 219.5h10.5v10.5h-10.5zM69.7 229.6h20.6v10.5h-20.6zM100 229.6h10.5v10.5h-10.5zM100 239.7h10.5v10.5h-10.5zM100 249.8h10.5v10.5h-10.5zM100 259.9h10.5v10.5h-10.5z"/><path fill="#3A672A" d="M39.4 158.9h30.7v10.5h-30.7zM89.9 158.9h10.5v10.5h-10.5zM59.6 169h10.5v10.5h-10.5zM140.4 169h40.8v10.5h-40.8zM49.5 189.2h20.6v10.5h-20.6zM160.6 189.2h10.5v10.5h-10.5zM150.5 199.3h10.5v10.5h-10.5zM49.5 209.4h30.7v10.5h-30.7zM130.3 209.4h20.6v10.5h-20.6zM49.5 229.6h20.6v10.5h-20.6zM89.9 239.7h10.5v10.5h-10.5zM89.9 249.8h10.5v10.5h-10.5zM89.9 259.9h10.5v10.5h-10.5z"/><path fill="#627F2C" d="M39.4 169h20.6v10.5h-20.6zM89.9 169h10.5v10.5h-10.5zM89.9 179.1h10.5v10.5h-10.5zM150.5 179.1h10.5v10.5h-10.5zM89.9 189.2h10.5v10.5h-10.5zM130.3 189.2h20.6v10.5h-20.6zM89.9 199.3h10.5v10.5h-10.5zM89.9 209.4h10.5v10.5h-10.5zM49.5 219.5h20.6v10.5h-20.6zM89.9 219.5h10.5v10.5h-10.5zM89.9 229.6h10.5v10.5h-10.5z"/><path fill="#48672E" d="M49.5 179.1h20.6v10.5h-20.6zM160.6 179.1h10.5v10.5h-10.5zM150.5 189.2h10.5v10.5h-10.5zM130.3 199.3h20.6v10.5h-20.6zM69.7 219.5h10.5v10.5h-10.5z"/>',
-    tulip: '<path fill="#801A10" d="M80.4 5.4h20v10.2h-20zM51 15.2h10.2v10.2h-10.2zM70.6 15.2h10.2v10.2h-10.2zM100 15.2h10.2v10.2h-10.2zM119.6 15.2h10.2v10.2h-10.2zM51 25h29.8v10.2h-29.8zM100 25h10.2v10.2h-10.2zM51 34.8h10.2v10.2h-10.2zM70.6 34.8h10.2v10.2h-10.2zM51 44.6h10.2v10.2h-10.2zM80.4 44.6h10.2v10.2h-10.2zM51 54.4h10.2v10.2h-10.2zM51 64.2h10.2v10.2h-10.2zM60.8 74h10.2v10.2h-10.2zM60.8 83.8h10.2v10.2h-10.2zM90.2 83.8h10.2v10.2h-10.2zM100 93.6h10.2v10.2h-10.2z"/><path fill="#C56F2A" d="M80.4 15.2h10.2v10.2h-10.2zM80.4 25h10.2v10.2h-10.2zM119.6 25h10.2v10.2h-10.2zM60.8 34.8h10.2v10.2h-10.2zM109.8 34.8h10.2v10.2h-10.2zM70.6 44.6h10.2v10.2h-10.2zM100 44.6h10.2v10.2h-10.2zM80.4 54.4h10.2v10.2h-10.2zM100 64.2h10.2v10.2h-10.2zM100 74h10.2v10.2h-10.2z"/><path fill="#D13810" d="M90.2 15.2h10.2v10.2h-10.2zM90.2 25h10.2v10.2h-10.2zM80.4 34.8h10.2v10.2h-10.2zM119.6 34.8h10.2v10.2h-10.2zM60.8 44.6h10.2v10.2h-10.2zM109.8 44.6h10.2v10.2h-10.2zM60.8 54.4h20v10.2h-20zM100 54.4h20v10.2h-20zM60.8 64.2h29.8v10.2h-29.8zM109.8 64.2h10.2v10.2h-10.2zM70.6 74h10.2v10.2h-10.2zM100 83.8h10.2v10.2h-10.2z"/><path fill="#6B1B1A" d="M129.4 15.2h10.2v10.2h-10.2zM109.8 25h10.2v10.2h-10.2zM129.4 25h10.2v10.2h-10.2zM100 34.8h10.2v10.2h-10.2zM129.4 34.8h10.2v10.2h-10.2zM90.2 44.6h10.2v10.2h-10.2zM129.4 44.6h10.2v10.2h-10.2zM90.2 54.4h10.2v10.2h-10.2zM129.4 54.4h10.2v10.2h-10.2zM90.2 64.2h10.2v10.2h-10.2zM129.4 64.2h10.2v10.2h-10.2zM90.2 74h10.2v10.2h-10.2zM119.6 74h10.2v10.2h-10.2zM119.6 83.8h10.2v10.2h-10.2zM70.6 93.6h10.2v10.2h-10.2zM109.8 93.6h10.2v10.2h-10.2z"/><path fill="#9D200E" d="M90.2 34.8h10.2v10.2h-10.2zM119.6 44.6h10.2v10.2h-10.2zM119.6 54.4h10.2v10.2h-10.2zM119.6 64.2h10.2v10.2h-10.2zM80.4 74h10.2v10.2h-10.2zM109.8 74h10.2v10.2h-10.2zM70.6 83.8h20v10.2h-20zM109.8 83.8h10.2v10.2h-10.2zM80.4 93.6h20v10.2h-20z"/><path fill="#0B3C20" d="M158.8 93.6h10.2v10.2h-10.2zM158.8 103.4h10.2v10.2h-10.2zM158.8 113.2h10.2v10.2h-10.2zM158.8 123h10.2v10.2h-10.2zM158.8 132.8h10.2v10.2h-10.2zM60.8 142.6h10.2v10.2h-10.2zM158.8 142.6h10.2v10.2h-10.2zM70.6 152.4h10.2v10.2h-10.2zM90.2 152.4h10.2v10.2h-10.2zM149 152.4h10.2v10.2h-10.2zM70.6 162.2h10.2v10.2h-10.2zM149 162.2h10.2v10.2h-10.2zM80.4 172h10.2v10.2h-10.2zM139.2 172h10.2v10.2h-10.2zM80.4 181.8h10.2v10.2h-10.2zM139.2 181.8h10.2v10.2h-10.2zM129.4 191.6h10.2v10.2h-10.2zM90.2 201.4h10.2v10.2h-10.2zM119.6 201.4h10.2v10.2h-10.2zM119.6 211.2h10.2v10.2h-10.2zM109.8 221h10.2v10.2h-10.2zM90.2 230.8h10.2v10.2h-10.2zM109.8 230.8h10.2v10.2h-10.2zM100 240.6h10.2v10.2h-10.2zM100 250.4h10.2v10.2h-10.2zM100 260.2h10.2v10.2h-10.2z"/><path fill="#0F3C1F" d="M80.4 103.4h10.2v10.2h-10.2zM100 103.4h10.2v10.2h-10.2zM90.2 113.2h10.2v10.2h-10.2zM41.2 123h10.2v10.2h-10.2zM90.2 123h10.2v10.2h-10.2zM51 132.8h10.2v10.2h-10.2zM90.2 132.8h10.2v10.2h-10.2zM90.2 142.6h10.2v10.2h-10.2zM90.2 162.2h10.2v10.2h-10.2zM90.2 211.2h10.2v10.2h-10.2zM90.2 221h10.2v10.2h-10.2z"/><path fill="#114524" d="M90.2 103.4h10.2v10.2h-10.2zM149 103.4h10.2v10.2h-10.2zM31.4 113.2h10.2v10.2h-10.2zM139.2 113.2h10.2v10.2h-10.2zM31.4 123h10.2v10.2h-10.2zM129.4 123h10.2v10.2h-10.2zM31.4 132.8h10.2v10.2h-10.2zM119.6 132.8h10.2v10.2h-10.2zM31.4 142.6h10.2v10.2h-10.2zM109.8 142.6h10.2v10.2h-10.2zM31.4 152.4h10.2v10.2h-10.2zM109.8 152.4h10.2v10.2h-10.2zM31.4 162.2h10.2v10.2h-10.2zM109.8 162.2h10.2v10.2h-10.2zM41.2 172h10.2v10.2h-10.2zM90.2 172h10.2v10.2h-10.2zM109.8 172h10.2v10.2h-10.2zM41.2 181.8h10.2v10.2h-10.2zM90.2 181.8h10.2v10.2h-10.2zM109.8 181.8h10.2v10.2h-10.2zM51 191.6h10.2v10.2h-10.2zM90.2 191.6h20v10.2h-20zM51 201.4h10.2v10.2h-10.2zM60.8 211.2h10.2v10.2h-10.2zM70.6 221h10.2v10.2h-10.2zM80.4 230.8h10.2v10.2h-10.2zM90.2 240.6h10.2v10.2h-10.2zM90.2 250.4h10.2v10.2h-10.2zM90.2 260.2h10.2v10.2h-10.2z"/><path fill="#2E6C33" d="M149 113.2h10.2v10.2h-10.2zM149 123h10.2v10.2h-10.2zM41.2 132.8h10.2v10.2h-10.2zM149 132.8h10.2v10.2h-10.2zM51 142.6h10.2v10.2h-10.2zM139.2 142.6h20v10.2h-20zM60.8 152.4h10.2v10.2h-10.2zM139.2 152.4h10.2v10.2h-10.2zM60.8 162.2h10.2v10.2h-10.2zM129.4 162.2h20v10.2h-20zM70.6 172h10.2v10.2h-10.2zM129.4 172h10.2v10.2h-10.2zM70.6 181.8h10.2v10.2h-10.2zM129.4 181.8h10.2v10.2h-10.2zM80.4 191.6h10.2v10.2h-10.2zM119.6 191.6h10.2v10.2h-10.2zM80.4 201.4h10.2v10.2h-10.2zM109.8 201.4h10.2v10.2h-10.2zM80.4 211.2h10.2v10.2h-10.2zM100 211.2h20v10.2h-20zM80.4 221h10.2v10.2h-10.2zM100 221h10.2v10.2h-10.2zM100 230.8h10.2v10.2h-10.2z"/><path fill="#5D963D" d="M139.2 123h10.2v10.2h-10.2zM129.4 132.8h10.2v10.2h-10.2zM119.6 142.6h20v10.2h-20zM41.2 152.4h20v10.2h-20zM119.6 152.4h20v10.2h-20zM41.2 162.2h20v10.2h-20zM119.6 162.2h10.2v10.2h-10.2zM51 172h20v10.2h-20zM119.6 172h10.2v10.2h-10.2zM51 181.8h20v10.2h-20zM119.6 181.8h10.2v10.2h-10.2zM60.8 191.6h10.2v10.2h-10.2zM109.8 191.6h10.2v10.2h-10.2zM60.8 201.4h20v10.2h-20zM100 201.4h10.2v10.2h-10.2zM70.6 211.2h10.2v10.2h-10.2z"/><path fill="#357633" d="M139.2 132.8h10.2v10.2h-10.2zM41.2 142.6h10.2v10.2h-10.2zM70.6 191.6h10.2v10.2h-10.2z"/>',
-    lily: '<path fill="#232932" d="M71.8 1.6h30.9v6.5h-30.9zM65.7 7.7h6.5v6.5h-6.5zM102.3 7.7h6.5v6.5h-6.5zM108.4 13.8h6.5v6.5h-6.5zM151.1 13.8h18.7v6.5h-18.7zM114.5 19.9h6.5v6.5h-6.5zM138.9 19.9h12.6v6.5h-12.6zM169.4 19.9h6.5v6.5h-6.5zM114.5 26h6.5v6.5h-6.5zM132.8 26h6.5v6.5h-6.5zM175.5 26h6.5v6.5h-6.5zM114.5 32.1h6.5v6.5h-6.5zM126.7 32.1h6.5v6.5h-6.5zM120.6 38.2h6.5v6.5h-6.5zM169.4 38.2h6.5v6.5h-6.5zM65.7 44.3h6.5v6.5h-6.5zM120.6 44.3h6.5v6.5h-6.5zM163.3 50.4h6.5v6.5h-6.5zM157.2 62.6h6.5v6.5h-6.5zM163.3 68.7h6.5v6.5h-6.5zM181.6 80.9h6.5v6.5h-6.5zM187.7 99.2h6.5v6.5h-6.5zM163.3 105.3h6.5v6.5h-6.5zM138.9 111.4h12.6v6.5h-12.6zM175.5 111.4h6.5v6.5h-6.5zM181.6 117.5h6.5v6.5h-6.5zM151.1 141.9h6.5v6.5h-6.5zM41.3 190.7h6.5v6.5h-6.5zM47.4 202.9h6.5v6.5h-6.5zM59.6 215.1h6.5v6.5h-6.5zM65.7 221.2h6.5v6.5h-6.5zM90.1 257.8h6.5v6.5h-6.5zM96.2 263.9h12.6v6.5h-12.6z"/><path fill="#B3C4ED" d="M71.8 7.7h12.6v6.5h-12.6zM77.9 13.8h6.5v6.5h-6.5zM77.9 19.9h6.5v6.5h-6.5zM151.1 19.9h18.7v6.5h-18.7zM77.9 26h6.5v6.5h-6.5zM138.9 26h12.6v6.5h-12.6zM157.2 26h6.5v6.5h-6.5zM169.4 26h6.5v6.5h-6.5zM77.9 32.1h6.5v6.5h-6.5zM163.3 32.1h6.5v6.5h-6.5zM77.9 38.2h12.6v6.5h-12.6zM84 44.3h6.5v6.5h-6.5zM108.4 44.3h12.6v6.5h-12.6zM84 50.4h6.5v6.5h-6.5zM90.1 56.5h6.5v6.5h-6.5zM138.9 56.5h6.5v6.5h-6.5zM71.8 62.6h6.5v6.5h-6.5zM151.1 62.6h6.5v6.5h-6.5zM47.4 68.7h6.5v6.5h-6.5zM65.7 68.7h6.5v6.5h-6.5zM65.7 74.8h12.6v6.5h-12.6zM151.1 74.8h6.5v6.5h-6.5zM163.3 74.8h6.5v6.5h-6.5zM163.3 80.9h6.5v6.5h-6.5zM175.5 80.9h6.5v6.5h-6.5zM151.1 87h12.6v6.5h-12.6zM175.5 87h12.6v6.5h-12.6zM145 93.1h6.5v6.5h-6.5zM181.6 93.1h6.5v6.5h-6.5zM59.6 99.2h6.5v6.5h-6.5zM145 99.2h12.6v6.5h-12.6zM175.5 99.2h6.5v6.5h-6.5zM71.8 105.3h6.5v6.5h-6.5zM90.1 111.4h12.6v6.5h-12.6zM84 117.5h18.7v6.5h-18.7zM77.9 123.6h6.5v6.5h-6.5zM108.4 123.6h24.8v6.5h-24.8zM71.8 129.7h6.5v6.5h-6.5zM114.5 129.7h6.5v6.5h-6.5zM59.6 141.9h6.5v6.5h-6.5zM126.7 148h6.5v6.5h-6.5zM138.9 148h6.5v6.5h-6.5zM126.7 154.1h6.5v6.5h-6.5zM138.9 154.1h6.5v6.5h-6.5z"/><path fill="#92B2E5" d="M84 7.7h12.6v6.5h-12.6zM90.1 13.8h6.5v6.5h-6.5zM90.1 19.9h6.5v6.5h-6.5zM96.2 26h6.5v6.5h-6.5zM96.2 32.1h6.5v6.5h-6.5zM151.1 32.1h6.5v6.5h-6.5zM96.2 38.2h12.6v6.5h-12.6zM126.7 38.2h6.5v6.5h-6.5zM145 38.2h6.5v6.5h-6.5zM96.2 44.3h6.5v6.5h-6.5zM126.7 44.3h6.5v6.5h-6.5zM138.9 44.3h6.5v6.5h-6.5zM29.1 50.4h24.8v6.5h-24.8zM71.8 50.4h6.5v6.5h-6.5zM90.1 50.4h12.6v6.5h-12.6zM108.4 50.4h12.6v6.5h-12.6zM126.7 50.4h6.5v6.5h-6.5zM138.9 50.4h12.6v6.5h-12.6zM23 56.5h12.6v6.5h-12.6zM53.5 56.5h12.6v6.5h-12.6zM71.8 56.5h12.6v6.5h-12.6zM96.2 56.5h6.5v6.5h-6.5zM108.4 56.5h6.5v6.5h-6.5zM145 56.5h6.5v6.5h-6.5zM157.2 56.5h6.5v6.5h-6.5zM65.7 62.6h6.5v6.5h-6.5zM77.9 62.6h6.5v6.5h-6.5zM90.1 62.6h6.5v6.5h-6.5zM102.3 62.6h6.5v6.5h-6.5zM145 62.6h6.5v6.5h-6.5zM71.8 68.7h18.7v6.5h-18.7zM96.2 68.7h6.5v6.5h-6.5zM145 68.7h6.5v6.5h-6.5zM53.5 74.8h6.5v6.5h-6.5zM84 74.8h6.5v6.5h-6.5zM145 74.8h6.5v6.5h-6.5zM65.7 80.9h24.8v6.5h-24.8zM132.8 80.9h6.5v6.5h-6.5zM145 80.9h18.7v6.5h-18.7zM71.8 87h12.6v6.5h-12.6zM145 87h6.5v6.5h-6.5zM163.3 87h12.6v6.5h-12.6zM65.7 93.1h12.6v6.5h-12.6zM138.9 93.1h6.5v6.5h-6.5zM175.5 93.1h6.5v6.5h-6.5zM65.7 99.2h18.7v6.5h-18.7zM132.8 99.2h12.6v6.5h-12.6zM157.2 99.2h6.5v6.5h-6.5zM181.6 99.2h6.5v6.5h-6.5zM77.9 105.3h6.5v6.5h-6.5zM90.1 105.3h12.6v6.5h-12.6zM132.8 105.3h18.7v6.5h-18.7zM175.5 105.3h12.6v6.5h-12.6zM71.8 111.4h6.5v6.5h-6.5zM84 111.4h6.5v6.5h-6.5zM102.3 111.4h6.5v6.5h-6.5zM114.5 111.4h18.7v6.5h-18.7zM181.6 111.4h6.5v6.5h-6.5zM108.4 117.5h24.8v6.5h-24.8zM59.6 123.6h6.5v6.5h-6.5zM59.6 129.7h6.5v6.5h-6.5zM53.5 135.8h18.7v6.5h-18.7z"/><path fill="#CDD5F2" d="M96.2 7.7h6.5v6.5h-6.5zM96.2 13.8h12.6v6.5h-12.6zM138.9 38.2h6.5v6.5h-6.5zM163.3 38.2h6.5v6.5h-6.5zM35.2 44.3h6.5v6.5h-6.5zM90.1 44.3h6.5v6.5h-6.5zM163.3 44.3h6.5v6.5h-6.5zM35.2 56.5h6.5v6.5h-6.5zM157.2 74.8h6.5v6.5h-6.5zM169.4 74.8h6.5v6.5h-6.5zM169.4 80.9h6.5v6.5h-6.5zM151.1 93.1h6.5v6.5h-6.5zM59.6 105.3h12.6v6.5h-12.6zM53.5 111.4h18.7v6.5h-18.7zM53.5 117.5h12.6v6.5h-12.6zM138.9 117.5h6.5v6.5h-6.5zM53.5 123.6h6.5v6.5h-6.5zM65.7 123.6h6.5v6.5h-6.5zM138.9 123.6h12.6v6.5h-12.6zM53.5 129.7h6.5v6.5h-6.5zM65.7 129.7h6.5v6.5h-6.5zM138.9 129.7h12.6v6.5h-12.6zM138.9 135.8h12.6v6.5h-12.6zM138.9 141.9h12.6v6.5h-12.6z"/><path fill="#1D292C" d="M65.7 13.8h12.6v6.5h-12.6zM71.8 19.9h6.5v6.5h-6.5zM71.8 26h6.5v6.5h-6.5zM71.8 32.1h6.5v6.5h-6.5zM169.4 32.1h6.5v6.5h-6.5zM71.8 38.2h6.5v6.5h-6.5zM71.8 44.3h6.5v6.5h-6.5zM169.4 44.3h6.5v6.5h-6.5zM84 56.5h6.5v6.5h-6.5zM163.3 56.5h6.5v6.5h-6.5zM84 62.6h6.5v6.5h-6.5zM90.1 68.7h6.5v6.5h-6.5zM157.2 68.7h6.5v6.5h-6.5zM169.4 68.7h6.5v6.5h-6.5zM175.5 74.8h6.5v6.5h-6.5zM96.2 80.9h6.5v6.5h-6.5zM187.7 87h6.5v6.5h-6.5zM187.7 93.1h6.5v6.5h-6.5zM151.1 105.3h12.6v6.5h-12.6zM187.7 105.3h6.5v6.5h-6.5zM187.7 111.4h6.5v6.5h-6.5zM145 117.5h6.5v6.5h-6.5zM151.1 123.6h6.5v6.5h-6.5zM96.2 129.7h6.5v6.5h-6.5zM151.1 129.7h6.5v6.5h-6.5zM96.2 135.8h6.5v6.5h-6.5zM151.1 135.8h6.5v6.5h-6.5zM90.1 141.9h6.5v6.5h-6.5zM16.9 148h18.7v6.5h-18.7zM90.1 148h6.5v6.5h-6.5zM16.9 154.1h6.5v6.5h-6.5zM35.2 154.1h18.7v6.5h-18.7zM90.1 154.1h6.5v6.5h-6.5zM102.3 154.1h6.5v6.5h-6.5zM23 160.2h6.5v6.5h-6.5zM53.5 160.2h6.5v6.5h-6.5zM90.1 160.2h6.5v6.5h-6.5zM29.1 166.3h6.5v6.5h-6.5zM59.6 166.3h6.5v6.5h-6.5zM90.1 166.3h6.5v6.5h-6.5zM35.2 172.4h6.5v6.5h-6.5zM65.7 172.4h6.5v6.5h-6.5zM90.1 172.4h6.5v6.5h-6.5zM145 172.4h30.9v6.5h-30.9zM35.2 178.5h6.5v6.5h-6.5zM53.5 178.5h6.5v6.5h-6.5zM65.7 178.5h6.5v6.5h-6.5zM90.1 178.5h6.5v6.5h-6.5zM132.8 178.5h12.6v6.5h-12.6zM41.3 184.6h6.5v6.5h-6.5zM71.8 184.6h6.5v6.5h-6.5zM90.1 184.6h6.5v6.5h-6.5zM126.7 184.6h6.5v6.5h-6.5zM157.2 184.6h6.5v6.5h-6.5zM71.8 190.7h6.5v6.5h-6.5zM90.1 190.7h6.5v6.5h-6.5zM120.6 190.7h6.5v6.5h-6.5zM145 190.7h6.5v6.5h-6.5zM47.4 196.8h6.5v6.5h-6.5zM77.9 196.8h6.5v6.5h-6.5zM90.1 196.8h6.5v6.5h-6.5zM114.5 196.8h6.5v6.5h-6.5zM138.9 196.8h6.5v6.5h-6.5zM77.9 202.9h6.5v6.5h-6.5zM90.1 202.9h6.5v6.5h-6.5zM108.4 202.9h6.5v6.5h-6.5zM53.5 209h6.5v6.5h-6.5zM77.9 209h6.5v6.5h-6.5zM90.1 209h6.5v6.5h-6.5zM102.3 209h6.5v6.5h-6.5zM84 215.1h12.6v6.5h-12.6zM126.7 215.1h6.5v6.5h-6.5zM84 221.2h12.6v6.5h-12.6zM102.3 221.2h6.5v6.5h-6.5zM126.7 221.2h6.5v6.5h-6.5zM71.8 227.3h6.5v6.5h-6.5zM120.6 227.3h6.5v6.5h-6.5zM77.9 233.4h6.5v6.5h-6.5zM114.5 233.4h6.5v6.5h-6.5zM84 239.5h6.5v6.5h-6.5zM102.3 239.5h12.6v6.5h-12.6zM102.3 245.6h6.5v6.5h-6.5zM90.1 251.7h6.5v6.5h-6.5zM102.3 251.7h6.5v6.5h-6.5zM102.3 257.8h6.5v6.5h-6.5z"/><path fill="#D5DCF4" d="M84 13.8h6.5v6.5h-6.5zM84 19.9h6.5v6.5h-6.5zM96.2 19.9h18.7v6.5h-18.7zM84 26h12.6v6.5h-12.6zM102.3 26h12.6v6.5h-12.6zM151.1 26h6.5v6.5h-6.5zM84 32.1h12.6v6.5h-12.6zM102.3 32.1h12.6v6.5h-12.6zM132.8 32.1h18.7v6.5h-18.7zM157.2 32.1h6.5v6.5h-6.5zM90.1 38.2h6.5v6.5h-6.5zM108.4 38.2h12.6v6.5h-12.6zM132.8 38.2h6.5v6.5h-6.5zM151.1 38.2h12.6v6.5h-12.6zM41.3 44.3h24.8v6.5h-24.8zM145 44.3h18.7v6.5h-18.7zM53.5 50.4h18.7v6.5h-18.7zM151.1 50.4h12.6v6.5h-12.6zM41.3 56.5h12.6v6.5h-12.6zM65.7 56.5h6.5v6.5h-6.5zM41.3 62.6h24.8v6.5h-24.8zM53.5 68.7h12.6v6.5h-12.6zM59.6 74.8h6.5v6.5h-6.5zM157.2 93.1h18.7v6.5h-18.7zM163.3 99.2h12.6v6.5h-12.6zM77.9 111.4h6.5v6.5h-6.5zM71.8 117.5h12.6v6.5h-12.6zM71.8 123.6h6.5v6.5h-6.5zM120.6 129.7h12.6v6.5h-12.6zM120.6 135.8h12.6v6.5h-12.6zM120.6 141.9h12.6v6.5h-12.6z"/><path fill="#5D9DB8" d="M163.3 26h6.5v6.5h-6.5zM102.3 44.3h6.5v6.5h-6.5zM132.8 44.3h6.5v6.5h-6.5zM120.6 50.4h6.5v6.5h-6.5zM114.5 56.5h6.5v6.5h-6.5zM126.7 56.5h6.5v6.5h-6.5zM96.2 62.6h6.5v6.5h-6.5zM114.5 62.6h6.5v6.5h-6.5zM132.8 62.6h6.5v6.5h-6.5zM102.3 68.7h6.5v6.5h-6.5zM114.5 68.7h6.5v6.5h-6.5zM126.7 68.7h12.6v6.5h-12.6zM77.9 74.8h6.5v6.5h-6.5zM96.2 74.8h12.6v6.5h-12.6zM120.6 74.8h12.6v6.5h-12.6zM59.6 80.9h6.5v6.5h-6.5zM90.1 80.9h6.5v6.5h-6.5zM102.3 80.9h6.5v6.5h-6.5zM120.6 80.9h6.5v6.5h-6.5zM138.9 80.9h6.5v6.5h-6.5zM84 87h12.6v6.5h-12.6zM102.3 87h6.5v6.5h-6.5zM126.7 87h18.7v6.5h-18.7zM96.2 93.1h6.5v6.5h-6.5zM120.6 93.1h18.7v6.5h-18.7zM84 99.2h12.6v6.5h-12.6zM114.5 99.2h18.7v6.5h-18.7zM84 105.3h6.5v6.5h-6.5zM102.3 105.3h12.6v6.5h-12.6zM132.8 111.4h6.5v6.5h-6.5zM132.8 117.5h6.5v6.5h-6.5zM132.8 123.6h6.5v6.5h-6.5zM132.8 129.7h6.5v6.5h-6.5zM132.8 135.8h6.5v6.5h-6.5zM132.8 141.9h6.5v6.5h-6.5zM132.8 148h6.5v6.5h-6.5zM132.8 154.1h6.5v6.5h-6.5zM126.7 160.2h12.6v6.5h-12.6z"/><path fill="#183038" d="M35.2 38.2h6.5v6.5h-6.5zM29.1 44.3h6.5v6.5h-6.5zM23 50.4h6.5v6.5h-6.5zM120.6 56.5h6.5v6.5h-6.5zM132.8 56.5h6.5v6.5h-6.5zM16.9 62.6h6.5v6.5h-6.5zM29.1 62.6h6.5v6.5h-6.5zM120.6 62.6h6.5v6.5h-6.5zM41.3 68.7h6.5v6.5h-6.5zM108.4 68.7h6.5v6.5h-6.5zM120.6 68.7h6.5v6.5h-6.5zM47.4 74.8h6.5v6.5h-6.5zM108.4 74.8h6.5v6.5h-6.5zM132.8 74.8h12.6v6.5h-12.6zM53.5 80.9h6.5v6.5h-6.5zM108.4 80.9h12.6v6.5h-12.6zM126.7 80.9h6.5v6.5h-6.5zM59.6 87h12.6v6.5h-12.6zM108.4 87h6.5v6.5h-6.5zM120.6 87h6.5v6.5h-6.5zM59.6 93.1h6.5v6.5h-6.5zM77.9 93.1h18.7v6.5h-18.7zM114.5 93.1h6.5v6.5h-6.5zM96.2 99.2h18.7v6.5h-18.7zM53.5 105.3h6.5v6.5h-6.5zM114.5 105.3h18.7v6.5h-18.7zM47.4 111.4h6.5v6.5h-6.5zM108.4 111.4h6.5v6.5h-6.5zM47.4 117.5h6.5v6.5h-6.5zM102.3 117.5h6.5v6.5h-6.5zM47.4 123.6h6.5v6.5h-6.5zM84 123.6h24.8v6.5h-24.8zM47.4 129.7h6.5v6.5h-6.5zM77.9 129.7h6.5v6.5h-6.5zM102.3 129.7h6.5v6.5h-6.5zM47.4 135.8h6.5v6.5h-6.5zM71.8 135.8h6.5v6.5h-6.5zM114.5 135.8h6.5v6.5h-6.5zM53.5 141.9h6.5v6.5h-6.5zM65.7 141.9h6.5v6.5h-6.5zM114.5 141.9h6.5v6.5h-6.5zM59.6 148h6.5v6.5h-6.5zM102.3 148h6.5v6.5h-6.5zM120.6 148h6.5v6.5h-6.5zM120.6 160.2h6.5v6.5h-6.5zM138.9 160.2h6.5v6.5h-6.5zM120.6 166.3h6.5v6.5h-6.5z"/><path fill="#162A30" d="M41.3 38.2h24.8v6.5h-24.8zM77.9 50.4h6.5v6.5h-6.5zM16.9 56.5h6.5v6.5h-6.5zM23 62.6h6.5v6.5h-6.5zM35.2 62.6h6.5v6.5h-6.5zM151.1 68.7h6.5v6.5h-6.5zM90.1 74.8h6.5v6.5h-6.5zM96.2 87h6.5v6.5h-6.5zM53.5 99.2h6.5v6.5h-6.5zM169.4 105.3h6.5v6.5h-6.5zM108.4 129.7h6.5v6.5h-6.5zM65.7 148h6.5v6.5h-6.5zM145 148h6.5v6.5h-6.5zM120.6 154.1h6.5v6.5h-6.5zM145 154.1h6.5v6.5h-6.5zM126.7 166.3h12.6v6.5h-12.6zM163.3 178.5h6.5v6.5h-6.5zM151.1 184.6h6.5v6.5h-6.5zM132.8 202.9h6.5v6.5h-6.5zM132.8 209h6.5v6.5h-6.5zM102.3 215.1h6.5v6.5h-6.5zM90.1 227.3h6.5v6.5h-6.5zM102.3 227.3h6.5v6.5h-6.5zM90.1 233.4h6.5v6.5h-6.5zM102.3 233.4h6.5v6.5h-6.5zM90.1 239.5h6.5v6.5h-6.5zM90.1 245.6h6.5v6.5h-6.5z"/><path fill="#8AA6BD" d="M77.9 44.3h6.5v6.5h-6.5zM151.1 56.5h6.5v6.5h-6.5zM65.7 117.5h6.5v6.5h-6.5z"/><path fill="#285B4F" d="M102.3 50.4h6.5v6.5h-6.5zM132.8 50.4h6.5v6.5h-6.5zM102.3 56.5h6.5v6.5h-6.5zM108.4 62.6h6.5v6.5h-6.5zM126.7 62.6h6.5v6.5h-6.5zM138.9 62.6h6.5v6.5h-6.5zM138.9 68.7h6.5v6.5h-6.5zM114.5 74.8h6.5v6.5h-6.5zM114.5 87h6.5v6.5h-6.5zM102.3 93.1h12.6v6.5h-12.6zM102.3 135.8h6.5v6.5h-6.5zM102.3 141.9h6.5v6.5h-6.5zM53.5 166.3h6.5v6.5h-6.5zM53.5 172.4h6.5v6.5h-6.5zM59.6 190.7h6.5v6.5h-6.5zM65.7 196.8h12.6v6.5h-12.6zM65.7 202.9h12.6v6.5h-12.6zM65.7 209h12.6v6.5h-12.6zM65.7 215.1h18.7v6.5h-18.7zM108.4 215.1h12.6v6.5h-12.6zM71.8 221.2h12.6v6.5h-12.6zM108.4 221.2h12.6v6.5h-12.6zM77.9 227.3h12.6v6.5h-12.6zM108.4 227.3h12.6v6.5h-12.6zM84 233.4h6.5v6.5h-6.5zM108.4 233.4h6.5v6.5h-6.5zM96.2 239.5h6.5v6.5h-6.5zM96.2 245.6h6.5v6.5h-6.5zM96.2 251.7h6.5v6.5h-6.5zM96.2 257.8h6.5v6.5h-6.5z"/><path fill="#477C55" d="M96.2 141.9h6.5v6.5h-6.5zM96.2 148h6.5v6.5h-6.5zM23 154.1h12.6v6.5h-12.6zM96.2 154.1h6.5v6.5h-6.5zM29.1 160.2h24.8v6.5h-24.8zM96.2 160.2h6.5v6.5h-6.5zM35.2 166.3h18.7v6.5h-18.7zM96.2 166.3h6.5v6.5h-6.5zM41.3 172.4h12.6v6.5h-12.6zM59.6 172.4h6.5v6.5h-6.5zM96.2 172.4h6.5v6.5h-6.5zM41.3 178.5h12.6v6.5h-12.6zM59.6 178.5h6.5v6.5h-6.5zM96.2 178.5h6.5v6.5h-6.5zM145 178.5h18.7v6.5h-18.7zM47.4 184.6h24.8v6.5h-24.8zM96.2 184.6h6.5v6.5h-6.5zM132.8 184.6h18.7v6.5h-18.7zM47.4 190.7h12.6v6.5h-12.6zM65.7 190.7h6.5v6.5h-6.5zM96.2 190.7h6.5v6.5h-6.5zM126.7 190.7h18.7v6.5h-18.7zM53.5 196.8h12.6v6.5h-12.6zM96.2 196.8h6.5v6.5h-6.5zM120.6 196.8h18.7v6.5h-18.7zM53.5 202.9h12.6v6.5h-12.6zM96.2 202.9h6.5v6.5h-6.5zM114.5 202.9h18.7v6.5h-18.7zM59.6 209h6.5v6.5h-6.5zM96.2 209h6.5v6.5h-6.5zM108.4 209h24.8v6.5h-24.8zM96.2 215.1h6.5v6.5h-6.5zM120.6 215.1h6.5v6.5h-6.5zM96.2 221.2h6.5v6.5h-6.5zM120.6 221.2h6.5v6.5h-6.5zM96.2 227.3h6.5v6.5h-6.5zM96.2 233.4h6.5v6.5h-6.5z"/>'
-  };
-  // longer stems for the bouquet, so they reach down into the wrap
-  const STEM_EXT = {
-    rose: '<path fill="#224127" d="M95.2 265h6.5v105h-6.5z"/>',
-    daisy: '<path fill="#124722" d="M88.6 265h10.2v105h-10.2z"/>',
-    sunflower: '<path fill="#2C4F1E" d="M100.0 265h10.5v105h-10.5z"/><path fill="#3A672A" d="M89.9 265h10.5v105h-10.5z"/>',
-    tulip: '<path fill="#0B3C20" d="M100.0 265h10.2v105h-10.2z"/><path fill="#114524" d="M90.2 265h10.2v105h-10.2z"/>',
-    lily: '<path fill="#2F5A2C" d="M96.2 265h12.6v105h-12.6z"/>'
-  };
-  const WRAP = '<svg class="px wrap" viewBox="0 0 13 10" aria-hidden="true"><path fill="#04361D" d="M0 0h1v1H0zM12 0h1v1H12zM1 1h1v1H1zM11 1h1v1H11zM1 2h1v1H1zM11 2h1v1H11zM2 3h1v1H2zM10 3h1v1H10zM2 4h1v1H2zM10 4h1v1H10zM3 5h1v1H3zM9 5h1v1H9zM3 6h1v1H3zM9 6h1v1H9zM4 7h1v1H4zM8 7h1v1H8zM4 8h1v1H4zM8 8h1v1H8zM5 9h3v1H5z"/><path fill="#76BA9D" d="M1 0h11v1H1zM2 1h9v1H2zM2 2h1v1H2zM4 2h7v1H4zM3 4h3v1H3zM7 4h3v1H7zM4 5h2v1H4zM7 5h2v1H7zM4 6h5v1H4zM5 7h3v1H5zM5 8h3v1H5z"/><path fill="#F0F2D5" d="M3 2h1v1H3z"/><path fill="#EF233C" d="M3 3h3v1H3zM7 3h3v1H7zM6 4h1v1H6zM6 5h1v1H6z"/><path fill="#97051D" d="M6 3h1v1H6z"/></svg>';
-  const WRAP_EMPTY = '<svg class="px wrap" viewBox="0 0 13 10" aria-hidden="true"><path fill="#04361D" d="M0 0h1v1H0zM12 0h1v1H12zM1 1h1v1H1zM11 1h1v1H11zM1 2h1v1H1zM11 2h1v1H11zM2 3h1v1H2zM10 3h1v1H10zM2 4h1v1H2zM10 4h1v1H10zM3 5h1v1H3zM9 5h1v1H9zM3 6h1v1H3zM9 6h1v1H9zM4 7h1v1H4zM8 7h1v1H8zM4 8h1v1H4zM8 8h1v1H8zM5 9h3v1H5z"/></svg>';
-  const FLOWER_EMOJI = { rose: "🌹", daisy: "🌼", sunflower: "🌻", tulip: "🌷", lily: "✿" };
-  const MAX_STEMS = 7;
-  // fan the picked stems out of the wrap; the more stems, the wider the fan
-  function spot(i, n) {
-    const mid = (n - 1) / 2, t = n > 1 ? (i - mid) / mid : 0;
-    const span = Math.min(34, 9 * (n - 1));
-    const back = n > 4 && i % 2;
-    return {
-      left: (35 - span / 2 + (n > 1 ? i * span / (n - 1) : 0)).toFixed(1),
-      top: (3 + 7 * t * t + (back ? -5 : 0)).toFixed(1),
-      rot: Math.round(t * Math.min(20, 6 * (n - 1))),
-      z: 10 - Math.round(Math.abs(i - mid)) + (back ? -3 : 0)
+  grab(i, e) {
+    if (e.pointerType === 'touch') return this.hold(i, e);
+    if (e.button !== 0) return;
+    const el = e.currentTarget;
+    const lim = this.limits(el), scale = lim.scale;
+    const from = this.state.spots[i] || { x: 0, y: 0 };
+    const x0 = e.clientX, y0 = e.clientY;
+    const clamp = (v, a, b) => Math.min(Math.max(v, a), b);
+    this.dragged = false;
+    const move = (ev) => {
+      const dx = clamp((ev.clientX - x0) / scale, lim.x0, lim.x1), dy = clamp((ev.clientY - y0) / scale, lim.y0, lim.y1);
+      if (!this.dragged && Math.hypot(ev.clientX - x0, ev.clientY - y0) < 4) return;
+      this.dragged = true;
+      this.setState({ lifted: i, spots: Object.assign({}, this.state.spots, { [i]: { x: from.x + dx, y: from.y + dy } }) });
     };
+    const drop = () => {
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', drop);
+      // a plain click must not re-render, or the link is swapped out before it opens
+      if (!this.dragged) return;
+      this.setState({ lifted: null });
+      try { localStorage.setItem('srishti-os-icons-v2', JSON.stringify(this.state.spots)); } catch (err) {}
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', drop);
   }
-  let picks = [];
-  function bouquetHTML(list) {
-    // the vase grows with the bouquet
-    const vase = `--wrap-w:${40 + 4 * list.length}%;--wrap-l:${30 - 2 * list.length}%`;
-    if (!list.length) return `<div class="bq empty" style="${vase}"><span class="empty-txt">your bouquet<br>goes here</span>${WRAP_EMPTY}</div>`;
-    const stems = list.map((f, i) => {
-      const p = spot(i, list.length);
-      return `<span class="stem" style="left:${p.left}%;top:${p.top}%;z-index:${p.z};transform:rotate(${p.rot}deg)"><svg class="px" viewBox="0 0 200 370" aria-hidden="true">${STEM_EXT[f]}${FLOWER_ART[f]}</svg></span>`;
-    }).join("");
-    return `<div class="bq" style="${vase}" role="img" aria-label="a bouquet of ${tally(list)}">${stems}${WRAP}</div>`;
+  // touch: a quick tap opens the icon, a swipe scrolls the page, and holding still picks the icon up.
+  // While held it is moved straight on the element (no re-render), so the touch keeps its target.
+  hold(i, e) {
+    const el = e.currentTarget;
+    const from = this.state.spots[i] || { x: 0, y: 0 };
+    const x0 = e.clientX, y0 = e.clientY;
+    const clamp = (v, a, b) => Math.min(Math.max(v, a), b);
+    let lim = null, at = from;
+    this.dragged = false;
+    const timer = setTimeout(() => {
+      lim = this.limits(el);
+      this.dragged = true;
+      el.classList.add('lifted');
+      if (navigator.vibrate) navigator.vibrate(12);
+    }, 320);
+    const move = (ev) => {
+      const t = ev.touches[0];
+      if (!lim) { if (Math.hypot(t.clientX - x0, t.clientY - y0) > 8) end(); return; }
+      ev.preventDefault();
+      at = { x: from.x + clamp((t.clientX - x0) / lim.scale, lim.x0, lim.x1), y: from.y + clamp((t.clientY - y0) / lim.scale, lim.y0, lim.y1) };
+      el.style.transform = 'translate(' + Math.round(at.x) + 'px, ' + Math.round(at.y) + 'px)';
+    };
+    const noMenu = (ev) => ev.preventDefault();
+    const end = () => {
+      clearTimeout(timer);
+      el.removeEventListener('touchmove', move);
+      el.removeEventListener('touchend', end);
+      el.removeEventListener('touchcancel', end);
+      setTimeout(() => el.removeEventListener('contextmenu', noMenu), 0);
+      if (!lim) return;
+      el.classList.remove('lifted');
+      const spots = Object.assign({}, this.state.spots, { [i]: at });
+      try { localStorage.setItem('srishti-os-icons-v2', JSON.stringify(spots)); } catch (err) {}
+      this.setState({ spots });
+    };
+    el.addEventListener('touchmove', move, { passive: false });
+    el.addEventListener('touchend', end);
+    el.addEventListener('touchcancel', end);
+    el.addEventListener('contextmenu', noMenu);
   }
-  // "2× tulip, rose"
-  function tally(list, withEmoji) {
-    const counts = {};
-    list.forEach((f) => (counts[f] = (counts[f] || 0) + 1));
-    return Object.entries(counts).map(([f, c]) => (c > 1 ? c + "× " : "") + f + (withEmoji ? " " + FLOWER_EMOJI[f] : "")).join(", ");
+  // touch: drag the welcome window around by its title bar
+  grabWin(e) {
+    if (e.pointerType !== 'touch' || e.target.closest('a')) return;
+    const win = e.currentTarget.closest('.win');
+    const lim = this.limits(win);
+    const from = this.state.win || { x: 0, y: 0 };
+    const x0 = e.clientX, y0 = e.clientY, id = e.pointerId;
+    const clamp = (v, a, b) => Math.min(Math.max(v, a), b);
+    let at = from;
+    win.classList.add('lifted');
+    const move = (ev) => {
+      if (ev.pointerId !== id) return;
+      at = { x: from.x + clamp((ev.clientX - x0) / lim.scale, lim.x0, lim.x1), y: from.y + clamp((ev.clientY - y0) / lim.scale, lim.y0, lim.y1) };
+      win.style.transform = 'translate(' + Math.round(at.x) + 'px, ' + Math.round(at.y) + 'px)';
+    };
+    const drop = (ev) => {
+      if (ev.pointerId !== id) return;
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', drop);
+      window.removeEventListener('pointercancel', drop);
+      win.classList.remove('lifted');
+      try { localStorage.setItem('srishti-os-welcome', JSON.stringify(at)); } catch (err) {}
+      this.setState({ win: at });
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', drop);
+    window.addEventListener('pointercancel', drop);
   }
-  function renderBouquet() {
-    $("bq-preview").innerHTML = bouquetHTML(picks);
-    $("bq-preview").style.setProperty("--box-w", 100 + 6 * picks.length + "px");
-    $("bq-send").disabled = !picks.length;
-    $("bq-tools").hidden = !picks.length;
-    $("bq-sub").textContent = picks.length >= MAX_STEMS ? "bouquet's full!" : "pick your flowers";
-    document.querySelectorAll(".flower").forEach((b) => {
-      const f = b.dataset.flower;
-      const count = picks.filter((p) => p === f).length;
-      b.classList.toggle("in", count > 0);
-      b.querySelector(".mark").textContent = count ? "×" + count : "+";
-      b.setAttribute("aria-label", count ? `add another ${f}, ${count} in the bouquet` : `add a ${f}`);
-    });
+  // computers: drag the corner grip to make the welcome window wider or narrower (its height follows the content)
+  grabSize(e) {
+    if (e.button !== 0 || e.pointerType === 'touch') return;
+    e.preventDefault();
+    const grip = e.currentTarget, win = grip.closest('.win');
+    const screen = win.parentElement, cols = getComputedStyle(screen).gridTemplateColumns.split(' ').map(parseFloat);
+    const r = win.getBoundingClientRect(), scale = r.width / win.offsetWidth || 1;
+    const maxW = (cols[1] || r.width) + 60;
+    const w0 = win.offsetWidth, x0 = e.clientX;
+    const clamp = (v, a, b) => Math.min(Math.max(v, a), b);
+    let size = { w: w0 };
+    grip.setPointerCapture(e.pointerId);
+    win.classList.add('sizing');
+    const move = (ev) => {
+      // the window is centred, so widening by dx needs 2*dx to keep the corner under the pointer
+      size = { w: Math.round(clamp(w0 + 2 * (ev.clientX - x0) / scale, 340, maxW)) };
+      win.style.maxWidth = 'none'; win.style.width = size.w + 'px';
+    };
+    const drop = () => {
+      grip.removeEventListener('pointermove', move);
+      grip.removeEventListener('pointerup', drop);
+      grip.removeEventListener('lostpointercapture', drop);
+      win.classList.remove('sizing');
+      try { localStorage.setItem('srishti-os-welcome-size', JSON.stringify(size)); } catch (err) {}
+      this.setState({ size });
+    };
+    grip.addEventListener('pointermove', move);
+    grip.addEventListener('pointerup', drop);
+    grip.addEventListener('lostpointercapture', drop);
   }
-  document.querySelectorAll(".flower").forEach((btn) => btn.addEventListener("click", () => {
-    const f = btn.dataset.flower;
-    if (picks.length < MAX_STEMS) picks = picks.concat(f);
-    renderBouquet();
-  }));
-  $("bq-undo").addEventListener("click", () => { picks = picks.slice(0, -1); renderBouquet(); });
-  $("bq-clear").addEventListener("click", () => { picks = []; renderBouquet(); });
-  renderBouquet();
-
-  // phones: the bouquet folds away behind a dropdown
-  $("bq-toggle").addEventListener("click", () => {
-    const side = $("bq-toggle").closest(".flower-side");
-    const open = side.classList.toggle("open");
-    $("bq-toggle").setAttribute("aria-expanded", String(open));
-  });
-
-  $("bq-send").addEventListener("click", async (e) => {
-    if (!picks.length) return;
-    burst(e.currentTarget);
-    if (sending) return;
-    sending = true;
-    const fd = new FormData(form);
-    const note = msg.value.trim();
-    const gift = "a bouquet: " + tally(picks, true);
-    fd.set("name", nameEl.value.trim() || "anonymous");
-    fd.set("prompt", "sent a bouquet");
-    fd.set("message", note ? note + "\n\n+ " + gift : "sent you " + gift);
-    // let the hearts float for a beat before switching screens
-    await Promise.all([deliver(fd, "bouquet"), new Promise((r) => setTimeout(r, reduced() ? 0 : 900))]);
-    $("bq-letter").innerHTML = bouquetHTML(picks);
-    $("env-sm").classList.add("has-bq");
-    $("sent-msg").textContent = "your bouquet is on its way! thank you :)";
-    show("sent");
-    sending = false;
-  });
-
-  /* outbound links */
-  document.querySelectorAll("[data-track]").forEach((a) =>
-    a.addEventListener("click", () => track(a.dataset.track, { location: a.dataset.location }))
-  );
-})();
+  resetSize() {
+    try { localStorage.removeItem('srishti-os-welcome-size'); } catch (err) {}
+    this.setState({ size: null });
+  }
+  tidy(e) {
+    e.preventDefault();
+    try { localStorage.removeItem('srishti-os-icons-v2'); localStorage.removeItem('srishti-os-welcome'); } catch (err) {}
+    this.setState({ spots: {}, win: null });
+  }
+  tap(e) {
+    if (this.dragged) { e.preventDefault(); this.dragged = false; }
+  }
+  renderVals() {
+    const d = this.state.now;
+    const day = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }).replace(',', '');
+    const time = d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+    const vals = { clock: (day + '  ' + time).toLowerCase(), tidy: (e) => this.tidy(e), moved: Object.keys(this.state.spots).length > 0 || !!this.state.win,
+      winT: this.state.win ? 'translate(' + Math.round(this.state.win.x) + 'px, ' + Math.round(this.state.win.y) + 'px)' : 'none',
+      grabWin: (e) => this.grabWin(e),
+      grabSize: (e) => this.grabSize(e), resetSize: () => this.resetSize(),
+      winMax: this.state.size ? 'none' : '700px',
+      winW: this.state.size ? this.state.size.w + 'px' : '100%',
+      winH: 'auto' };
+    for (let i = 0; i < 7; i++) {
+      const p = this.state.spots[i];
+      vals['t' + i] = p ? 'translate(' + Math.round(p.x) + 'px, ' + Math.round(p.y) + 'px)' : 'none';
+      vals['z' + i] = this.state.lifted === i ? '4' : p ? '2' : 'auto';
+      vals['grab' + i] = (e) => this.grab(i, e);
+      vals['tap' + i] = (e) => this.tap(e);
+    }
+    return vals;
+  }
+}
 </script>
 </body>
 </html>
